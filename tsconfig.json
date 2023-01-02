@@ -18,9 +18,10 @@
     "baseUrl": ".",
     "paths": {
       "@lib/*": ["lib/*"],
-      "@styles/*": ["styles/*"],
       "@hooks/*": ["hooks/*"],
-      "@components/*": ["components/*"]
+      "@components/*": ["components/*"],
+      "@providers/*": ["providers/*"],
+      "@styles/*": ["styles/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
