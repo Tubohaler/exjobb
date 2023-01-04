@@ -1,11 +1,11 @@
 import {
-  MantineProvider,
   MantineTheme,
   Tuple,
   DefaultMantineColor,
   DEFAULT_THEME,
+  AnchorProps,
 } from '@mantine/core';
-
+import Link from 'next/link';
 import { EB_Garamond } from '@next/font/google';
 
 declare module '@mantine/core' {
@@ -25,6 +25,7 @@ const ebGaramond = EB_Garamond({
  *
  * color swatches for beige, blue and red generated with
  * https://smart-swatch.netlify.app/
+ * based on:
  * (beige: #e8e5df, blue: #9dc3df, red: #ff8a8a)
  *
  * body background: beige[1],
@@ -71,35 +72,42 @@ export const colors: MantineTheme['colors'] = {
   ],
 };
 
-export const theme: MantineTheme = {
+const mainTheme: MantineTheme = {
   ...DEFAULT_THEME,
+  colors,
   colorScheme: 'light',
+  defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
   headings: {
     ...DEFAULT_THEME.headings,
     fontFamily: ebGaramond.style.fontFamily,
   },
-  colors,
   globalStyles: (theme) => ({
     body: {
       background: theme.colors.beige[1],
     },
-    a: {
-      color: theme.colors.blue[2],
-      transition: 'all 0.33s ease-in-out 0.1s;',
-      '&:hover': {
-        color: theme.colors.red[2],
+    'main > article': {
+      '&:nth-of-type(odd)': {
+        backgroundColor: 'rgba(0,0,0,0.02)',
       },
     },
   }),
+  components: {
+    Anchor: {
+      defaultProps: {
+        component: Link,
+        sx: (theme) => ({
+          color: theme.black,
+          textDecoration: 'none',
+          transition: 'all 0.33s ease-in-out 0.1s',
+          '&:hover': {
+            color: theme.colors.red[2],
+            textDecoration: 'none',
+          },
+        }),
+      } as Partial<AnchorProps>,
+    },
+  },
 };
 
-const ThemeProvider = ({ children }: React.PropsWithChildren) => {
-  return (
-    <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
-      {children}
-    </MantineProvider>
-  );
-};
-
-export default ThemeProvider;
+export default mainTheme;
