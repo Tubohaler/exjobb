@@ -1,0 +1,27 @@
+query People {
+  allPeopleModels {
+    id
+    name
+    email
+    _status
+    _firstPublishedAt
+    featuredImage {
+      responsiveImage(
+        imgixParams: { fm: jpg }
+        sizes: "(max-width: 600px) 100vw, 600px"
+      ) {
+        srcSet
+        src
+        sizes
+        webpSrcSet
+        alt
+        title
+        bgColor
+        base64
+      }
+    }
+  }
+  _allPeopleModelsMeta {
+    count
+  }
+}
