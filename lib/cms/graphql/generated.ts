@@ -2318,7 +2318,11 @@ export const PeopleDocument = {
                             },
                             {
                               kind: 'Field',
-                              name: { kind: 'Name', value: 'webpSrcSet' },
+                              name: { kind: 'Name', value: 'width' },
+                            },
+                            {
+                              kind: 'Field',
+                              name: { kind: 'Name', value: 'height' },
                             },
                             {
                               kind: 'Field',
@@ -2348,6 +2352,31 @@ export const PeopleDocument = {
           {
             kind: 'Field',
             name: { kind: 'Name', value: '_allPeopleModelsMeta' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filter' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: '_status' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'eq' },
+                            value: { kind: 'EnumValue', value: 'published' },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
@@ -2378,7 +2407,8 @@ export type PeopleQuery = {
         srcSet: string;
         src: string;
         sizes: string;
-        webpSrcSet: string;
+        width: number;
+        height: number;
         alt?: string | null;
         title?: string | null;
         bgColor?: string | null;

@@ -13,7 +13,8 @@ query People {
         srcSet
         src
         sizes
-        webpSrcSet
+        width
+        height
         alt
         title
         bgColor
@@ -21,7 +22,7 @@ query People {
       }
     }
   }
-  _allPeopleModelsMeta {
+  _allPeopleModelsMeta(filter: { _status: { eq: published } }) {
     count
   }
 }
