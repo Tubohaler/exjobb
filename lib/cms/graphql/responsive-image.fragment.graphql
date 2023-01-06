@@ -1,0 +1,13 @@
+fragment ResponsiveImageFragment on TitleFileField {
+  responsiveImage(sizes: $sizes, imgixParams: $imgixParams) {
+    src
+    title
+    alt
+    srcSet
+    sizes
+    width
+    height
+    bgColor
+    aspectRatio
+  }
+}

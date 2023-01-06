@@ -40,28 +40,7 @@ const config: CodegenConfig = {
         preResolveTypes: true,
         dedupeFragments: true,
       },
-      plugins: [
-        'typescript',
-        'typed-document-node',
-        'typescript-operations',
-        // {
-        //   'typescript-operations': {
-        //     strictScalars: true,
-        //     scalars: {
-        //       BooleanType: 'boolean',
-        //       CustomData: 'Record<string, unknown>',
-        //       Date: 'string',
-        //       DateTime: 'string',
-        //       FloatType: 'number',
-        //       IntType: 'number',
-        //       ItemId: 'string',
-        //       JsonField: 'unkown',
-        //       MetaTagAttributes: 'Record<string, string>',
-        //       UploadId: 'string',
-        //     },
-        //   } as TypeScriptTypedDocumentNodesConfig,
-        // },
-      ],
+      plugins: ['typescript', 'typed-document-node', 'typescript-operations'],
     },
   },
 };

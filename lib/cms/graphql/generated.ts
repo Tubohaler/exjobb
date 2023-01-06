@@ -1653,7 +1653,7 @@ export type PeopleModelRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   email?: Maybe<Scalars['String']>;
-  featuredImage?: Maybe<FileField>;
+  featuredImage?: Maybe<TitleFileField>;
   id: Scalars['ItemId'];
   jobPosition: Scalars['String'];
   name: Scalars['String'];
@@ -1882,6 +1882,75 @@ export type Tag = {
   attributes?: Maybe<Scalars['MetaTagAttributes']>;
   content?: Maybe<Scalars['String']>;
   tag: Scalars['String'];
+};
+
+export type TitleFileField = FileFieldInterface & {
+  __typename?: 'TitleFileField';
+  _createdAt: Scalars['DateTime'];
+  _updatedAt: Scalars['DateTime'];
+  alt?: Maybe<Scalars['String']>;
+  author?: Maybe<Scalars['String']>;
+  basename: Scalars['String'];
+  blurUpThumb?: Maybe<Scalars['String']>;
+  blurhash?: Maybe<Scalars['String']>;
+  colors: Array<ColorField>;
+  copyright?: Maybe<Scalars['String']>;
+  customData: Scalars['CustomData'];
+  exifInfo: Scalars['CustomData'];
+  filename: Scalars['String'];
+  focalPoint?: Maybe<FocalPoint>;
+  format: Scalars['String'];
+  height?: Maybe<Scalars['IntType']>;
+  id: Scalars['UploadId'];
+  md5: Scalars['String'];
+  mimeType: Scalars['String'];
+  notes?: Maybe<Scalars['String']>;
+  responsiveImage?: Maybe<ResponsiveImage>;
+  size: Scalars['IntType'];
+  smartTags: Array<Scalars['String']>;
+  tags: Array<Scalars['String']>;
+  title: Scalars['String'];
+  url: Scalars['String'];
+  video?: Maybe<UploadVideoField>;
+  width?: Maybe<Scalars['IntType']>;
+};
+
+export type TitleFileFieldAltArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type TitleFileFieldBlurUpThumbArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
+  punch?: InputMaybe<Scalars['Float']>;
+  quality?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+export type TitleFileFieldCustomDataArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type TitleFileFieldFocalPointArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type TitleFileFieldResponsiveImageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  imgixParams?: InputMaybe<ImgixParams>;
+  locale?: InputMaybe<SiteLocale>;
+  sizes?: InputMaybe<Scalars['String']>;
+};
+
+export type TitleFileFieldTitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type TitleFileFieldUrlArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
 };
 
 /** Specifies how to filter by upload type */
@@ -2243,6 +2312,60 @@ export type FocalPoint = {
   y: Scalars['FloatType'];
 };
 
+export const ResponsiveImageFragmentFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ResponsiveImageFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'TitleFileField' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'responsiveImage' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'sizes' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'sizes' },
+                },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'imgixParams' },
+                value: {
+                  kind: 'Variable',
+                  name: { kind: 'Name', value: 'imgixParams' },
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'src' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'srcSet' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'sizes' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'bgColor' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'aspectRatio' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ResponsiveImageFragmentFragment, unknown>;
 export const PeopleDocument = {
   kind: 'Document',
   definitions: [
@@ -2250,109 +2373,54 @@ export const PeopleDocument = {
       kind: 'OperationDefinition',
       operation: 'query',
       name: { kind: 'Name', value: 'People' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'sizes' },
+          },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          defaultValue: {
+            kind: 'StringValue',
+            value: '(max-width: 512px) 100vw, 512px',
+            block: false,
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'imgixParams' },
+          },
+          type: {
+            kind: 'NamedType',
+            name: { kind: 'Name', value: 'ImgixParams' },
+          },
+          defaultValue: {
+            kind: 'ObjectValue',
+            fields: [
+              {
+                kind: 'ObjectField',
+                name: { kind: 'Name', value: 'fm' },
+                value: { kind: 'EnumValue', value: 'webp' },
+              },
+            ],
+          },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'allPeopleModels' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                { kind: 'Field', name: { kind: 'Name', value: '_status' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: '_firstPublishedAt' },
-                },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'featuredImage' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'responsiveImage' },
-                        arguments: [
-                          {
-                            kind: 'Argument',
-                            name: { kind: 'Name', value: 'imgixParams' },
-                            value: {
-                              kind: 'ObjectValue',
-                              fields: [
-                                {
-                                  kind: 'ObjectField',
-                                  name: { kind: 'Name', value: 'fm' },
-                                  value: { kind: 'EnumValue', value: 'jpg' },
-                                },
-                              ],
-                            },
-                          },
-                          {
-                            kind: 'Argument',
-                            name: { kind: 'Name', value: 'sizes' },
-                            value: {
-                              kind: 'StringValue',
-                              value: '(max-width: 600px) 100vw, 600px',
-                              block: false,
-                            },
-                          },
-                        ],
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'srcSet' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'src' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'sizes' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'width' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'height' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'alt' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'title' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'bgColor' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'base64' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: '_allPeopleModelsMeta' },
             arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'orderBy' },
+                value: { kind: 'EnumValue', value: '_createdAt_ASC' },
+              },
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'filter' },
@@ -2373,6 +2441,24 @@ export const PeopleDocument = {
                         ],
                       },
                     },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'featuredImage' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'exists' },
+                            value: {
+                              kind: 'StringValue',
+                              value: 'true',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
                   ],
                 },
               },
@@ -2380,16 +2466,38 @@ export const PeopleDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'count' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'featuredImage' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: {
+                          kind: 'Name',
+                          value: 'ResponsiveImageFragment',
+                        },
+                      },
+                    ],
+                  },
+                },
               ],
             },
           },
         ],
       },
     },
+    ...ResponsiveImageFragmentFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PeopleQuery, PeopleQueryVariables>;
-export type PeopleQueryVariables = Exact<{ [key: string]: never }>;
+export type PeopleQueryVariables = Exact<{
+  sizes?: InputMaybe<Scalars['String']>;
+  imgixParams?: InputMaybe<ImgixParams>;
+}>;
 
 export type PeopleQuery = {
   __typename?: 'Query';
@@ -2398,23 +2506,36 @@ export type PeopleQuery = {
     id: string;
     name: string;
     email?: string | null;
-    _status: ItemStatus;
-    _firstPublishedAt?: string | null;
     featuredImage?: {
-      __typename?: 'FileField';
+      __typename?: 'TitleFileField';
       responsiveImage?: {
         __typename?: 'ResponsiveImage';
-        srcSet: string;
         src: string;
+        title?: string | null;
+        alt?: string | null;
+        srcSet: string;
         sizes: string;
         width: number;
         height: number;
-        alt?: string | null;
-        title?: string | null;
         bgColor?: string | null;
-        base64?: string | null;
+        aspectRatio: number;
       } | null;
     } | null;
   }>;
-  _allPeopleModelsMeta: { __typename?: 'CollectionMetadata'; count: number };
+};
+
+export type ResponsiveImageFragmentFragment = {
+  __typename?: 'TitleFileField';
+  responsiveImage?: {
+    __typename?: 'ResponsiveImage';
+    src: string;
+    title?: string | null;
+    alt?: string | null;
+    srcSet: string;
+    sizes: string;
+    width: number;
+    height: number;
+    bgColor?: string | null;
+    aspectRatio: number;
+  } | null;
 };

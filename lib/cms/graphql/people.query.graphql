@@ -1,28 +1,16 @@
-query People {
-  allPeopleModels {
+query People(
+  $sizes: String = "(max-width: 512px) 100vw, 512px"
+  $imgixParams: ImgixParams = { fm: webp }
+) {
+  allPeopleModels(
+    orderBy: _createdAt_ASC
+    filter: { _status: { eq: published }, featuredImage: { exists: "true" } }
+  ) {
     id
     name
     email
-    _status
-    _firstPublishedAt
     featuredImage {
-      responsiveImage(
-        imgixParams: { fm: jpg }
-        sizes: "(max-width: 600px) 100vw, 600px"
-      ) {
-        srcSet
-        src
-        sizes
-        width
-        height
-        alt
-        title
-        bgColor
-        base64
-      }
+      ...ResponsiveImageFragment
     }
-  }
-  _allPeopleModelsMeta(filter: { _status: { eq: published } }) {
-    count
   }
 }
