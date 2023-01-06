@@ -1,0 +1,10 @@
+query FeaturedVideo {
+  featuredVideo {
+    landscape {
+      ...VideoFragment
+    }
+    portrait {
+      ...VideoFragment
+    }
+  }
+}

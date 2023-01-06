@@ -1,8 +1,5 @@
-query People(
-  $sizes: String = "(max-width: 512px) 100vw, 512px"
-  $imgixParams: ImgixParams = { fm: webp }
-) {
-  allPeopleModels(
+query Staff {
+  allStaffs(
     orderBy: _createdAt_ASC
     filter: { _status: { eq: published }, featuredImage: { exists: "true" } }
   ) {
@@ -10,6 +7,8 @@ query People(
     name
     email
     featuredImage {
+      title
+      alt
       ...ResponsiveImageFragment
     }
   }

@@ -1,0 +1,16 @@
+fragment ResponsiveImageFragment on FileField {
+  responsiveImage(
+    sizes: "(max-width: 512px) 100vw, 512px"
+    imgixParams: { fm: webp }
+  ) {
+    src
+    alt
+    title
+    width
+    height
+    srcSet
+    sizes
+    bgColor
+    aspectRatio
+  }
+}

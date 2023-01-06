@@ -81,6 +81,30 @@ export type CreatedAtFilter = {
 
 export type FaviconType = 'appleTouchIcon' | 'icon' | 'msApplication';
 
+/** Record of type Featured Video (featured_video) */
+export type FeaturedVideoRecord = RecordInterface & {
+  __typename?: 'FeaturedVideoRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  landscape: VideoFileField;
+  portrait: VideoFileField;
+};
+
+/** Record of type Featured Video (featured_video) */
+export type FeaturedVideoRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime'];
@@ -241,9 +265,9 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']>;
 };
 
-/** Record of type House (house) */
-export type HouseRecord = RecordInterface & {
-  __typename?: 'HouseRecord';
+/** Record of type House Gallery (house_gallery) */
+export type HouseGalleryRecord = RecordInterface & {
+  __typename?: 'HouseGalleryRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -255,12 +279,12 @@ export type HouseRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  featuredImages: Array<FileField>;
   id: Scalars['ItemId'];
+  images: Array<FileField>;
 };
 
-/** Record of type House (house) */
-export type HouseRecord_SeoMetaTagsArgs = {
+/** Record of type House Gallery (house_gallery) */
+export type HouseGalleryRecord_SeoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -1595,75 +1619,6 @@ export type OrientationFilter = {
   neq?: InputMaybe<UploadOrientation>;
 };
 
-export type PeopleModelModelFilter = {
-  OR?: InputMaybe<Array<InputMaybe<PeopleModelModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  email?: InputMaybe<StringFilter>;
-  featuredImage?: InputMaybe<FileFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  jobPosition?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-};
-
-export type PeopleModelModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'email_ASC'
-  | 'email_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'jobPosition_ASC'
-  | 'jobPosition_DESC'
-  | 'name_ASC'
-  | 'name_DESC';
-
-/** Record of type People (people_model) */
-export type PeopleModelRecord = RecordInterface & {
-  __typename?: 'PeopleModelRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  email?: Maybe<Scalars['String']>;
-  featuredImage?: Maybe<TitleFileField>;
-  id: Scalars['ItemId'];
-  jobPosition: Scalars['String'];
-  name: Scalars['String'];
-};
-
-/** Record of type People (people_model) */
-export type PeopleModelRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
 /** Specifies how to filter by publication datetime */
 export type PublishedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
@@ -1686,27 +1641,29 @@ export type PublishedAtFilter = {
 export type Query = {
   __typename?: 'Query';
   /** Returns meta information regarding a record collection */
-  _allPeopleModelsMeta: CollectionMetadata;
+  _allStaffsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta?: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
-  allPeopleModels: Array<PeopleModelRecord>;
+  allStaffs: Array<StaffRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
-  house?: Maybe<HouseRecord>;
+  featuredVideo?: Maybe<FeaturedVideoRecord>;
+  /** Returns the single instance record */
+  houseGallery?: Maybe<HouseGalleryRecord>;
   /** Returns a specific record */
-  peopleModel?: Maybe<PeopleModelRecord>;
+  staff?: Maybe<StaffRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
 
 /** The query root for this schema */
-export type Query_AllPeopleModelsMetaArgs = {
+export type Query_AllStaffsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<PeopleModelModelFilter>;
+  filter?: InputMaybe<StaffModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -1723,12 +1680,12 @@ export type Query_SiteArgs = {
 };
 
 /** The query root for this schema */
-export type QueryAllPeopleModelsArgs = {
+export type QueryAllStaffsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<PeopleModelModelFilter>;
+  filter?: InputMaybe<StaffModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<PeopleModelModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -1743,17 +1700,23 @@ export type QueryAllUploadsArgs = {
 };
 
 /** The query root for this schema */
-export type QueryHouseArgs = {
+export type QueryFeaturedVideoArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };
 
 /** The query root for this schema */
-export type QueryPeopleModelArgs = {
+export type QueryHouseGalleryArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<PeopleModelModelFilter>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<PeopleModelModelOrderBy>>>;
+};
+
+/** The query root for this schema */
+export type QueryStaffArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<StaffModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
 };
 
 /** The query root for this schema */
@@ -1839,6 +1802,75 @@ export type SiteGlobalSeoArgs = {
 
 export type SiteLocale = 'en';
 
+export type StaffModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<StaffModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  email?: InputMaybe<StringFilter>;
+  featuredImage?: InputMaybe<FileFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  jobPosition?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type StaffModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'jobPosition_ASC'
+  | 'jobPosition_DESC'
+  | 'name_ASC'
+  | 'name_DESC';
+
+/** Record of type People (staff) */
+export type StaffRecord = RecordInterface & {
+  __typename?: 'StaffRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  email?: Maybe<Scalars['String']>;
+  featuredImage?: Maybe<FileField>;
+  id: Scalars['ItemId'];
+  jobPosition: Scalars['String'];
+  name: Scalars['String'];
+};
+
+/** Record of type People (staff) */
+export type StaffRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by status */
 export type StatusFilter = {
   /** Search the record with the specified status */
@@ -1882,75 +1914,6 @@ export type Tag = {
   attributes?: Maybe<Scalars['MetaTagAttributes']>;
   content?: Maybe<Scalars['String']>;
   tag: Scalars['String'];
-};
-
-export type TitleFileField = FileFieldInterface & {
-  __typename?: 'TitleFileField';
-  _createdAt: Scalars['DateTime'];
-  _updatedAt: Scalars['DateTime'];
-  alt?: Maybe<Scalars['String']>;
-  author?: Maybe<Scalars['String']>;
-  basename: Scalars['String'];
-  blurUpThumb?: Maybe<Scalars['String']>;
-  blurhash?: Maybe<Scalars['String']>;
-  colors: Array<ColorField>;
-  copyright?: Maybe<Scalars['String']>;
-  customData: Scalars['CustomData'];
-  exifInfo: Scalars['CustomData'];
-  filename: Scalars['String'];
-  focalPoint?: Maybe<FocalPoint>;
-  format: Scalars['String'];
-  height?: Maybe<Scalars['IntType']>;
-  id: Scalars['UploadId'];
-  md5: Scalars['String'];
-  mimeType: Scalars['String'];
-  notes?: Maybe<Scalars['String']>;
-  responsiveImage?: Maybe<ResponsiveImage>;
-  size: Scalars['IntType'];
-  smartTags: Array<Scalars['String']>;
-  tags: Array<Scalars['String']>;
-  title: Scalars['String'];
-  url: Scalars['String'];
-  video?: Maybe<UploadVideoField>;
-  width?: Maybe<Scalars['IntType']>;
-};
-
-export type TitleFileFieldAltArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-export type TitleFileFieldBlurUpThumbArgs = {
-  imgixParams?: InputMaybe<ImgixParams>;
-  punch?: InputMaybe<Scalars['Float']>;
-  quality?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
-};
-
-export type TitleFileFieldCustomDataArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-export type TitleFileFieldFocalPointArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-export type TitleFileFieldResponsiveImageArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  imgixParams?: InputMaybe<ImgixParams>;
-  locale?: InputMaybe<SiteLocale>;
-  sizes?: InputMaybe<Scalars['String']>;
-};
-
-export type TitleFileFieldTitleArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-export type TitleFileFieldUrlArgs = {
-  imgixParams?: InputMaybe<ImgixParams>;
 };
 
 /** Specifies how to filter by upload type */
@@ -2304,6 +2267,75 @@ export type UploadWidthFilter = {
   neq?: InputMaybe<Scalars['IntType']>;
 };
 
+export type VideoFileField = FileFieldInterface & {
+  __typename?: 'VideoFileField';
+  _createdAt: Scalars['DateTime'];
+  _updatedAt: Scalars['DateTime'];
+  alt?: Maybe<Scalars['String']>;
+  author?: Maybe<Scalars['String']>;
+  basename: Scalars['String'];
+  blurUpThumb?: Maybe<Scalars['String']>;
+  blurhash?: Maybe<Scalars['String']>;
+  colors: Array<ColorField>;
+  copyright?: Maybe<Scalars['String']>;
+  customData: Scalars['CustomData'];
+  exifInfo: Scalars['CustomData'];
+  filename: Scalars['String'];
+  focalPoint?: Maybe<FocalPoint>;
+  format: Scalars['String'];
+  height?: Maybe<Scalars['IntType']>;
+  id: Scalars['UploadId'];
+  md5: Scalars['String'];
+  mimeType: Scalars['String'];
+  notes?: Maybe<Scalars['String']>;
+  responsiveImage?: Maybe<ResponsiveImage>;
+  size: Scalars['IntType'];
+  smartTags: Array<Scalars['String']>;
+  tags: Array<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
+  video: UploadVideoField;
+  width?: Maybe<Scalars['IntType']>;
+};
+
+export type VideoFileFieldAltArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type VideoFileFieldBlurUpThumbArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
+  punch?: InputMaybe<Scalars['Float']>;
+  quality?: InputMaybe<Scalars['Int']>;
+  size?: InputMaybe<Scalars['Int']>;
+};
+
+export type VideoFileFieldCustomDataArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type VideoFileFieldFocalPointArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type VideoFileFieldResponsiveImageArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  imgixParams?: InputMaybe<ImgixParams>;
+  locale?: InputMaybe<SiteLocale>;
+  sizes?: InputMaybe<Scalars['String']>;
+};
+
+export type VideoFileFieldTitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+export type VideoFileFieldUrlArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
+};
+
 export type VideoMp4Res = 'high' | 'low' | 'medium';
 
 export type FocalPoint = {
@@ -2320,7 +2352,7 @@ export const ResponsiveImageFragmentFragmentDoc = {
       name: { kind: 'Name', value: 'ResponsiveImageFragment' },
       typeCondition: {
         kind: 'NamedType',
-        name: { kind: 'Name', value: 'TitleFileField' },
+        name: { kind: 'Name', value: 'FileField' },
       },
       selectionSet: {
         kind: 'SelectionSet',
@@ -2333,16 +2365,23 @@ export const ResponsiveImageFragmentFragmentDoc = {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'sizes' },
                 value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'sizes' },
+                  kind: 'StringValue',
+                  value: '(max-width: 512px) 100vw, 512px',
+                  block: false,
                 },
               },
               {
                 kind: 'Argument',
                 name: { kind: 'Name', value: 'imgixParams' },
                 value: {
-                  kind: 'Variable',
-                  name: { kind: 'Name', value: 'imgixParams' },
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'fm' },
+                      value: { kind: 'EnumValue', value: 'webp' },
+                    },
+                  ],
                 },
               },
             ],
@@ -2350,12 +2389,12 @@ export const ResponsiveImageFragmentFragmentDoc = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'src' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'srcSet' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'sizes' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'width' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'srcSet' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'sizes' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'bgColor' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'aspectRatio' } },
               ],
@@ -2366,55 +2405,210 @@ export const ResponsiveImageFragmentFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<ResponsiveImageFragmentFragment, unknown>;
-export const PeopleDocument = {
+export const VideoFragmentFragmentDoc = {
   kind: 'Document',
   definitions: [
     {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'People' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'sizes' },
-          },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-          defaultValue: {
-            kind: 'StringValue',
-            value: '(max-width: 512px) 100vw, 512px',
-            block: false,
-          },
-        },
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'imgixParams' },
-          },
-          type: {
-            kind: 'NamedType',
-            name: { kind: 'Name', value: 'ImgixParams' },
-          },
-          defaultValue: {
-            kind: 'ObjectValue',
-            fields: [
-              {
-                kind: 'ObjectField',
-                name: { kind: 'Name', value: 'fm' },
-                value: { kind: 'EnumValue', value: 'webp' },
-              },
-            ],
-          },
-        },
-      ],
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'VideoFragment' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'VideoFileField' },
+      },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'allPeopleModels' },
+            name: { kind: 'Name', value: 'video' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'streamingUrl' },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'mp4High' },
+                  name: { kind: 'Name', value: 'mp4Url' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'res' },
+                      value: { kind: 'EnumValue', value: 'high' },
+                    },
+                  ],
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'mp4Med' },
+                  name: { kind: 'Name', value: 'mp4Url' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'res' },
+                      value: { kind: 'EnumValue', value: 'medium' },
+                    },
+                  ],
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'mp4Low' },
+                  name: { kind: 'Name', value: 'mp4Url' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'res' },
+                      value: { kind: 'EnumValue', value: 'low' },
+                    },
+                  ],
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'duration' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'framerate' } },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'thumbJpg' },
+                  name: { kind: 'Name', value: 'thumbnailUrl' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'format' },
+                      value: { kind: 'EnumValue', value: 'jpg' },
+                    },
+                  ],
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'thumbPng' },
+                  name: { kind: 'Name', value: 'thumbnailUrl' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'format' },
+                      value: { kind: 'EnumValue', value: 'png' },
+                    },
+                  ],
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'thumbGif' },
+                  name: { kind: 'Name', value: 'thumbnailUrl' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'format' },
+                      value: { kind: 'EnumValue', value: 'gif' },
+                    },
+                  ],
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<VideoFragmentFragment, unknown>;
+export const FeaturedVideoDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'FeaturedVideo' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'featuredVideo' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'landscape' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'VideoFragment' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'portrait' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'VideoFragment' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...VideoFragmentFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<FeaturedVideoQuery, FeaturedVideoQueryVariables>;
+export const HomeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Home' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'featuredVideo' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'landscape' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'VideoFragment' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'portrait' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'VideoFragment' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allStaffs' },
             arguments: [
               {
                 kind: 'Argument',
@@ -2475,6 +2669,81 @@ export const PeopleDocument = {
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'height' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      {
+                        kind: 'FragmentSpread',
+                        name: {
+                          kind: 'Name',
+                          value: 'ResponsiveImageFragment',
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'houseGallery' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'images' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: {
+                          kind: 'Name',
+                          value: 'ResponsiveImageFragment',
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...VideoFragmentFragmentDoc.definitions,
+    ...ResponsiveImageFragmentFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<HomeQuery, HomeQueryVariables>;
+export const HouseGalleryDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'HouseGallery' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'houseGallery' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'images' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
                       {
                         kind: 'FragmentSpread',
                         name: {
@@ -2493,49 +2762,304 @@ export const PeopleDocument = {
     },
     ...ResponsiveImageFragmentFragmentDoc.definitions,
   ],
-} as unknown as DocumentNode<PeopleQuery, PeopleQueryVariables>;
-export type PeopleQueryVariables = Exact<{
-  sizes?: InputMaybe<Scalars['String']>;
-  imgixParams?: InputMaybe<ImgixParams>;
-}>;
+} as unknown as DocumentNode<HouseGalleryQuery, HouseGalleryQueryVariables>;
+export const StaffDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Staff' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allStaffs' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'orderBy' },
+                value: { kind: 'EnumValue', value: '_createdAt_ASC' },
+              },
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filter' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: '_status' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'eq' },
+                            value: { kind: 'EnumValue', value: 'published' },
+                          },
+                        ],
+                      },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'featuredImage' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'exists' },
+                            value: {
+                              kind: 'StringValue',
+                              value: 'true',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'featuredImage' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+                      {
+                        kind: 'FragmentSpread',
+                        name: {
+                          kind: 'Name',
+                          value: 'ResponsiveImageFragment',
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    ...ResponsiveImageFragmentFragmentDoc.definitions,
+  ],
+} as unknown as DocumentNode<StaffQuery, StaffQueryVariables>;
+export type ResponsiveImageFragmentFragment = {
+  __typename?: 'FileField';
+  responsiveImage?: {
+    __typename?: 'ResponsiveImage';
+    src: string;
+    alt?: string | null;
+    title?: string | null;
+    width: number;
+    height: number;
+    srcSet: string;
+    sizes: string;
+    bgColor?: string | null;
+    aspectRatio: number;
+  } | null;
+};
 
-export type PeopleQuery = {
+export type VideoFragmentFragment = {
+  __typename?: 'VideoFileField';
+  video: {
+    __typename?: 'UploadVideoField';
+    streamingUrl: string;
+    duration?: number | null;
+    framerate?: number | null;
+    mp4High?: string | null;
+    mp4Med?: string | null;
+    mp4Low?: string | null;
+    thumbJpg: string;
+    thumbPng: string;
+    thumbGif: string;
+  };
+};
+
+export type FeaturedVideoQueryVariables = Exact<{ [key: string]: never }>;
+
+export type FeaturedVideoQuery = {
   __typename?: 'Query';
-  allPeopleModels: Array<{
-    __typename?: 'PeopleModelRecord';
+  featuredVideo?: {
+    __typename?: 'FeaturedVideoRecord';
+    landscape: {
+      __typename?: 'VideoFileField';
+      video: {
+        __typename?: 'UploadVideoField';
+        streamingUrl: string;
+        duration?: number | null;
+        framerate?: number | null;
+        mp4High?: string | null;
+        mp4Med?: string | null;
+        mp4Low?: string | null;
+        thumbJpg: string;
+        thumbPng: string;
+        thumbGif: string;
+      };
+    };
+    portrait: {
+      __typename?: 'VideoFileField';
+      video: {
+        __typename?: 'UploadVideoField';
+        streamingUrl: string;
+        duration?: number | null;
+        framerate?: number | null;
+        mp4High?: string | null;
+        mp4Med?: string | null;
+        mp4Low?: string | null;
+        thumbJpg: string;
+        thumbPng: string;
+        thumbGif: string;
+      };
+    };
+  } | null;
+};
+
+export type HomeQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HomeQuery = {
+  __typename?: 'Query';
+  featuredVideo?: {
+    __typename?: 'FeaturedVideoRecord';
+    landscape: {
+      __typename?: 'VideoFileField';
+      video: {
+        __typename?: 'UploadVideoField';
+        streamingUrl: string;
+        duration?: number | null;
+        framerate?: number | null;
+        mp4High?: string | null;
+        mp4Med?: string | null;
+        mp4Low?: string | null;
+        thumbJpg: string;
+        thumbPng: string;
+        thumbGif: string;
+      };
+    };
+    portrait: {
+      __typename?: 'VideoFileField';
+      video: {
+        __typename?: 'UploadVideoField';
+        streamingUrl: string;
+        duration?: number | null;
+        framerate?: number | null;
+        mp4High?: string | null;
+        mp4Med?: string | null;
+        mp4Low?: string | null;
+        thumbJpg: string;
+        thumbPng: string;
+        thumbGif: string;
+      };
+    };
+  } | null;
+  allStaffs: Array<{
+    __typename?: 'StaffRecord';
     id: string;
     name: string;
     email?: string | null;
     featuredImage?: {
-      __typename?: 'TitleFileField';
+      __typename?: 'FileField';
+      title?: string | null;
+      alt?: string | null;
+      width?: number | null;
+      height?: number | null;
+      url: string;
       responsiveImage?: {
         __typename?: 'ResponsiveImage';
         src: string;
-        title?: string | null;
         alt?: string | null;
-        srcSet: string;
-        sizes: string;
+        title?: string | null;
         width: number;
         height: number;
+        srcSet: string;
+        sizes: string;
         bgColor?: string | null;
         aspectRatio: number;
       } | null;
     } | null;
   }>;
+  houseGallery?: {
+    __typename?: 'HouseGalleryRecord';
+    images: Array<{
+      __typename?: 'FileField';
+      responsiveImage?: {
+        __typename?: 'ResponsiveImage';
+        src: string;
+        alt?: string | null;
+        title?: string | null;
+        width: number;
+        height: number;
+        srcSet: string;
+        sizes: string;
+        bgColor?: string | null;
+        aspectRatio: number;
+      } | null;
+    }>;
+  } | null;
 };
 
-export type ResponsiveImageFragmentFragment = {
-  __typename?: 'TitleFileField';
-  responsiveImage?: {
-    __typename?: 'ResponsiveImage';
-    src: string;
-    title?: string | null;
-    alt?: string | null;
-    srcSet: string;
-    sizes: string;
-    width: number;
-    height: number;
-    bgColor?: string | null;
-    aspectRatio: number;
+export type HouseGalleryQueryVariables = Exact<{ [key: string]: never }>;
+
+export type HouseGalleryQuery = {
+  __typename?: 'Query';
+  houseGallery?: {
+    __typename?: 'HouseGalleryRecord';
+    images: Array<{
+      __typename?: 'FileField';
+      responsiveImage?: {
+        __typename?: 'ResponsiveImage';
+        src: string;
+        alt?: string | null;
+        title?: string | null;
+        width: number;
+        height: number;
+        srcSet: string;
+        sizes: string;
+        bgColor?: string | null;
+        aspectRatio: number;
+      } | null;
+    }>;
   } | null;
+};
+
+export type StaffQueryVariables = Exact<{ [key: string]: never }>;
+
+export type StaffQuery = {
+  __typename?: 'Query';
+  allStaffs: Array<{
+    __typename?: 'StaffRecord';
+    id: string;
+    name: string;
+    email?: string | null;
+    featuredImage?: {
+      __typename?: 'FileField';
+      title?: string | null;
+      alt?: string | null;
+      responsiveImage?: {
+        __typename?: 'ResponsiveImage';
+        src: string;
+        alt?: string | null;
+        title?: string | null;
+        width: number;
+        height: number;
+        srcSet: string;
+        sizes: string;
+        bgColor?: string | null;
+        aspectRatio: number;
+      } | null;
+    } | null;
+  }>;
 };
