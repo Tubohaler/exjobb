@@ -5,35 +5,10 @@ fragment Site on Query {
       mimeType
     }
     globalSeo {
-      facebookPageUrl
-      fallbackSeo {
-        description
-        title
-        twitterCard
-        image {
-          url
-          title
-          height
-          width
-        }
-      }
-      twitterAccount
-      titleSuffix
-      siteName
+      ...GlobalSeo
     }
   }
-  socialLinksCollection {
-    links {
-      hoverIcon {
-        url
-      }
-      icon {
-        url
-      }
-      linkTitle
-      id
-      title
-      url
-    }
+  allSocialLinks {
+    ...SocialLink
   }
 }

@@ -1,7 +1,0 @@
-fragment ImageGallery on ImageGalleryRecord {
-  id
-  title
-  images {
-    ...ResponsiveImage
-  }
-}

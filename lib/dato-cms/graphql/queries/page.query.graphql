@@ -1,56 +1,6 @@
 query Page($name: String) {
   ...Site
   page(filter: { name: { eq: $name } }) {
-    name
-    pageTitle
-    urlSlug
-    metaTags {
-      description
-      title
-      twitterCard
-      image {
-        url
-        title
-        width
-        height
-      }
-    }
-    _seoMetaTags {
-      content
-      tag
-      attributes
-    }
-    sections {
-      id
-      title
-      content {
-        __typename
-        value
-        links {
-          ... on AddressRecord {
-            ...Address
-          }
-          ... on ProjectGalleryRecord {
-            ...ProjectGallery
-          }
-          ... on ImageGalleryRecord {
-            ...ImageGallery
-          }
-          ... on PeopleGalleryRecord {
-            ...PeopleGallery
-          }
-        }
-        blocks {
-          __typename
-          id
-          landscape {
-            ...Video
-          }
-          portrait {
-            ...Video
-          }
-        }
-      }
-    }
+    ...Page
   }
 }

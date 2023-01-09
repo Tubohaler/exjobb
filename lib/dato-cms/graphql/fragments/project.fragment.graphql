@@ -1,0 +1,11 @@
+fragment Project on ProjectRecord {
+  id
+  name
+  pageUrl
+  steamUrl
+  humbleUrl
+  humbleButtonText
+  featuredImage {
+    ...ResponsiveImage
+  }
+}
