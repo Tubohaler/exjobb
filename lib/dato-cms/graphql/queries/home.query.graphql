@@ -7,7 +7,7 @@ query Home {
       ...VideoFragment
     }
   }
-  allStaffs(
+  allPeopleModels(
     orderBy: _createdAt_ASC
     filter: { _status: { eq: published }, featuredImage: { exists: "true" } }
   ) {

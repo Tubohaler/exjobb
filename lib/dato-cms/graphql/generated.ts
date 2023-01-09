@@ -23,6 +23,7 @@ export type Scalars = {
   FloatType: number;
   IntType: number;
   ItemId: string;
+  JsonField: unkown;
   MetaTagAttributes: Record<string, string>;
   UploadId: string;
 };
@@ -1619,6 +1620,75 @@ export type OrientationFilter = {
   neq?: InputMaybe<UploadOrientation>;
 };
 
+export type PeopleModelModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<PeopleModelModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  email?: InputMaybe<StringFilter>;
+  featuredImage?: InputMaybe<FileFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  jobPosition?: InputMaybe<StringFilter>;
+  name?: InputMaybe<StringFilter>;
+};
+
+export type PeopleModelModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'jobPosition_ASC'
+  | 'jobPosition_DESC'
+  | 'name_ASC'
+  | 'name_DESC';
+
+/** Record of type People (people_model) */
+export type PeopleModelRecord = RecordInterface & {
+  __typename?: 'PeopleModelRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  email?: Maybe<Scalars['String']>;
+  featuredImage?: Maybe<FileField>;
+  id: Scalars['ItemId'];
+  jobPosition: Scalars['String'];
+  name: Scalars['String'];
+};
+
+/** Record of type People (people_model) */
+export type PeopleModelRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by publication datetime */
 export type PublishedAtFilter = {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
@@ -1641,13 +1711,13 @@ export type PublishedAtFilter = {
 export type Query = {
   __typename?: 'Query';
   /** Returns meta information regarding a record collection */
-  _allStaffsMeta: CollectionMetadata;
+  _allPeopleModelsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta?: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
-  allStaffs: Array<StaffRecord>;
+  allPeopleModels: Array<PeopleModelRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
@@ -1655,15 +1725,15 @@ export type Query = {
   /** Returns the single instance record */
   houseGallery?: Maybe<HouseGalleryRecord>;
   /** Returns a specific record */
-  staff?: Maybe<StaffRecord>;
+  peopleModel?: Maybe<PeopleModelRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
 
 /** The query root for this schema */
-export type Query_AllStaffsMetaArgs = {
+export type Query_AllPeopleModelsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<StaffModelFilter>;
+  filter?: InputMaybe<PeopleModelModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -1680,12 +1750,12 @@ export type Query_SiteArgs = {
 };
 
 /** The query root for this schema */
-export type QueryAllStaffsArgs = {
+export type QueryAllPeopleModelsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<StaffModelFilter>;
+  filter?: InputMaybe<PeopleModelModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<PeopleModelModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -1712,11 +1782,11 @@ export type QueryHouseGalleryArgs = {
 };
 
 /** The query root for this schema */
-export type QueryStaffArgs = {
+export type QueryPeopleModelArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<StaffModelFilter>;
+  filter?: InputMaybe<PeopleModelModelFilter>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<PeopleModelModelOrderBy>>>;
 };
 
 /** The query root for this schema */
@@ -1775,6 +1845,42 @@ export type ResponsiveImage = {
   width: Scalars['IntType'];
 };
 
+export type SectionModelSectionContentField = {
+  __typename?: 'SectionModelSectionContentField';
+  blocks: Array<Scalars['String']>;
+  links: Array<SectionModelSectionContentLinksField>;
+  value: Scalars['JsonField'];
+};
+
+export type SectionModelSectionContentLinksField =
+  | FeaturedVideoRecord
+  | HouseGalleryRecord
+  | PeopleModelRecord;
+
+/** Block of type Page Section (section) */
+export type SectionRecord = RecordInterface & {
+  __typename?: 'SectionRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  sectionContent: SectionModelSectionContentField;
+  sectionTitle: Scalars['String'];
+};
+
+/** Block of type Page Section (section) */
+export type SectionRecord_SeoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 export type SeoField = {
   __typename?: 'SeoField';
   description?: Maybe<Scalars['String']>;
@@ -1801,75 +1907,6 @@ export type SiteGlobalSeoArgs = {
 };
 
 export type SiteLocale = 'en';
-
-export type StaffModelFilter = {
-  OR?: InputMaybe<Array<InputMaybe<StaffModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  email?: InputMaybe<StringFilter>;
-  featuredImage?: InputMaybe<FileFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  jobPosition?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-};
-
-export type StaffModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'email_ASC'
-  | 'email_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'jobPosition_ASC'
-  | 'jobPosition_DESC'
-  | 'name_ASC'
-  | 'name_DESC';
-
-/** Record of type People (staff) */
-export type StaffRecord = RecordInterface & {
-  __typename?: 'StaffRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  email?: Maybe<Scalars['String']>;
-  featuredImage?: Maybe<FileField>;
-  id: Scalars['ItemId'];
-  jobPosition: Scalars['String'];
-  name: Scalars['String'];
-};
-
-/** Record of type People (staff) */
-export type StaffRecord_SeoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
 
 /** Specifies how to filter by status */
 export type StatusFilter = {
@@ -2608,7 +2645,7 @@ export const HomeDocument = {
           },
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'allStaffs' },
+            name: { kind: 'Name', value: 'allPeopleModels' },
             arguments: [
               {
                 kind: 'Argument',
@@ -2763,100 +2800,6 @@ export const HouseGalleryDocument = {
     ...ResponsiveImageFragmentFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<HouseGalleryQuery, HouseGalleryQueryVariables>;
-export const StaffDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'Staff' },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'allStaffs' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'orderBy' },
-                value: { kind: 'EnumValue', value: '_createdAt_ASC' },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'filter' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: '_status' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'eq' },
-                            value: { kind: 'EnumValue', value: 'published' },
-                          },
-                        ],
-                      },
-                    },
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'featuredImage' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'exists' },
-                            value: {
-                              kind: 'StringValue',
-                              value: 'true',
-                              block: false,
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'featuredImage' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
-                      {
-                        kind: 'FragmentSpread',
-                        name: {
-                          kind: 'Name',
-                          value: 'ResponsiveImageFragment',
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    ...ResponsiveImageFragmentFragmentDoc.definitions,
-  ],
-} as unknown as DocumentNode<StaffQuery, StaffQueryVariables>;
 export type ResponsiveImageFragmentFragment = {
   __typename?: 'FileField';
   responsiveImage?: {
@@ -2965,8 +2908,8 @@ export type HomeQuery = {
       };
     };
   } | null;
-  allStaffs: Array<{
-    __typename?: 'StaffRecord';
+  allPeopleModels: Array<{
+    __typename?: 'PeopleModelRecord';
     id: string;
     name: string;
     email?: string | null;
@@ -3033,33 +2976,4 @@ export type HouseGalleryQuery = {
       } | null;
     }>;
   } | null;
-};
-
-export type StaffQueryVariables = Exact<{ [key: string]: never }>;
-
-export type StaffQuery = {
-  __typename?: 'Query';
-  allStaffs: Array<{
-    __typename?: 'StaffRecord';
-    id: string;
-    name: string;
-    email?: string | null;
-    featuredImage?: {
-      __typename?: 'FileField';
-      title?: string | null;
-      alt?: string | null;
-      responsiveImage?: {
-        __typename?: 'ResponsiveImage';
-        src: string;
-        alt?: string | null;
-        title?: string | null;
-        width: number;
-        height: number;
-        srcSet: string;
-        sizes: string;
-        bgColor?: string | null;
-        aspectRatio: number;
-      } | null;
-    } | null;
-  }>;
 };
