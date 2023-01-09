@@ -1,0 +1,10 @@
+fragment PeopleGallery on PeopleGalleryRecord {
+  people {
+    id
+    jobPosition
+    name
+    featuredImage {
+      ...ResponsiveImage
+    }
+  }
+}

@@ -11,7 +11,7 @@ const scalars = {
   FloatType: 'number',
   IntType: 'number',
   ItemId: 'string',
-  JsonField: 'unkown',
+  JsonField: 'unknown',
   MetaTagAttributes: 'Record<string, string>',
   UploadId: 'string',
 };

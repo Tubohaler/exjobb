@@ -1,0 +1,13 @@
+fragment ProjectGallery on ProjectGalleryRecord {
+  projects {
+    id
+    name
+    pageUrl
+    steamUrl
+    humbleUrl
+    humbleButtonText
+    featuredImage {
+      ...ResponsiveImage
+    }
+  }
+}

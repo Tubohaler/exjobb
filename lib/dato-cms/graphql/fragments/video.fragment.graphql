@@ -1,4 +1,4 @@
-fragment VideoFragment on VideoFileField {
+fragment Video on VideoFileField {
   video {
     streamingUrl
     mp4High: mp4Url(res: high)

@@ -1,0 +1,39 @@
+fragment Site on Query {
+  _site {
+    favicon {
+      url
+      mimeType
+    }
+    globalSeo {
+      facebookPageUrl
+      fallbackSeo {
+        description
+        title
+        twitterCard
+        image {
+          url
+          title
+          height
+          width
+        }
+      }
+      twitterAccount
+      titleSuffix
+      siteName
+    }
+  }
+  socialLinksCollection {
+    links {
+      hoverIcon {
+        url
+      }
+      icon {
+        url
+      }
+      linkTitle
+      id
+      title
+      url
+    }
+  }
+}

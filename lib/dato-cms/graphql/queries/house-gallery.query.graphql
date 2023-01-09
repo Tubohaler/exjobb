@@ -1,7 +1,0 @@
-query HouseGallery {
-  houseGallery {
-    images {
-      ...ResponsiveImageFragment
-    }
-  }
-}
