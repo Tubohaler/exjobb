@@ -1,13 +1,13 @@
 fragment Video on VideoFileField {
+  mimeType
   video {
     streamingUrl
+    duration
+    framerate
     mp4High: mp4Url(res: high)
     mp4Med: mp4Url(res: medium)
     mp4Low: mp4Url(res: low)
-    duration
-    framerate
     thumbJpg: thumbnailUrl(format: jpg)
-    thumbPng: thumbnailUrl(format: png)
     thumbGif: thumbnailUrl(format: gif)
   }
 }

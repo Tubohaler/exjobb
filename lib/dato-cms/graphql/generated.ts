@@ -3272,6 +3272,7 @@ export const VideoFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'video' },
@@ -3282,6 +3283,8 @@ export const VideoFragmentDoc = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'streamingUrl' },
                 },
+                { kind: 'Field', name: { kind: 'Name', value: 'duration' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'framerate' } },
                 {
                   kind: 'Field',
                   alias: { kind: 'Name', value: 'mp4High' },
@@ -3318,8 +3321,6 @@ export const VideoFragmentDoc = {
                     },
                   ],
                 },
-                { kind: 'Field', name: { kind: 'Name', value: 'duration' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'framerate' } },
                 {
                   kind: 'Field',
                   alias: { kind: 'Name', value: 'thumbJpg' },
@@ -3329,18 +3330,6 @@ export const VideoFragmentDoc = {
                       kind: 'Argument',
                       name: { kind: 'Name', value: 'format' },
                       value: { kind: 'EnumValue', value: 'jpg' },
-                    },
-                  ],
-                },
-                {
-                  kind: 'Field',
-                  alias: { kind: 'Name', value: 'thumbPng' },
-                  name: { kind: 'Name', value: 'thumbnailUrl' },
-                  arguments: [
-                    {
-                      kind: 'Argument',
-                      name: { kind: 'Name', value: 'format' },
-                      value: { kind: 'EnumValue', value: 'png' },
                     },
                   ],
                 },
@@ -4009,6 +3998,7 @@ export type PageFragment = {
         id: string;
         landscape: {
           __typename?: 'VideoFileField';
+          mimeType: string;
           video: {
             __typename?: 'UploadVideoField';
             streamingUrl: string;
@@ -4018,12 +4008,12 @@ export type PageFragment = {
             mp4Med?: string | null;
             mp4Low?: string | null;
             thumbJpg: string;
-            thumbPng: string;
             thumbGif: string;
           };
         };
         portrait: {
           __typename?: 'VideoFileField';
+          mimeType: string;
           video: {
             __typename?: 'UploadVideoField';
             streamingUrl: string;
@@ -4033,7 +4023,6 @@ export type PageFragment = {
             mp4Med?: string | null;
             mp4Low?: string | null;
             thumbJpg: string;
-            thumbPng: string;
             thumbGif: string;
           };
         };
@@ -4179,6 +4168,7 @@ export type SectionFragment = {
       id: string;
       landscape: {
         __typename?: 'VideoFileField';
+        mimeType: string;
         video: {
           __typename?: 'UploadVideoField';
           streamingUrl: string;
@@ -4188,12 +4178,12 @@ export type SectionFragment = {
           mp4Med?: string | null;
           mp4Low?: string | null;
           thumbJpg: string;
-          thumbPng: string;
           thumbGif: string;
         };
       };
       portrait: {
         __typename?: 'VideoFileField';
+        mimeType: string;
         video: {
           __typename?: 'UploadVideoField';
           streamingUrl: string;
@@ -4203,7 +4193,6 @@ export type SectionFragment = {
           mp4Med?: string | null;
           mp4Low?: string | null;
           thumbJpg: string;
-          thumbPng: string;
           thumbGif: string;
         };
       };
@@ -4286,6 +4275,7 @@ export type StaffFragment = {
 
 export type VideoFragment = {
   __typename?: 'VideoFileField';
+  mimeType: string;
   video: {
     __typename?: 'UploadVideoField';
     streamingUrl: string;
@@ -4295,7 +4285,6 @@ export type VideoFragment = {
     mp4Med?: string | null;
     mp4Low?: string | null;
     thumbJpg: string;
-    thumbPng: string;
     thumbGif: string;
   };
 };
@@ -4426,6 +4415,7 @@ export type PageQuery = {
           id: string;
           landscape: {
             __typename?: 'VideoFileField';
+            mimeType: string;
             video: {
               __typename?: 'UploadVideoField';
               streamingUrl: string;
@@ -4435,12 +4425,12 @@ export type PageQuery = {
               mp4Med?: string | null;
               mp4Low?: string | null;
               thumbJpg: string;
-              thumbPng: string;
               thumbGif: string;
             };
           };
           portrait: {
             __typename?: 'VideoFileField';
+            mimeType: string;
             video: {
               __typename?: 'UploadVideoField';
               streamingUrl: string;
@@ -4450,7 +4440,6 @@ export type PageQuery = {
               mp4Med?: string | null;
               mp4Low?: string | null;
               thumbJpg: string;
-              thumbPng: string;
               thumbGif: string;
             };
           };
