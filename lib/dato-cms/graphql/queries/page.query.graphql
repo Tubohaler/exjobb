@@ -1,0 +1,6 @@
+query Page($name: String) {
+  ...Site
+  page(filter: { name: { eq: $name } }) {
+    ...Page
+  }
+}

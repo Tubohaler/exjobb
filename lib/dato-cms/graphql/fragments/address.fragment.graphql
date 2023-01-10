@@ -1,0 +1,9 @@
+fragment Address on AddressRecord {
+  id
+  name
+  title
+  zipCode
+  country
+  city
+  address
+}

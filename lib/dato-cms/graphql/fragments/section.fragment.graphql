@@ -1,0 +1,41 @@
+fragment Section on SectionRecord {
+  id
+  title
+  content {
+    __typename
+    value
+    links {
+      __typename
+      ... on AddressRecord {
+        ...Address
+      }
+      ... on ProjectGalleryRecord {
+        projects {
+          ...Project
+        }
+      }
+      ... on ImageGalleryRecord {
+        id
+        title
+        images {
+          ...ResponsiveImage
+        }
+      }
+      ... on PeopleGalleryRecord {
+        people {
+          ...Staff
+        }
+      }
+    }
+    blocks {
+      __typename
+      id
+      landscape {
+        ...Video
+      }
+      portrait {
+        ...Video
+      }
+    }
+  }
+}

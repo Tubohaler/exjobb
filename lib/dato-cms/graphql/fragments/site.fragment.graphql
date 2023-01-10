@@ -1,0 +1,14 @@
+fragment Site on Query {
+  _site {
+    favicon {
+      url
+      mimeType
+    }
+    globalSeo {
+      ...GlobalSeo
+    }
+  }
+  allSocialLinks {
+    ...SocialLink
+  }
+}

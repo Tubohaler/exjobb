@@ -1,0 +1,17 @@
+fragment GlobalSeo on GlobalSeoField {
+  facebookPageUrl
+  fallbackSeo {
+    description
+    title
+    twitterCard
+    image {
+      url
+      title
+      height
+      width
+    }
+  }
+  twitterAccount
+  titleSuffix
+  siteName
+}

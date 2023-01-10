@@ -1,0 +1,8 @@
+fragment Staff on StaffRecord {
+  id
+  jobPosition
+  name
+  featuredImage {
+    ...ResponsiveImage
+  }
+}

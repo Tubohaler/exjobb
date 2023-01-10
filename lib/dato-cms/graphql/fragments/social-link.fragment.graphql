@@ -1,0 +1,12 @@
+fragment SocialLink on SocialLinkRecord {
+  hoverIcon {
+    url
+  }
+  icon {
+    url
+  }
+  linkTitle
+  id
+  title
+  url
+}

@@ -1,0 +1,24 @@
+fragment Page on PageRecord {
+  name
+  pageTitle
+  urlSlug
+  metaTags {
+    description
+    title
+    twitterCard
+    image {
+      url
+      title
+      width
+      height
+    }
+  }
+  _seoMetaTags {
+    content
+    tag
+    attributes
+  }
+  sections {
+    ...Section
+  }
+}
