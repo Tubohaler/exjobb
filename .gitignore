@@ -36,3 +36,4 @@ yarn-error.log*
 next-env.d.ts
 
 pages/test.tsx
+lib/dato-cms/cache/**/*.json

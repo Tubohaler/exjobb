@@ -1,19 +1,28 @@
-import type { CodegenConfig } from '@graphql-codegen/cli';
-import path from 'path';
 import dotenv from 'dotenv';
 dotenv.config();
+import type { CodegenConfig } from '@graphql-codegen/cli';
+import type { TypeScriptDocumentsPluginConfig } from '@graphql-codegen/typescript-operations';
 
-const scalars = {
-  BooleanType: 'boolean',
-  CustomData: 'Record<string, unknown>',
-  Date: 'string',
-  DateTime: 'string',
-  FloatType: 'number',
-  IntType: 'number',
-  ItemId: 'string',
-  JsonField: 'unknown',
-  MetaTagAttributes: 'Record<string, string>',
-  UploadId: 'string',
+const tsPluginConfig: TypeScriptDocumentsPluginConfig = {
+  scalars: {
+    BooleanType: 'boolean',
+    CustomData: 'Record<string, unknown>',
+    Date: 'string',
+    DateTime: 'string',
+    FloatType: 'number',
+    IntType: 'number',
+    ItemId: 'string',
+    JsonField: 'unknown',
+    MetaTagAttributes: 'Record<string, string>',
+    UploadId: 'string',
+  },
+  strictScalars: true,
+  useTypeImports: true,
+  preResolveTypes: true,
+  avoidOptionals: true,
+  dedupeFragments: true,
+  nonOptionalTypename: true,
+  exportFragmentSpreadSubTypes: true,
 };
 
 const config: CodegenConfig = {
@@ -23,27 +32,20 @@ const config: CodegenConfig = {
         headers: {
           Authorization: process.env.DATO_CMS_TOKEN || '',
           'X-Exclude-Invalid': 'true',
+          'X-Api-Version': '3',
         },
       },
     },
   ],
-  overwrite: true,
-  hooks: {
-    afterOneFileWrite: ['prettier --write'],
-  },
-  documents: [path.resolve('lib/dato-cms/graphql/**/*.graphql')],
+  documents: ['lib/dato-cms/graphql/**/*.graphql'],
   generates: {
     'lib/dato-cms/graphql/generated.ts': {
-      config: {
-        strictScalars: true,
-        scalars,
-        useTypeImports: true,
-        enumsAsTypes: true,
-        preResolveTypes: true,
-        dedupeFragments: true,
-      },
+      config: tsPluginConfig,
       plugins: ['typescript', 'typed-document-node', 'typescript-operations'],
     },
+  },
+  hooks: {
+    afterOneFileWrite: ['prettier --write'],
   },
 };
 

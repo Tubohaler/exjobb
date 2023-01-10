@@ -15,6 +15,7 @@ export default function request<
     {
       Authorization: process.env.DATO_CMS_TOKEN || '',
       'X-Exclude-Invalid': 'true',
+      'X-Api-Version': '3',
     }
   );
 }
