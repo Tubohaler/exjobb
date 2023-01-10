@@ -1,23 +1,23 @@
-import styled from '@emotion/styled';
-import { Box } from '@mantine/core';
-
-export type PageWrapperProps = Omit<
-  Parameters<typeof Box<'div'>>[0],
-  'component'
-> & {
-  children: React.ReactNode;
-};
-
-const StyledDiv = styled.div`
-  height: 100vh;
-  min-height: fit-content;
-`;
-
+import { AppShell, Flex, Header } from '@mantine/core';
+import NavLinks from '../links/NavLinks';
+import SocialMediaLinks from '../links/SocialMediaLinks';
 /**
  * Used to wrap the whole page in a div
  */
-const PageWrapper = (props: PageWrapperProps) => {
-  return <Box component={StyledDiv} {...props} />;
+const PageWrapper = ({ children }: React.PropsWithChildren) => {
+  return (
+    <AppShell
+      header={
+        <Header height={70} p="md" style={{ backgroundColor: 'white' }}>
+          <Flex justify="flex-end" align="center" direction="row">
+            <NavLinks spacing="xs" />
+            <SocialMediaLinks size="xs" spacing={2} />
+          </Flex>
+        </Header>
+      }
+    >
+      {children}
+    </AppShell>
+  );
 };
-
 export default PageWrapper;
