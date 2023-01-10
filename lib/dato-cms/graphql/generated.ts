@@ -47,38 +47,37 @@ export type AddressModelFilter = {
   zipCode: InputMaybe<StringFilter>;
 };
 
-export enum AddressModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  AddressAsc = 'address_ASC',
-  AddressDesc = 'address_DESC',
-  CityAsc = 'city_ASC',
-  CityDesc = 'city_DESC',
-  CountryAsc = 'country_ASC',
-  CountryDesc = 'country_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  ZipCodeAsc = 'zipCode_ASC',
-  ZipCodeDesc = 'zipCode_DESC',
-}
+export type AddressModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'address_ASC'
+  | 'address_DESC'
+  | 'city_ASC'
+  | 'city_DESC'
+  | 'country_ASC'
+  | 'country_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'zipCode_ASC'
+  | 'zipCode_DESC';
 
 /** Record of type Address (address) */
 export type AddressRecord = RecordInterface & {
@@ -119,20 +118,19 @@ export type CollectionMetadata = {
   count: Scalars['IntType'];
 };
 
-export enum ColorBucketType {
-  Black = 'black',
-  Blue = 'blue',
-  Brown = 'brown',
-  Cyan = 'cyan',
-  Green = 'green',
-  Grey = 'grey',
-  Orange = 'orange',
-  Pink = 'pink',
-  Purple = 'purple',
-  Red = 'red',
-  White = 'white',
-  Yellow = 'yellow',
-}
+export type ColorBucketType =
+  | 'black'
+  | 'blue'
+  | 'brown'
+  | 'cyan'
+  | 'green'
+  | 'grey'
+  | 'orange'
+  | 'pink'
+  | 'purple'
+  | 'red'
+  | 'white'
+  | 'yellow';
 
 export type ColorField = {
   __typename: 'ColorField';
@@ -190,11 +188,7 @@ export type CreatedAtFilter = {
   neq: InputMaybe<Scalars['DateTime']>;
 };
 
-export enum FaviconType {
-  AppleTouchIcon = 'appleTouchIcon',
-  Icon = 'icon',
-  MsApplication = 'msApplication',
-}
+export type FaviconType = 'appleTouchIcon' | 'icon' | 'msApplication';
 
 export type FileField = FileFieldInterface & {
   __typename: 'FileField';
@@ -454,28 +448,27 @@ export type ImageGalleryModelFilter = {
   title: InputMaybe<StringFilter>;
 };
 
-export enum ImageGalleryModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-}
+export type ImageGalleryModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC';
 
 /** Record of type Image Gallery (image_gallery) */
 export type ImageGalleryRecord = RecordInterface & {
@@ -1686,184 +1679,121 @@ export type ImgixParams = {
   w: InputMaybe<Scalars['FloatType']>;
 };
 
-export enum ImgixParamsAuto {
-  Compress = 'compress',
-  Enhance = 'enhance',
-  Format = 'format',
-  Redeye = 'redeye',
-}
+export type ImgixParamsAuto = 'compress' | 'enhance' | 'format' | 'redeye';
 
-export enum ImgixParamsBlendAlign {
-  Bottom = 'bottom',
-  Center = 'center',
-  Left = 'left',
-  Middle = 'middle',
-  Right = 'right',
-  Top = 'top',
-}
+export type ImgixParamsBlendAlign =
+  | 'bottom'
+  | 'center'
+  | 'left'
+  | 'middle'
+  | 'right'
+  | 'top';
 
-export enum ImgixParamsBlendCrop {
-  Bottom = 'bottom',
-  Faces = 'faces',
-  Left = 'left',
-  Right = 'right',
-  Top = 'top',
-}
+export type ImgixParamsBlendCrop =
+  | 'bottom'
+  | 'faces'
+  | 'left'
+  | 'right'
+  | 'top';
 
-export enum ImgixParamsBlendFit {
-  Clamp = 'clamp',
-  Clip = 'clip',
-  Crop = 'crop',
-  Max = 'max',
-  Scale = 'scale',
-}
+export type ImgixParamsBlendFit = 'clamp' | 'clip' | 'crop' | 'max' | 'scale';
 
-export enum ImgixParamsBlendMode {
-  Burn = 'burn',
-  Color = 'color',
-  Darken = 'darken',
-  Difference = 'difference',
-  Dodge = 'dodge',
-  Exclusion = 'exclusion',
-  Hardlight = 'hardlight',
-  Hue = 'hue',
-  Lighten = 'lighten',
-  Luminosity = 'luminosity',
-  Multiply = 'multiply',
-  Normal = 'normal',
-  Overlay = 'overlay',
-  Saturation = 'saturation',
-  Screen = 'screen',
-  Softlight = 'softlight',
-}
+export type ImgixParamsBlendMode =
+  | 'burn'
+  | 'color'
+  | 'darken'
+  | 'difference'
+  | 'dodge'
+  | 'exclusion'
+  | 'hardlight'
+  | 'hue'
+  | 'lighten'
+  | 'luminosity'
+  | 'multiply'
+  | 'normal'
+  | 'overlay'
+  | 'saturation'
+  | 'screen'
+  | 'softlight';
 
-export enum ImgixParamsBlendSize {
-  Inherit = 'inherit',
-}
+export type ImgixParamsBlendSize = 'inherit';
 
-export enum ImgixParamsCh {
-  Dpr = 'dpr',
-  SaveData = 'saveData',
-  Width = 'width',
-}
+export type ImgixParamsCh = 'dpr' | 'saveData' | 'width';
 
-export enum ImgixParamsCrop {
-  Bottom = 'bottom',
-  Edges = 'edges',
-  Entropy = 'entropy',
-  Faces = 'faces',
-  Focalpoint = 'focalpoint',
-  Left = 'left',
-  Right = 'right',
-  Top = 'top',
-}
+export type ImgixParamsCrop =
+  | 'bottom'
+  | 'edges'
+  | 'entropy'
+  | 'faces'
+  | 'focalpoint'
+  | 'left'
+  | 'right'
+  | 'top';
 
-export enum ImgixParamsCs {
-  Adobergb1998 = 'adobergb1998',
-  Srgb = 'srgb',
-  Strip = 'strip',
-  Tinysrgb = 'tinysrgb',
-}
+export type ImgixParamsCs = 'adobergb1998' | 'srgb' | 'strip' | 'tinysrgb';
 
-export enum ImgixParamsFill {
-  Blur = 'blur',
-  Solid = 'solid',
-}
+export type ImgixParamsFill = 'blur' | 'solid';
 
-export enum ImgixParamsFit {
-  Clamp = 'clamp',
-  Clip = 'clip',
-  Crop = 'crop',
-  Facearea = 'facearea',
-  Fill = 'fill',
-  Fillmax = 'fillmax',
-  Max = 'max',
-  Min = 'min',
-  Scale = 'scale',
-}
+export type ImgixParamsFit =
+  | 'clamp'
+  | 'clip'
+  | 'crop'
+  | 'facearea'
+  | 'fill'
+  | 'fillmax'
+  | 'max'
+  | 'min'
+  | 'scale';
 
-export enum ImgixParamsFlip {
-  H = 'h',
-  Hv = 'hv',
-  V = 'v',
-}
+export type ImgixParamsFlip = 'h' | 'hv' | 'v';
 
-export enum ImgixParamsFm {
-  Avif = 'avif',
-  Blurhash = 'blurhash',
-  Gif = 'gif',
-  Jp2 = 'jp2',
-  Jpg = 'jpg',
-  Json = 'json',
-  Jxr = 'jxr',
-  Mp4 = 'mp4',
-  Pjpg = 'pjpg',
-  Png = 'png',
-  Png8 = 'png8',
-  Png32 = 'png32',
-  Webm = 'webm',
-  Webp = 'webp',
-}
+export type ImgixParamsFm =
+  | 'avif'
+  | 'blurhash'
+  | 'gif'
+  | 'jp2'
+  | 'jpg'
+  | 'json'
+  | 'jxr'
+  | 'mp4'
+  | 'pjpg'
+  | 'png'
+  | 'png8'
+  | 'png32'
+  | 'webm'
+  | 'webp';
 
-export enum ImgixParamsIptc {
-  Allow = 'allow',
-  Block = 'block',
-}
+export type ImgixParamsIptc = 'allow' | 'block';
 
-export enum ImgixParamsMarkAlign {
-  Bottom = 'bottom',
-  Center = 'center',
-  Left = 'left',
-  Middle = 'middle',
-  Right = 'right',
-  Top = 'top',
-}
+export type ImgixParamsMarkAlign =
+  | 'bottom'
+  | 'center'
+  | 'left'
+  | 'middle'
+  | 'right'
+  | 'top';
 
-export enum ImgixParamsMarkFit {
-  Clip = 'clip',
-  Crop = 'crop',
-  Fill = 'fill',
-  Max = 'max',
-  Scale = 'scale',
-}
+export type ImgixParamsMarkFit = 'clip' | 'crop' | 'fill' | 'max' | 'scale';
 
-export enum ImgixParamsMarkTile {
-  Grid = 'grid',
-}
+export type ImgixParamsMarkTile = 'grid';
 
-export enum ImgixParamsPalette {
-  Css = 'css',
-  Json = 'json',
-}
+export type ImgixParamsPalette = 'css' | 'json';
 
-export enum ImgixParamsTransparency {
-  Grid = 'grid',
-}
+export type ImgixParamsTransparency = 'grid';
 
-export enum ImgixParamsTrim {
-  Auto = 'auto',
-  Color = 'color',
-}
+export type ImgixParamsTrim = 'auto' | 'color';
 
-export enum ImgixParamsTxtAlign {
-  Bottom = 'bottom',
-  Center = 'center',
-  Left = 'left',
-  Middle = 'middle',
-  Right = 'right',
-  Top = 'top',
-}
+export type ImgixParamsTxtAlign =
+  | 'bottom'
+  | 'center'
+  | 'left'
+  | 'middle'
+  | 'right'
+  | 'top';
 
-export enum ImgixParamsTxtClip {
-  Ellipsis = 'ellipsis',
-  End = 'end',
-  Middle = 'middle',
-  Start = 'start',
-}
+export type ImgixParamsTxtClip = 'ellipsis' | 'end' | 'middle' | 'start';
 
-export enum ImgixParamsTxtFit {
-  Max = 'max',
-}
+export type ImgixParamsTxtFit = 'max';
 
 /** Specifies how to filter by usage */
 export type InUseFilter = {
@@ -1883,17 +1813,9 @@ export type ItemIdFilter = {
   notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
 };
 
-export enum ItemStatus {
-  Draft = 'draft',
-  Published = 'published',
-  Updated = 'updated',
-}
+export type ItemStatus = 'draft' | 'published' | 'updated';
 
-export enum MuxThumbnailFormatType {
-  Gif = 'gif',
-  Jpg = 'jpg',
-  Png = 'png',
-}
+export type MuxThumbnailFormatType = 'gif' | 'jpg' | 'png';
 
 /** Specifies how to filter by image orientation */
 export type OrientationFilter = {
@@ -1922,32 +1844,31 @@ export type PageModelFilter = {
   urlSlug: InputMaybe<SlugFilter>;
 };
 
-export enum PageModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  PageTitleAsc = 'pageTitle_ASC',
-  PageTitleDesc = 'pageTitle_DESC',
-  PositionAsc = 'position_ASC',
-  PositionDesc = 'position_DESC',
-}
+export type PageModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'pageTitle_ASC'
+  | 'pageTitle_DESC'
+  | 'position_ASC'
+  | 'position_DESC';
 
 /** Record of type Page (page) */
 export type PageRecord = RecordInterface & {
@@ -2072,40 +1993,39 @@ export type ProjectModelFilter = {
   steamUrl: InputMaybe<StringFilter>;
 };
 
-export enum ProjectModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  DescriptionAsc = 'description_ASC',
-  DescriptionDesc = 'description_DESC',
-  HumbleButtonTextAsc = 'humbleButtonText_ASC',
-  HumbleButtonTextDesc = 'humbleButtonText_DESC',
-  HumbleUrlAsc = 'humbleUrl_ASC',
-  HumbleUrlDesc = 'humbleUrl_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  PageUrlAsc = 'pageUrl_ASC',
-  PageUrlDesc = 'pageUrl_DESC',
-  SlugSrcAsc = 'slugSrc_ASC',
-  SlugSrcDesc = 'slugSrc_DESC',
-  SteamUrlAsc = 'steamUrl_ASC',
-  SteamUrlDesc = 'steamUrl_DESC',
-}
+export type ProjectModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'humbleButtonText_ASC'
+  | 'humbleButtonText_DESC'
+  | 'humbleUrl_ASC'
+  | 'humbleUrl_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'pageUrl_ASC'
+  | 'pageUrl_DESC'
+  | 'slugSrc_ASC'
+  | 'slugSrc_DESC'
+  | 'steamUrl_ASC'
+  | 'steamUrl_DESC';
 
 /** Record of type Project (project) */
 export type ProjectRecord = RecordInterface & {
@@ -2441,12 +2361,7 @@ export type ResolutionFilter = {
   notIn: InputMaybe<Array<InputMaybe<ResolutionType>>>;
 };
 
-export enum ResolutionType {
-  Icon = 'icon',
-  Large = 'large',
-  Medium = 'medium',
-  Small = 'small',
-}
+export type ResolutionType = 'icon' | 'large' | 'medium' | 'small';
 
 export type ResponsiveImage = {
   __typename: 'ResponsiveImage';
@@ -2556,9 +2471,7 @@ export type SiteGlobalSeoArgs = {
   locale: InputMaybe<SiteLocale>;
 };
 
-export enum SiteLocale {
-  En = 'en',
-}
+export type SiteLocale = 'en';
 
 /** Specifies how to filter Slug fields */
 export type SlugFilter = {
@@ -2591,34 +2504,33 @@ export type SocialLinkModelFilter = {
   url: InputMaybe<StringFilter>;
 };
 
-export enum SocialLinkModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  LinkTitleAsc = 'linkTitle_ASC',
-  LinkTitleDesc = 'linkTitle_DESC',
-  PositionAsc = 'position_ASC',
-  PositionDesc = 'position_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
-  UrlAsc = 'url_ASC',
-  UrlDesc = 'url_DESC',
-}
+export type SocialLinkModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'linkTitle_ASC'
+  | 'linkTitle_DESC'
+  | 'position_ASC'
+  | 'position_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'url_ASC'
+  | 'url_DESC';
 
 /** Record of type Social Link (social_link) */
 export type SocialLinkRecord = RecordInterface & {
@@ -2665,32 +2577,31 @@ export type StaffModelFilter = {
   name: InputMaybe<StringFilter>;
 };
 
-export enum StaffModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  EmailAsc = 'email_ASC',
-  EmailDesc = 'email_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  JobPositionAsc = 'jobPosition_ASC',
-  JobPositionDesc = 'jobPosition_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-}
+export type StaffModelOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_firstPublishedAt_ASC'
+  | '_firstPublishedAt_DESC'
+  | '_isValid_ASC'
+  | '_isValid_DESC'
+  | '_publicationScheduledAt_ASC'
+  | '_publicationScheduledAt_DESC'
+  | '_publishedAt_ASC'
+  | '_publishedAt_DESC'
+  | '_status_ASC'
+  | '_status_DESC'
+  | '_unpublishingScheduledAt_ASC'
+  | '_unpublishingScheduledAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'jobPosition_ASC'
+  | 'jobPosition_DESC'
+  | 'name_ASC'
+  | 'name_DESC';
 
 /** Record of type Staff (staff) */
 export type StaffRecord = RecordInterface & {
@@ -2982,32 +2893,27 @@ export type UploadNotesFilter = {
   notMatches: InputMaybe<StringMatchesFilter>;
 };
 
-export enum UploadOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  BasenameAsc = 'basename_ASC',
-  BasenameDesc = 'basename_DESC',
-  FilenameAsc = 'filename_ASC',
-  FilenameDesc = 'filename_DESC',
-  FormatAsc = 'format_ASC',
-  FormatDesc = 'format_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  MimeTypeAsc = 'mimeType_ASC',
-  MimeTypeDesc = 'mimeType_DESC',
-  ResolutionAsc = 'resolution_ASC',
-  ResolutionDesc = 'resolution_DESC',
-  SizeAsc = 'size_ASC',
-  SizeDesc = 'size_DESC',
-}
+export type UploadOrderBy =
+  | '_createdAt_ASC'
+  | '_createdAt_DESC'
+  | '_updatedAt_ASC'
+  | '_updatedAt_DESC'
+  | 'basename_ASC'
+  | 'basename_DESC'
+  | 'filename_ASC'
+  | 'filename_DESC'
+  | 'format_ASC'
+  | 'format_DESC'
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'mimeType_ASC'
+  | 'mimeType_DESC'
+  | 'resolution_ASC'
+  | 'resolution_DESC'
+  | 'size_ASC'
+  | 'size_DESC';
 
-export enum UploadOrientation {
-  Landscape = 'landscape',
-  Portrait = 'portrait',
-  Square = 'square',
-}
+export type UploadOrientation = 'landscape' | 'portrait' | 'square';
 
 /** Specifies how to filter by size */
 export type UploadSizeFilter = {
@@ -3057,16 +2963,15 @@ export type UploadTitleFilter = {
   notMatches: InputMaybe<StringMatchesFilter>;
 };
 
-export enum UploadType {
-  Archive = 'archive',
-  Audio = 'audio',
-  Image = 'image',
-  Pdfdocument = 'pdfdocument',
-  Presentation = 'presentation',
-  Richtext = 'richtext',
-  Spreadsheet = 'spreadsheet',
-  Video = 'video',
-}
+export type UploadType =
+  | 'archive'
+  | 'audio'
+  | 'image'
+  | 'pdfdocument'
+  | 'presentation'
+  | 'richtext'
+  | 'spreadsheet'
+  | 'video';
 
 /** Specifies how to filter by update datetime */
 export type UploadUpdatedAtFilter = {
@@ -3189,11 +3094,7 @@ export type VideoFileFieldUrlArgs = {
   imgixParams: InputMaybe<ImgixParams>;
 };
 
-export enum VideoMp4Res {
-  High = 'high',
-  Low = 'low',
-  Medium = 'medium',
-}
+export type VideoMp4Res = 'high' | 'low' | 'medium';
 
 export type FocalPoint = {
   __typename: 'focalPoint';
@@ -3201,6 +3102,56 @@ export type FocalPoint = {
   y: Scalars['FloatType'];
 };
 
+export const GlobalSeoFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'GlobalSeo' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'GlobalSeoField' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'facebookPageUrl' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'fallbackSeo' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'twitterCard' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'image' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: 'height' },
+                      },
+                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          { kind: 'Field', name: { kind: 'Name', value: 'twitterAccount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'titleSuffix' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'siteName' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GlobalSeoFragment, unknown>;
 export const AddressFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -3712,56 +3663,6 @@ export const PageFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PageFragment, unknown>;
-export const GlobalSeoFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'GlobalSeo' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'GlobalSeoField' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: 'facebookPageUrl' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'fallbackSeo' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'description' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'twitterCard' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'image' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                      { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'height' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'width' } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          { kind: 'Field', name: { kind: 'Name', value: 'twitterAccount' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'titleSuffix' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'siteName' } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<GlobalSeoFragment, unknown>;
 export const SocialLinkFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -3782,6 +3683,9 @@ export const SocialLinkFragmentDoc = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'height' } },
               ],
             },
           },
@@ -3792,6 +3696,9 @@ export const SocialLinkFragmentDoc = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'height' } },
               ],
             },
           },
@@ -3804,19 +3711,64 @@ export const SocialLinkFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<SocialLinkFragment, unknown>;
-export const SiteFragmentDoc = {
+export const PageDocument = {
   kind: 'Document',
   definitions: [
     {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Site' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'Query' },
-      },
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'Page' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+      ],
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'page' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'filter' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'name' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'eq' },
+                            value: {
+                              kind: 'Variable',
+                              name: { kind: 'Name', value: 'name' },
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Page' },
+                },
+              ],
+            },
+          },
           {
             kind: 'Field',
             name: { kind: 'Name', value: '_site' },
@@ -3869,73 +3821,6 @@ export const SiteFragmentDoc = {
         ],
       },
     },
-  ],
-} as unknown as DocumentNode<SiteFragment, unknown>;
-export const PageDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'Page' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
-          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'FragmentSpread', name: { kind: 'Name', value: 'Site' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'page' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'filter' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'name' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: 'eq' },
-                            value: {
-                              kind: 'Variable',
-                              name: { kind: 'Name', value: 'name' },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Page' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-    ...SiteFragmentDoc.definitions,
-    ...GlobalSeoFragmentDoc.definitions,
-    ...SocialLinkFragmentDoc.definitions,
     ...PageFragmentDoc.definitions,
     ...SectionFragmentDoc.definitions,
     ...AddressFragmentDoc.definitions,
@@ -3943,6 +3828,8 @@ export const PageDocument = {
     ...ResponsiveImageFragmentDoc.definitions,
     ...StaffFragmentDoc.definitions,
     ...VideoFragmentDoc.definitions,
+    ...GlobalSeoFragmentDoc.definitions,
+    ...SocialLinkFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;
 export type AddressFragment = {
@@ -4299,51 +4186,26 @@ export type SectionFragment = {
   };
 };
 
-export type SiteFragment = {
-  __typename: 'Query';
-  _site: {
-    __typename: 'Site';
-    favicon: { __typename: 'FileField'; url: string; mimeType: string } | null;
-    globalSeo: {
-      __typename: 'GlobalSeoField';
-      facebookPageUrl: string | null;
-      twitterAccount: string | null;
-      titleSuffix: string | null;
-      siteName: string | null;
-      fallbackSeo: {
-        __typename: 'SeoField';
-        description: string | null;
-        title: string | null;
-        twitterCard: string | null;
-        image: {
-          __typename: 'FileField';
-          url: string;
-          title: string | null;
-          height: number | null;
-          width: number | null;
-        } | null;
-      } | null;
-    } | null;
-  };
-  allSocialLinks: Array<{
-    __typename: 'SocialLinkRecord';
-    linkTitle: string | null;
-    id: string;
-    title: string;
-    url: string;
-    hoverIcon: { __typename: 'FileField'; url: string } | null;
-    icon: { __typename: 'FileField'; url: string };
-  }>;
-};
-
 export type SocialLinkFragment = {
   __typename: 'SocialLinkRecord';
   linkTitle: string | null;
   id: string;
   title: string;
   url: string;
-  hoverIcon: { __typename: 'FileField'; url: string } | null;
-  icon: { __typename: 'FileField'; url: string };
+  hoverIcon: {
+    __typename: 'FileField';
+    url: string;
+    mimeType: string;
+    width: number | null;
+    height: number | null;
+  } | null;
+  icon: {
+    __typename: 'FileField';
+    url: string;
+    mimeType: string;
+    width: number | null;
+    height: number | null;
+  };
 };
 
 export type StaffFragment = {
@@ -4572,7 +4434,19 @@ export type PageQuery = {
     id: string;
     title: string;
     url: string;
-    hoverIcon: { __typename: 'FileField'; url: string } | null;
-    icon: { __typename: 'FileField'; url: string };
+    hoverIcon: {
+      __typename: 'FileField';
+      url: string;
+      mimeType: string;
+      width: number | null;
+      height: number | null;
+    } | null;
+    icon: {
+      __typename: 'FileField';
+      url: string;
+      mimeType: string;
+      width: number | null;
+      height: number | null;
+    };
   }>;
 };

@@ -22,7 +22,6 @@ const tsPluginConfig: TypeScriptDocumentsPluginConfig = {
   avoidOptionals: true,
   dedupeFragments: true,
   nonOptionalTypename: true,
-  exportFragmentSpreadSubTypes: true,
 };
 
 const config: CodegenConfig = {
@@ -40,7 +39,7 @@ const config: CodegenConfig = {
   documents: ['lib/dato-cms/graphql/**/*.graphql'],
   generates: {
     'lib/dato-cms/graphql/generated.ts': {
-      config: tsPluginConfig,
+      config: { ...tsPluginConfig, enumsAsTypes: true },
       plugins: ['typescript', 'typed-document-node', 'typescript-operations'],
     },
   },

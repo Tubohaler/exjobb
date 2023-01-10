@@ -1,6 +1,17 @@
 query Page($name: String) {
-  ...Site
   page(filter: { name: { eq: $name } }) {
     ...Page
+  }
+  _site {
+    favicon {
+      url
+      mimeType
+    }
+    globalSeo {
+      ...GlobalSeo
+    }
+  }
+  allSocialLinks {
+    ...SocialLink
   }
 }
