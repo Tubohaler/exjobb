@@ -72,6 +72,8 @@ export const colors: MantineTheme['colors'] = {
   ],
 };
 
+export const defaultTransition = 'all 0.33s ease-in-out 0.1s';
+
 const mainTheme: MantineTheme = {
   ...DEFAULT_THEME,
   colors,
@@ -92,22 +94,6 @@ const mainTheme: MantineTheme = {
       },
     },
   }),
-  components: {
-    Anchor: {
-      defaultProps: {
-        component: Link,
-        sx: (theme) => ({
-          color: theme.black,
-          textDecoration: 'none',
-          transition: 'all 0.33s ease-in-out 0.1s',
-          '&:hover': {
-            color: theme.colors.red[2],
-            textDecoration: 'none',
-          },
-        }),
-      } as Partial<AnchorProps>,
-    },
-  },
 };
 
 export default mainTheme;
