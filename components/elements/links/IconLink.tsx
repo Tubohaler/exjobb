@@ -79,7 +79,6 @@ const useStyles = createStyles(
 
     return {
       root: {
-        background: 'red',
         color: colors[active ? 'active' : 'default'],
         transition: defaultTransition,
         lineHeight: 1,
