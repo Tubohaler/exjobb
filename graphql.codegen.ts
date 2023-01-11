@@ -22,12 +22,21 @@ const tsPluginConfig: TypeScriptDocumentsPluginConfig &
   scalars,
   strictScalars: true,
   useTypeImports: true,
-  preResolveTypes: true,
   avoidOptionals: true,
-  dedupeFragments: true,
   nonOptionalTypename: true,
   enumsAsTypes: true,
+  dedupeFragments: true,
+  preResolveTypes: false,
+  skipTypeNameForRoot: true,
+  declarationKind: 'interface',
 };
+
+const appendedContent = `
+export interface SvgIconFragment extends IconFragment {
+  mimeType: "image/svg+xml";
+  inlineHTML?: string;
+}
+`;
 
 const config: CodegenConfig = {
   schema: [
@@ -45,7 +54,17 @@ const config: CodegenConfig = {
   generates: {
     'lib/dato-cms/graphql/generated.ts': {
       config: tsPluginConfig,
-      plugins: ['typescript', 'typed-document-node', 'typescript-operations'],
+      plugins: [
+        {
+          add: {
+            placement: 'append',
+            content: appendedContent,
+          },
+        },
+        'typescript',
+        'typescript-operations',
+        'typed-document-node',
+      ],
     },
     'lib/dato-cms/graphql/introspection.json': {
       config: { minify: true },

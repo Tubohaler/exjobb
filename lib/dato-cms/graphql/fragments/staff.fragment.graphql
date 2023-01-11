@@ -1,4 +1,5 @@
 fragment Staff on StaffRecord {
+  __typename
   id
   jobPosition
   name

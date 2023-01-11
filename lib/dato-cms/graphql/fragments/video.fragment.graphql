@@ -1,6 +1,8 @@
 fragment Video on VideoFileField {
+  __typename
   mimeType
   video {
+    __typename
     streamingUrl
     duration
     framerate

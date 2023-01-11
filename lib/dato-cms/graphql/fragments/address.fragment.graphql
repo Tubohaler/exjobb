@@ -1,4 +1,5 @@
 fragment Address on AddressRecord {
+  __typename
   id
   name
   title

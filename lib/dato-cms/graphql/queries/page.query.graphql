@@ -1,8 +1,10 @@
 query Page($name: String) {
+  __typename
   page(filter: { name: { eq: $name } }) {
     ...Page
   }
   _site {
+    __typename
     favicon {
       url
       mimeType

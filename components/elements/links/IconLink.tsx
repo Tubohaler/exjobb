@@ -1,7 +1,14 @@
 import Link from './Link';
-import { ActionIcon, createStyles, DefaultProps } from '@mantine/core';
+import {
+  ActionIcon,
+  Box,
+  createStyles,
+  CSSObject,
+  DefaultProps,
+} from '@mantine/core';
 import { defaultTransition } from '@lib/theme/main';
 import { ReactSVG, Props as ReactSVGProps } from 'react-svg';
+import { SvgIconFragment } from '@lib/dato-cms';
 
 export type IconLinkStylesNames = 'root' | 'wrapper';
 export type IconLinkStylesParams = {
@@ -21,10 +28,7 @@ export type IconLinkProps = DefaultProps<
 > &
   Parameters<typeof ActionIcon<typeof Link>>[0] &
   IconLinkStylesParams & {
-    icon:
-      | React.ReactNode
-      | IconProps
-      | ((params: IconLinkStylesParams) => JSX.Element);
+    icon: React.ReactNode | IconProps;
   };
 
 const useStyles = createStyles(
@@ -64,54 +68,78 @@ const useStyles = createStyles(
       active: !activeColor ? 'initial' : getColor(activeColor, shades.active),
     };
 
+    const wrapperStyles: CSSObject = {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 0,
+    };
+
     return {
       root: {
+        background: 'red',
         color: colors[active ? 'active' : 'default'],
         transition: defaultTransition,
+        lineHeight: 1,
         '&:hover': {
           color: colors.hover,
         },
         '&:active': {
           color: colors.active,
         },
+      },
+      wrapper: {
+        ...wrapperStyles,
+        '& > div': wrapperStyles,
         '& svg': {
           height: '1em',
           maxHeight: '100%',
           width: 'auto',
           fill: 'currentColor',
           transition: defaultTransition,
+          pointerEvents: 'none',
         },
       },
-      wrapper: {},
     };
   }
 );
 
 const IconLink = ({
   icon,
-  color,
-  hoverColor,
-  activeColor,
   active,
   styles,
   unstyled,
   className,
   classNames,
-  title,
+  color = 'black',
+  hoverColor = 'red',
+  activeColor = 'blue',
+  baseShade = 9,
+  activeShade = 2,
+  variant = 'transparent',
   ...props
 }: IconLinkProps) => {
-  const stylesParams = { color, hoverColor, activeColor, active };
-  const { classes, cx, theme } = useStyles(stylesParams, {
-    name: 'IconLink',
-    classNames,
-    styles,
-    unstyled,
-  });
+  const { classes, cx } = useStyles(
+    {
+      color,
+      hoverColor,
+      activeColor,
+      baseShade,
+      activeShade,
+      active,
+    },
+    {
+      name: 'IconLink',
+      classNames,
+      styles,
+      unstyled,
+    }
+  );
 
   const Icon = () => {
-    return typeof icon === 'function' ? (
-      icon(stylesParams)
-    ) : icon && typeof icon === 'object' && 'src' in icon ? (
+    return icon && typeof icon === 'object' && 'src' in icon ? (
       <ReactSVG className={classes.wrapper} {...icon} />
     ) : (
       <>icon</>
@@ -120,7 +148,6 @@ const IconLink = ({
 
   return (
     <ActionIcon
-      variant="transparent"
       component={Link}
       className={cx(classes.root, className)}
       {...props}
@@ -129,16 +156,5 @@ const IconLink = ({
     </ActionIcon>
   );
 };
-
-const defaultProps: Partial<IconLinkProps> = {
-  color: 'black',
-  hoverColor: 'red',
-  activeColor: 'blue',
-  activeShade: 2,
-  baseShade: 9,
-  variant: 'transparent',
-};
-
-IconLink.defaultProps = defaultProps;
 
 export default IconLink;

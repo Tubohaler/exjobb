@@ -1,17 +1,17 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { PageName } from '../types';
+import { PageName, StaticPageData } from '../types';
 import { PageQuery } from '../graphql/generated';
 
 type DevCacheData = {
   modified_at: number;
-  pages: Partial<Record<PageName, PageQuery>>;
+  pages: Partial<Record<PageName, StaticPageData>>;
 };
 
 interface DevCache {
-  get(name: PageName): Promise<PageQuery | null>;
-  set(name: PageName, data: PageQuery): Promise<boolean>;
+  get(name: PageName): Promise<StaticPageData | null>;
+  set(name: PageName, data: StaticPageData | PageQuery): Promise<boolean>;
 }
 
 const isDevCacheData = (data: unknown): data is DevCacheData => {

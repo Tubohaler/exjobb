@@ -11,7 +11,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
   [SubKey in K]: Maybe<T[SubKey]>;
 };
 /** All built-in and custom scalars, mapped to their actual values */
-export type Scalars = {
+export interface Scalars {
   ID: string;
   String: string;
   Boolean: boolean;
@@ -26,9 +26,9 @@ export type Scalars = {
   JsonField: unknown;
   MetaTagAttributes: Record<string, string>;
   UploadId: string;
-};
+}
 
-export type AddressModelFilter = {
+export interface AddressModelFilter {
   OR: InputMaybe<Array<InputMaybe<AddressModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -45,7 +45,7 @@ export type AddressModelFilter = {
   name: InputMaybe<StringFilter>;
   title: InputMaybe<StringFilter>;
   zipCode: InputMaybe<StringFilter>;
-};
+}
 
 export type AddressModelOrderBy =
   | '_createdAt_ASC'
@@ -80,7 +80,7 @@ export type AddressModelOrderBy =
   | 'zipCode_DESC';
 
 /** Record of type Address (address) */
-export type AddressRecord = RecordInterface & {
+export interface AddressRecord extends RecordInterface {
   __typename: 'AddressRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -100,23 +100,23 @@ export type AddressRecord = RecordInterface & {
   name: Scalars['String'];
   title: Scalars['String'];
   zipCode: Scalars['String'];
-};
+}
 
 /** Record of type Address (address) */
-export type AddressRecord_SeoMetaTagsArgs = {
+export interface AddressRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter Boolean fields */
-export type BooleanFilter = {
+export interface BooleanFilter {
   /** Search for records with an exact match */
   eq: InputMaybe<Scalars['BooleanType']>;
-};
+}
 
-export type CollectionMetadata = {
+export interface CollectionMetadata {
   __typename: 'CollectionMetadata';
   count: Scalars['IntType'];
-};
+}
 
 export type ColorBucketType =
   | 'black'
@@ -132,17 +132,17 @@ export type ColorBucketType =
   | 'white'
   | 'yellow';
 
-export type ColorField = {
+export interface ColorField {
   __typename: 'ColorField';
   alpha: Scalars['IntType'];
   blue: Scalars['IntType'];
   green: Scalars['IntType'];
   hex: Scalars['String'];
   red: Scalars['IntType'];
-};
+}
 
 /** Record of type Contact Info (contact_info) */
-export type ContactInfoRecord = RecordInterface & {
+export interface ContactInfoRecord extends RecordInterface {
   __typename: 'ContactInfoRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -163,15 +163,15 @@ export type ContactInfoRecord = RecordInterface & {
   pressMaterialUrl: Scalars['String'];
   primaryEmail: Scalars['String'];
   studioAddress: AddressRecord;
-};
+}
 
 /** Record of type Contact Info (contact_info) */
-export type ContactInfoRecord_SeoMetaTagsArgs = {
+export interface ContactInfoRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter by creation datetime */
-export type CreatedAtFilter = {
+export interface CreatedAtFilter {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
   eq: InputMaybe<Scalars['DateTime']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
@@ -186,11 +186,11 @@ export type CreatedAtFilter = {
   lte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
   neq: InputMaybe<Scalars['DateTime']>;
-};
+}
 
 export type FaviconType = 'appleTouchIcon' | 'icon' | 'msApplication';
 
-export type FileField = FileFieldInterface & {
+export interface FileField extends FileFieldInterface {
   __typename: 'FileField';
   _createdAt: Scalars['DateTime'];
   _updatedAt: Scalars['DateTime'];
@@ -219,47 +219,47 @@ export type FileField = FileFieldInterface & {
   url: Scalars['String'];
   video: Maybe<UploadVideoField>;
   width: Maybe<Scalars['IntType']>;
-};
+}
 
-export type FileFieldAltArgs = {
+export interface FileFieldAltArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldBlurUpThumbArgs = {
+export interface FileFieldBlurUpThumbArgs {
   imgixParams: InputMaybe<ImgixParams>;
   punch?: InputMaybe<Scalars['Float']>;
   quality?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
-};
+}
 
-export type FileFieldCustomDataArgs = {
+export interface FileFieldCustomDataArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldFocalPointArgs = {
+export interface FileFieldFocalPointArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldResponsiveImageArgs = {
+export interface FileFieldResponsiveImageArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   imgixParams: InputMaybe<ImgixParams>;
   locale: InputMaybe<SiteLocale>;
   sizes: InputMaybe<Scalars['String']>;
-};
+}
 
-export type FileFieldTitleArgs = {
+export interface FileFieldTitleArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldUrlArgs = {
+export interface FileFieldUrlArgs {
   imgixParams: InputMaybe<ImgixParams>;
-};
+}
 
-export type FileFieldInterface = {
+export interface FileFieldInterface {
   _createdAt: Scalars['DateTime'];
   _updatedAt: Scalars['DateTime'];
   alt: Maybe<Scalars['String']>;
@@ -287,48 +287,48 @@ export type FileFieldInterface = {
   url: Scalars['String'];
   video: Maybe<UploadVideoField>;
   width: Maybe<Scalars['IntType']>;
-};
+}
 
-export type FileFieldInterfaceAltArgs = {
+export interface FileFieldInterfaceAltArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldInterfaceBlurUpThumbArgs = {
+export interface FileFieldInterfaceBlurUpThumbArgs {
   imgixParams: InputMaybe<ImgixParams>;
   punch?: InputMaybe<Scalars['Float']>;
   quality?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
-};
+}
 
-export type FileFieldInterfaceCustomDataArgs = {
+export interface FileFieldInterfaceCustomDataArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldInterfaceFocalPointArgs = {
+export interface FileFieldInterfaceFocalPointArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldInterfaceResponsiveImageArgs = {
+export interface FileFieldInterfaceResponsiveImageArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   imgixParams: InputMaybe<ImgixParams>;
   locale: InputMaybe<SiteLocale>;
   sizes: InputMaybe<Scalars['String']>;
-};
+}
 
-export type FileFieldInterfaceTitleArgs = {
+export interface FileFieldInterfaceTitleArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type FileFieldInterfaceUrlArgs = {
+export interface FileFieldInterfaceUrlArgs {
   imgixParams: InputMaybe<ImgixParams>;
-};
+}
 
 /** Specifies how to filter Single-file/image fields */
-export type FileFilter = {
+export interface FileFilter {
   /** Search for records with an exact match. The specified value must be an Upload ID */
   eq: InputMaybe<Scalars['UploadId']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
@@ -339,10 +339,10 @@ export type FileFilter = {
   neq: InputMaybe<Scalars['UploadId']>;
   /** Filter records that do not have one of the specified uploads */
   notIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
-};
+}
 
 /** Specifies how to filter Multiple files/images field */
-export type GalleryFilter = {
+export interface GalleryFilter {
   /** Filter records that have all of the specified uploads. The specified values must be Upload IDs */
   allIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
   /** Filter records that have one of the specified uploads. The specified values must be Upload IDs */
@@ -353,18 +353,18 @@ export type GalleryFilter = {
   exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter records that do not have any of the specified uploads. The specified values must be Upload IDs */
   notIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
-};
+}
 
-export type GlobalSeoField = {
+export interface GlobalSeoField {
   __typename: 'GlobalSeoField';
   facebookPageUrl: Maybe<Scalars['String']>;
   fallbackSeo: Maybe<SeoField>;
   siteName: Maybe<Scalars['String']>;
   titleSuffix: Maybe<Scalars['String']>;
   twitterAccount: Maybe<Scalars['String']>;
-};
+}
 
-export type ImageFileField = FileFieldInterface & {
+export interface ImageFileField extends FileFieldInterface {
   __typename: 'ImageFileField';
   _createdAt: Scalars['DateTime'];
   _updatedAt: Scalars['DateTime'];
@@ -393,47 +393,47 @@ export type ImageFileField = FileFieldInterface & {
   url: Scalars['String'];
   video: Maybe<UploadVideoField>;
   width: Scalars['IntType'];
-};
+}
 
-export type ImageFileFieldAltArgs = {
+export interface ImageFileFieldAltArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type ImageFileFieldBlurUpThumbArgs = {
+export interface ImageFileFieldBlurUpThumbArgs {
   imgixParams: InputMaybe<ImgixParams>;
   punch?: InputMaybe<Scalars['Float']>;
   quality?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
-};
+}
 
-export type ImageFileFieldCustomDataArgs = {
+export interface ImageFileFieldCustomDataArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type ImageFileFieldFocalPointArgs = {
+export interface ImageFileFieldFocalPointArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type ImageFileFieldResponsiveImageArgs = {
+export interface ImageFileFieldResponsiveImageArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   imgixParams: InputMaybe<ImgixParams>;
   locale: InputMaybe<SiteLocale>;
   sizes: InputMaybe<Scalars['String']>;
-};
+}
 
-export type ImageFileFieldTitleArgs = {
+export interface ImageFileFieldTitleArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type ImageFileFieldUrlArgs = {
+export interface ImageFileFieldUrlArgs {
   imgixParams: InputMaybe<ImgixParams>;
-};
+}
 
-export type ImageGalleryModelFilter = {
+export interface ImageGalleryModelFilter {
   OR: InputMaybe<Array<InputMaybe<ImageGalleryModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -446,7 +446,7 @@ export type ImageGalleryModelFilter = {
   id: InputMaybe<ItemIdFilter>;
   images: InputMaybe<GalleryFilter>;
   title: InputMaybe<StringFilter>;
-};
+}
 
 export type ImageGalleryModelOrderBy =
   | '_createdAt_ASC'
@@ -471,7 +471,7 @@ export type ImageGalleryModelOrderBy =
   | 'title_DESC';
 
 /** Record of type Image Gallery (image_gallery) */
-export type ImageGalleryRecord = RecordInterface & {
+export interface ImageGalleryRecord extends RecordInterface {
   __typename: 'ImageGalleryRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -487,14 +487,14 @@ export type ImageGalleryRecord = RecordInterface & {
   id: Scalars['ItemId'];
   images: Array<ImageFileField>;
   title: Scalars['String'];
-};
+}
 
 /** Record of type Image Gallery (image_gallery) */
-export type ImageGalleryRecord_SeoMetaTagsArgs = {
+export interface ImageGalleryRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type ImgixParams = {
+export interface ImgixParams {
   /**
    * Aspect Ratio
    *
@@ -1677,7 +1677,7 @@ export type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/size/w)
    */
   w: InputMaybe<Scalars['FloatType']>;
-};
+}
 
 export type ImgixParamsAuto = 'compress' | 'enhance' | 'format' | 'redeye';
 
@@ -1796,13 +1796,13 @@ export type ImgixParamsTxtClip = 'ellipsis' | 'end' | 'middle' | 'start';
 export type ImgixParamsTxtFit = 'max';
 
 /** Specifies how to filter by usage */
-export type InUseFilter = {
+export interface InUseFilter {
   /** Search uploads that are currently used by some record or not */
   eq: InputMaybe<Scalars['BooleanType']>;
-};
+}
 
 /** Specifies how to filter by ID */
-export type ItemIdFilter = {
+export interface ItemIdFilter {
   /** Search the record with the specified ID */
   eq: InputMaybe<Scalars['ItemId']>;
   /** Search records with the specified IDs */
@@ -1811,21 +1811,21 @@ export type ItemIdFilter = {
   neq: InputMaybe<Scalars['ItemId']>;
   /** Search records that do not have the specified IDs */
   notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
-};
+}
 
 export type ItemStatus = 'draft' | 'published' | 'updated';
 
 export type MuxThumbnailFormatType = 'gif' | 'jpg' | 'png';
 
 /** Specifies how to filter by image orientation */
-export type OrientationFilter = {
+export interface OrientationFilter {
   /** Search uploads with the specified orientation */
   eq: InputMaybe<UploadOrientation>;
   /** Exclude uploads with the specified orientation */
   neq: InputMaybe<UploadOrientation>;
-};
+}
 
-export type PageModelFilter = {
+export interface PageModelFilter {
   OR: InputMaybe<Array<InputMaybe<PageModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -1842,7 +1842,7 @@ export type PageModelFilter = {
   parent: InputMaybe<ParentFilter>;
   position: InputMaybe<PositionFilter>;
   urlSlug: InputMaybe<SlugFilter>;
-};
+}
 
 export type PageModelOrderBy =
   | '_createdAt_ASC'
@@ -1871,7 +1871,7 @@ export type PageModelOrderBy =
   | 'position_DESC';
 
 /** Record of type Page (page) */
-export type PageRecord = RecordInterface & {
+export interface PageRecord extends RecordInterface {
   __typename: 'PageRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -1893,23 +1893,23 @@ export type PageRecord = RecordInterface & {
   position: Maybe<Scalars['IntType']>;
   sections: Array<SectionRecord>;
   urlSlug: Maybe<Scalars['String']>;
-};
+}
 
 /** Record of type Page (page) */
-export type PageRecord_SeoMetaTagsArgs = {
+export interface PageRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter by parent (tree-like collections only) */
-export type ParentFilter = {
+export interface ParentFilter {
   /** Filter records children of the specified record. Value must be a Record ID */
   eq: InputMaybe<Scalars['ItemId']>;
   /** Filter records with a parent record or not */
   exists: InputMaybe<Scalars['BooleanType']>;
-};
+}
 
 /** Record of type People Gallery (people_gallery) */
-export type PeopleGalleryRecord = RecordInterface & {
+export interface PeopleGalleryRecord extends RecordInterface {
   __typename: 'PeopleGalleryRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -1924,15 +1924,15 @@ export type PeopleGalleryRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   people: Array<StaffRecord>;
-};
+}
 
 /** Record of type People Gallery (people_gallery) */
-export type PeopleGalleryRecord_SeoMetaTagsArgs = {
+export interface PeopleGalleryRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter by position (sorted and tree-like collections) */
-export type PositionFilter = {
+export interface PositionFilter {
   /** Search for records with an exact match */
   eq: InputMaybe<Scalars['IntType']>;
   /** Filter records with a value that's strictly greater than the one specified */
@@ -1945,10 +1945,10 @@ export type PositionFilter = {
   lte: InputMaybe<Scalars['IntType']>;
   /** Exclude records with an exact match */
   neq: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** Record of type Project Gallery (project_gallery) */
-export type ProjectGalleryRecord = RecordInterface & {
+export interface ProjectGalleryRecord extends RecordInterface {
   __typename: 'ProjectGalleryRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -1963,14 +1963,14 @@ export type ProjectGalleryRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   projects: Array<ProjectRecord>;
-};
+}
 
 /** Record of type Project Gallery (project_gallery) */
-export type ProjectGalleryRecord_SeoMetaTagsArgs = {
+export interface ProjectGalleryRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type ProjectModelFilter = {
+export interface ProjectModelFilter {
   OR: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -1991,7 +1991,7 @@ export type ProjectModelFilter = {
   slugSrc: InputMaybe<StringFilter>;
   steamSlug: InputMaybe<SlugFilter>;
   steamUrl: InputMaybe<StringFilter>;
-};
+}
 
 export type ProjectModelOrderBy =
   | '_createdAt_ASC'
@@ -2028,7 +2028,7 @@ export type ProjectModelOrderBy =
   | 'steamUrl_DESC';
 
 /** Record of type Project (project) */
-export type ProjectRecord = RecordInterface & {
+export interface ProjectRecord extends RecordInterface {
   __typename: 'ProjectRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -2052,15 +2052,15 @@ export type ProjectRecord = RecordInterface & {
   slugSrc: Maybe<Scalars['String']>;
   steamSlug: Maybe<Scalars['String']>;
   steamUrl: Maybe<Scalars['String']>;
-};
+}
 
 /** Record of type Project (project) */
-export type ProjectRecord_SeoMetaTagsArgs = {
+export interface ProjectRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter by publication datetime */
-export type PublishedAtFilter = {
+export interface PublishedAtFilter {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
   eq: InputMaybe<Scalars['DateTime']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
@@ -2075,10 +2075,10 @@ export type PublishedAtFilter = {
   lte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
   neq: InputMaybe<Scalars['DateTime']>;
-};
+}
 
 /** The query root for this schema */
-export type Query = {
+export interface Query {
   __typename: 'Query';
   /** Returns meta information regarding a record collection */
   _allAddressesMeta: CollectionMetadata;
@@ -2130,207 +2130,207 @@ export type Query = {
   staff: Maybe<StaffRecord>;
   /** Returns a specific asset */
   upload: Maybe<FileField>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllAddressesMetaArgs = {
+export interface Query_AllAddressesMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<AddressModelFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllImageGalleriesMetaArgs = {
+export interface Query_AllImageGalleriesMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ImageGalleryModelFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllPagesMetaArgs = {
+export interface Query_AllPagesMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<PageModelFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllProjectsMetaArgs = {
+export interface Query_AllProjectsMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ProjectModelFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllSocialLinksMetaArgs = {
+export interface Query_AllSocialLinksMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<SocialLinkModelFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllStaffsMetaArgs = {
+export interface Query_AllStaffsMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<StaffModelFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_AllUploadsMetaArgs = {
+export interface Query_AllUploadsMetaArgs {
   filter: InputMaybe<UploadFilter>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type Query_SiteArgs = {
+export interface Query_SiteArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAddressArgs = {
+export interface QueryAddressArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<AddressModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<AddressModelOrderBy>>>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllAddressesArgs = {
+export interface QueryAllAddressesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<AddressModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<AddressModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllImageGalleriesArgs = {
+export interface QueryAllImageGalleriesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ImageGalleryModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ImageGalleryModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllPagesArgs = {
+export interface QueryAllPagesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<PageModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<PageModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllProjectsArgs = {
+export interface QueryAllProjectsArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ProjectModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ProjectModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllSocialLinksArgs = {
+export interface QueryAllSocialLinksArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<SocialLinkModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<SocialLinkModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllStaffsArgs = {
+export interface QueryAllStaffsArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<StaffModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryAllUploadsArgs = {
+export interface QueryAllUploadsArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<UploadFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** The query root for this schema */
-export type QueryContactInfoArgs = {
+export interface QueryContactInfoArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type QueryImageGalleryArgs = {
+export interface QueryImageGalleryArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ImageGalleryModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ImageGalleryModelOrderBy>>>;
-};
+}
 
 /** The query root for this schema */
-export type QueryPageArgs = {
+export interface QueryPageArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<PageModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<PageModelOrderBy>>>;
-};
+}
 
 /** The query root for this schema */
-export type QueryPeopleGalleryArgs = {
+export interface QueryPeopleGalleryArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type QueryProjectArgs = {
+export interface QueryProjectArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ProjectModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ProjectModelOrderBy>>>;
-};
+}
 
 /** The query root for this schema */
-export type QueryProjectGalleryArgs = {
+export interface QueryProjectGalleryArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** The query root for this schema */
-export type QuerySocialLinkArgs = {
+export interface QuerySocialLinkArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<SocialLinkModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<SocialLinkModelOrderBy>>>;
-};
+}
 
 /** The query root for this schema */
-export type QueryStaffArgs = {
+export interface QueryStaffArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<StaffModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
-};
+}
 
 /** The query root for this schema */
-export type QueryUploadArgs = {
+export interface QueryUploadArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<UploadFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
-};
+}
 
-export type RecordInterface = {
+export interface RecordInterface {
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -2343,14 +2343,14 @@ export type RecordInterface = {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-};
+}
 
-export type RecordInterface_SeoMetaTagsArgs = {
+export interface RecordInterface_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter by upload type */
-export type ResolutionFilter = {
+export interface ResolutionFilter {
   /** Search uploads with the specified resolution */
   eq: InputMaybe<ResolutionType>;
   /** Search uploads with the specified resolutions */
@@ -2359,11 +2359,11 @@ export type ResolutionFilter = {
   neq: InputMaybe<ResolutionType>;
   /** Search uploads without the specified resolutions */
   notIn: InputMaybe<Array<InputMaybe<ResolutionType>>>;
-};
+}
 
 export type ResolutionType = 'icon' | 'large' | 'medium' | 'small';
 
-export type ResponsiveImage = {
+export interface ResponsiveImage {
   __typename: 'ResponsiveImage';
   alt: Maybe<Scalars['String']>;
   aspectRatio: Scalars['FloatType'];
@@ -2376,10 +2376,10 @@ export type ResponsiveImage = {
   title: Maybe<Scalars['String']>;
   webpSrcSet: Scalars['String'];
   width: Scalars['IntType'];
-};
+}
 
 /** Block of type Responsive Video (responsive_video) */
-export type ResponsiveVideoRecord = RecordInterface & {
+export interface ResponsiveVideoRecord extends RecordInterface {
   __typename: 'ResponsiveVideoRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -2395,19 +2395,19 @@ export type ResponsiveVideoRecord = RecordInterface & {
   id: Scalars['ItemId'];
   landscape: VideoFileField;
   portrait: VideoFileField;
-};
+}
 
 /** Block of type Responsive Video (responsive_video) */
-export type ResponsiveVideoRecord_SeoMetaTagsArgs = {
+export interface ResponsiveVideoRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type SectionModelContentField = {
+export interface SectionModelContentField {
   __typename: 'SectionModelContentField';
   blocks: Array<ResponsiveVideoRecord>;
   links: Array<SectionModelContentLinksField>;
   value: Scalars['JsonField'];
-};
+}
 
 export type SectionModelContentLinksField =
   | AddressRecord
@@ -2417,7 +2417,7 @@ export type SectionModelContentLinksField =
   | StaffRecord;
 
 /** Block of type Page Section (section) */
-export type SectionRecord = RecordInterface & {
+export interface SectionRecord extends RecordInterface {
   __typename: 'SectionRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -2433,48 +2433,48 @@ export type SectionRecord = RecordInterface & {
   content: SectionModelContentField;
   id: Scalars['ItemId'];
   title: Scalars['String'];
-};
+}
 
 /** Block of type Page Section (section) */
-export type SectionRecord_SeoMetaTagsArgs = {
+export interface SectionRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type SeoField = {
+export interface SeoField {
   __typename: 'SeoField';
   description: Maybe<Scalars['String']>;
   image: Maybe<FileField>;
   title: Maybe<Scalars['String']>;
   twitterCard: Maybe<Scalars['String']>;
-};
+}
 
 /** Specifies how to filter SEO meta tags fields */
-export type SeoFilter = {
+export interface SeoFilter {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists: InputMaybe<Scalars['BooleanType']>;
-};
+}
 
-export type Site = {
+export interface Site {
   __typename: 'Site';
   favicon: Maybe<FileField>;
   faviconMetaTags: Array<Tag>;
   globalSeo: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
-};
+}
 
-export type SiteFaviconMetaTagsArgs = {
+export interface SiteFaviconMetaTagsArgs {
   variants?: InputMaybe<Array<InputMaybe<FaviconType>>>;
-};
+}
 
-export type SiteGlobalSeoArgs = {
+export interface SiteGlobalSeoArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 export type SiteLocale = 'en';
 
 /** Specifies how to filter Slug fields */
-export type SlugFilter = {
+export interface SlugFilter {
   /** Search for records with an exact match */
   eq: InputMaybe<Scalars['String']>;
   /** Filter records that have one of the specified slugs */
@@ -2483,9 +2483,9 @@ export type SlugFilter = {
   neq: InputMaybe<Scalars['String']>;
   /** Filter records that do have one of the specified slugs */
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
+}
 
-export type SocialLinkModelFilter = {
+export interface SocialLinkModelFilter {
   OR: InputMaybe<Array<InputMaybe<SocialLinkModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -2495,14 +2495,13 @@ export type SocialLinkModelFilter = {
   _status: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
   _updatedAt: InputMaybe<UpdatedAtFilter>;
-  hoverIcon: InputMaybe<FileFilter>;
   href: InputMaybe<StringFilter>;
   icon: InputMaybe<FileFilter>;
   id: InputMaybe<ItemIdFilter>;
   linkTitle: InputMaybe<StringFilter>;
   position: InputMaybe<PositionFilter>;
   title: InputMaybe<StringFilter>;
-};
+}
 
 export type SocialLinkModelOrderBy =
   | '_createdAt_ASC'
@@ -2533,7 +2532,7 @@ export type SocialLinkModelOrderBy =
   | 'title_DESC';
 
 /** Record of type Social Link (social_link) */
-export type SocialLinkRecord = RecordInterface & {
+export interface SocialLinkRecord extends RecordInterface {
   __typename: 'SocialLinkRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -2546,21 +2545,20 @@ export type SocialLinkRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  hoverIcon: Maybe<FileField>;
   href: Scalars['String'];
   icon: FileField;
   id: Scalars['ItemId'];
   linkTitle: Maybe<Scalars['String']>;
   position: Maybe<Scalars['IntType']>;
   title: Scalars['String'];
-};
+}
 
 /** Record of type Social Link (social_link) */
-export type SocialLinkRecord_SeoMetaTagsArgs = {
+export interface SocialLinkRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type StaffModelFilter = {
+export interface StaffModelFilter {
   OR: InputMaybe<Array<InputMaybe<StaffModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
@@ -2575,7 +2573,7 @@ export type StaffModelFilter = {
   id: InputMaybe<ItemIdFilter>;
   jobPosition: InputMaybe<StringFilter>;
   name: InputMaybe<StringFilter>;
-};
+}
 
 export type StaffModelOrderBy =
   | '_createdAt_ASC'
@@ -2604,7 +2602,7 @@ export type StaffModelOrderBy =
   | 'name_DESC';
 
 /** Record of type Staff (staff) */
-export type StaffRecord = RecordInterface & {
+export interface StaffRecord extends RecordInterface {
   __typename: 'StaffRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
@@ -2622,15 +2620,15 @@ export type StaffRecord = RecordInterface & {
   id: Scalars['ItemId'];
   jobPosition: Scalars['String'];
   name: Scalars['String'];
-};
+}
 
 /** Record of type Staff (staff) */
-export type StaffRecord_SeoMetaTagsArgs = {
+export interface StaffRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
-};
+}
 
 /** Specifies how to filter by status */
-export type StatusFilter = {
+export interface StatusFilter {
   /** Search the record with the specified status */
   eq: InputMaybe<ItemStatus>;
   /** Search records with the specified statuses */
@@ -2639,10 +2637,10 @@ export type StatusFilter = {
   neq: InputMaybe<ItemStatus>;
   /** Search records without the specified statuses */
   notIn: InputMaybe<Array<InputMaybe<ItemStatus>>>;
-};
+}
 
 /** Specifies how to filter Single-line string fields */
-export type StringFilter = {
+export interface StringFilter {
   /** Search for records with an exact match */
   eq: InputMaybe<Scalars['String']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
@@ -2659,23 +2657,23 @@ export type StringFilter = {
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude records based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
-export type StringMatchesFilter = {
+export interface StringMatchesFilter {
   caseSensitive: InputMaybe<Scalars['BooleanType']>;
   pattern: Scalars['String'];
   regexp: InputMaybe<Scalars['BooleanType']>;
-};
+}
 
-export type Tag = {
+export interface Tag {
   __typename: 'Tag';
   attributes: Maybe<Scalars['MetaTagAttributes']>;
   content: Maybe<Scalars['String']>;
   tag: Scalars['String'];
-};
+}
 
 /** Specifies how to filter by upload type */
-export type TypeFilter = {
+export interface TypeFilter {
   /** Search uploads with the specified type */
   eq: InputMaybe<UploadType>;
   /** Search uploads with the specified types */
@@ -2684,10 +2682,10 @@ export type TypeFilter = {
   neq: InputMaybe<UploadType>;
   /** Search uploads without the specified types */
   notIn: InputMaybe<Array<InputMaybe<UploadType>>>;
-};
+}
 
 /** Specifies how to filter by update datetime */
-export type UpdatedAtFilter = {
+export interface UpdatedAtFilter {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
   eq: InputMaybe<Scalars['DateTime']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
@@ -2702,10 +2700,10 @@ export type UpdatedAtFilter = {
   lte: InputMaybe<Scalars['DateTime']>;
   /** Filter records with a value that's outside the specified minute range. Seconds and milliseconds are truncated from the argument. */
   neq: InputMaybe<Scalars['DateTime']>;
-};
+}
 
 /** Specifies how to filter by default alt */
-export type UploadAltFilter = {
+export interface UploadAltFilter {
   /** Search the uploads with the specified alt */
   eq: InputMaybe<Scalars['String']>;
   /** Filter uploads with the specified field defined (i.e. with any value) or not */
@@ -2720,28 +2718,28 @@ export type UploadAltFilter = {
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 /** Specifies how to filter by auhtor */
-export type UploadAuthorFilter = {
+export interface UploadAuthorFilter {
   /** Filter uploads with the specified field defined (i.e. with any value) or not */
   exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter uploads based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 /** Specifies how to filter by basename */
-export type UploadBasenameFilter = {
+export interface UploadBasenameFilter {
   /** Filter uploads based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 /** Specifies how to filter by colors */
-export type UploadColorsFilter = {
+export interface UploadColorsFilter {
   /** Filter uploads that have all of the specified colors */
   allIn: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
   /** Filter uploads that have at least one of the specified colors */
@@ -2752,20 +2750,20 @@ export type UploadColorsFilter = {
   eq: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
   /** Filter uploads that do not have any of the specified colors */
   notIn: InputMaybe<Array<InputMaybe<ColorBucketType>>>;
-};
+}
 
 /** Specifies how to filter by copyright */
-export type UploadCopyrightFilter = {
+export interface UploadCopyrightFilter {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter uploads based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 /** Specifies how to filter by creation datetime */
-export type UploadCreatedAtFilter = {
+export interface UploadCreatedAtFilter {
   /** Search for uploads with an exact match */
   eq: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's strictly greater than the one specified */
@@ -2778,17 +2776,17 @@ export type UploadCreatedAtFilter = {
   lte: InputMaybe<Scalars['DateTime']>;
   /** Exclude uploads with an exact match */
   neq: InputMaybe<Scalars['DateTime']>;
-};
+}
 
 /** Specifies how to filter by filename */
-export type UploadFilenameFilter = {
+export interface UploadFilenameFilter {
   /** Filter uploads based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
-export type UploadFilter = {
+export interface UploadFilter {
   OR: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   _createdAt: InputMaybe<UploadCreatedAtFilter>;
   _updatedAt: InputMaybe<UploadUpdatedAtFilter>;
@@ -2813,10 +2811,10 @@ export type UploadFilter = {
   title: InputMaybe<UploadTitleFilter>;
   type: InputMaybe<TypeFilter>;
   width: InputMaybe<UploadWidthFilter>;
-};
+}
 
 /** Specifies how to filter by format */
-export type UploadFormatFilter = {
+export interface UploadFormatFilter {
   /** Search the asset with the specified format */
   eq: InputMaybe<Scalars['String']>;
   /** Search assets with the specified formats */
@@ -2825,10 +2823,10 @@ export type UploadFormatFilter = {
   neq: InputMaybe<Scalars['String']>;
   /** Search assets that do not have the specified formats */
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
+}
 
 /** Specifies how to filter by height */
-export type UploadHeightFilter = {
+export interface UploadHeightFilter {
   /** Search assets with the specified height */
   eq: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger than the specified height */
@@ -2841,10 +2839,10 @@ export type UploadHeightFilter = {
   lte: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified height */
   neq: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** Specifies how to filter by ID */
-export type UploadIdFilter = {
+export interface UploadIdFilter {
   /** Search the asset with the specified ID */
   eq: InputMaybe<Scalars['UploadId']>;
   /** Search assets with the specified IDs */
@@ -2853,10 +2851,10 @@ export type UploadIdFilter = {
   neq: InputMaybe<Scalars['UploadId']>;
   /** Search assets that do not have the specified IDs */
   notIn: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
-};
+}
 
 /** Specifies how to filter by MD5 */
-export type UploadMd5Filter = {
+export interface UploadMd5Filter {
   /** Search the asset with the specified MD5 */
   eq: InputMaybe<Scalars['String']>;
   /** Search assets with the specified MD5s */
@@ -2865,10 +2863,10 @@ export type UploadMd5Filter = {
   neq: InputMaybe<Scalars['String']>;
   /** Search assets that do not have the specified MD5s */
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
-};
+}
 
 /** Specifies how to filter by mime type */
-export type UploadMimeTypeFilter = {
+export interface UploadMimeTypeFilter {
   /** Search the asset with the specified mime type */
   eq: InputMaybe<Scalars['String']>;
   /** Search assets with the specified mime types */
@@ -2881,17 +2879,17 @@ export type UploadMimeTypeFilter = {
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 /** Specifies how to filter by notes */
-export type UploadNotesFilter = {
+export interface UploadNotesFilter {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists: InputMaybe<Scalars['BooleanType']>;
   /** Filter uploads based on a regular expression */
   matches: InputMaybe<StringMatchesFilter>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 export type UploadOrderBy =
   | '_createdAt_ASC'
@@ -2916,7 +2914,7 @@ export type UploadOrderBy =
 export type UploadOrientation = 'landscape' | 'portrait' | 'square';
 
 /** Specifies how to filter by size */
-export type UploadSizeFilter = {
+export interface UploadSizeFilter {
   /** Search assets with the specified size (in bytes) */
   eq: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger than the specified size (in bytes) */
@@ -2929,10 +2927,10 @@ export type UploadSizeFilter = {
   lte: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified size (in bytes) */
   neq: InputMaybe<Scalars['IntType']>;
-};
+}
 
 /** Specifies how to filter by tags */
-export type UploadTagsFilter = {
+export interface UploadTagsFilter {
   /** Filter uploads linked to all of the specified tags */
   allIn: InputMaybe<Array<Scalars['String']>>;
   /** Filter uploads linked to at least one of the specified tags */
@@ -2943,10 +2941,10 @@ export type UploadTagsFilter = {
   eq: InputMaybe<Array<Scalars['String']>>;
   /** Filter uploads not linked to any of the specified tags */
   notIn: InputMaybe<Array<Scalars['String']>>;
-};
+}
 
 /** Specifies how to filter by default title */
-export type UploadTitleFilter = {
+export interface UploadTitleFilter {
   /** Search the asset with the specified title */
   eq: InputMaybe<Scalars['String']>;
   /** Filter assets with the specified field defined (i.e. with any value) or not */
@@ -2961,7 +2959,7 @@ export type UploadTitleFilter = {
   notIn: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
   /** Exclude uploads based on a regular expression */
   notMatches: InputMaybe<StringMatchesFilter>;
-};
+}
 
 export type UploadType =
   | 'archive'
@@ -2974,7 +2972,7 @@ export type UploadType =
   | 'video';
 
 /** Specifies how to filter by update datetime */
-export type UploadUpdatedAtFilter = {
+export interface UploadUpdatedAtFilter {
   /** Search for uploads with an exact match */
   eq: InputMaybe<Scalars['DateTime']>;
   /** Filter uploads with a value that's strictly greater than the one specified */
@@ -2987,9 +2985,9 @@ export type UploadUpdatedAtFilter = {
   lte: InputMaybe<Scalars['DateTime']>;
   /** Exclude uploads with an exact match */
   neq: InputMaybe<Scalars['DateTime']>;
-};
+}
 
-export type UploadVideoField = {
+export interface UploadVideoField {
   __typename: 'UploadVideoField';
   duration: Maybe<Scalars['Int']>;
   framerate: Maybe<Scalars['Int']>;
@@ -2998,19 +2996,19 @@ export type UploadVideoField = {
   muxPlaybackId: Scalars['String'];
   streamingUrl: Scalars['String'];
   thumbnailUrl: Scalars['String'];
-};
+}
 
-export type UploadVideoFieldMp4UrlArgs = {
+export interface UploadVideoFieldMp4UrlArgs {
   exactRes: InputMaybe<VideoMp4Res>;
   res: InputMaybe<VideoMp4Res>;
-};
+}
 
-export type UploadVideoFieldThumbnailUrlArgs = {
+export interface UploadVideoFieldThumbnailUrlArgs {
   format?: InputMaybe<MuxThumbnailFormatType>;
-};
+}
 
 /** Specifies how to filter by width */
-export type UploadWidthFilter = {
+export interface UploadWidthFilter {
   /** Search assets with the specified width */
   eq: InputMaybe<Scalars['IntType']>;
   /** Search all assets larger than the specified width */
@@ -3023,9 +3021,9 @@ export type UploadWidthFilter = {
   lte: InputMaybe<Scalars['IntType']>;
   /** Search assets that do not have the specified width */
   neq: InputMaybe<Scalars['IntType']>;
-};
+}
 
-export type VideoFileField = FileFieldInterface & {
+export interface VideoFileField extends FileFieldInterface {
   __typename: 'VideoFileField';
   _createdAt: Scalars['DateTime'];
   _updatedAt: Scalars['DateTime'];
@@ -3054,52 +3052,744 @@ export type VideoFileField = FileFieldInterface & {
   url: Scalars['String'];
   video: UploadVideoField;
   width: Maybe<Scalars['IntType']>;
-};
+}
 
-export type VideoFileFieldAltArgs = {
+export interface VideoFileFieldAltArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type VideoFileFieldBlurUpThumbArgs = {
+export interface VideoFileFieldBlurUpThumbArgs {
   imgixParams: InputMaybe<ImgixParams>;
   punch?: InputMaybe<Scalars['Float']>;
   quality?: InputMaybe<Scalars['Int']>;
   size?: InputMaybe<Scalars['Int']>;
-};
+}
 
-export type VideoFileFieldCustomDataArgs = {
+export interface VideoFileFieldCustomDataArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type VideoFileFieldFocalPointArgs = {
+export interface VideoFileFieldFocalPointArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type VideoFileFieldResponsiveImageArgs = {
+export interface VideoFileFieldResponsiveImageArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   imgixParams: InputMaybe<ImgixParams>;
   locale: InputMaybe<SiteLocale>;
   sizes: InputMaybe<Scalars['String']>;
-};
+}
 
-export type VideoFileFieldTitleArgs = {
+export interface VideoFileFieldTitleArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-};
+}
 
-export type VideoFileFieldUrlArgs = {
+export interface VideoFileFieldUrlArgs {
   imgixParams: InputMaybe<ImgixParams>;
-};
+}
 
 export type VideoMp4Res = 'high' | 'low' | 'medium';
 
-export type FocalPoint = {
+export interface FocalPoint {
   __typename: 'focalPoint';
   x: Scalars['FloatType'];
   y: Scalars['FloatType'];
+}
+
+export type AddressFragment = { __typename: 'AddressRecord' } & Pick<
+  AddressRecord,
+  'id' | 'name' | 'title' | 'zipCode' | 'country' | 'city' | 'address'
+>;
+
+export type GlobalSeoFragment = { __typename: 'GlobalSeoField' } & Pick<
+  GlobalSeoField,
+  'facebookPageUrl' | 'twitterAccount' | 'titleSuffix' | 'siteName'
+> & {
+    fallbackSeo: Maybe<
+      { __typename: 'SeoField' } & Pick<
+        SeoField,
+        'description' | 'title' | 'twitterCard'
+      > & {
+          image: Maybe<
+            { __typename: 'FileField' } & Pick<
+              FileField,
+              'url' | 'title' | 'height' | 'width'
+            >
+          >;
+        }
+    >;
+  };
+
+export type IconFragment = { __typename: 'FileField' } & Pick<
+  FileField,
+  'mimeType' | 'url' | 'width' | 'height'
+>;
+
+export type ImageGalleryFragment = { __typename: 'ImageGalleryRecord' } & Pick<
+  ImageGalleryRecord,
+  'id' | 'title'
+> & {
+    images: Array<
+      { __typename: 'ImageFileField' } & {
+        responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+          ResponsiveImage,
+          | 'src'
+          | 'alt'
+          | 'title'
+          | 'width'
+          | 'height'
+          | 'srcSet'
+          | 'sizes'
+          | 'bgColor'
+          | 'aspectRatio'
+        >;
+      }
+    >;
+  };
+
+export type PageFragment = { __typename: 'PageRecord' } & Pick<
+  PageRecord,
+  'name' | 'pageTitle' | 'urlSlug'
+> & {
+    metaTags: Maybe<
+      { __typename: 'SeoField' } & Pick<
+        SeoField,
+        'description' | 'title' | 'twitterCard'
+      > & {
+          image: Maybe<
+            { __typename: 'FileField' } & Pick<
+              FileField,
+              'url' | 'title' | 'width' | 'height'
+            >
+          >;
+        }
+    >;
+    _seoMetaTags: Array<
+      { __typename: 'Tag' } & Pick<Tag, 'content' | 'tag' | 'attributes'>
+    >;
+    sections: Array<
+      { __typename: 'SectionRecord' } & Pick<SectionRecord, 'id' | 'title'> & {
+          content: { __typename: 'SectionModelContentField' } & Pick<
+            SectionModelContentField,
+            'value'
+          > & {
+              links: Array<
+                | ({ __typename: 'AddressRecord' } & Pick<
+                    AddressRecord,
+                    | 'id'
+                    | 'name'
+                    | 'title'
+                    | 'zipCode'
+                    | 'country'
+                    | 'city'
+                    | 'address'
+                  >)
+                | ({ __typename: 'ImageGalleryRecord' } & Pick<
+                    ImageGalleryRecord,
+                    'id' | 'title'
+                  > & {
+                      images: Array<
+                        { __typename: 'ImageFileField' } & {
+                          responsiveImage: {
+                            __typename: 'ResponsiveImage';
+                          } & Pick<
+                            ResponsiveImage,
+                            | 'src'
+                            | 'alt'
+                            | 'title'
+                            | 'width'
+                            | 'height'
+                            | 'srcSet'
+                            | 'sizes'
+                            | 'bgColor'
+                            | 'aspectRatio'
+                          >;
+                        }
+                      >;
+                    })
+                | ({ __typename: 'PeopleGalleryRecord' } & {
+                    people: Array<
+                      { __typename: 'StaffRecord' } & Pick<
+                        StaffRecord,
+                        'id' | 'jobPosition' | 'name'
+                      > & {
+                          featuredImage: Maybe<
+                            { __typename: 'ImageFileField' } & {
+                              responsiveImage: {
+                                __typename: 'ResponsiveImage';
+                              } & Pick<
+                                ResponsiveImage,
+                                | 'src'
+                                | 'alt'
+                                | 'title'
+                                | 'width'
+                                | 'height'
+                                | 'srcSet'
+                                | 'sizes'
+                                | 'bgColor'
+                                | 'aspectRatio'
+                              >;
+                            }
+                          >;
+                        }
+                    >;
+                  })
+                | ({ __typename: 'ProjectGalleryRecord' } & {
+                    projects: Array<
+                      { __typename: 'ProjectRecord' } & Pick<
+                        ProjectRecord,
+                        | 'id'
+                        | 'name'
+                        | 'pageUrl'
+                        | 'steamUrl'
+                        | 'humbleUrl'
+                        | 'humbleButtonText'
+                      > & {
+                          featuredImage: { __typename: 'ImageFileField' } & {
+                            responsiveImage: {
+                              __typename: 'ResponsiveImage';
+                            } & Pick<
+                              ResponsiveImage,
+                              | 'src'
+                              | 'alt'
+                              | 'title'
+                              | 'width'
+                              | 'height'
+                              | 'srcSet'
+                              | 'sizes'
+                              | 'bgColor'
+                              | 'aspectRatio'
+                            >;
+                          };
+                        }
+                    >;
+                  })
+                | { __typename: 'StaffRecord' }
+              >;
+              blocks: Array<
+                { __typename: 'ResponsiveVideoRecord' } & Pick<
+                  ResponsiveVideoRecord,
+                  'id'
+                > & {
+                    landscape: { __typename: 'VideoFileField' } & Pick<
+                      VideoFileField,
+                      'mimeType'
+                    > & {
+                        video: { __typename: 'UploadVideoField' } & Pick<
+                          UploadVideoField,
+                          'streamingUrl' | 'duration' | 'framerate'
+                        > & {
+                            mp4High: UploadVideoField['mp4Url'];
+                            mp4Med: UploadVideoField['mp4Url'];
+                            mp4Low: UploadVideoField['mp4Url'];
+                            thumbJpg: UploadVideoField['thumbnailUrl'];
+                            thumbGif: UploadVideoField['thumbnailUrl'];
+                          };
+                      };
+                    portrait: { __typename: 'VideoFileField' } & Pick<
+                      VideoFileField,
+                      'mimeType'
+                    > & {
+                        video: { __typename: 'UploadVideoField' } & Pick<
+                          UploadVideoField,
+                          'streamingUrl' | 'duration' | 'framerate'
+                        > & {
+                            mp4High: UploadVideoField['mp4Url'];
+                            mp4Med: UploadVideoField['mp4Url'];
+                            mp4Low: UploadVideoField['mp4Url'];
+                            thumbJpg: UploadVideoField['thumbnailUrl'];
+                            thumbGif: UploadVideoField['thumbnailUrl'];
+                          };
+                      };
+                  }
+              >;
+            };
+        }
+    >;
+  };
+
+export type PeopleGalleryFragment = { __typename: 'PeopleGalleryRecord' } & {
+  people: Array<
+    { __typename: 'StaffRecord' } & Pick<
+      StaffRecord,
+      'id' | 'jobPosition' | 'name'
+    > & {
+        featuredImage: Maybe<
+          { __typename: 'ImageFileField' } & {
+            responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+              ResponsiveImage,
+              | 'src'
+              | 'alt'
+              | 'title'
+              | 'width'
+              | 'height'
+              | 'srcSet'
+              | 'sizes'
+              | 'bgColor'
+              | 'aspectRatio'
+            >;
+          }
+        >;
+      }
+  >;
+};
+
+export type ProjectGalleryFragment = { __typename: 'ProjectGalleryRecord' } & {
+  projects: Array<
+    { __typename: 'ProjectRecord' } & Pick<
+      ProjectRecord,
+      'id' | 'name' | 'pageUrl' | 'steamUrl' | 'humbleUrl' | 'humbleButtonText'
+    > & {
+        featuredImage: { __typename: 'ImageFileField' } & {
+          responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+            ResponsiveImage,
+            | 'src'
+            | 'alt'
+            | 'title'
+            | 'width'
+            | 'height'
+            | 'srcSet'
+            | 'sizes'
+            | 'bgColor'
+            | 'aspectRatio'
+          >;
+        };
+      }
+  >;
+};
+
+export type ProjectFragment = { __typename: 'ProjectRecord' } & Pick<
+  ProjectRecord,
+  'id' | 'name' | 'pageUrl' | 'steamUrl' | 'humbleUrl' | 'humbleButtonText'
+> & {
+    featuredImage: { __typename: 'ImageFileField' } & {
+      responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+        ResponsiveImage,
+        | 'src'
+        | 'alt'
+        | 'title'
+        | 'width'
+        | 'height'
+        | 'srcSet'
+        | 'sizes'
+        | 'bgColor'
+        | 'aspectRatio'
+      >;
+    };
+  };
+
+export type ResponsiveImageFragment = { __typename: 'ImageFileField' } & {
+  responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+    ResponsiveImage,
+    | 'src'
+    | 'alt'
+    | 'title'
+    | 'width'
+    | 'height'
+    | 'srcSet'
+    | 'sizes'
+    | 'bgColor'
+    | 'aspectRatio'
+  >;
+};
+
+export type SectionFragment = { __typename: 'SectionRecord' } & Pick<
+  SectionRecord,
+  'id' | 'title'
+> & {
+    content: { __typename: 'SectionModelContentField' } & Pick<
+      SectionModelContentField,
+      'value'
+    > & {
+        links: Array<
+          | ({ __typename: 'AddressRecord' } & Pick<
+              AddressRecord,
+              | 'id'
+              | 'name'
+              | 'title'
+              | 'zipCode'
+              | 'country'
+              | 'city'
+              | 'address'
+            >)
+          | ({ __typename: 'ImageGalleryRecord' } & Pick<
+              ImageGalleryRecord,
+              'id' | 'title'
+            > & {
+                images: Array<
+                  { __typename: 'ImageFileField' } & {
+                    responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+                      ResponsiveImage,
+                      | 'src'
+                      | 'alt'
+                      | 'title'
+                      | 'width'
+                      | 'height'
+                      | 'srcSet'
+                      | 'sizes'
+                      | 'bgColor'
+                      | 'aspectRatio'
+                    >;
+                  }
+                >;
+              })
+          | ({ __typename: 'PeopleGalleryRecord' } & {
+              people: Array<
+                { __typename: 'StaffRecord' } & Pick<
+                  StaffRecord,
+                  'id' | 'jobPosition' | 'name'
+                > & {
+                    featuredImage: Maybe<
+                      { __typename: 'ImageFileField' } & {
+                        responsiveImage: {
+                          __typename: 'ResponsiveImage';
+                        } & Pick<
+                          ResponsiveImage,
+                          | 'src'
+                          | 'alt'
+                          | 'title'
+                          | 'width'
+                          | 'height'
+                          | 'srcSet'
+                          | 'sizes'
+                          | 'bgColor'
+                          | 'aspectRatio'
+                        >;
+                      }
+                    >;
+                  }
+              >;
+            })
+          | ({ __typename: 'ProjectGalleryRecord' } & {
+              projects: Array<
+                { __typename: 'ProjectRecord' } & Pick<
+                  ProjectRecord,
+                  | 'id'
+                  | 'name'
+                  | 'pageUrl'
+                  | 'steamUrl'
+                  | 'humbleUrl'
+                  | 'humbleButtonText'
+                > & {
+                    featuredImage: { __typename: 'ImageFileField' } & {
+                      responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+                        ResponsiveImage,
+                        | 'src'
+                        | 'alt'
+                        | 'title'
+                        | 'width'
+                        | 'height'
+                        | 'srcSet'
+                        | 'sizes'
+                        | 'bgColor'
+                        | 'aspectRatio'
+                      >;
+                    };
+                  }
+              >;
+            })
+          | { __typename: 'StaffRecord' }
+        >;
+        blocks: Array<
+          { __typename: 'ResponsiveVideoRecord' } & Pick<
+            ResponsiveVideoRecord,
+            'id'
+          > & {
+              landscape: { __typename: 'VideoFileField' } & Pick<
+                VideoFileField,
+                'mimeType'
+              > & {
+                  video: { __typename: 'UploadVideoField' } & Pick<
+                    UploadVideoField,
+                    'streamingUrl' | 'duration' | 'framerate'
+                  > & {
+                      mp4High: UploadVideoField['mp4Url'];
+                      mp4Med: UploadVideoField['mp4Url'];
+                      mp4Low: UploadVideoField['mp4Url'];
+                      thumbJpg: UploadVideoField['thumbnailUrl'];
+                      thumbGif: UploadVideoField['thumbnailUrl'];
+                    };
+                };
+              portrait: { __typename: 'VideoFileField' } & Pick<
+                VideoFileField,
+                'mimeType'
+              > & {
+                  video: { __typename: 'UploadVideoField' } & Pick<
+                    UploadVideoField,
+                    'streamingUrl' | 'duration' | 'framerate'
+                  > & {
+                      mp4High: UploadVideoField['mp4Url'];
+                      mp4Med: UploadVideoField['mp4Url'];
+                      mp4Low: UploadVideoField['mp4Url'];
+                      thumbJpg: UploadVideoField['thumbnailUrl'];
+                      thumbGif: UploadVideoField['thumbnailUrl'];
+                    };
+                };
+            }
+        >;
+      };
+  };
+
+export type SocialLinkFragment = { __typename: 'SocialLinkRecord' } & Pick<
+  SocialLinkRecord,
+  'linkTitle' | 'id' | 'title' | 'href'
+> & {
+    icon: { __typename: 'FileField' } & Pick<
+      FileField,
+      'mimeType' | 'url' | 'width' | 'height'
+    >;
+  };
+
+export type StaffFragment = { __typename: 'StaffRecord' } & Pick<
+  StaffRecord,
+  'id' | 'jobPosition' | 'name'
+> & {
+    featuredImage: Maybe<
+      { __typename: 'ImageFileField' } & {
+        responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+          ResponsiveImage,
+          | 'src'
+          | 'alt'
+          | 'title'
+          | 'width'
+          | 'height'
+          | 'srcSet'
+          | 'sizes'
+          | 'bgColor'
+          | 'aspectRatio'
+        >;
+      }
+    >;
+  };
+
+export type VideoFragment = { __typename: 'VideoFileField' } & Pick<
+  VideoFileField,
+  'mimeType'
+> & {
+    video: { __typename: 'UploadVideoField' } & Pick<
+      UploadVideoField,
+      'streamingUrl' | 'duration' | 'framerate'
+    > & {
+        mp4High: UploadVideoField['mp4Url'];
+        mp4Med: UploadVideoField['mp4Url'];
+        mp4Low: UploadVideoField['mp4Url'];
+        thumbJpg: UploadVideoField['thumbnailUrl'];
+        thumbGif: UploadVideoField['thumbnailUrl'];
+      };
+  };
+
+export type PageQueryVariables = Exact<{
+  name: InputMaybe<Scalars['String']>;
+}>;
+
+export type PageQuery = { __typename: 'Query' } & {
+  page: Maybe<
+    { __typename: 'PageRecord' } & Pick<
+      PageRecord,
+      'name' | 'pageTitle' | 'urlSlug'
+    > & {
+        metaTags: Maybe<
+          { __typename: 'SeoField' } & Pick<
+            SeoField,
+            'description' | 'title' | 'twitterCard'
+          > & {
+              image: Maybe<
+                { __typename: 'FileField' } & Pick<
+                  FileField,
+                  'url' | 'title' | 'width' | 'height'
+                >
+              >;
+            }
+        >;
+        _seoMetaTags: Array<
+          { __typename: 'Tag' } & Pick<Tag, 'content' | 'tag' | 'attributes'>
+        >;
+        sections: Array<
+          { __typename: 'SectionRecord' } & Pick<
+            SectionRecord,
+            'id' | 'title'
+          > & {
+              content: { __typename: 'SectionModelContentField' } & Pick<
+                SectionModelContentField,
+                'value'
+              > & {
+                  links: Array<
+                    | ({ __typename: 'AddressRecord' } & Pick<
+                        AddressRecord,
+                        | 'id'
+                        | 'name'
+                        | 'title'
+                        | 'zipCode'
+                        | 'country'
+                        | 'city'
+                        | 'address'
+                      >)
+                    | ({ __typename: 'ImageGalleryRecord' } & Pick<
+                        ImageGalleryRecord,
+                        'id' | 'title'
+                      > & {
+                          images: Array<
+                            { __typename: 'ImageFileField' } & {
+                              responsiveImage: {
+                                __typename: 'ResponsiveImage';
+                              } & Pick<
+                                ResponsiveImage,
+                                | 'src'
+                                | 'alt'
+                                | 'title'
+                                | 'width'
+                                | 'height'
+                                | 'srcSet'
+                                | 'sizes'
+                                | 'bgColor'
+                                | 'aspectRatio'
+                              >;
+                            }
+                          >;
+                        })
+                    | ({ __typename: 'PeopleGalleryRecord' } & {
+                        people: Array<
+                          { __typename: 'StaffRecord' } & Pick<
+                            StaffRecord,
+                            'id' | 'jobPosition' | 'name'
+                          > & {
+                              featuredImage: Maybe<
+                                { __typename: 'ImageFileField' } & {
+                                  responsiveImage: {
+                                    __typename: 'ResponsiveImage';
+                                  } & Pick<
+                                    ResponsiveImage,
+                                    | 'src'
+                                    | 'alt'
+                                    | 'title'
+                                    | 'width'
+                                    | 'height'
+                                    | 'srcSet'
+                                    | 'sizes'
+                                    | 'bgColor'
+                                    | 'aspectRatio'
+                                  >;
+                                }
+                              >;
+                            }
+                        >;
+                      })
+                    | ({ __typename: 'ProjectGalleryRecord' } & {
+                        projects: Array<
+                          { __typename: 'ProjectRecord' } & Pick<
+                            ProjectRecord,
+                            | 'id'
+                            | 'name'
+                            | 'pageUrl'
+                            | 'steamUrl'
+                            | 'humbleUrl'
+                            | 'humbleButtonText'
+                          > & {
+                              featuredImage: {
+                                __typename: 'ImageFileField';
+                              } & {
+                                responsiveImage: {
+                                  __typename: 'ResponsiveImage';
+                                } & Pick<
+                                  ResponsiveImage,
+                                  | 'src'
+                                  | 'alt'
+                                  | 'title'
+                                  | 'width'
+                                  | 'height'
+                                  | 'srcSet'
+                                  | 'sizes'
+                                  | 'bgColor'
+                                  | 'aspectRatio'
+                                >;
+                              };
+                            }
+                        >;
+                      })
+                    | { __typename: 'StaffRecord' }
+                  >;
+                  blocks: Array<
+                    { __typename: 'ResponsiveVideoRecord' } & Pick<
+                      ResponsiveVideoRecord,
+                      'id'
+                    > & {
+                        landscape: { __typename: 'VideoFileField' } & Pick<
+                          VideoFileField,
+                          'mimeType'
+                        > & {
+                            video: { __typename: 'UploadVideoField' } & Pick<
+                              UploadVideoField,
+                              'streamingUrl' | 'duration' | 'framerate'
+                            > & {
+                                mp4High: UploadVideoField['mp4Url'];
+                                mp4Med: UploadVideoField['mp4Url'];
+                                mp4Low: UploadVideoField['mp4Url'];
+                                thumbJpg: UploadVideoField['thumbnailUrl'];
+                                thumbGif: UploadVideoField['thumbnailUrl'];
+                              };
+                          };
+                        portrait: { __typename: 'VideoFileField' } & Pick<
+                          VideoFileField,
+                          'mimeType'
+                        > & {
+                            video: { __typename: 'UploadVideoField' } & Pick<
+                              UploadVideoField,
+                              'streamingUrl' | 'duration' | 'framerate'
+                            > & {
+                                mp4High: UploadVideoField['mp4Url'];
+                                mp4Med: UploadVideoField['mp4Url'];
+                                mp4Low: UploadVideoField['mp4Url'];
+                                thumbJpg: UploadVideoField['thumbnailUrl'];
+                                thumbGif: UploadVideoField['thumbnailUrl'];
+                              };
+                          };
+                      }
+                  >;
+                };
+            }
+        >;
+      }
+  >;
+  _site: { __typename: 'Site' } & {
+    favicon: Maybe<
+      { __typename: 'FileField' } & Pick<FileField, 'url' | 'mimeType'>
+    >;
+    globalSeo: Maybe<
+      { __typename: 'GlobalSeoField' } & Pick<
+        GlobalSeoField,
+        'facebookPageUrl' | 'twitterAccount' | 'titleSuffix' | 'siteName'
+      > & {
+          fallbackSeo: Maybe<
+            { __typename: 'SeoField' } & Pick<
+              SeoField,
+              'description' | 'title' | 'twitterCard'
+            > & {
+                image: Maybe<
+                  { __typename: 'FileField' } & Pick<
+                    FileField,
+                    'url' | 'title' | 'height' | 'width'
+                  >
+                >;
+              }
+          >;
+        }
+    >;
+  };
+  allSocialLinks: Array<
+    { __typename: 'SocialLinkRecord' } & Pick<
+      SocialLinkRecord,
+      'linkTitle' | 'id' | 'title' | 'href'
+    > & {
+        icon: { __typename: 'FileField' } & Pick<
+          FileField,
+          'mimeType' | 'url' | 'width' | 'height'
+        >;
+      }
+  >;
 };
 
 export const GlobalSeoFragmentDoc = {
@@ -3115,13 +3805,18 @@ export const GlobalSeoFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'facebookPageUrl' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'twitterAccount' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'titleSuffix' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'siteName' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'fallbackSeo' },
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'description' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'twitterCard' } },
@@ -3131,6 +3826,10 @@ export const GlobalSeoFragmentDoc = {
                   selectionSet: {
                     kind: 'SelectionSet',
                     selections: [
+                      {
+                        kind: 'Field',
+                        name: { kind: 'Name', value: '__typename' },
+                      },
                       { kind: 'Field', name: { kind: 'Name', value: 'url' } },
                       { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                       {
@@ -3144,9 +3843,6 @@ export const GlobalSeoFragmentDoc = {
               ],
             },
           },
-          { kind: 'Field', name: { kind: 'Name', value: 'twitterAccount' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'titleSuffix' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'siteName' } },
         ],
       },
     },
@@ -3165,6 +3861,7 @@ export const AddressFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
@@ -3190,6 +3887,7 @@ export const ResponsiveImageFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'responsiveImage' },
@@ -3221,6 +3919,7 @@ export const ResponsiveImageFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'src' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'title' } },
@@ -3251,6 +3950,7 @@ export const ProjectFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'pageUrl' } },
@@ -3275,6 +3975,72 @@ export const ProjectFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<ProjectFragment, unknown>;
+export const ProjectGalleryFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ProjectGallery' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'ProjectGalleryRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'projects' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Project' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ProjectGalleryFragment, unknown>;
+export const ImageGalleryFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ImageGallery' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'ImageGalleryRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'images' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'ResponsiveImage' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ImageGalleryFragment, unknown>;
 export const StaffFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -3288,6 +4054,7 @@ export const StaffFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'jobPosition' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
@@ -3309,6 +4076,38 @@ export const StaffFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<StaffFragment, unknown>;
+export const PeopleGalleryFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PeopleGallery' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'PeopleGalleryRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'people' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Staff' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PeopleGalleryFragment, unknown>;
 export const VideoFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -3322,6 +4121,7 @@ export const VideoFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
           {
             kind: 'Field',
@@ -3329,6 +4129,7 @@ export const VideoFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'streamingUrl' },
@@ -3416,6 +4217,7 @@ export const SectionFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
           {
@@ -3462,17 +4264,8 @@ export const SectionFragmentDoc = {
                           kind: 'SelectionSet',
                           selections: [
                             {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'projects' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'FragmentSpread',
-                                    name: { kind: 'Name', value: 'Project' },
-                                  },
-                                ],
-                              },
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'ProjectGallery' },
                             },
                           ],
                         },
@@ -3487,28 +4280,8 @@ export const SectionFragmentDoc = {
                           kind: 'SelectionSet',
                           selections: [
                             {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'id' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'title' },
-                            },
-                            {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'images' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'FragmentSpread',
-                                    name: {
-                                      kind: 'Name',
-                                      value: 'ResponsiveImage',
-                                    },
-                                  },
-                                ],
-                              },
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'ImageGallery' },
                             },
                           ],
                         },
@@ -3523,17 +4296,8 @@ export const SectionFragmentDoc = {
                           kind: 'SelectionSet',
                           selections: [
                             {
-                              kind: 'Field',
-                              name: { kind: 'Name', value: 'people' },
-                              selectionSet: {
-                                kind: 'SelectionSet',
-                                selections: [
-                                  {
-                                    kind: 'FragmentSpread',
-                                    name: { kind: 'Name', value: 'Staff' },
-                                  },
-                                ],
-                              },
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'PeopleGallery' },
                             },
                           ],
                         },
@@ -3602,6 +4366,7 @@ export const PageFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'pageTitle' } },
           { kind: 'Field', name: { kind: 'Name', value: 'urlSlug' } },
@@ -3611,6 +4376,7 @@ export const PageFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'description' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'twitterCard' } },
@@ -3639,6 +4405,7 @@ export const PageFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'content' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'tag' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'attributes' } },
@@ -3676,6 +4443,7 @@ export const IconFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
           { kind: 'Field', name: { kind: 'Name', value: 'url' } },
           { kind: 'Field', name: { kind: 'Name', value: 'width' } },
@@ -3698,19 +4466,11 @@ export const SocialLinkFragmentDoc = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'hoverIcon' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Icon' },
-                },
-              ],
-            },
-          },
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'linkTitle' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'href' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'icon' },
@@ -3724,10 +4484,6 @@ export const SocialLinkFragmentDoc = {
               ],
             },
           },
-          { kind: 'Field', name: { kind: 'Name', value: 'linkTitle' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'href' } },
         ],
       },
     },
@@ -3750,6 +4506,7 @@ export const PageDocument = {
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'page' },
@@ -3797,6 +4554,7 @@ export const PageDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'favicon' },
@@ -3846,8 +4604,11 @@ export const PageDocument = {
     ...PageFragmentDoc.definitions,
     ...SectionFragmentDoc.definitions,
     ...AddressFragmentDoc.definitions,
+    ...ProjectGalleryFragmentDoc.definitions,
     ...ProjectFragmentDoc.definitions,
     ...ResponsiveImageFragmentDoc.definitions,
+    ...ImageGalleryFragmentDoc.definitions,
+    ...PeopleGalleryFragmentDoc.definitions,
     ...StaffFragmentDoc.definitions,
     ...VideoFragmentDoc.definitions,
     ...GlobalSeoFragmentDoc.definitions,
@@ -3855,629 +4616,8 @@ export const PageDocument = {
     ...IconFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;
-export type AddressFragment = {
-  __typename: 'AddressRecord';
-  id: string;
-  name: string;
-  title: string;
-  zipCode: string;
-  country: string;
-  city: string;
-  address: string;
-};
 
-export type GlobalSeoFragment = {
-  __typename: 'GlobalSeoField';
-  facebookPageUrl: string | null;
-  twitterAccount: string | null;
-  titleSuffix: string | null;
-  siteName: string | null;
-  fallbackSeo: {
-    __typename: 'SeoField';
-    description: string | null;
-    title: string | null;
-    twitterCard: string | null;
-    image: {
-      __typename: 'FileField';
-      url: string;
-      title: string | null;
-      height: number | null;
-      width: number | null;
-    } | null;
-  } | null;
-};
-
-export type IconFragment = {
-  __typename: 'FileField';
-  mimeType: string;
-  url: string;
-  width: number | null;
-  height: number | null;
-};
-
-export type PageFragment = {
-  __typename: 'PageRecord';
-  name: string;
-  pageTitle: string;
-  urlSlug: string | null;
-  metaTags: {
-    __typename: 'SeoField';
-    description: string | null;
-    title: string | null;
-    twitterCard: string | null;
-    image: {
-      __typename: 'FileField';
-      url: string;
-      title: string | null;
-      width: number | null;
-      height: number | null;
-    } | null;
-  } | null;
-  _seoMetaTags: Array<{
-    __typename: 'Tag';
-    content: string | null;
-    tag: string;
-    attributes: Record<string, string> | null;
-  }>;
-  sections: Array<{
-    __typename: 'SectionRecord';
-    id: string;
-    title: string;
-    content: {
-      __typename: 'SectionModelContentField';
-      value: unknown;
-      links: Array<
-        | {
-            __typename: 'AddressRecord';
-            id: string;
-            name: string;
-            title: string;
-            zipCode: string;
-            country: string;
-            city: string;
-            address: string;
-          }
-        | {
-            __typename: 'ImageGalleryRecord';
-            id: string;
-            title: string;
-            images: Array<{
-              __typename: 'ImageFileField';
-              responsiveImage: {
-                __typename: 'ResponsiveImage';
-                src: string;
-                alt: string | null;
-                title: string | null;
-                width: number;
-                height: number;
-                srcSet: string;
-                sizes: string;
-                bgColor: string | null;
-                aspectRatio: number;
-              };
-            }>;
-          }
-        | {
-            __typename: 'PeopleGalleryRecord';
-            people: Array<{
-              __typename: 'StaffRecord';
-              id: string;
-              jobPosition: string;
-              name: string;
-              featuredImage: {
-                __typename: 'ImageFileField';
-                responsiveImage: {
-                  __typename: 'ResponsiveImage';
-                  src: string;
-                  alt: string | null;
-                  title: string | null;
-                  width: number;
-                  height: number;
-                  srcSet: string;
-                  sizes: string;
-                  bgColor: string | null;
-                  aspectRatio: number;
-                };
-              } | null;
-            }>;
-          }
-        | {
-            __typename: 'ProjectGalleryRecord';
-            projects: Array<{
-              __typename: 'ProjectRecord';
-              id: string;
-              name: string;
-              pageUrl: string | null;
-              steamUrl: string | null;
-              humbleUrl: string | null;
-              humbleButtonText: string | null;
-              featuredImage: {
-                __typename: 'ImageFileField';
-                responsiveImage: {
-                  __typename: 'ResponsiveImage';
-                  src: string;
-                  alt: string | null;
-                  title: string | null;
-                  width: number;
-                  height: number;
-                  srcSet: string;
-                  sizes: string;
-                  bgColor: string | null;
-                  aspectRatio: number;
-                };
-              };
-            }>;
-          }
-        | { __typename: 'StaffRecord' }
-      >;
-      blocks: Array<{
-        __typename: 'ResponsiveVideoRecord';
-        id: string;
-        landscape: {
-          __typename: 'VideoFileField';
-          mimeType: string;
-          video: {
-            __typename: 'UploadVideoField';
-            streamingUrl: string;
-            duration: number | null;
-            framerate: number | null;
-            mp4High: string | null;
-            mp4Med: string | null;
-            mp4Low: string | null;
-            thumbJpg: string;
-            thumbGif: string;
-          };
-        };
-        portrait: {
-          __typename: 'VideoFileField';
-          mimeType: string;
-          video: {
-            __typename: 'UploadVideoField';
-            streamingUrl: string;
-            duration: number | null;
-            framerate: number | null;
-            mp4High: string | null;
-            mp4Med: string | null;
-            mp4Low: string | null;
-            thumbJpg: string;
-            thumbGif: string;
-          };
-        };
-      }>;
-    };
-  }>;
-};
-
-export type ProjectFragment = {
-  __typename: 'ProjectRecord';
-  id: string;
-  name: string;
-  pageUrl: string | null;
-  steamUrl: string | null;
-  humbleUrl: string | null;
-  humbleButtonText: string | null;
-  featuredImage: {
-    __typename: 'ImageFileField';
-    responsiveImage: {
-      __typename: 'ResponsiveImage';
-      src: string;
-      alt: string | null;
-      title: string | null;
-      width: number;
-      height: number;
-      srcSet: string;
-      sizes: string;
-      bgColor: string | null;
-      aspectRatio: number;
-    };
-  };
-};
-
-export type ResponsiveImageFragment = {
-  __typename: 'ImageFileField';
-  responsiveImage: {
-    __typename: 'ResponsiveImage';
-    src: string;
-    alt: string | null;
-    title: string | null;
-    width: number;
-    height: number;
-    srcSet: string;
-    sizes: string;
-    bgColor: string | null;
-    aspectRatio: number;
-  };
-};
-
-export type SectionFragment = {
-  __typename: 'SectionRecord';
-  id: string;
-  title: string;
-  content: {
-    __typename: 'SectionModelContentField';
-    value: unknown;
-    links: Array<
-      | {
-          __typename: 'AddressRecord';
-          id: string;
-          name: string;
-          title: string;
-          zipCode: string;
-          country: string;
-          city: string;
-          address: string;
-        }
-      | {
-          __typename: 'ImageGalleryRecord';
-          id: string;
-          title: string;
-          images: Array<{
-            __typename: 'ImageFileField';
-            responsiveImage: {
-              __typename: 'ResponsiveImage';
-              src: string;
-              alt: string | null;
-              title: string | null;
-              width: number;
-              height: number;
-              srcSet: string;
-              sizes: string;
-              bgColor: string | null;
-              aspectRatio: number;
-            };
-          }>;
-        }
-      | {
-          __typename: 'PeopleGalleryRecord';
-          people: Array<{
-            __typename: 'StaffRecord';
-            id: string;
-            jobPosition: string;
-            name: string;
-            featuredImage: {
-              __typename: 'ImageFileField';
-              responsiveImage: {
-                __typename: 'ResponsiveImage';
-                src: string;
-                alt: string | null;
-                title: string | null;
-                width: number;
-                height: number;
-                srcSet: string;
-                sizes: string;
-                bgColor: string | null;
-                aspectRatio: number;
-              };
-            } | null;
-          }>;
-        }
-      | {
-          __typename: 'ProjectGalleryRecord';
-          projects: Array<{
-            __typename: 'ProjectRecord';
-            id: string;
-            name: string;
-            pageUrl: string | null;
-            steamUrl: string | null;
-            humbleUrl: string | null;
-            humbleButtonText: string | null;
-            featuredImage: {
-              __typename: 'ImageFileField';
-              responsiveImage: {
-                __typename: 'ResponsiveImage';
-                src: string;
-                alt: string | null;
-                title: string | null;
-                width: number;
-                height: number;
-                srcSet: string;
-                sizes: string;
-                bgColor: string | null;
-                aspectRatio: number;
-              };
-            };
-          }>;
-        }
-      | { __typename: 'StaffRecord' }
-    >;
-    blocks: Array<{
-      __typename: 'ResponsiveVideoRecord';
-      id: string;
-      landscape: {
-        __typename: 'VideoFileField';
-        mimeType: string;
-        video: {
-          __typename: 'UploadVideoField';
-          streamingUrl: string;
-          duration: number | null;
-          framerate: number | null;
-          mp4High: string | null;
-          mp4Med: string | null;
-          mp4Low: string | null;
-          thumbJpg: string;
-          thumbGif: string;
-        };
-      };
-      portrait: {
-        __typename: 'VideoFileField';
-        mimeType: string;
-        video: {
-          __typename: 'UploadVideoField';
-          streamingUrl: string;
-          duration: number | null;
-          framerate: number | null;
-          mp4High: string | null;
-          mp4Med: string | null;
-          mp4Low: string | null;
-          thumbJpg: string;
-          thumbGif: string;
-        };
-      };
-    }>;
-  };
-};
-
-export type SocialLinkFragment = {
-  __typename: 'SocialLinkRecord';
-  linkTitle: string | null;
-  id: string;
-  title: string;
-  href: string;
-  hoverIcon: {
-    __typename: 'FileField';
-    mimeType: string;
-    url: string;
-    width: number | null;
-    height: number | null;
-  } | null;
-  icon: {
-    __typename: 'FileField';
-    mimeType: string;
-    url: string;
-    width: number | null;
-    height: number | null;
-  };
-};
-
-export type StaffFragment = {
-  __typename: 'StaffRecord';
-  id: string;
-  jobPosition: string;
-  name: string;
-  featuredImage: {
-    __typename: 'ImageFileField';
-    responsiveImage: {
-      __typename: 'ResponsiveImage';
-      src: string;
-      alt: string | null;
-      title: string | null;
-      width: number;
-      height: number;
-      srcSet: string;
-      sizes: string;
-      bgColor: string | null;
-      aspectRatio: number;
-    };
-  } | null;
-};
-
-export type VideoFragment = {
-  __typename: 'VideoFileField';
-  mimeType: string;
-  video: {
-    __typename: 'UploadVideoField';
-    streamingUrl: string;
-    duration: number | null;
-    framerate: number | null;
-    mp4High: string | null;
-    mp4Med: string | null;
-    mp4Low: string | null;
-    thumbJpg: string;
-    thumbGif: string;
-  };
-};
-
-export type PageQueryVariables = Exact<{
-  name: InputMaybe<Scalars['String']>;
-}>;
-
-export type PageQuery = {
-  __typename: 'Query';
-  page: {
-    __typename: 'PageRecord';
-    name: string;
-    pageTitle: string;
-    urlSlug: string | null;
-    metaTags: {
-      __typename: 'SeoField';
-      description: string | null;
-      title: string | null;
-      twitterCard: string | null;
-      image: {
-        __typename: 'FileField';
-        url: string;
-        title: string | null;
-        width: number | null;
-        height: number | null;
-      } | null;
-    } | null;
-    _seoMetaTags: Array<{
-      __typename: 'Tag';
-      content: string | null;
-      tag: string;
-      attributes: Record<string, string> | null;
-    }>;
-    sections: Array<{
-      __typename: 'SectionRecord';
-      id: string;
-      title: string;
-      content: {
-        __typename: 'SectionModelContentField';
-        value: unknown;
-        links: Array<
-          | {
-              __typename: 'AddressRecord';
-              id: string;
-              name: string;
-              title: string;
-              zipCode: string;
-              country: string;
-              city: string;
-              address: string;
-            }
-          | {
-              __typename: 'ImageGalleryRecord';
-              id: string;
-              title: string;
-              images: Array<{
-                __typename: 'ImageFileField';
-                responsiveImage: {
-                  __typename: 'ResponsiveImage';
-                  src: string;
-                  alt: string | null;
-                  title: string | null;
-                  width: number;
-                  height: number;
-                  srcSet: string;
-                  sizes: string;
-                  bgColor: string | null;
-                  aspectRatio: number;
-                };
-              }>;
-            }
-          | {
-              __typename: 'PeopleGalleryRecord';
-              people: Array<{
-                __typename: 'StaffRecord';
-                id: string;
-                jobPosition: string;
-                name: string;
-                featuredImage: {
-                  __typename: 'ImageFileField';
-                  responsiveImage: {
-                    __typename: 'ResponsiveImage';
-                    src: string;
-                    alt: string | null;
-                    title: string | null;
-                    width: number;
-                    height: number;
-                    srcSet: string;
-                    sizes: string;
-                    bgColor: string | null;
-                    aspectRatio: number;
-                  };
-                } | null;
-              }>;
-            }
-          | {
-              __typename: 'ProjectGalleryRecord';
-              projects: Array<{
-                __typename: 'ProjectRecord';
-                id: string;
-                name: string;
-                pageUrl: string | null;
-                steamUrl: string | null;
-                humbleUrl: string | null;
-                humbleButtonText: string | null;
-                featuredImage: {
-                  __typename: 'ImageFileField';
-                  responsiveImage: {
-                    __typename: 'ResponsiveImage';
-                    src: string;
-                    alt: string | null;
-                    title: string | null;
-                    width: number;
-                    height: number;
-                    srcSet: string;
-                    sizes: string;
-                    bgColor: string | null;
-                    aspectRatio: number;
-                  };
-                };
-              }>;
-            }
-          | { __typename: 'StaffRecord' }
-        >;
-        blocks: Array<{
-          __typename: 'ResponsiveVideoRecord';
-          id: string;
-          landscape: {
-            __typename: 'VideoFileField';
-            mimeType: string;
-            video: {
-              __typename: 'UploadVideoField';
-              streamingUrl: string;
-              duration: number | null;
-              framerate: number | null;
-              mp4High: string | null;
-              mp4Med: string | null;
-              mp4Low: string | null;
-              thumbJpg: string;
-              thumbGif: string;
-            };
-          };
-          portrait: {
-            __typename: 'VideoFileField';
-            mimeType: string;
-            video: {
-              __typename: 'UploadVideoField';
-              streamingUrl: string;
-              duration: number | null;
-              framerate: number | null;
-              mp4High: string | null;
-              mp4Med: string | null;
-              mp4Low: string | null;
-              thumbJpg: string;
-              thumbGif: string;
-            };
-          };
-        }>;
-      };
-    }>;
-  } | null;
-  _site: {
-    __typename: 'Site';
-    favicon: { __typename: 'FileField'; url: string; mimeType: string } | null;
-    globalSeo: {
-      __typename: 'GlobalSeoField';
-      facebookPageUrl: string | null;
-      twitterAccount: string | null;
-      titleSuffix: string | null;
-      siteName: string | null;
-      fallbackSeo: {
-        __typename: 'SeoField';
-        description: string | null;
-        title: string | null;
-        twitterCard: string | null;
-        image: {
-          __typename: 'FileField';
-          url: string;
-          title: string | null;
-          height: number | null;
-          width: number | null;
-        } | null;
-      } | null;
-    } | null;
-  };
-  allSocialLinks: Array<{
-    __typename: 'SocialLinkRecord';
-    linkTitle: string | null;
-    id: string;
-    title: string;
-    href: string;
-    hoverIcon: {
-      __typename: 'FileField';
-      mimeType: string;
-      url: string;
-      width: number | null;
-      height: number | null;
-    } | null;
-    icon: {
-      __typename: 'FileField';
-      mimeType: string;
-      url: string;
-      width: number | null;
-      height: number | null;
-    };
-  }>;
-};
+export interface SvgIconFragment extends IconFragment {
+  mimeType: 'image/svg+xml';
+  inlineHTML?: string;
+}
