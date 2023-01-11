@@ -1,18 +1,12 @@
 fragment SocialLink on SocialLinkRecord {
   hoverIcon {
-    url
-    mimeType
-    width
-    height
+    ...Icon
   }
   icon {
-    url
-    mimeType
-    width
-    height
+    ...Icon
   }
   linkTitle
   id
   title
-  url
+  href
 }

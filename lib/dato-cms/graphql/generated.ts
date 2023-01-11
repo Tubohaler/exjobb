@@ -2496,12 +2496,12 @@ export type SocialLinkModelFilter = {
   _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
   _updatedAt: InputMaybe<UpdatedAtFilter>;
   hoverIcon: InputMaybe<FileFilter>;
+  href: InputMaybe<StringFilter>;
   icon: InputMaybe<FileFilter>;
   id: InputMaybe<ItemIdFilter>;
   linkTitle: InputMaybe<StringFilter>;
   position: InputMaybe<PositionFilter>;
   title: InputMaybe<StringFilter>;
-  url: InputMaybe<StringFilter>;
 };
 
 export type SocialLinkModelOrderBy =
@@ -2521,6 +2521,8 @@ export type SocialLinkModelOrderBy =
   | '_unpublishingScheduledAt_DESC'
   | '_updatedAt_ASC'
   | '_updatedAt_DESC'
+  | 'href_ASC'
+  | 'href_DESC'
   | 'id_ASC'
   | 'id_DESC'
   | 'linkTitle_ASC'
@@ -2528,9 +2530,7 @@ export type SocialLinkModelOrderBy =
   | 'position_ASC'
   | 'position_DESC'
   | 'title_ASC'
-  | 'title_DESC'
-  | 'url_ASC'
-  | 'url_DESC';
+  | 'title_DESC';
 
 /** Record of type Social Link (social_link) */
 export type SocialLinkRecord = RecordInterface & {
@@ -2547,12 +2547,12 @@ export type SocialLinkRecord = RecordInterface & {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   hoverIcon: Maybe<FileField>;
+  href: Scalars['String'];
   icon: FileField;
   id: Scalars['ItemId'];
   linkTitle: Maybe<Scalars['String']>;
   position: Maybe<Scalars['IntType']>;
   title: Scalars['String'];
-  url: Scalars['String'];
 };
 
 /** Record of type Social Link (social_link) */
@@ -3663,6 +3663,28 @@ export const PageFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PageFragment, unknown>;
+export const IconFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Icon' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'FileField' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<IconFragment, unknown>;
 export const SocialLinkFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -3682,10 +3704,10 @@ export const SocialLinkFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'width' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Icon' },
+                },
               ],
             },
           },
@@ -3695,17 +3717,17 @@ export const SocialLinkFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'width' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Icon' },
+                },
               ],
             },
           },
           { kind: 'Field', name: { kind: 'Name', value: 'linkTitle' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'href' } },
         ],
       },
     },
@@ -3830,6 +3852,7 @@ export const PageDocument = {
     ...VideoFragmentDoc.definitions,
     ...GlobalSeoFragmentDoc.definitions,
     ...SocialLinkFragmentDoc.definitions,
+    ...IconFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;
 export type AddressFragment = {
@@ -3862,6 +3885,14 @@ export type GlobalSeoFragment = {
       width: number | null;
     } | null;
   } | null;
+};
+
+export type IconFragment = {
+  __typename: 'FileField';
+  mimeType: string;
+  url: string;
+  width: number | null;
+  height: number | null;
 };
 
 export type PageFragment = {
@@ -4191,18 +4222,18 @@ export type SocialLinkFragment = {
   linkTitle: string | null;
   id: string;
   title: string;
-  url: string;
+  href: string;
   hoverIcon: {
     __typename: 'FileField';
-    url: string;
     mimeType: string;
+    url: string;
     width: number | null;
     height: number | null;
   } | null;
   icon: {
     __typename: 'FileField';
-    url: string;
     mimeType: string;
+    url: string;
     width: number | null;
     height: number | null;
   };
@@ -4433,18 +4464,18 @@ export type PageQuery = {
     linkTitle: string | null;
     id: string;
     title: string;
-    url: string;
+    href: string;
     hoverIcon: {
       __typename: 'FileField';
-      url: string;
       mimeType: string;
+      url: string;
       width: number | null;
       height: number | null;
     } | null;
     icon: {
       __typename: 'FileField';
-      url: string;
       mimeType: string;
+      url: string;
       width: number | null;
       height: number | null;
     };
