@@ -1,7 +1,6 @@
 import Link from './Link';
 import {
   ActionIcon,
-  Box,
   createStyles,
   CSSObject,
   DefaultProps,
@@ -9,6 +8,7 @@ import {
 import { defaultTransition } from '@lib/theme/main';
 import { ReactSVG, Props as ReactSVGProps } from 'react-svg';
 import { SvgIconFragment } from '@lib/dato-cms';
+import { isSvgIconFragment } from '@lib/dato-cms/typeGuard';
 
 export type IconLinkStylesNames = 'root' | 'wrapper';
 export type IconLinkStylesParams = {
@@ -20,7 +20,9 @@ export type IconLinkStylesParams = {
   activeShade?: number;
 };
 
-export type IconProps = { src: string; fallback?: ReactSVGProps['fallback'] };
+export type IconProps = ({ src: string } | (SvgIconFragment & {})) & {
+  fallback?: ReactSVGProps['fallback'];
+};
 
 export type IconLinkProps = DefaultProps<
   IconLinkStylesNames,
@@ -63,9 +65,15 @@ const useStyles = createStyles(
     };
 
     const colors: Record<string, string> = {
-      default: !color ? 'inherit' : getColor(color, shades.base),
-      hover: !hoverColor ? 'initial' : getColor(hoverColor, shades.active),
-      active: !activeColor ? 'initial' : getColor(activeColor, shades.active),
+      get default() {
+        return !color ? 'inherit' : getColor(color, shades.base);
+      },
+      get hover() {
+        return !hoverColor ? 'initial' : getColor(hoverColor, shades.active);
+      },
+      get active() {
+        return !activeColor ? this.hover : getColor(activeColor, shades.active);
+      },
     };
 
     const wrapperStyles: CSSObject = {
@@ -75,11 +83,12 @@ const useStyles = createStyles(
       justifyContent: 'center',
       alignItems: 'center',
       padding: 0,
+      color: 'inherit',
     };
 
-    return {
+    const styles: Record<IconLinkStylesNames, CSSObject> = {
       root: {
-        color: colors[active ? 'active' : 'default'],
+        color: active ? colors.active : colors.default,
         transition: defaultTransition,
         lineHeight: 1,
         '&:hover': {
@@ -87,6 +96,9 @@ const useStyles = createStyles(
         },
         '&:active': {
           color: colors.active,
+        },
+        '& a': {
+          color: 'inherit',
         },
       },
       wrapper: {
@@ -102,8 +114,33 @@ const useStyles = createStyles(
         },
       },
     };
+    console.log(styles);
+    return styles;
   }
 );
+
+const Icon = ({
+  icon,
+  className,
+}: Pick<IconLinkProps, 'icon' | 'className'>) => {
+  if (isSvgIconFragment(icon)) {
+    return (
+      <ReactSVG
+        className={className}
+        src={icon.inlineHTML || icon.url}
+        fallback={
+          (icon as SvgIconFragment & { fallback?: IconProps['fallback'] })
+            .fallback
+        }
+      />
+    );
+  }
+  if (icon && typeof icon === 'object' && 'src' in icon) {
+    return <ReactSVG className={className} {...icon} />;
+  }
+
+  return <>{icon}</>;
+};
 
 const IconLink = ({
   icon,
@@ -120,6 +157,7 @@ const IconLink = ({
   variant = 'transparent',
   ...props
 }: IconLinkProps) => {
+  console.log(active);
   const { classes, cx } = useStyles(
     {
       color,
@@ -137,21 +175,14 @@ const IconLink = ({
     }
   );
 
-  const Icon = () => {
-    return icon && typeof icon === 'object' && 'src' in icon ? (
-      <ReactSVG className={classes.wrapper} {...icon} />
-    ) : (
-      <>icon</>
-    );
-  };
-
   return (
     <ActionIcon
       component={Link}
       className={cx(classes.root, className)}
+      variant={variant}
       {...props}
     >
-      <Icon />
+      <Icon icon={icon} className={classes.wrapper} />
     </ActionIcon>
   );
 };
