@@ -28,6 +28,7 @@ const centralSection = [
 const PageWrapper = ({ children }: React.PropsWithChildren) => {
   return (
     <AppShell
+      padding={0}
       header={
         <Header
           height={'70'}
@@ -53,9 +54,9 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
         <Grid grow align="center">
           {/* <Group sx={{ width: '100%' }} position="apart" spacing="xl"> */}
           <Grid.Col span={4}>
-            <Stack spacing={'xs'} align="center">
+            <Stack spacing={1} align="left">
               {leftSection.map((text, i) => (
-                <Text key={`leftSection${i}`} size="sm">
+                <Text key={`leftSection${i}`} size="xs">
                   {text}
                 </Text>
               ))}
@@ -71,7 +72,7 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
             </Stack>
           </Grid.Col>
           <Grid.Col span={4}>
-            <Stack align="center">
+            <Stack align="end">
               <SocialMediaLinks size="xs" spacing={2} />{' '}
             </Stack>
           </Grid.Col>
