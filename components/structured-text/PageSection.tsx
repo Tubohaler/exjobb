@@ -1,4 +1,5 @@
 import {
+  Image,
   StructuredText,
   StructuredTextPropTypes,
   StructuredTextGraphQlResponseRecord,
@@ -9,14 +10,18 @@ import type {
   AddressFragment,
   ImageGalleryFragment,
   PeopleGalleryFragment,
+  ProjectFragment,
   ProjectGalleryFragment,
   ResponsiveVideoFragment,
   SectionFragment,
 } from '@lib/dato-cms';
-import { Text, Title } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
+
+import { Box, Text, Title, Overlay } from '@mantine/core';
+import { useMediaQuery, useHover } from '@mantine/hooks';
 import { useMemo } from 'react';
 import { Article } from '@components/elements/layout';
+import { defaultTransition } from '@lib/theme/main';
+import Link from 'next/link';
 
 export interface BlockComponents {
   ResponsiveVideoRecord: (props: ResponsiveVideoFragment) => JSX.Element;
@@ -54,6 +59,7 @@ const defaultBlock: BlockComponents = {
         muted
         playsInline
         loop
+        style={{ maxWidth: '100vw' }}
       >
         <source
           src={video.mp4High || video.mp4Med || video.mp4Low || ''}
@@ -62,6 +68,40 @@ const defaultBlock: BlockComponents = {
       </video>
     );
   },
+};
+
+const Project = ({ id, name, pageUrl, featuredImage }: ProjectFragment) => {
+  const { hovered, ref } = useHover();
+  return (
+    <Box
+      ref={ref}
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        aspectRatio: 1,
+      }}
+    >
+      <Overlay
+        opacity={hovered ? 0.4 : 0}
+        color="black"
+        zIndex={10}
+        sx={{ transition: defaultTransition }}
+      />
+      {featuredImage?.responsiveImage && (
+        // eslint-disable-next-line jsx-a11y/alt-text
+        <Image
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'fill',
+            objectPosition: 'center',
+          }}
+          data={featuredImage.responsiveImage}
+        />
+      )}
+    </Box>
+  );
 };
 
 const defaultInline: InlineComponents = {
@@ -75,7 +115,24 @@ const defaultInline: InlineComponents = {
     return <Text>PeopleGallery</Text>;
   },
   ProjectGalleryRecord: ({ projects }) => {
-    return <Text>ProjectGallery </Text>;
+    return (
+      <Box
+        sx={(theme) => ({
+          display: 'grid',
+          maxWidth: theme.breakpoints.lg,
+          gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+          alignContent: 'center',
+          justifyItems: 'center',
+          [theme.fn.largerThan('lg')]: {
+            gridTemplateColumns: 'repeat(4, 1fr)',
+          },
+        })}
+      >
+        {projects.map((project) => {
+          return <Project key={project.id} {...project} />;
+        })}
+      </Box>
+    );
   },
 };
 
