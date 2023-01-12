@@ -21,13 +21,8 @@ fragment Section on SectionRecord {
       }
     }
     blocks {
-      __typename
-      id
-      landscape {
-        ...Video
-      }
-      portrait {
-        ...Video
+      ... on ResponsiveVideoRecord {
+        ...ResponsiveVideo
       }
     }
   }

@@ -16,4 +16,5 @@ query Page($name: String) {
   allSocialLinks {
     ...SocialLink
   }
+  ...PageLinks
 }

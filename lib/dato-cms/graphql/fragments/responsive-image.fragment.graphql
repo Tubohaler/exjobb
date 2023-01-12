@@ -1,5 +1,6 @@
 fragment ResponsiveImage on ImageFileField {
   __typename
+  id
   responsiveImage(
     sizes: "(max-width: 512px) 100vw, 512px"
     imgixParams: { fm: webp }

@@ -1,9 +1,10 @@
 fragment Video on VideoFileField {
   __typename
   mimeType
+  width
+  height
   video {
     __typename
-    streamingUrl
     duration
     framerate
     mp4High: mp4Url(res: high)

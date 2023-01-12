@@ -3,6 +3,7 @@ fragment Page on PageRecord {
   name
   pageTitle
   urlSlug
+  id
   metaTags {
     __typename
     description

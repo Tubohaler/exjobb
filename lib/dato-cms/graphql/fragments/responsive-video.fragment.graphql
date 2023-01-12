@@ -1,0 +1,10 @@
+fragment ResponsiveVideo on ResponsiveVideoRecord {
+  id
+  __typename
+  landscape {
+    ...Video
+  }
+  portrait {
+    ...Video
+  }
+}

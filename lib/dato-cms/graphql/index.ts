@@ -47,37 +47,38 @@ export interface AddressModelFilter {
   zipCode: InputMaybe<StringFilter>;
 }
 
-export type AddressModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'address_ASC'
-  | 'address_DESC'
-  | 'city_ASC'
-  | 'city_DESC'
-  | 'country_ASC'
-  | 'country_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'title_ASC'
-  | 'title_DESC'
-  | 'zipCode_ASC'
-  | 'zipCode_DESC';
+export enum AddressModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  AddressAsc = 'address_ASC',
+  AddressDesc = 'address_DESC',
+  CityAsc = 'city_ASC',
+  CityDesc = 'city_DESC',
+  CountryAsc = 'country_ASC',
+  CountryDesc = 'country_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  ZipCodeAsc = 'zipCode_ASC',
+  ZipCodeDesc = 'zipCode_DESC',
+}
 
 /** Record of type Address (address) */
 export interface AddressRecord extends RecordInterface {
@@ -118,19 +119,20 @@ export interface CollectionMetadata {
   count: Scalars['IntType'];
 }
 
-export type ColorBucketType =
-  | 'black'
-  | 'blue'
-  | 'brown'
-  | 'cyan'
-  | 'green'
-  | 'grey'
-  | 'orange'
-  | 'pink'
-  | 'purple'
-  | 'red'
-  | 'white'
-  | 'yellow';
+export enum ColorBucketType {
+  Black = 'black',
+  Blue = 'blue',
+  Brown = 'brown',
+  Cyan = 'cyan',
+  Green = 'green',
+  Grey = 'grey',
+  Orange = 'orange',
+  Pink = 'pink',
+  Purple = 'purple',
+  Red = 'red',
+  White = 'white',
+  Yellow = 'yellow',
+}
 
 export interface ColorField {
   __typename: 'ColorField';
@@ -188,7 +190,11 @@ export interface CreatedAtFilter {
   neq: InputMaybe<Scalars['DateTime']>;
 }
 
-export type FaviconType = 'appleTouchIcon' | 'icon' | 'msApplication';
+export enum FaviconType {
+  AppleTouchIcon = 'appleTouchIcon',
+  Icon = 'icon',
+  MsApplication = 'msApplication',
+}
 
 export interface FileField extends FileFieldInterface {
   __typename: 'FileField';
@@ -448,27 +454,28 @@ export interface ImageGalleryModelFilter {
   title: InputMaybe<StringFilter>;
 }
 
-export type ImageGalleryModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'title_ASC'
-  | 'title_DESC';
+export enum ImageGalleryModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
 
 /** Record of type Image Gallery (image_gallery) */
 export interface ImageGalleryRecord extends RecordInterface {
@@ -1679,121 +1686,184 @@ export interface ImgixParams {
   w: InputMaybe<Scalars['FloatType']>;
 }
 
-export type ImgixParamsAuto = 'compress' | 'enhance' | 'format' | 'redeye';
+export enum ImgixParamsAuto {
+  Compress = 'compress',
+  Enhance = 'enhance',
+  Format = 'format',
+  Redeye = 'redeye',
+}
 
-export type ImgixParamsBlendAlign =
-  | 'bottom'
-  | 'center'
-  | 'left'
-  | 'middle'
-  | 'right'
-  | 'top';
+export enum ImgixParamsBlendAlign {
+  Bottom = 'bottom',
+  Center = 'center',
+  Left = 'left',
+  Middle = 'middle',
+  Right = 'right',
+  Top = 'top',
+}
 
-export type ImgixParamsBlendCrop =
-  | 'bottom'
-  | 'faces'
-  | 'left'
-  | 'right'
-  | 'top';
+export enum ImgixParamsBlendCrop {
+  Bottom = 'bottom',
+  Faces = 'faces',
+  Left = 'left',
+  Right = 'right',
+  Top = 'top',
+}
 
-export type ImgixParamsBlendFit = 'clamp' | 'clip' | 'crop' | 'max' | 'scale';
+export enum ImgixParamsBlendFit {
+  Clamp = 'clamp',
+  Clip = 'clip',
+  Crop = 'crop',
+  Max = 'max',
+  Scale = 'scale',
+}
 
-export type ImgixParamsBlendMode =
-  | 'burn'
-  | 'color'
-  | 'darken'
-  | 'difference'
-  | 'dodge'
-  | 'exclusion'
-  | 'hardlight'
-  | 'hue'
-  | 'lighten'
-  | 'luminosity'
-  | 'multiply'
-  | 'normal'
-  | 'overlay'
-  | 'saturation'
-  | 'screen'
-  | 'softlight';
+export enum ImgixParamsBlendMode {
+  Burn = 'burn',
+  Color = 'color',
+  Darken = 'darken',
+  Difference = 'difference',
+  Dodge = 'dodge',
+  Exclusion = 'exclusion',
+  Hardlight = 'hardlight',
+  Hue = 'hue',
+  Lighten = 'lighten',
+  Luminosity = 'luminosity',
+  Multiply = 'multiply',
+  Normal = 'normal',
+  Overlay = 'overlay',
+  Saturation = 'saturation',
+  Screen = 'screen',
+  Softlight = 'softlight',
+}
 
-export type ImgixParamsBlendSize = 'inherit';
+export enum ImgixParamsBlendSize {
+  Inherit = 'inherit',
+}
 
-export type ImgixParamsCh = 'dpr' | 'saveData' | 'width';
+export enum ImgixParamsCh {
+  Dpr = 'dpr',
+  SaveData = 'saveData',
+  Width = 'width',
+}
 
-export type ImgixParamsCrop =
-  | 'bottom'
-  | 'edges'
-  | 'entropy'
-  | 'faces'
-  | 'focalpoint'
-  | 'left'
-  | 'right'
-  | 'top';
+export enum ImgixParamsCrop {
+  Bottom = 'bottom',
+  Edges = 'edges',
+  Entropy = 'entropy',
+  Faces = 'faces',
+  Focalpoint = 'focalpoint',
+  Left = 'left',
+  Right = 'right',
+  Top = 'top',
+}
 
-export type ImgixParamsCs = 'adobergb1998' | 'srgb' | 'strip' | 'tinysrgb';
+export enum ImgixParamsCs {
+  Adobergb1998 = 'adobergb1998',
+  Srgb = 'srgb',
+  Strip = 'strip',
+  Tinysrgb = 'tinysrgb',
+}
 
-export type ImgixParamsFill = 'blur' | 'solid';
+export enum ImgixParamsFill {
+  Blur = 'blur',
+  Solid = 'solid',
+}
 
-export type ImgixParamsFit =
-  | 'clamp'
-  | 'clip'
-  | 'crop'
-  | 'facearea'
-  | 'fill'
-  | 'fillmax'
-  | 'max'
-  | 'min'
-  | 'scale';
+export enum ImgixParamsFit {
+  Clamp = 'clamp',
+  Clip = 'clip',
+  Crop = 'crop',
+  Facearea = 'facearea',
+  Fill = 'fill',
+  Fillmax = 'fillmax',
+  Max = 'max',
+  Min = 'min',
+  Scale = 'scale',
+}
 
-export type ImgixParamsFlip = 'h' | 'hv' | 'v';
+export enum ImgixParamsFlip {
+  H = 'h',
+  Hv = 'hv',
+  V = 'v',
+}
 
-export type ImgixParamsFm =
-  | 'avif'
-  | 'blurhash'
-  | 'gif'
-  | 'jp2'
-  | 'jpg'
-  | 'json'
-  | 'jxr'
-  | 'mp4'
-  | 'pjpg'
-  | 'png'
-  | 'png8'
-  | 'png32'
-  | 'webm'
-  | 'webp';
+export enum ImgixParamsFm {
+  Avif = 'avif',
+  Blurhash = 'blurhash',
+  Gif = 'gif',
+  Jp2 = 'jp2',
+  Jpg = 'jpg',
+  Json = 'json',
+  Jxr = 'jxr',
+  Mp4 = 'mp4',
+  Pjpg = 'pjpg',
+  Png = 'png',
+  Png8 = 'png8',
+  Png32 = 'png32',
+  Webm = 'webm',
+  Webp = 'webp',
+}
 
-export type ImgixParamsIptc = 'allow' | 'block';
+export enum ImgixParamsIptc {
+  Allow = 'allow',
+  Block = 'block',
+}
 
-export type ImgixParamsMarkAlign =
-  | 'bottom'
-  | 'center'
-  | 'left'
-  | 'middle'
-  | 'right'
-  | 'top';
+export enum ImgixParamsMarkAlign {
+  Bottom = 'bottom',
+  Center = 'center',
+  Left = 'left',
+  Middle = 'middle',
+  Right = 'right',
+  Top = 'top',
+}
 
-export type ImgixParamsMarkFit = 'clip' | 'crop' | 'fill' | 'max' | 'scale';
+export enum ImgixParamsMarkFit {
+  Clip = 'clip',
+  Crop = 'crop',
+  Fill = 'fill',
+  Max = 'max',
+  Scale = 'scale',
+}
 
-export type ImgixParamsMarkTile = 'grid';
+export enum ImgixParamsMarkTile {
+  Grid = 'grid',
+}
 
-export type ImgixParamsPalette = 'css' | 'json';
+export enum ImgixParamsPalette {
+  Css = 'css',
+  Json = 'json',
+}
 
-export type ImgixParamsTransparency = 'grid';
+export enum ImgixParamsTransparency {
+  Grid = 'grid',
+}
 
-export type ImgixParamsTrim = 'auto' | 'color';
+export enum ImgixParamsTrim {
+  Auto = 'auto',
+  Color = 'color',
+}
 
-export type ImgixParamsTxtAlign =
-  | 'bottom'
-  | 'center'
-  | 'left'
-  | 'middle'
-  | 'right'
-  | 'top';
+export enum ImgixParamsTxtAlign {
+  Bottom = 'bottom',
+  Center = 'center',
+  Left = 'left',
+  Middle = 'middle',
+  Right = 'right',
+  Top = 'top',
+}
 
-export type ImgixParamsTxtClip = 'ellipsis' | 'end' | 'middle' | 'start';
+export enum ImgixParamsTxtClip {
+  Ellipsis = 'ellipsis',
+  End = 'end',
+  Middle = 'middle',
+  Start = 'start',
+}
 
-export type ImgixParamsTxtFit = 'max';
+export enum ImgixParamsTxtFit {
+  Max = 'max',
+}
 
 /** Specifies how to filter by usage */
 export interface InUseFilter {
@@ -1813,9 +1883,17 @@ export interface ItemIdFilter {
   notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
 }
 
-export type ItemStatus = 'draft' | 'published' | 'updated';
+export enum ItemStatus {
+  Draft = 'draft',
+  Published = 'published',
+  Updated = 'updated',
+}
 
-export type MuxThumbnailFormatType = 'gif' | 'jpg' | 'png';
+export enum MuxThumbnailFormatType {
+  Gif = 'gif',
+  Jpg = 'jpg',
+  Png = 'png',
+}
 
 /** Specifies how to filter by image orientation */
 export interface OrientationFilter {
@@ -1844,31 +1922,32 @@ export interface PageModelFilter {
   urlSlug: InputMaybe<SlugFilter>;
 }
 
-export type PageModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'pageTitle_ASC'
-  | 'pageTitle_DESC'
-  | 'position_ASC'
-  | 'position_DESC';
+export enum PageModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PageTitleAsc = 'pageTitle_ASC',
+  PageTitleDesc = 'pageTitle_DESC',
+  PositionAsc = 'position_ASC',
+  PositionDesc = 'position_DESC',
+}
 
 /** Record of type Page (page) */
 export interface PageRecord extends RecordInterface {
@@ -1993,39 +2072,40 @@ export interface ProjectModelFilter {
   steamUrl: InputMaybe<StringFilter>;
 }
 
-export type ProjectModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'description_ASC'
-  | 'description_DESC'
-  | 'humbleButtonText_ASC'
-  | 'humbleButtonText_DESC'
-  | 'humbleUrl_ASC'
-  | 'humbleUrl_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'pageUrl_ASC'
-  | 'pageUrl_DESC'
-  | 'slugSrc_ASC'
-  | 'slugSrc_DESC'
-  | 'steamUrl_ASC'
-  | 'steamUrl_DESC';
+export enum ProjectModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  HumbleButtonTextAsc = 'humbleButtonText_ASC',
+  HumbleButtonTextDesc = 'humbleButtonText_DESC',
+  HumbleUrlAsc = 'humbleUrl_ASC',
+  HumbleUrlDesc = 'humbleUrl_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PageUrlAsc = 'pageUrl_ASC',
+  PageUrlDesc = 'pageUrl_DESC',
+  SlugSrcAsc = 'slugSrc_ASC',
+  SlugSrcDesc = 'slugSrc_DESC',
+  SteamUrlAsc = 'steamUrl_ASC',
+  SteamUrlDesc = 'steamUrl_DESC',
+}
 
 /** Record of type Project (project) */
 export interface ProjectRecord extends RecordInterface {
@@ -2361,7 +2441,12 @@ export interface ResolutionFilter {
   notIn: InputMaybe<Array<InputMaybe<ResolutionType>>>;
 }
 
-export type ResolutionType = 'icon' | 'large' | 'medium' | 'small';
+export enum ResolutionType {
+  Icon = 'icon',
+  Large = 'large',
+  Medium = 'medium',
+  Small = 'small',
+}
 
 export interface ResponsiveImage {
   __typename: 'ResponsiveImage';
@@ -2471,7 +2556,9 @@ export interface SiteGlobalSeoArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
-export type SiteLocale = 'en';
+export enum SiteLocale {
+  En = 'en',
+}
 
 /** Specifies how to filter Slug fields */
 export interface SlugFilter {
@@ -2503,33 +2590,34 @@ export interface SocialLinkModelFilter {
   title: InputMaybe<StringFilter>;
 }
 
-export type SocialLinkModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'href_ASC'
-  | 'href_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'linkTitle_ASC'
-  | 'linkTitle_DESC'
-  | 'position_ASC'
-  | 'position_DESC'
-  | 'title_ASC'
-  | 'title_DESC';
+export enum SocialLinkModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  HrefAsc = 'href_ASC',
+  HrefDesc = 'href_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  LinkTitleAsc = 'linkTitle_ASC',
+  LinkTitleDesc = 'linkTitle_DESC',
+  PositionAsc = 'position_ASC',
+  PositionDesc = 'position_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
 
 /** Record of type Social Link (social_link) */
 export interface SocialLinkRecord extends RecordInterface {
@@ -2575,31 +2663,32 @@ export interface StaffModelFilter {
   name: InputMaybe<StringFilter>;
 }
 
-export type StaffModelOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_firstPublishedAt_ASC'
-  | '_firstPublishedAt_DESC'
-  | '_isValid_ASC'
-  | '_isValid_DESC'
-  | '_publicationScheduledAt_ASC'
-  | '_publicationScheduledAt_DESC'
-  | '_publishedAt_ASC'
-  | '_publishedAt_DESC'
-  | '_status_ASC'
-  | '_status_DESC'
-  | '_unpublishingScheduledAt_ASC'
-  | '_unpublishingScheduledAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'email_ASC'
-  | 'email_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'jobPosition_ASC'
-  | 'jobPosition_DESC'
-  | 'name_ASC'
-  | 'name_DESC';
+export enum StaffModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  EmailAsc = 'email_ASC',
+  EmailDesc = 'email_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  JobPositionAsc = 'jobPosition_ASC',
+  JobPositionDesc = 'jobPosition_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+}
 
 /** Record of type Staff (staff) */
 export interface StaffRecord extends RecordInterface {
@@ -2891,27 +2980,32 @@ export interface UploadNotesFilter {
   notMatches: InputMaybe<StringMatchesFilter>;
 }
 
-export type UploadOrderBy =
-  | '_createdAt_ASC'
-  | '_createdAt_DESC'
-  | '_updatedAt_ASC'
-  | '_updatedAt_DESC'
-  | 'basename_ASC'
-  | 'basename_DESC'
-  | 'filename_ASC'
-  | 'filename_DESC'
-  | 'format_ASC'
-  | 'format_DESC'
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'mimeType_ASC'
-  | 'mimeType_DESC'
-  | 'resolution_ASC'
-  | 'resolution_DESC'
-  | 'size_ASC'
-  | 'size_DESC';
+export enum UploadOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  BasenameAsc = 'basename_ASC',
+  BasenameDesc = 'basename_DESC',
+  FilenameAsc = 'filename_ASC',
+  FilenameDesc = 'filename_DESC',
+  FormatAsc = 'format_ASC',
+  FormatDesc = 'format_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  MimeTypeAsc = 'mimeType_ASC',
+  MimeTypeDesc = 'mimeType_DESC',
+  ResolutionAsc = 'resolution_ASC',
+  ResolutionDesc = 'resolution_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+}
 
-export type UploadOrientation = 'landscape' | 'portrait' | 'square';
+export enum UploadOrientation {
+  Landscape = 'landscape',
+  Portrait = 'portrait',
+  Square = 'square',
+}
 
 /** Specifies how to filter by size */
 export interface UploadSizeFilter {
@@ -2961,15 +3055,16 @@ export interface UploadTitleFilter {
   notMatches: InputMaybe<StringMatchesFilter>;
 }
 
-export type UploadType =
-  | 'archive'
-  | 'audio'
-  | 'image'
-  | 'pdfdocument'
-  | 'presentation'
-  | 'richtext'
-  | 'spreadsheet'
-  | 'video';
+export enum UploadType {
+  Archive = 'archive',
+  Audio = 'audio',
+  Image = 'image',
+  Pdfdocument = 'pdfdocument',
+  Presentation = 'presentation',
+  Richtext = 'richtext',
+  Spreadsheet = 'spreadsheet',
+  Video = 'video',
+}
 
 /** Specifies how to filter by update datetime */
 export interface UploadUpdatedAtFilter {
@@ -3092,7 +3187,11 @@ export interface VideoFileFieldUrlArgs {
   imgixParams: InputMaybe<ImgixParams>;
 }
 
-export type VideoMp4Res = 'high' | 'low' | 'medium';
+export enum VideoMp4Res {
+  High = 'high',
+  Low = 'low',
+  Medium = 'medium',
+}
 
 export interface FocalPoint {
   __typename: 'focalPoint';
@@ -3100,696 +3199,778 @@ export interface FocalPoint {
   y: Scalars['FloatType'];
 }
 
-export type AddressFragment = { __typename: 'AddressRecord' } & Pick<
-  AddressRecord,
-  'id' | 'name' | 'title' | 'zipCode' | 'country' | 'city' | 'address'
->;
+export type AddressFragment = {
+  __typename: 'AddressRecord';
+  id: string;
+  name: string;
+  title: string;
+  zipCode: string;
+  country: string;
+  city: string;
+  address: string;
+};
 
-export type GlobalSeoFragment = { __typename: 'GlobalSeoField' } & Pick<
-  GlobalSeoField,
-  'facebookPageUrl' | 'twitterAccount' | 'titleSuffix' | 'siteName'
-> & {
-    fallbackSeo: Maybe<
-      { __typename: 'SeoField' } & Pick<
-        SeoField,
-        'description' | 'title' | 'twitterCard'
-      > & {
-          image: Maybe<
-            { __typename: 'FileField' } & Pick<
-              FileField,
-              'url' | 'title' | 'height' | 'width'
-            >
-          >;
-        }
-    >;
-  };
+export type GlobalSeoFragment = {
+  __typename: 'GlobalSeoField';
+  facebookPageUrl: string | null;
+  twitterAccount: string | null;
+  titleSuffix: string | null;
+  siteName: string | null;
+  fallbackSeo: {
+    __typename: 'SeoField';
+    description: string | null;
+    title: string | null;
+    twitterCard: string | null;
+    image: {
+      __typename: 'FileField';
+      url: string;
+      title: string | null;
+      height: number | null;
+      width: number | null;
+    } | null;
+  } | null;
+};
 
-export type IconFragment = { __typename: 'FileField' } & Pick<
-  FileField,
-  'mimeType' | 'url' | 'width' | 'height'
->;
+export type IconFragment = {
+  __typename: 'FileField';
+  mimeType: string;
+  url: string;
+  width: number | null;
+  height: number | null;
+};
 
-export type ImageGalleryFragment = { __typename: 'ImageGalleryRecord' } & Pick<
-  ImageGalleryRecord,
-  'id' | 'title'
-> & {
-    images: Array<
-      { __typename: 'ImageFileField' } & {
-        responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-          ResponsiveImage,
-          | 'src'
-          | 'alt'
-          | 'title'
-          | 'width'
-          | 'height'
-          | 'srcSet'
-          | 'sizes'
-          | 'bgColor'
-          | 'aspectRatio'
-        >;
-      }
-    >;
-  };
+export type ImageGalleryFragment = {
+  __typename: 'ImageGalleryRecord';
+  id: string;
+  title: string;
+  images: Array<{
+    __typename: 'ImageFileField';
+    id: string;
+    responsiveImage: {
+      __typename: 'ResponsiveImage';
+      src: string;
+      alt: string | null;
+      title: string | null;
+      width: number;
+      height: number;
+      srcSet: string;
+      sizes: string;
+      bgColor: string | null;
+      aspectRatio: number;
+    };
+  }>;
+};
 
-export type PageFragment = { __typename: 'PageRecord' } & Pick<
-  PageRecord,
-  'name' | 'pageTitle' | 'urlSlug'
-> & {
-    metaTags: Maybe<
-      { __typename: 'SeoField' } & Pick<
-        SeoField,
-        'description' | 'title' | 'twitterCard'
-      > & {
-          image: Maybe<
-            { __typename: 'FileField' } & Pick<
-              FileField,
-              'url' | 'title' | 'width' | 'height'
-            >
-          >;
-        }
-    >;
-    _seoMetaTags: Array<
-      { __typename: 'Tag' } & Pick<Tag, 'content' | 'tag' | 'attributes'>
-    >;
-    sections: Array<
-      { __typename: 'SectionRecord' } & Pick<SectionRecord, 'id' | 'title'> & {
-          content: { __typename: 'SectionModelContentField' } & Pick<
-            SectionModelContentField,
-            'value'
-          > & {
-              links: Array<
-                | ({ __typename: 'AddressRecord' } & Pick<
-                    AddressRecord,
-                    | 'id'
-                    | 'name'
-                    | 'title'
-                    | 'zipCode'
-                    | 'country'
-                    | 'city'
-                    | 'address'
-                  >)
-                | ({ __typename: 'ImageGalleryRecord' } & Pick<
-                    ImageGalleryRecord,
-                    'id' | 'title'
-                  > & {
-                      images: Array<
-                        { __typename: 'ImageFileField' } & {
-                          responsiveImage: {
-                            __typename: 'ResponsiveImage';
-                          } & Pick<
-                            ResponsiveImage,
-                            | 'src'
-                            | 'alt'
-                            | 'title'
-                            | 'width'
-                            | 'height'
-                            | 'srcSet'
-                            | 'sizes'
-                            | 'bgColor'
-                            | 'aspectRatio'
-                          >;
-                        }
-                      >;
-                    })
-                | ({ __typename: 'PeopleGalleryRecord' } & {
-                    people: Array<
-                      { __typename: 'StaffRecord' } & Pick<
-                        StaffRecord,
-                        'id' | 'jobPosition' | 'name'
-                      > & {
-                          featuredImage: Maybe<
-                            { __typename: 'ImageFileField' } & {
-                              responsiveImage: {
-                                __typename: 'ResponsiveImage';
-                              } & Pick<
-                                ResponsiveImage,
-                                | 'src'
-                                | 'alt'
-                                | 'title'
-                                | 'width'
-                                | 'height'
-                                | 'srcSet'
-                                | 'sizes'
-                                | 'bgColor'
-                                | 'aspectRatio'
-                              >;
-                            }
-                          >;
-                        }
-                    >;
-                  })
-                | ({ __typename: 'ProjectGalleryRecord' } & {
-                    projects: Array<
-                      { __typename: 'ProjectRecord' } & Pick<
-                        ProjectRecord,
-                        | 'id'
-                        | 'name'
-                        | 'pageUrl'
-                        | 'steamUrl'
-                        | 'humbleUrl'
-                        | 'humbleButtonText'
-                      > & {
-                          featuredImage: { __typename: 'ImageFileField' } & {
-                            responsiveImage: {
-                              __typename: 'ResponsiveImage';
-                            } & Pick<
-                              ResponsiveImage,
-                              | 'src'
-                              | 'alt'
-                              | 'title'
-                              | 'width'
-                              | 'height'
-                              | 'srcSet'
-                              | 'sizes'
-                              | 'bgColor'
-                              | 'aspectRatio'
-                            >;
-                          };
-                        }
-                    >;
-                  })
-                | { __typename: 'StaffRecord' }
-              >;
-              blocks: Array<
-                { __typename: 'ResponsiveVideoRecord' } & Pick<
-                  ResponsiveVideoRecord,
-                  'id'
-                > & {
-                    landscape: { __typename: 'VideoFileField' } & Pick<
-                      VideoFileField,
-                      'mimeType'
-                    > & {
-                        video: { __typename: 'UploadVideoField' } & Pick<
-                          UploadVideoField,
-                          'streamingUrl' | 'duration' | 'framerate'
-                        > & {
-                            mp4High: UploadVideoField['mp4Url'];
-                            mp4Med: UploadVideoField['mp4Url'];
-                            mp4Low: UploadVideoField['mp4Url'];
-                            thumbJpg: UploadVideoField['thumbnailUrl'];
-                            thumbGif: UploadVideoField['thumbnailUrl'];
-                          };
-                      };
-                    portrait: { __typename: 'VideoFileField' } & Pick<
-                      VideoFileField,
-                      'mimeType'
-                    > & {
-                        video: { __typename: 'UploadVideoField' } & Pick<
-                          UploadVideoField,
-                          'streamingUrl' | 'duration' | 'framerate'
-                        > & {
-                            mp4High: UploadVideoField['mp4Url'];
-                            mp4Med: UploadVideoField['mp4Url'];
-                            mp4Low: UploadVideoField['mp4Url'];
-                            thumbJpg: UploadVideoField['thumbnailUrl'];
-                            thumbGif: UploadVideoField['thumbnailUrl'];
-                          };
-                      };
-                  }
-              >;
-            };
-        }
-    >;
-  };
+export type PageLinksFragment = {
+  __typename: 'Query';
+  allPages: Array<{
+    __typename: 'PageRecord';
+    id: string;
+    urlSlug: string | null;
+    name: string;
+    position: number | null;
+  }>;
+};
 
-export type PeopleGalleryFragment = { __typename: 'PeopleGalleryRecord' } & {
-  people: Array<
-    { __typename: 'StaffRecord' } & Pick<
-      StaffRecord,
-      'id' | 'jobPosition' | 'name'
-    > & {
-        featuredImage: Maybe<
-          { __typename: 'ImageFileField' } & {
-            responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-              ResponsiveImage,
-              | 'src'
-              | 'alt'
-              | 'title'
-              | 'width'
-              | 'height'
-              | 'srcSet'
-              | 'sizes'
-              | 'bgColor'
-              | 'aspectRatio'
-            >;
+export type PageFragment = {
+  __typename: 'PageRecord';
+  name: string;
+  pageTitle: string;
+  urlSlug: string | null;
+  id: string;
+  metaTags: {
+    __typename: 'SeoField';
+    description: string | null;
+    title: string | null;
+    twitterCard: string | null;
+    image: {
+      __typename: 'FileField';
+      url: string;
+      title: string | null;
+      width: number | null;
+      height: number | null;
+    } | null;
+  } | null;
+  _seoMetaTags: Array<{
+    __typename: 'Tag';
+    content: string | null;
+    tag: string;
+    attributes: Record<string, string> | null;
+  }>;
+  sections: Array<{
+    __typename: 'SectionRecord';
+    id: string;
+    title: string;
+    content: {
+      __typename: 'SectionModelContentField';
+      value: unknown;
+      links: Array<
+        | {
+            __typename: 'AddressRecord';
+            id: string;
+            name: string;
+            title: string;
+            zipCode: string;
+            country: string;
+            city: string;
+            address: string;
           }
-        >;
-      }
-  >;
-};
-
-export type ProjectGalleryFragment = { __typename: 'ProjectGalleryRecord' } & {
-  projects: Array<
-    { __typename: 'ProjectRecord' } & Pick<
-      ProjectRecord,
-      'id' | 'name' | 'pageUrl' | 'steamUrl' | 'humbleUrl' | 'humbleButtonText'
-    > & {
-        featuredImage: { __typename: 'ImageFileField' } & {
-          responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-            ResponsiveImage,
-            | 'src'
-            | 'alt'
-            | 'title'
-            | 'width'
-            | 'height'
-            | 'srcSet'
-            | 'sizes'
-            | 'bgColor'
-            | 'aspectRatio'
-          >;
-        };
-      }
-  >;
-};
-
-export type ProjectFragment = { __typename: 'ProjectRecord' } & Pick<
-  ProjectRecord,
-  'id' | 'name' | 'pageUrl' | 'steamUrl' | 'humbleUrl' | 'humbleButtonText'
-> & {
-    featuredImage: { __typename: 'ImageFileField' } & {
-      responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-        ResponsiveImage,
-        | 'src'
-        | 'alt'
-        | 'title'
-        | 'width'
-        | 'height'
-        | 'srcSet'
-        | 'sizes'
-        | 'bgColor'
-        | 'aspectRatio'
+        | {
+            __typename: 'ImageGalleryRecord';
+            id: string;
+            title: string;
+            images: Array<{
+              __typename: 'ImageFileField';
+              id: string;
+              responsiveImage: {
+                __typename: 'ResponsiveImage';
+                src: string;
+                alt: string | null;
+                title: string | null;
+                width: number;
+                height: number;
+                srcSet: string;
+                sizes: string;
+                bgColor: string | null;
+                aspectRatio: number;
+              };
+            }>;
+          }
+        | {
+            __typename: 'PeopleGalleryRecord';
+            id: string;
+            people: Array<{
+              __typename: 'StaffRecord';
+              id: string;
+              jobPosition: string;
+              name: string;
+              featuredImage: {
+                __typename: 'ImageFileField';
+                id: string;
+                responsiveImage: {
+                  __typename: 'ResponsiveImage';
+                  src: string;
+                  alt: string | null;
+                  title: string | null;
+                  width: number;
+                  height: number;
+                  srcSet: string;
+                  sizes: string;
+                  bgColor: string | null;
+                  aspectRatio: number;
+                };
+              } | null;
+            }>;
+          }
+        | {
+            __typename: 'ProjectGalleryRecord';
+            id: string;
+            projects: Array<{
+              __typename: 'ProjectRecord';
+              id: string;
+              name: string;
+              pageUrl: string | null;
+              steamUrl: string | null;
+              humbleUrl: string | null;
+              humbleButtonText: string | null;
+              featuredImage: {
+                __typename: 'ImageFileField';
+                id: string;
+                responsiveImage: {
+                  __typename: 'ResponsiveImage';
+                  src: string;
+                  alt: string | null;
+                  title: string | null;
+                  width: number;
+                  height: number;
+                  srcSet: string;
+                  sizes: string;
+                  bgColor: string | null;
+                  aspectRatio: number;
+                };
+              };
+            }>;
+          }
+        | { __typename: 'StaffRecord' }
       >;
+      blocks: Array<{
+        __typename: 'ResponsiveVideoRecord';
+        id: string;
+        landscape: {
+          __typename: 'VideoFileField';
+          mimeType: string;
+          width: number | null;
+          height: number | null;
+          video: {
+            __typename: 'UploadVideoField';
+            duration: number | null;
+            framerate: number | null;
+            mp4High: string | null;
+            mp4Med: string | null;
+            mp4Low: string | null;
+            thumbJpg: string;
+            thumbGif: string;
+          };
+        };
+        portrait: {
+          __typename: 'VideoFileField';
+          mimeType: string;
+          width: number | null;
+          height: number | null;
+          video: {
+            __typename: 'UploadVideoField';
+            duration: number | null;
+            framerate: number | null;
+            mp4High: string | null;
+            mp4Med: string | null;
+            mp4Low: string | null;
+            thumbJpg: string;
+            thumbGif: string;
+          };
+        };
+      }>;
+    };
+  }>;
+};
+
+export type PeopleGalleryFragment = {
+  __typename: 'PeopleGalleryRecord';
+  id: string;
+  people: Array<{
+    __typename: 'StaffRecord';
+    id: string;
+    jobPosition: string;
+    name: string;
+    featuredImage: {
+      __typename: 'ImageFileField';
+      id: string;
+      responsiveImage: {
+        __typename: 'ResponsiveImage';
+        src: string;
+        alt: string | null;
+        title: string | null;
+        width: number;
+        height: number;
+        srcSet: string;
+        sizes: string;
+        bgColor: string | null;
+        aspectRatio: number;
+      };
+    } | null;
+  }>;
+};
+
+export type ProjectGalleryFragment = {
+  __typename: 'ProjectGalleryRecord';
+  id: string;
+  projects: Array<{
+    __typename: 'ProjectRecord';
+    id: string;
+    name: string;
+    pageUrl: string | null;
+    steamUrl: string | null;
+    humbleUrl: string | null;
+    humbleButtonText: string | null;
+    featuredImage: {
+      __typename: 'ImageFileField';
+      id: string;
+      responsiveImage: {
+        __typename: 'ResponsiveImage';
+        src: string;
+        alt: string | null;
+        title: string | null;
+        width: number;
+        height: number;
+        srcSet: string;
+        sizes: string;
+        bgColor: string | null;
+        aspectRatio: number;
+      };
+    };
+  }>;
+};
+
+export type ProjectFragment = {
+  __typename: 'ProjectRecord';
+  id: string;
+  name: string;
+  pageUrl: string | null;
+  steamUrl: string | null;
+  humbleUrl: string | null;
+  humbleButtonText: string | null;
+  featuredImage: {
+    __typename: 'ImageFileField';
+    id: string;
+    responsiveImage: {
+      __typename: 'ResponsiveImage';
+      src: string;
+      alt: string | null;
+      title: string | null;
+      width: number;
+      height: number;
+      srcSet: string;
+      sizes: string;
+      bgColor: string | null;
+      aspectRatio: number;
     };
   };
-
-export type ResponsiveImageFragment = { __typename: 'ImageFileField' } & {
-  responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-    ResponsiveImage,
-    | 'src'
-    | 'alt'
-    | 'title'
-    | 'width'
-    | 'height'
-    | 'srcSet'
-    | 'sizes'
-    | 'bgColor'
-    | 'aspectRatio'
-  >;
 };
 
-export type SectionFragment = { __typename: 'SectionRecord' } & Pick<
-  SectionRecord,
-  'id' | 'title'
-> & {
-    content: { __typename: 'SectionModelContentField' } & Pick<
-      SectionModelContentField,
-      'value'
-    > & {
-        links: Array<
-          | ({ __typename: 'AddressRecord' } & Pick<
-              AddressRecord,
-              | 'id'
-              | 'name'
-              | 'title'
-              | 'zipCode'
-              | 'country'
-              | 'city'
-              | 'address'
-            >)
-          | ({ __typename: 'ImageGalleryRecord' } & Pick<
-              ImageGalleryRecord,
-              'id' | 'title'
-            > & {
-                images: Array<
-                  { __typename: 'ImageFileField' } & {
-                    responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-                      ResponsiveImage,
-                      | 'src'
-                      | 'alt'
-                      | 'title'
-                      | 'width'
-                      | 'height'
-                      | 'srcSet'
-                      | 'sizes'
-                      | 'bgColor'
-                      | 'aspectRatio'
-                    >;
-                  }
-                >;
-              })
-          | ({ __typename: 'PeopleGalleryRecord' } & {
-              people: Array<
-                { __typename: 'StaffRecord' } & Pick<
-                  StaffRecord,
-                  'id' | 'jobPosition' | 'name'
-                > & {
-                    featuredImage: Maybe<
-                      { __typename: 'ImageFileField' } & {
-                        responsiveImage: {
-                          __typename: 'ResponsiveImage';
-                        } & Pick<
-                          ResponsiveImage,
-                          | 'src'
-                          | 'alt'
-                          | 'title'
-                          | 'width'
-                          | 'height'
-                          | 'srcSet'
-                          | 'sizes'
-                          | 'bgColor'
-                          | 'aspectRatio'
-                        >;
-                      }
-                    >;
-                  }
-              >;
-            })
-          | ({ __typename: 'ProjectGalleryRecord' } & {
-              projects: Array<
-                { __typename: 'ProjectRecord' } & Pick<
-                  ProjectRecord,
-                  | 'id'
-                  | 'name'
-                  | 'pageUrl'
-                  | 'steamUrl'
-                  | 'humbleUrl'
-                  | 'humbleButtonText'
-                > & {
-                    featuredImage: { __typename: 'ImageFileField' } & {
-                      responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-                        ResponsiveImage,
-                        | 'src'
-                        | 'alt'
-                        | 'title'
-                        | 'width'
-                        | 'height'
-                        | 'srcSet'
-                        | 'sizes'
-                        | 'bgColor'
-                        | 'aspectRatio'
-                      >;
-                    };
-                  }
-              >;
-            })
-          | { __typename: 'StaffRecord' }
-        >;
-        blocks: Array<
-          { __typename: 'ResponsiveVideoRecord' } & Pick<
-            ResponsiveVideoRecord,
-            'id'
-          > & {
-              landscape: { __typename: 'VideoFileField' } & Pick<
-                VideoFileField,
-                'mimeType'
-              > & {
-                  video: { __typename: 'UploadVideoField' } & Pick<
-                    UploadVideoField,
-                    'streamingUrl' | 'duration' | 'framerate'
-                  > & {
-                      mp4High: UploadVideoField['mp4Url'];
-                      mp4Med: UploadVideoField['mp4Url'];
-                      mp4Low: UploadVideoField['mp4Url'];
-                      thumbJpg: UploadVideoField['thumbnailUrl'];
-                      thumbGif: UploadVideoField['thumbnailUrl'];
-                    };
-                };
-              portrait: { __typename: 'VideoFileField' } & Pick<
-                VideoFileField,
-                'mimeType'
-              > & {
-                  video: { __typename: 'UploadVideoField' } & Pick<
-                    UploadVideoField,
-                    'streamingUrl' | 'duration' | 'framerate'
-                  > & {
-                      mp4High: UploadVideoField['mp4Url'];
-                      mp4Med: UploadVideoField['mp4Url'];
-                      mp4Low: UploadVideoField['mp4Url'];
-                      thumbJpg: UploadVideoField['thumbnailUrl'];
-                      thumbGif: UploadVideoField['thumbnailUrl'];
-                    };
-                };
-            }
-        >;
-      };
+export type ResponsiveImageFragment = {
+  __typename: 'ImageFileField';
+  id: string;
+  responsiveImage: {
+    __typename: 'ResponsiveImage';
+    src: string;
+    alt: string | null;
+    title: string | null;
+    width: number;
+    height: number;
+    srcSet: string;
+    sizes: string;
+    bgColor: string | null;
+    aspectRatio: number;
   };
+};
 
-export type SocialLinkFragment = { __typename: 'SocialLinkRecord' } & Pick<
-  SocialLinkRecord,
-  'linkTitle' | 'id' | 'title' | 'href'
-> & {
-    icon: { __typename: 'FileField' } & Pick<
-      FileField,
-      'mimeType' | 'url' | 'width' | 'height'
+export type ResponsiveVideoFragment = {
+  __typename: 'ResponsiveVideoRecord';
+  id: string;
+  landscape: {
+    __typename: 'VideoFileField';
+    mimeType: string;
+    width: number | null;
+    height: number | null;
+    video: {
+      __typename: 'UploadVideoField';
+      duration: number | null;
+      framerate: number | null;
+      mp4High: string | null;
+      mp4Med: string | null;
+      mp4Low: string | null;
+      thumbJpg: string;
+      thumbGif: string;
+    };
+  };
+  portrait: {
+    __typename: 'VideoFileField';
+    mimeType: string;
+    width: number | null;
+    height: number | null;
+    video: {
+      __typename: 'UploadVideoField';
+      duration: number | null;
+      framerate: number | null;
+      mp4High: string | null;
+      mp4Med: string | null;
+      mp4Low: string | null;
+      thumbJpg: string;
+      thumbGif: string;
+    };
+  };
+};
+
+export type SectionFragment = {
+  __typename: 'SectionRecord';
+  id: string;
+  title: string;
+  content: {
+    __typename: 'SectionModelContentField';
+    value: unknown;
+    links: Array<
+      | {
+          __typename: 'AddressRecord';
+          id: string;
+          name: string;
+          title: string;
+          zipCode: string;
+          country: string;
+          city: string;
+          address: string;
+        }
+      | {
+          __typename: 'ImageGalleryRecord';
+          id: string;
+          title: string;
+          images: Array<{
+            __typename: 'ImageFileField';
+            id: string;
+            responsiveImage: {
+              __typename: 'ResponsiveImage';
+              src: string;
+              alt: string | null;
+              title: string | null;
+              width: number;
+              height: number;
+              srcSet: string;
+              sizes: string;
+              bgColor: string | null;
+              aspectRatio: number;
+            };
+          }>;
+        }
+      | {
+          __typename: 'PeopleGalleryRecord';
+          id: string;
+          people: Array<{
+            __typename: 'StaffRecord';
+            id: string;
+            jobPosition: string;
+            name: string;
+            featuredImage: {
+              __typename: 'ImageFileField';
+              id: string;
+              responsiveImage: {
+                __typename: 'ResponsiveImage';
+                src: string;
+                alt: string | null;
+                title: string | null;
+                width: number;
+                height: number;
+                srcSet: string;
+                sizes: string;
+                bgColor: string | null;
+                aspectRatio: number;
+              };
+            } | null;
+          }>;
+        }
+      | {
+          __typename: 'ProjectGalleryRecord';
+          id: string;
+          projects: Array<{
+            __typename: 'ProjectRecord';
+            id: string;
+            name: string;
+            pageUrl: string | null;
+            steamUrl: string | null;
+            humbleUrl: string | null;
+            humbleButtonText: string | null;
+            featuredImage: {
+              __typename: 'ImageFileField';
+              id: string;
+              responsiveImage: {
+                __typename: 'ResponsiveImage';
+                src: string;
+                alt: string | null;
+                title: string | null;
+                width: number;
+                height: number;
+                srcSet: string;
+                sizes: string;
+                bgColor: string | null;
+                aspectRatio: number;
+              };
+            };
+          }>;
+        }
+      | { __typename: 'StaffRecord' }
     >;
-  };
-
-export type StaffFragment = { __typename: 'StaffRecord' } & Pick<
-  StaffRecord,
-  'id' | 'jobPosition' | 'name'
-> & {
-    featuredImage: Maybe<
-      { __typename: 'ImageFileField' } & {
-        responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
-          ResponsiveImage,
-          | 'src'
-          | 'alt'
-          | 'title'
-          | 'width'
-          | 'height'
-          | 'srcSet'
-          | 'sizes'
-          | 'bgColor'
-          | 'aspectRatio'
-        >;
-      }
-    >;
-  };
-
-export type VideoFragment = { __typename: 'VideoFileField' } & Pick<
-  VideoFileField,
-  'mimeType'
-> & {
-    video: { __typename: 'UploadVideoField' } & Pick<
-      UploadVideoField,
-      'streamingUrl' | 'duration' | 'framerate'
-    > & {
-        mp4High: UploadVideoField['mp4Url'];
-        mp4Med: UploadVideoField['mp4Url'];
-        mp4Low: UploadVideoField['mp4Url'];
-        thumbJpg: UploadVideoField['thumbnailUrl'];
-        thumbGif: UploadVideoField['thumbnailUrl'];
+    blocks: Array<{
+      __typename: 'ResponsiveVideoRecord';
+      id: string;
+      landscape: {
+        __typename: 'VideoFileField';
+        mimeType: string;
+        width: number | null;
+        height: number | null;
+        video: {
+          __typename: 'UploadVideoField';
+          duration: number | null;
+          framerate: number | null;
+          mp4High: string | null;
+          mp4Med: string | null;
+          mp4Low: string | null;
+          thumbJpg: string;
+          thumbGif: string;
+        };
       };
+      portrait: {
+        __typename: 'VideoFileField';
+        mimeType: string;
+        width: number | null;
+        height: number | null;
+        video: {
+          __typename: 'UploadVideoField';
+          duration: number | null;
+          framerate: number | null;
+          mp4High: string | null;
+          mp4Med: string | null;
+          mp4Low: string | null;
+          thumbJpg: string;
+          thumbGif: string;
+        };
+      };
+    }>;
   };
+};
+
+export type SocialLinkFragment = {
+  __typename: 'SocialLinkRecord';
+  linkTitle: string | null;
+  id: string;
+  title: string;
+  href: string;
+  icon: {
+    __typename: 'FileField';
+    mimeType: string;
+    url: string;
+    width: number | null;
+    height: number | null;
+  };
+};
+
+export type StaffFragment = {
+  __typename: 'StaffRecord';
+  id: string;
+  jobPosition: string;
+  name: string;
+  featuredImage: {
+    __typename: 'ImageFileField';
+    id: string;
+    responsiveImage: {
+      __typename: 'ResponsiveImage';
+      src: string;
+      alt: string | null;
+      title: string | null;
+      width: number;
+      height: number;
+      srcSet: string;
+      sizes: string;
+      bgColor: string | null;
+      aspectRatio: number;
+    };
+  } | null;
+};
+
+export type VideoFragment = {
+  __typename: 'VideoFileField';
+  mimeType: string;
+  width: number | null;
+  height: number | null;
+  video: {
+    __typename: 'UploadVideoField';
+    duration: number | null;
+    framerate: number | null;
+    mp4High: string | null;
+    mp4Med: string | null;
+    mp4Low: string | null;
+    thumbJpg: string;
+    thumbGif: string;
+  };
+};
 
 export type PageQueryVariables = Exact<{
   name: InputMaybe<Scalars['String']>;
 }>;
 
-export type PageQuery = { __typename: 'Query' } & {
-  page: Maybe<
-    { __typename: 'PageRecord' } & Pick<
-      PageRecord,
-      'name' | 'pageTitle' | 'urlSlug'
-    > & {
-        metaTags: Maybe<
-          { __typename: 'SeoField' } & Pick<
-            SeoField,
-            'description' | 'title' | 'twitterCard'
-          > & {
-              image: Maybe<
-                { __typename: 'FileField' } & Pick<
-                  FileField,
-                  'url' | 'title' | 'width' | 'height'
-                >
-              >;
+export type PageQuery = {
+  __typename: 'Query';
+  page: {
+    __typename: 'PageRecord';
+    name: string;
+    pageTitle: string;
+    urlSlug: string | null;
+    id: string;
+    metaTags: {
+      __typename: 'SeoField';
+      description: string | null;
+      title: string | null;
+      twitterCard: string | null;
+      image: {
+        __typename: 'FileField';
+        url: string;
+        title: string | null;
+        width: number | null;
+        height: number | null;
+      } | null;
+    } | null;
+    _seoMetaTags: Array<{
+      __typename: 'Tag';
+      content: string | null;
+      tag: string;
+      attributes: Record<string, string> | null;
+    }>;
+    sections: Array<{
+      __typename: 'SectionRecord';
+      id: string;
+      title: string;
+      content: {
+        __typename: 'SectionModelContentField';
+        value: unknown;
+        links: Array<
+          | {
+              __typename: 'AddressRecord';
+              id: string;
+              name: string;
+              title: string;
+              zipCode: string;
+              country: string;
+              city: string;
+              address: string;
             }
-        >;
-        _seoMetaTags: Array<
-          { __typename: 'Tag' } & Pick<Tag, 'content' | 'tag' | 'attributes'>
-        >;
-        sections: Array<
-          { __typename: 'SectionRecord' } & Pick<
-            SectionRecord,
-            'id' | 'title'
-          > & {
-              content: { __typename: 'SectionModelContentField' } & Pick<
-                SectionModelContentField,
-                'value'
-              > & {
-                  links: Array<
-                    | ({ __typename: 'AddressRecord' } & Pick<
-                        AddressRecord,
-                        | 'id'
-                        | 'name'
-                        | 'title'
-                        | 'zipCode'
-                        | 'country'
-                        | 'city'
-                        | 'address'
-                      >)
-                    | ({ __typename: 'ImageGalleryRecord' } & Pick<
-                        ImageGalleryRecord,
-                        'id' | 'title'
-                      > & {
-                          images: Array<
-                            { __typename: 'ImageFileField' } & {
-                              responsiveImage: {
-                                __typename: 'ResponsiveImage';
-                              } & Pick<
-                                ResponsiveImage,
-                                | 'src'
-                                | 'alt'
-                                | 'title'
-                                | 'width'
-                                | 'height'
-                                | 'srcSet'
-                                | 'sizes'
-                                | 'bgColor'
-                                | 'aspectRatio'
-                              >;
-                            }
-                          >;
-                        })
-                    | ({ __typename: 'PeopleGalleryRecord' } & {
-                        people: Array<
-                          { __typename: 'StaffRecord' } & Pick<
-                            StaffRecord,
-                            'id' | 'jobPosition' | 'name'
-                          > & {
-                              featuredImage: Maybe<
-                                { __typename: 'ImageFileField' } & {
-                                  responsiveImage: {
-                                    __typename: 'ResponsiveImage';
-                                  } & Pick<
-                                    ResponsiveImage,
-                                    | 'src'
-                                    | 'alt'
-                                    | 'title'
-                                    | 'width'
-                                    | 'height'
-                                    | 'srcSet'
-                                    | 'sizes'
-                                    | 'bgColor'
-                                    | 'aspectRatio'
-                                  >;
-                                }
-                              >;
-                            }
-                        >;
-                      })
-                    | ({ __typename: 'ProjectGalleryRecord' } & {
-                        projects: Array<
-                          { __typename: 'ProjectRecord' } & Pick<
-                            ProjectRecord,
-                            | 'id'
-                            | 'name'
-                            | 'pageUrl'
-                            | 'steamUrl'
-                            | 'humbleUrl'
-                            | 'humbleButtonText'
-                          > & {
-                              featuredImage: {
-                                __typename: 'ImageFileField';
-                              } & {
-                                responsiveImage: {
-                                  __typename: 'ResponsiveImage';
-                                } & Pick<
-                                  ResponsiveImage,
-                                  | 'src'
-                                  | 'alt'
-                                  | 'title'
-                                  | 'width'
-                                  | 'height'
-                                  | 'srcSet'
-                                  | 'sizes'
-                                  | 'bgColor'
-                                  | 'aspectRatio'
-                                >;
-                              };
-                            }
-                        >;
-                      })
-                    | { __typename: 'StaffRecord' }
-                  >;
-                  blocks: Array<
-                    { __typename: 'ResponsiveVideoRecord' } & Pick<
-                      ResponsiveVideoRecord,
-                      'id'
-                    > & {
-                        landscape: { __typename: 'VideoFileField' } & Pick<
-                          VideoFileField,
-                          'mimeType'
-                        > & {
-                            video: { __typename: 'UploadVideoField' } & Pick<
-                              UploadVideoField,
-                              'streamingUrl' | 'duration' | 'framerate'
-                            > & {
-                                mp4High: UploadVideoField['mp4Url'];
-                                mp4Med: UploadVideoField['mp4Url'];
-                                mp4Low: UploadVideoField['mp4Url'];
-                                thumbJpg: UploadVideoField['thumbnailUrl'];
-                                thumbGif: UploadVideoField['thumbnailUrl'];
-                              };
-                          };
-                        portrait: { __typename: 'VideoFileField' } & Pick<
-                          VideoFileField,
-                          'mimeType'
-                        > & {
-                            video: { __typename: 'UploadVideoField' } & Pick<
-                              UploadVideoField,
-                              'streamingUrl' | 'duration' | 'framerate'
-                            > & {
-                                mp4High: UploadVideoField['mp4Url'];
-                                mp4Med: UploadVideoField['mp4Url'];
-                                mp4Low: UploadVideoField['mp4Url'];
-                                thumbJpg: UploadVideoField['thumbnailUrl'];
-                                thumbGif: UploadVideoField['thumbnailUrl'];
-                              };
-                          };
-                      }
-                  >;
+          | {
+              __typename: 'ImageGalleryRecord';
+              id: string;
+              title: string;
+              images: Array<{
+                __typename: 'ImageFileField';
+                id: string;
+                responsiveImage: {
+                  __typename: 'ResponsiveImage';
+                  src: string;
+                  alt: string | null;
+                  title: string | null;
+                  width: number;
+                  height: number;
+                  srcSet: string;
+                  sizes: string;
+                  bgColor: string | null;
+                  aspectRatio: number;
                 };
+              }>;
             }
+          | {
+              __typename: 'PeopleGalleryRecord';
+              id: string;
+              people: Array<{
+                __typename: 'StaffRecord';
+                id: string;
+                jobPosition: string;
+                name: string;
+                featuredImage: {
+                  __typename: 'ImageFileField';
+                  id: string;
+                  responsiveImage: {
+                    __typename: 'ResponsiveImage';
+                    src: string;
+                    alt: string | null;
+                    title: string | null;
+                    width: number;
+                    height: number;
+                    srcSet: string;
+                    sizes: string;
+                    bgColor: string | null;
+                    aspectRatio: number;
+                  };
+                } | null;
+              }>;
+            }
+          | {
+              __typename: 'ProjectGalleryRecord';
+              id: string;
+              projects: Array<{
+                __typename: 'ProjectRecord';
+                id: string;
+                name: string;
+                pageUrl: string | null;
+                steamUrl: string | null;
+                humbleUrl: string | null;
+                humbleButtonText: string | null;
+                featuredImage: {
+                  __typename: 'ImageFileField';
+                  id: string;
+                  responsiveImage: {
+                    __typename: 'ResponsiveImage';
+                    src: string;
+                    alt: string | null;
+                    title: string | null;
+                    width: number;
+                    height: number;
+                    srcSet: string;
+                    sizes: string;
+                    bgColor: string | null;
+                    aspectRatio: number;
+                  };
+                };
+              }>;
+            }
+          | { __typename: 'StaffRecord' }
         >;
-      }
-  >;
-  _site: { __typename: 'Site' } & {
-    favicon: Maybe<
-      { __typename: 'FileField' } & Pick<FileField, 'url' | 'mimeType'>
-    >;
-    globalSeo: Maybe<
-      { __typename: 'GlobalSeoField' } & Pick<
-        GlobalSeoField,
-        'facebookPageUrl' | 'twitterAccount' | 'titleSuffix' | 'siteName'
-      > & {
-          fallbackSeo: Maybe<
-            { __typename: 'SeoField' } & Pick<
-              SeoField,
-              'description' | 'title' | 'twitterCard'
-            > & {
-                image: Maybe<
-                  { __typename: 'FileField' } & Pick<
-                    FileField,
-                    'url' | 'title' | 'height' | 'width'
-                  >
-                >;
-              }
-          >;
-        }
-    >;
+        blocks: Array<{
+          __typename: 'ResponsiveVideoRecord';
+          id: string;
+          landscape: {
+            __typename: 'VideoFileField';
+            mimeType: string;
+            width: number | null;
+            height: number | null;
+            video: {
+              __typename: 'UploadVideoField';
+              duration: number | null;
+              framerate: number | null;
+              mp4High: string | null;
+              mp4Med: string | null;
+              mp4Low: string | null;
+              thumbJpg: string;
+              thumbGif: string;
+            };
+          };
+          portrait: {
+            __typename: 'VideoFileField';
+            mimeType: string;
+            width: number | null;
+            height: number | null;
+            video: {
+              __typename: 'UploadVideoField';
+              duration: number | null;
+              framerate: number | null;
+              mp4High: string | null;
+              mp4Med: string | null;
+              mp4Low: string | null;
+              thumbJpg: string;
+              thumbGif: string;
+            };
+          };
+        }>;
+      };
+    }>;
+  } | null;
+  _site: {
+    __typename: 'Site';
+    favicon: { __typename: 'FileField'; url: string; mimeType: string } | null;
+    globalSeo: {
+      __typename: 'GlobalSeoField';
+      facebookPageUrl: string | null;
+      twitterAccount: string | null;
+      titleSuffix: string | null;
+      siteName: string | null;
+      fallbackSeo: {
+        __typename: 'SeoField';
+        description: string | null;
+        title: string | null;
+        twitterCard: string | null;
+        image: {
+          __typename: 'FileField';
+          url: string;
+          title: string | null;
+          height: number | null;
+          width: number | null;
+        } | null;
+      } | null;
+    } | null;
   };
-  allSocialLinks: Array<
-    { __typename: 'SocialLinkRecord' } & Pick<
-      SocialLinkRecord,
-      'linkTitle' | 'id' | 'title' | 'href'
-    > & {
-        icon: { __typename: 'FileField' } & Pick<
-          FileField,
-          'mimeType' | 'url' | 'width' | 'height'
-        >;
-      }
-  >;
+  allSocialLinks: Array<{
+    __typename: 'SocialLinkRecord';
+    linkTitle: string | null;
+    id: string;
+    title: string;
+    href: string;
+    icon: {
+      __typename: 'FileField';
+      mimeType: string;
+      url: string;
+      width: number | null;
+      height: number | null;
+    };
+  }>;
+  allPages: Array<{
+    __typename: 'PageRecord';
+    id: string;
+    urlSlug: string | null;
+    name: string;
+    position: number | null;
+  }>;
 };
 
 export const GlobalSeoFragmentDoc = {
@@ -3848,6 +4029,44 @@ export const GlobalSeoFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<GlobalSeoFragment, unknown>;
+export const PageLinksFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PageLinks' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'Query' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'allPages' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'orderBy' },
+                value: { kind: 'EnumValue', value: 'position_ASC' },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'urlSlug' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'position' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PageLinksFragment, unknown>;
 export const AddressFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -3888,6 +4107,7 @@ export const ResponsiveImageFragmentDoc = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'responsiveImage' },
@@ -3989,6 +4209,7 @@ export const ProjectGalleryFragmentDoc = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'projects' },
@@ -4090,6 +4311,7 @@ export const PeopleGalleryFragmentDoc = {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'people' },
@@ -4123,6 +4345,8 @@ export const VideoFragmentDoc = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'video' },
@@ -4130,10 +4354,6 @@ export const VideoFragmentDoc = {
               kind: 'SelectionSet',
               selections: [
                 { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'streamingUrl' },
-                },
                 { kind: 'Field', name: { kind: 'Name', value: 'duration' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'framerate' } },
                 {
@@ -4204,6 +4424,52 @@ export const VideoFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<VideoFragment, unknown>;
+export const ResponsiveVideoFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'ResponsiveVideo' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'ResponsiveVideoRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'landscape' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Video' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'portrait' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Video' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ResponsiveVideoFragment, unknown>;
 export const SectionFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -4312,32 +4578,20 @@ export const SectionFragmentDoc = {
                     kind: 'SelectionSet',
                     selections: [
                       {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: '__typename' },
-                      },
-                      { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'landscape' },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'Video' },
-                            },
-                          ],
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: {
+                            kind: 'Name',
+                            value: 'ResponsiveVideoRecord',
+                          },
                         },
-                      },
-                      {
-                        kind: 'Field',
-                        name: { kind: 'Name', value: 'portrait' },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
                             {
                               kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'Video' },
+                              name: { kind: 'Name', value: 'ResponsiveVideo' },
                             },
                           ],
                         },
@@ -4370,6 +4624,7 @@ export const PageFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'pageTitle' } },
           { kind: 'Field', name: { kind: 'Name', value: 'urlSlug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'metaTags' },
@@ -4598,6 +4853,10 @@ export const PageDocument = {
               ],
             },
           },
+          {
+            kind: 'FragmentSpread',
+            name: { kind: 'Name', value: 'PageLinks' },
+          },
         ],
       },
     },
@@ -4610,10 +4869,12 @@ export const PageDocument = {
     ...ImageGalleryFragmentDoc.definitions,
     ...PeopleGalleryFragmentDoc.definitions,
     ...StaffFragmentDoc.definitions,
+    ...ResponsiveVideoFragmentDoc.definitions,
     ...VideoFragmentDoc.definitions,
     ...GlobalSeoFragmentDoc.definitions,
     ...SocialLinkFragmentDoc.definitions,
     ...IconFragmentDoc.definitions,
+    ...PageLinksFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;
 
