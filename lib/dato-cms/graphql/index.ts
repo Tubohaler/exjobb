@@ -4617,7 +4617,19 @@ export const PageDocument = {
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;
 
+export type PageName = 'home' | 'about' | 'contact' | 'career';
+
 export interface SvgIconFragment extends IconFragment {
   mimeType: 'image/svg+xml';
   inlineHTML?: string;
 }
+
+export interface StaticPageData extends PageQuery {
+  allSocialLinks: Array<
+    Omit<SocialLinkFragment, 'icon'> & {
+      icon: SvgIconFragment;
+    }
+  >;
+}
+
+export type StaticPageProps = { data: StaticPageData };

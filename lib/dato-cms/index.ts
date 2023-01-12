@@ -1,3 +1,2 @@
-export * from './graphql/generated';
-export * from './types';
+export * from './graphql';
 export { default as createGetStaticPageProps } from './createGetStaticPageProps';

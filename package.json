@@ -6,11 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --no-cache",
     "prettier": "prettier --w .",
     "prepare": "husky install",
     "pre-commit": "lint-staged && pretty-quick --staged",
-    "generate-cms-types": "graphql-codegen --config ./graphql.codegen.ts"
+    "clear-dev-cache": "node lib/dato-cms/dev-cache/clear-cache.cjs",
+    "generate-cms-types": "npm run clear-dev-cache && graphql-codegen --config ./graphql.codegen.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",

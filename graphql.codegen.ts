@@ -31,11 +31,23 @@ const tsPluginConfig: TypeScriptDocumentsPluginConfig &
   declarationKind: 'interface',
 };
 
-const appendedContent = `
+const appendContent = `
+export type PageName = 'home' | 'about' | 'contact' | 'career';
+
 export interface SvgIconFragment extends IconFragment {
-  mimeType: "image/svg+xml";
+  mimeType: "image/svg+xml"
   inlineHTML?: string;
 }
+
+export interface StaticPageData extends PageQuery {
+  allSocialLinks: Array<
+    Omit<SocialLinkFragment, 'icon'> & {
+      icon: SvgIconFragment;
+    }
+  >;
+}
+
+export type StaticPageProps = { data: StaticPageData };
 `;
 
 const config: CodegenConfig = {
@@ -52,15 +64,10 @@ const config: CodegenConfig = {
   ],
   documents: ['lib/dato-cms/graphql/**/*.graphql'],
   generates: {
-    'lib/dato-cms/graphql/generated.ts': {
+    'lib/dato-cms/graphql/index.ts': {
       config: tsPluginConfig,
       plugins: [
-        {
-          add: {
-            placement: 'append',
-            content: appendedContent,
-          },
-        },
+        { add: { content: appendContent, placement: 'append' } },
         'typescript',
         'typescript-operations',
         'typed-document-node',

@@ -1,11 +1,17 @@
-import { PageDocument, PageQuery } from './graphql/generated';
 import { GetStaticProps } from 'next';
 import request from './request';
-import type { PageName, StaticPageData, StaticPageProps } from './types';
-import createDevCache from './cache/createDevCache';
+import createDevCache, { DevCache } from './dev-cache/createDevCache';
 import { isSvgIconFragment } from './typeGuard';
+import { modifyInlineSvg } from '@lib/svg-utils';
 import axios from 'axios';
 import isSvg from 'is-svg';
+import {
+  PageDocument,
+  PageQuery,
+  PageName,
+  StaticPageData,
+  StaticPageProps,
+} from './graphql';
 
 const createStaticPageData = async (
   queryData: PageQuery
@@ -14,25 +20,36 @@ const createStaticPageData = async (
     ...record,
     icon: { ...record.icon },
   })) as StaticPageData['allSocialLinks'];
+
   await Promise.all(
     allSocialLinks.map(
       (record) =>
         new Promise<void>((resolve) => {
-          if (!isSvgIconFragment(record.icon)) return resolve();
+          if (!isSvgIconFragment(record.icon)) return;
           axios
             .get(record.icon.url, {
               headers: { Accept: 'image/svg+xml' },
             })
             .then((res) => {
               if (res.headers['content-type'] !== 'image/svg+xml') {
-                return resolve();
+                return;
               }
               const { data } = res;
-              if (typeof data !== 'string' || !isSvg(data)) return resolve();
-              record.icon = { ...record.icon, inlineHTML: data };
-              resolve();
+              if (typeof data !== 'string' || !isSvg(data)) return;
+              record.icon = {
+                ...record.icon,
+                inlineHTML:
+                  modifyInlineSvg(data, ['title'], {
+                    fill: 'currentColor',
+                    width: `${record.icon.width}`,
+                    height: `${record.icon.height}`,
+                  }) || data,
+              };
             })
-            .catch(() => resolve());
+            .catch((err) => {
+              console.error(err instanceof Error ? err.message : err);
+            })
+            .finally(resolve);
         })
     )
   );
@@ -41,23 +58,23 @@ const createStaticPageData = async (
 };
 
 export default function createGetStaticPageProps<T extends PageName>(
-  name: T,
+  pageName: T,
   devCacheMaxAge?: number
 ): GetStaticProps<StaticPageProps> {
-  if (process.env.NODE_ENV !== 'development') {
-    return async () => {
-      const data = await request(PageDocument, { name });
-      return { props: { data: await createStaticPageData(data) } };
-    };
-  }
+  const devMode = process.env.NODE_ENV === 'development';
   const cache = createDevCache(devCacheMaxAge);
+
   return async () => {
-    let data = await cache.get(name);
-    if (!data) {
-      const pageData = await request(PageDocument, { name });
-      data = await createStaticPageData(pageData);
-      await cache.set(name, data);
-    }
+    let data: StaticPageData | null = null;
+
+    if (devMode) data = await cache.get(pageName);
+    if (data) return { props: { data } };
+
+    const pageData = await request(PageDocument, { name: pageName });
+    data = await createStaticPageData(pageData);
+
+    if (devMode) await cache.set(pageName, data);
+
     return { props: { data } };
   };
 }

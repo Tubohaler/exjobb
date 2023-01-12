@@ -1,4 +1,4 @@
-import { FileField, IconFragment, SvgIconFragment } from './graphql/generated';
+import { FileField, IconFragment, SvgIconFragment } from './graphql';
 
 export const isFileField = (data: unknown): data is FileField => {
   return (
