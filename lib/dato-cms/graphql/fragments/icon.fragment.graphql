@@ -1,0 +1,7 @@
+fragment Icon on FileField {
+  __typename
+  mimeType
+  url
+  width
+  height
+}

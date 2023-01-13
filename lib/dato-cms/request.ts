@@ -8,14 +8,15 @@ export default function request<
   document: RequestDocument | TypedDocumentNode<TDocument, Variables>,
   variables?: Variables
 ) {
+  const headers = {
+    Authorization: process.env.DATO_CMS_TOKEN || '',
+    'X-Exclude-Invalid': 'true',
+    'X-Api-Version': '3',
+  };
   return graphqlRequest<TDocument, Variables>(
     'https://graphql.datocms.com/',
     document,
     variables,
-    {
-      Authorization: process.env.DATO_CMS_TOKEN || '',
-      'X-Exclude-Invalid': 'true',
-      'X-Api-Version': '3',
-    }
+    headers
   );
 }

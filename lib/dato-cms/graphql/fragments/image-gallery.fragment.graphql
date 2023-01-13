@@ -1,0 +1,8 @@
+fragment ImageGallery on ImageGalleryRecord {
+  __typename
+  id
+  title
+  images {
+    ...ResponsiveImage
+  }
+}

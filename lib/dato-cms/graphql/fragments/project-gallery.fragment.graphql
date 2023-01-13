@@ -1,0 +1,7 @@
+fragment ProjectGallery on ProjectGalleryRecord {
+  __typename
+  id
+  projects {
+    ...Project
+  }
+}

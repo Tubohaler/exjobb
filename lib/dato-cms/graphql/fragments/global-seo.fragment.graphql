@@ -1,17 +1,20 @@
 fragment GlobalSeo on GlobalSeoField {
+  __typename
   facebookPageUrl
+  twitterAccount
+  titleSuffix
+  siteName
   fallbackSeo {
+    __typename
     description
     title
     twitterCard
     image {
+      __typename
       url
       title
       height
       width
     }
   }
-  twitterAccount
-  titleSuffix
-  siteName
 }

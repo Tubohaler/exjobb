@@ -1,4 +1,5 @@
 fragment Project on ProjectRecord {
+  __typename
   id
   name
   pageUrl

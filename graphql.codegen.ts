@@ -2,8 +2,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 import type { CodegenConfig } from '@graphql-codegen/cli';
 import type { TypeScriptDocumentsPluginConfig } from '@graphql-codegen/typescript-operations';
+import type { TypeScriptPluginConfig } from '@graphql-codegen/typescript';
+import type { AddPluginConfig } from '@graphql-codegen/add/typings/config';
 
-const tsPluginConfig: TypeScriptDocumentsPluginConfig = {
+const tsPluginConfig: TypeScriptDocumentsPluginConfig &
+  Omit<TypeScriptPluginConfig, keyof TypeScriptDocumentsPluginConfig> = {
   scalars: {
     BooleanType: 'boolean',
     CustomData: 'Record<string, unknown>',
@@ -18,10 +21,10 @@ const tsPluginConfig: TypeScriptDocumentsPluginConfig = {
   },
   strictScalars: true,
   useTypeImports: true,
-  preResolveTypes: true,
   avoidOptionals: true,
-  dedupeFragments: true,
   nonOptionalTypename: true,
+  dedupeFragments: true,
+  declarationKind: 'interface',
 };
 
 const config: CodegenConfig = {
@@ -38,9 +41,40 @@ const config: CodegenConfig = {
   ],
   documents: ['lib/dato-cms/graphql/**/*.graphql'],
   generates: {
-    'lib/dato-cms/graphql/generated.ts': {
-      config: { ...tsPluginConfig, enumsAsTypes: true },
-      plugins: ['typescript', 'typed-document-node', 'typescript-operations'],
+    'lib/dato-cms/graphql/index.ts': {
+      config: tsPluginConfig,
+      plugins: [
+        {
+          add: {
+            placement: 'append',
+            content: `
+        export type PageName = 'home' | 'about' | 'contact' | 'career';
+        
+        export interface SvgIconFragment extends IconFragment {
+          mimeType: "image/svg+xml"
+          inlineHTML?: string;
+        }
+        
+        export interface StaticPageData extends PageQuery {
+          allSocialLinks: Array<
+            Omit<SocialLinkFragment, 'icon'> & {
+              icon: SvgIconFragment;
+            }
+          >;
+        }
+        
+        export type StaticPageProps = { data: StaticPageData };
+        `,
+          },
+        },
+        'typescript',
+        'typescript-operations',
+        'typed-document-node',
+      ],
+    },
+    'lib/dato-cms/graphql/introspection.json': {
+      config: { minify: true },
+      plugins: ['introspection'],
     },
   },
   hooks: {

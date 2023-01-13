@@ -1,8 +1,11 @@
 fragment Page on PageRecord {
+  __typename
   name
   pageTitle
   urlSlug
+  id
   metaTags {
+    __typename
     description
     title
     twitterCard
@@ -14,6 +17,7 @@ fragment Page on PageRecord {
     }
   }
   _seoMetaTags {
+    __typename
     content
     tag
     attributes

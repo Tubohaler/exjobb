@@ -1,17 +1,16 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
-import { PageName } from '../types';
-import { PageQuery } from '../graphql/generated';
+import { PageQuery, PageName, StaticPageData } from '../graphql';
 
 type DevCacheData = {
   modified_at: number;
-  pages: Partial<Record<PageName, PageQuery>>;
+  pages: Partial<Record<PageName, StaticPageData>>;
 };
 
-interface DevCache {
-  get(name: PageName): Promise<PageQuery | null>;
-  set(name: PageName, data: PageQuery): Promise<boolean>;
+export interface DevCache {
+  get(name: PageName): Promise<StaticPageData | null>;
+  set(name: PageName, data: StaticPageData | PageQuery): Promise<boolean>;
 }
 
 const isDevCacheData = (data: unknown): data is DevCacheData => {
@@ -30,6 +29,11 @@ const isDevCacheData = (data: unknown): data is DevCacheData => {
   );
 };
 
+export const cachePath = path.resolve(
+  fileURLToPath(import.meta.url),
+  `../cache.json`
+);
+
 /**
  * @param maxAge Max-Age in seconds
  */
@@ -40,14 +44,10 @@ const createDevCache =
         set: async () => false,
       })
     : (maxAge = 3600): DevCache => {
-        const cachePath = path.resolve(
-          fileURLToPath(import.meta.url),
-          `../page-cache.development.json`
-        );
         const writeCache = async (pages: DevCacheData['pages']) => {
           try {
             const data: DevCacheData = { modified_at: Date.now(), pages };
-            const json = JSON.stringify(data);
+            const json = JSON.stringify(data, undefined, 2);
             await fs.promises.writeFile(cachePath, json, 'utf-8');
             return true;
           } catch (err) {

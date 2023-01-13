@@ -1,4 +1,5 @@
 fragment Section on SectionRecord {
+  __typename
   id
   title
   content {
@@ -10,31 +11,18 @@ fragment Section on SectionRecord {
         ...Address
       }
       ... on ProjectGalleryRecord {
-        projects {
-          ...Project
-        }
+        ...ProjectGallery
       }
       ... on ImageGalleryRecord {
-        id
-        title
-        images {
-          ...ResponsiveImage
-        }
+        ...ImageGallery
       }
       ... on PeopleGalleryRecord {
-        people {
-          ...Staff
-        }
+        ...PeopleGallery
       }
     }
     blocks {
-      __typename
-      id
-      landscape {
-        ...Video
-      }
-      portrait {
-        ...Video
+      ... on ResponsiveVideoRecord {
+        ...ResponsiveVideo
       }
     }
   }
