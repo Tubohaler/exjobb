@@ -33,6 +33,7 @@ export interface InlineComponents {
   PeopleGalleryRecord: (props: PeopleGalleryFragment) => JSX.Element;
   ProjectGalleryRecord: (props: ProjectGalleryFragment) => JSX.Element;
 }
+
 export type PageSectionProps<
   WrapperProps = { children: React.ReactNode } & Record<string, unknown>
 > = {
