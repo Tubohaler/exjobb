@@ -1,4 +1,5 @@
-import { Title, Anchor } from '@mantine/core';
+import { Title } from '@mantine/core';
+import Link from '@components/elements/links/Link';
 import { Article, Head, Main, PageWrapper } from '@components/elements/layout';
 
 const Home = () => {
@@ -6,22 +7,11 @@ const Home = () => {
     <>
       <Head />
       <PageWrapper>
-        <Main
-          style={{
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          <Article>
-            <Title>
-              <Anchor href="https://mightanddelight.com/">
-                Might and Delight
-              </Anchor>
-            </Title>
-          </Article>
-        </Main>
+        <Article>
+          <Title>
+            <Link href="https://mightanddelight.com/">Might and Delight</Link>
+          </Title>
+        </Article>
       </PageWrapper>
     </>
   );

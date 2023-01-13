@@ -1,17 +1,70 @@
 import {
   AppShell,
-  Flex,
   Header,
-  Text,
+  Box,
   Group,
+  createStyles,
+  Text,
   Grid,
   Footer,
   Stack,
-  Box,
 } from '@mantine/core';
+
+import {
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandSteam,
+  /* IconBrandThreejs, */
+  IconBrandTwitter,
+  IconBrandYoutube,
+} from '@tabler/icons';
 import NavLinks from '../links/NavLinks';
-import SocialMediaLinks from '../links/SocialMediaLinks';
-import Main from './Main';
+import SocialMediaLink from '../links/SocialMediaLink';
+import { defaultTransition } from '@lib/theme/main';
+
+const useStyles = createStyles((theme) => ({
+  socialLink: {
+    fontSize: 'xs',
+
+    transition: defaultTransition,
+    '&:hover': {
+      color: theme.colors.red[2],
+    },
+
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: theme.fontSizes.xl,
+    },
+  },
+  HeaderBox: {
+    padding: theme.spacing.md,
+    backgroundColor: theme.white,
+    [theme.fn.largerThan('md')]: {
+      height: 70,
+    },
+  },
+
+  headerContent: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: '100%',
+    gap: theme.spacing.xl,
+    [theme.fn.smallerThan('md')]: {
+      justifyContent: 'center',
+      fontSize: theme.fontSizes.xl,
+      flexDirection: 'column',
+
+      gap: theme.spacing.xs,
+    },
+    '@media (max-width: 400px)': {
+      fontSize: '1rem',
+      gap: '5px',
+    },
+  },
+  mainContent: {
+    height: '100%',
+  },
+}));
 
 const leftSection = [
   '© 2023 Copyright Might and Delight. All rights reserved.',
@@ -25,24 +78,38 @@ const centralSection = [
   'contact@mightanddelight.com',
 ];
 
+const socialLinks = [
+  { icon: <IconBrandFacebook />, href: '' },
+  { icon: <IconBrandTwitter />, href: '' },
+  { icon: <IconBrandInstagram />, href: '' },
+  { icon: <IconBrandYoutube />, href: '' },
+  { icon: <IconBrandSteam />, href: '' },
+];
 const PageWrapper = ({ children }: React.PropsWithChildren) => {
+  const { classes } = useStyles();
   return (
     <AppShell
       padding={0}
       header={
-        <Header
-          height={'70'}
-          sx={(theme) => ({ background: theme.white })}
-          p="md"
-        >
-          <Flex justify="flex-end" align="center" direction="row">
-            <NavLinks spacing="xs" />
-            <SocialMediaLinks size="xs" spacing={2} />
-          </Flex>
+        <Header height={110} className={classes.HeaderBox}>
+          <Box className={classes.headerContent}>
+            <NavLinks />
+            <Group>
+              {socialLinks.map((props, i) => (
+                <SocialMediaLink
+                  variant="transparent"
+                  key={i}
+                  className={classes.socialLink}
+                  {...props}
+                />
+              ))}
+            </Group>
+          </Box>
         </Header>
       }
     >
       {children}
+
       <Box
         sx={(theme) => ({
           height: 110,
@@ -73,7 +140,17 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
           </Grid.Col>
           <Grid.Col span={4}>
             <Stack align="end">
-              <SocialMediaLinks size="xs" spacing={2} />{' '}
+              {/* To do: make more re-usable */}
+              <Group>
+                {socialLinks.map((props, i) => (
+                  <SocialMediaLink
+                    variant="transparent"
+                    key={i}
+                    className={classes.socialLink}
+                    {...props}
+                  />
+                ))}
+              </Group>
             </Stack>
           </Grid.Col>
         </Grid>
