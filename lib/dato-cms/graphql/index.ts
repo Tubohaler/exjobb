@@ -114,6 +114,71 @@ export interface BooleanFilter {
   eq: InputMaybe<Scalars['BooleanType']>;
 }
 
+export interface CodetestModelContentField {
+  __typename: 'CodetestModelContentField';
+  blocks: Array<Scalars['String']>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+}
+
+export interface CodetestModelFilter {
+  OR: InputMaybe<Array<InputMaybe<CodetestModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  content: InputMaybe<StructuredTextFilter>;
+  id: InputMaybe<ItemIdFilter>;
+}
+
+export enum CodetestModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+}
+
+/** Record of type CodeTest (codetest) */
+export interface CodetestRecord extends RecordInterface {
+  __typename: 'CodetestRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  content: Maybe<CodetestModelContentField>;
+  id: Scalars['ItemId'];
+}
+
+/** Record of type CodeTest (codetest) */
+export interface CodetestRecord_SeoMetaTagsArgs {
+  locale: InputMaybe<SiteLocale>;
+}
+
 export interface CollectionMetadata {
   __typename: 'CollectionMetadata';
   count: Scalars['IntType'];
@@ -2163,6 +2228,8 @@ export interface Query {
   /** Returns meta information regarding a record collection */
   _allAddressesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allCodetestsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allImageGalleriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allPagesMeta: CollectionMetadata;
@@ -2181,6 +2248,8 @@ export interface Query {
   /** Returns a collection of records */
   allAddresses: Array<AddressRecord>;
   /** Returns a collection of records */
+  allCodetests: Array<CodetestRecord>;
+  /** Returns a collection of records */
   allImageGalleries: Array<ImageGalleryRecord>;
   /** Returns a collection of records */
   allPages: Array<PageRecord>;
@@ -2192,6 +2261,8 @@ export interface Query {
   allStaffs: Array<StaffRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
+  /** Returns a specific record */
+  codetest: Maybe<CodetestRecord>;
   /** Returns the single instance record */
   contactInfo: Maybe<ContactInfoRecord>;
   /** Returns a specific record */
@@ -2216,6 +2287,13 @@ export interface Query {
 export interface Query_AllAddressesMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<AddressModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
+export interface Query_AllCodetestsMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<CodetestModelFilter>;
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -2285,6 +2363,16 @@ export interface QueryAllAddressesArgs {
 }
 
 /** The query root for this schema */
+export interface QueryAllCodetestsArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<CodetestModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<CodetestModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
 export interface QueryAllImageGalleriesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ImageGalleryModelFilter>;
@@ -2342,6 +2430,14 @@ export interface QueryAllUploadsArgs {
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
+export interface QueryCodetestArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<CodetestModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<CodetestModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -2752,6 +2848,18 @@ export interface StringMatchesFilter {
   caseSensitive: InputMaybe<Scalars['BooleanType']>;
   pattern: Scalars['String'];
   regexp: InputMaybe<Scalars['BooleanType']>;
+}
+
+/** Specifies how to filter Structured Text fields */
+export interface StructuredTextFilter {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with the specified field set as blank (null or single empty paragraph) */
+  isBlank: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records based on a regular expression */
+  matches: InputMaybe<StringMatchesFilter>;
+  /** Exclude records based on a regular expression */
+  notMatches: InputMaybe<StringMatchesFilter>;
 }
 
 export interface Tag {
