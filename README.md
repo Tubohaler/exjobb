@@ -14,3 +14,11 @@ npm install
 ```bash
 npm run dev
 ```
+
+## Types Reference
+
+Types generated from GraphQL Queries and Fragments:
+
+```ts
+
+```
