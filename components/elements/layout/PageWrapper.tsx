@@ -66,13 +66,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   /* footer styling */
-  footerGrid: {
-    display: 'flex',
-    flexDirection: 'row',
-    [theme.fn.smallerThan('sm')]: {
-      /*    flexDirection: "row-reverse", */
-    },
-  },
+
   footerContent: {
     transition: defaultTransition,
     [theme.fn.smallerThan('sm')]: {
@@ -83,6 +77,7 @@ const useStyles = createStyles((theme) => ({
     alignItems: 'left',
     [theme.fn.smallerThan('sm')]: {
       alignItems: 'center',
+      marginTop: '10px',
     },
   },
   socialLinks: {
@@ -146,7 +141,7 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
         p="md"
         component="footer"
       >
-        <Grid grow align="center" className={classes.footerGrid}>
+        <Grid grow align="center" /* className={classes.footerGrid} */>
           {/* <Group sx={{ width: '100%' }} position="apart" spacing="xl"> */}
           <Grid.Col sm={4} order={3} orderSm={1}>
             <Stack spacing={1} className={classes.copyright}>
