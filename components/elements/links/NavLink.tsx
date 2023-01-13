@@ -10,7 +10,11 @@ const NavLink = ({ active, ...props }: NavLinkProps) => {
       sx={(theme) => ({
         color: active ? theme.colors.blue[2] : theme.black,
         '&:not(:last-of-type):after': {
+          pointerEvents: 'none',
           content: '"/"',
+          position: 'relative',
+          color: theme.black,
+          right: '-5px',
         },
       })}
       {...props}
