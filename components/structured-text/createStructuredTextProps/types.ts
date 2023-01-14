@@ -4,6 +4,8 @@ import type {
   PeopleGalleryFragment,
   ProjectGalleryFragment,
   ResponsiveVideoFragment,
+  StaffFragment,
+  ProjectFragment,
 } from '@lib/dato-cms';
 import { StructuredTextPropTypes } from 'react-datocms';
 import type { RenderMarkRule } from 'datocms-structured-text-generic-html-renderer';
@@ -56,28 +58,59 @@ export type DefaultMarkRuleFn<
   F extends TrasformFn = TrasformFn
 > = MarkRuleFn<M, H, T, F>;
 
+/**
+ * Components used to render blocks in StructuredText (based on custom blocks in Might and Delight DatoCMS setup)
+ *
+ * @see {@link https://www.datocms.com/docs/structured-text/dast#block}
+ */
 export interface BlockComponents {
+  /** @see ResponsiveVideoFragment */
   ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
 }
 
+/**
+ * Components used to render inline items in StructuredText (based on custom records in Might and Delight DatoCMS setup)
+ *
+ * @see {@link https://www.datocms.com/docs/structured-text/dast#inlineItem}
+ */
 export interface InlineComponents {
+  /** @see AddressFragment */
   Address: (props: AddressFragment) => JSX.Element;
+  /** @see ImageGalleryFragment */
   ImageGallery: (props: ImageGalleryFragment) => JSX.Element;
+  /**
+   * @see PeopleGalleryFragment
+   * @see StaffFragment
+   */
   PeopleGallery: (props: PeopleGalleryFragment) => JSX.Element;
+  /**
+   * @see ProjectGalleryFragment
+   * @see ProjectFragment
+   */
   ProjectGallery: (props: ProjectGalleryFragment) => JSX.Element;
 }
 
 export interface NodeRules {
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#root} */
   Root: NodeRuleFn<Root>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#paragraph} */
   Paragraph: NodeRuleFn<Paragraph>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#heading} */
   Heading: NodeRuleFn<Heading>;
-  List: NodeRuleFn<List>;
-  ListItem: NodeRuleFn<ListItem>;
-  Blockquote: NodeRuleFn<Blockquote>;
-  Code: NodeRuleFn<Code>;
-  ThematicBreak: NodeRuleFn<ThematicBreak>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#span} */
   Span: NodeRuleFn<Span>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#link} */
   Link: NodeRuleFn<Link>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#list} */
+  List: NodeRuleFn<List>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#listItem} */
+  ListItem: NodeRuleFn<ListItem>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#blockquote} */
+  Blockquote: NodeRuleFn<Blockquote>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#code} */
+  Code: NodeRuleFn<Code>;
+  /** @see {@link https://www.datocms.com/docs/structured-text/dast#thematicBreak} */
+  ThematicBreak: NodeRuleFn<ThematicBreak>;
 }
 
 export interface MarkRules {
@@ -90,9 +123,29 @@ export interface MarkRules {
 }
 
 export interface CreateStructuredTextPropsConfig {
+  /**
+   * Components to render Block Components
+   * @see BlockComponents
+   */
   blockComponents?: Partial<BlockComponents>;
+  /**
+   * Components to render Inline Components
+   * @see InlineComponents
+   */
   inlineComponents?: Partial<InlineComponents>;
+  /**
+   * Callbacks to render default nodes:
+   * @see NodeRules
+   * @see {@link https://www.datocms.com/docs/structured-text/dast}
+   */
   nodeRules?: Partial<NodeRules>;
+  /**
+   * Callbacks to render default marks (inside nodes):
+   * @see MarkRules
+   */
   markRules?: Partial<MarkRules>;
+  /**
+   * Callbacks to render custom marks
+   */
   customMarkRules?: Record<string, MarkRuleFn<string>>;
 }
