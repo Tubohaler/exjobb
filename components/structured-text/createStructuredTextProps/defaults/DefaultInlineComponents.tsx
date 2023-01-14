@@ -1,7 +1,7 @@
-import type { InlineComponents } from '@components/structured-text/types';
+import type { InlineComponents } from '@components/structured-text/createStructuredTextProps/types';
 import { Text, Box } from '@mantine/core';
 
-const defaultInlineComponents: InlineComponents = {
+const DefaultInlineComponents: InlineComponents = {
   Address: ({ id }) => {
     return <Text key={id}>Address {id}</Text>;
   },
@@ -22,4 +22,4 @@ const defaultInlineComponents: InlineComponents = {
   },
 };
 
-export default defaultInlineComponents;
+export default DefaultInlineComponents;

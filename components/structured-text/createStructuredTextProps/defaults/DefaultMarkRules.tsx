@@ -1,6 +1,7 @@
-import type { MarkRules } from '@components/structured-text/types';
+import type { MarkRules } from '@components/structured-text/createStructuredTextProps/types';
 import { Text, Mark } from '@mantine/core';
-const defaultMarkRules: Partial<MarkRules> = {
+
+const DefaultMarkRules: Partial<MarkRules> = {
   strong: ({ key, children }) => {
     return (
       <Text key={key} component="strong">
@@ -45,4 +46,4 @@ const defaultMarkRules: Partial<MarkRules> = {
   },
 };
 
-export default defaultMarkRules;
+export default DefaultMarkRules;

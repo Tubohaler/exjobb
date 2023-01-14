@@ -1,4 +1,4 @@
-import type { NodeRules } from '@components/structured-text/types';
+import type { NodeRules } from '@components/structured-text/createStructuredTextProps/types';
 import type { Link as LinkNode } from 'datocms-structured-text-utils';
 import Link, { LinkProps } from '@components/elements/links/Link';
 import {
@@ -26,7 +26,7 @@ const getLinkPropsFromMeta = (meta: LinkNode['meta']): Partial<LinkProps> => {
   return props;
 };
 
-const defaultNodeRules: Partial<NodeRules> = {
+const DefaultNodeRules: Partial<NodeRules> = {
   Root: ({ key, children }) => (
     <React.Fragment key={key}>{children}</React.Fragment>
   ),
@@ -85,4 +85,4 @@ const defaultNodeRules: Partial<NodeRules> = {
   },
 };
 
-export default defaultNodeRules;
+export default DefaultNodeRules;
