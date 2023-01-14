@@ -1,24 +1,32 @@
 import type { InlineComponents } from '@components/structured-text/createStructuredTextProps/types';
-import { Text, Box } from '@mantine/core';
+import { Code } from '@mantine/core';
+
+const devMode = process.env.NODE_ENV === 'development';
+
+console.log(process.env.NODE_ENV);
+
+const Placeholder = ({ type }: { type: keyof InlineComponents }) => {
+  return !devMode ? (
+    <>{null}</>
+  ) : (
+    <Code p="xl" m="xl">
+      {type} Placeholder
+    </Code>
+  );
+};
 
 const DefaultInlineComponents: InlineComponents = {
-  Address: ({ id }) => {
-    return <Text key={id}>Address {id}</Text>;
+  Address: () => {
+    return <Placeholder type="Address" />;
   },
-  ImageGallery: ({ id, images }) => {
-    return <Text key={id}>ImageGallery {id}</Text>;
+  ImageGallery: () => {
+    return <Placeholder type="ImageGallery" />;
   },
-  PeopleGallery: ({ id, people }) => {
-    return <Text key={id}>PeopleGallery</Text>;
+  PeopleGallery: () => {
+    return <Placeholder type="PeopleGallery" />;
   },
-  ProjectGallery: ({ projects }) => {
-    return (
-      <Box>
-        {projects.map(({ id, name }) => {
-          return <Text key={id}>{name}</Text>;
-        })}
-      </Box>
-    );
+  ProjectGallery: () => {
+    return <Placeholder type="ProjectGallery" />;
   },
 };
 

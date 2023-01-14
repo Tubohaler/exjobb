@@ -3,7 +3,7 @@ query Page($name: String) {
   page(filter: { name: { eq: $name } }) {
     ...Page
   }
-  _site {
+  site: _site {
     __typename
     favicon {
       url
@@ -13,7 +13,7 @@ query Page($name: String) {
       ...GlobalSeo
     }
   }
-  allSocialLinks {
+  socialLinks: allSocialLinks {
     ...SocialLink
   }
   ...PageLinks

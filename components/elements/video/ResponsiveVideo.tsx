@@ -41,9 +41,9 @@ function ResponsiveVideo({
   return (
     <Box component="div" className={cx(classes.root, className)} {...props}>
       {isPortrait ? (
-        <Video video={video.portrait} />
+        <Video video={video.portrait} className={classes.portrait} />
       ) : (
-        <Video video={video.landscape} />
+        <Video video={video.landscape} className={classes.landscape} />
       )}
     </Box>
   );

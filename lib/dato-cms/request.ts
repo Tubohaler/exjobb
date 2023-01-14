@@ -8,6 +8,11 @@ export default function request<
   document: RequestDocument | TypedDocumentNode<TDocument, Variables>,
   variables?: Variables
 ) {
+  if (!process.env.DATO_CMS_TOKEN) {
+    throw new Error(
+      'DATO_CMS_TOKEN does not exist in environment variables. Please add it and try again.'
+    );
+  }
   const headers = {
     Authorization: process.env.DATO_CMS_TOKEN || '',
     'X-Exclude-Invalid': 'true',

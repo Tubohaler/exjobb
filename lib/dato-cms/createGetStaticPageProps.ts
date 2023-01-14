@@ -16,7 +16,7 @@ import {
 const createStaticPageData = async (
   queryData: PageQuery
 ): Promise<StaticPageData> => {
-  const allSocialLinks = queryData.allSocialLinks.map((record) => ({
+  const allSocialLinks = queryData.socialLinks.map((record) => ({
     ...record,
     icon: { ...record.icon },
   })) as StaticPageData['allSocialLinks'];

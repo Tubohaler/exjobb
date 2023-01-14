@@ -3371,7 +3371,7 @@ export type ImageGalleryFragment = {
 
 export type PageLinksFragment = {
   __typename: 'Query';
-  allPages: Array<{
+  pageLinks: Array<{
     __typename: 'PageRecord';
     id: string;
     urlSlug: string | null;
@@ -4034,7 +4034,7 @@ export type PageQuery = {
       };
     }>;
   } | null;
-  _site: {
+  site: {
     __typename: 'Site';
     favicon: { __typename: 'FileField'; url: string; mimeType: string } | null;
     globalSeo: {
@@ -4058,7 +4058,7 @@ export type PageQuery = {
       } | null;
     } | null;
   };
-  allSocialLinks: Array<{
+  socialLinks: Array<{
     __typename: 'SocialLinkRecord';
     linkTitle: string | null;
     id: string;
@@ -4072,7 +4072,7 @@ export type PageQuery = {
       height: number | null;
     };
   }>;
-  allPages: Array<{
+  pageLinks: Array<{
     __typename: 'PageRecord';
     id: string;
     urlSlug: string | null;
@@ -4152,6 +4152,7 @@ export const PageLinksFragmentDoc = {
         selections: [
           {
             kind: 'Field',
+            alias: { kind: 'Name', value: 'pageLinks' },
             name: { kind: 'Name', value: 'allPages' },
             arguments: [
               {
@@ -4913,6 +4914,7 @@ export const PageDocument = {
           },
           {
             kind: 'Field',
+            alias: { kind: 'Name', value: 'site' },
             name: { kind: 'Name', value: '_site' },
             selectionSet: {
               kind: 'SelectionSet',
@@ -4950,6 +4952,7 @@ export const PageDocument = {
           },
           {
             kind: 'Field',
+            alias: { kind: 'Name', value: 'socialLinks' },
             name: { kind: 'Name', value: 'allSocialLinks' },
             selectionSet: {
               kind: 'SelectionSet',
