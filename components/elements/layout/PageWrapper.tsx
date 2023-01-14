@@ -64,6 +64,28 @@ const useStyles = createStyles((theme) => ({
   mainContent: {
     height: '100%',
   },
+
+  /* footer styling */
+
+  footerContent: {
+    transition: defaultTransition,
+    [theme.fn.smallerThan('sm')]: {
+      height: '250px',
+    },
+  },
+  copyright: {
+    alignItems: 'left',
+    [theme.fn.smallerThan('sm')]: {
+      alignItems: 'center',
+      marginTop: '10px',
+    },
+  },
+  socialLinks: {
+    alignItems: 'flex-end',
+    [theme.fn.smallerThan('sm')]: {
+      alignItems: 'center',
+    },
+  },
 }));
 
 const leftSection = [
@@ -109,19 +131,20 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
       }
     >
       {children}
-
+      {/* adam fill */}
+      <Box h={'80vh'}></Box>
+      {/* adam fill end */}
       <Box
-        sx={(theme) => ({
-          height: 110,
-          background: theme.white,
-        })}
+        className={classes.footerContent}
+        h={110}
+        bg={'white'}
         p="md"
         component="footer"
       >
-        <Grid grow align="center">
+        <Grid grow align="center" /* className={classes.footerGrid} */>
           {/* <Group sx={{ width: '100%' }} position="apart" spacing="xl"> */}
-          <Grid.Col span={4}>
-            <Stack spacing={1} align="left">
+          <Grid.Col sm={4} order={3} orderSm={1}>
+            <Stack spacing={1} className={classes.copyright}>
               {leftSection.map((text, i) => (
                 <Text key={`leftSection${i}`} size="xs">
                   {text}
@@ -129,7 +152,7 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
               ))}
             </Stack>
           </Grid.Col>
-          <Grid.Col span={4}>
+          <Grid.Col sm={4} order={2}>
             <Stack spacing={0} align="center">
               {centralSection.map((text, i) => (
                 <Text align="center" key={`centralSection${i}`} size="sm">
@@ -138,8 +161,8 @@ const PageWrapper = ({ children }: React.PropsWithChildren) => {
               ))}
             </Stack>
           </Grid.Col>
-          <Grid.Col span={4}>
-            <Stack align="end">
+          <Grid.Col sm={4} order={1} orderSm={3}>
+            <Stack className={classes.socialLinks}>
               {/* To do: make more re-usable */}
               <Group>
                 {socialLinks.map((props, i) => (
