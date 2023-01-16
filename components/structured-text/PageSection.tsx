@@ -1,52 +1,19 @@
-import {
-  Image,
-  StructuredText,
-  StructuredTextPropTypes,
-  StructuredTextGraphQlResponseRecord,
-  renderNodeRule,
-  renderMarkRule,
-} from 'react-datocms';
-import { isHeading, isStructuredText } from 'datocms-structured-text-utils';
+import { isStructuredText } from 'datocms-structured-text-utils';
+import StructuredText, { StructuredTextProps } from './StructuredText';
 
-import type {
-  AddressFragment,
-  ImageGalleryFragment,
-  PeopleGalleryFragment,
-  ProjectFragment,
-  ProjectGalleryFragment,
-  ResponsiveVideoFragment,
-  SectionFragment,
-} from '@lib/dato-cms';
-
-import createStructuredTextProps from './createStructuredTextProps';
+import type { SectionFragment } from '@lib/dato-cms';
 
 import { Title } from '@mantine/core';
 import { Article } from '@components/elements/layout';
 
-export interface BlockComponents {
-  ResponsiveVideoRecord: (props: ResponsiveVideoFragment) => JSX.Element;
-}
-
-export interface InlineComponents {
-  AddressRecord: (props: AddressFragment) => JSX.Element;
-  ImageGalleryRecord: (props: ImageGalleryFragment) => JSX.Element;
-  PeopleGalleryRecord: (props: PeopleGalleryFragment) => JSX.Element;
-  ProjectGalleryRecord: (props: ProjectGalleryFragment) => JSX.Element;
-}
-
 export type PageSectionProps<
   WrapperProps = { children: React.ReactNode } & Record<string, unknown>
-> = Omit<
-  StructuredTextPropTypes<StructuredTextGraphQlResponseRecord>,
-  'data'
-> & {
+> = Omit<StructuredTextProps, 'data'> & {
   section: SectionFragment;
   title?: React.ReactNode | ((title: string) => JSX.Element);
   wrapper?: (props: WrapperProps) => JSX.Element;
   wrapperProps?: Omit<WrapperProps, 'children'>;
 };
-
-const defaultProps = createStructuredTextProps();
 
 const PageSection = ({
   section,
@@ -66,7 +33,7 @@ const PageSection = ({
       )}
       <StructuredText
         data={isStructuredText(section.content) ? section.content : null}
-        {...{ ...defaultProps, ...props }}
+        {...props}
       />
     </WrapperElement>
   );

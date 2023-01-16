@@ -12,6 +12,7 @@ import {
 import { DefaultInlineComponents } from './defaults';
 import { InlineComponents } from './types';
 import inferType from './inferType';
+import Placeholder from './Placeholder';
 
 type InlineTypeNames = Exclude<
   Exclude<StaticPageData['page'], null>['sections'][number]['content']['links'],
@@ -60,7 +61,7 @@ export default function createRenderInlineRecord<
           />
         );
       default:
-        return null;
+        return <Placeholder key={record.id} type={record.__typename} />;
     }
   };
 }

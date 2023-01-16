@@ -30,10 +30,7 @@ const DefaultNodeRules: Partial<NodeRules> = {
   Root: ({ key, children }) => (
     <React.Fragment key={key}>{children}</React.Fragment>
   ),
-  Paragraph: ({ key, children, node }) => {
-    if (node.children.every((child) => child.type === 'inlineItem')) {
-      return <React.Fragment key={key}>{children}</React.Fragment>;
-    }
+  Paragraph: ({ key, children }) => {
     return <Text key={key}>{children}</Text>;
   },
   Heading: ({ key, children, node }) => {

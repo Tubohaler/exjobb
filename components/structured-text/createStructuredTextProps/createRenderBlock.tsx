@@ -6,6 +6,7 @@ import type {
 import { DefaultBlockComponents } from './defaults';
 import { BlockComponents } from './types';
 import inferType from './inferType';
+import Placeholder from './Placeholder';
 type BlockTypeNames = Exclude<
   Exclude<
     StaticPageData['page'],
@@ -32,7 +33,7 @@ export default function createRenderBlock<
           inferType<ResponsiveVideoFragment>(record)
         );
       default:
-        return null;
+        return <Placeholder key={record.id} type={record.__typename} />;
     }
   };
 }
