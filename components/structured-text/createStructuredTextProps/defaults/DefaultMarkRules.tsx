@@ -4,7 +4,7 @@ import { Text, Mark } from '@mantine/core';
 const DefaultMarkRules: Partial<MarkRules> = {
   strong: ({ key, children }) => {
     return (
-      <Text key={key} component="strong">
+      <Text key={key} inherit inline component="strong">
         {children}
       </Text>
     );

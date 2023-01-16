@@ -2,7 +2,6 @@ import { Code } from '@mantine/core';
 
 const devMode = process.env.NODE_ENV === 'development';
 
-console.log(process.env.NODE_ENV);
 /**
  * Placeholder for structured text nodes.
  *
