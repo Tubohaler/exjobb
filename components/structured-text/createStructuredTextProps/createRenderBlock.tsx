@@ -7,7 +7,7 @@ import {
 import { BlockComponents } from './types';
 import inferType from './inferType';
 import Placeholder from './Placeholder';
-import { DefaultBlockComponents } from './defaults';
+import DefaultBlocks from './defaults/DefaultBlocks';
 import { isStructuredText } from 'datocms-structured-text-utils';
 
 type BlockTypeNames = Exclude<
@@ -26,8 +26,8 @@ export default function createRenderBlock<
   blockComponents?: Partial<BlockComponents>
 ): StructuredTextPropTypes<R1, R2>['renderBlock'] {
   const Components: BlockComponents = !blockComponents
-    ? DefaultBlockComponents
-    : { ...DefaultBlockComponents, ...blockComponents };
+    ? DefaultBlocks
+    : { ...DefaultBlocks, ...blockComponents };
 
   return ({ record }) => {
     const typename = record.__typename as BlockTypeNames | 'unknown';

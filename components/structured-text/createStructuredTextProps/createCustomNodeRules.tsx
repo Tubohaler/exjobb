@@ -1,4 +1,4 @@
-import { renderNodeRule } from 'datocms-structured-text-generic-html-renderer';
+import React from 'react';
 import {
   isRoot,
   Root,
@@ -18,13 +18,13 @@ import {
   isLink,
   Link,
 } from 'datocms-structured-text-utils';
-import React from 'react';
-import {
+import { renderNodeRule } from 'datocms-structured-text-generic-html-renderer';
+import type {
   StructuredTextGraphQlResponseRecord,
   StructuredTextPropTypes,
 } from 'react-datocms';
-import { DefaultNodeRules } from './defaults';
-import { NodeRules, NodeRuleFn } from './types';
+import type { NodeRules, NodeRuleFn } from './types';
+import DefaultNodeRules from './defaults/DefaultNodeRules';
 
 export default function createCustomNodeRules<
   R1 extends StructuredTextGraphQlResponseRecord,

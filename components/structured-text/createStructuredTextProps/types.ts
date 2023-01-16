@@ -79,7 +79,7 @@ export interface BlockComponents {
  *
  * @see {@link https://www.datocms.com/docs/structured-text/dast#inlineItem}
  */
-export interface InlineComponents {
+export interface StructuredTextComponents {
   /** @see AddressFragment */
   Address: (props: AddressFragment) => JSX.Element;
   /** @see ImageGalleryFragment */
@@ -141,15 +141,15 @@ export interface MarkRules {
 
 export interface CreateStructuredTextPropsConfig {
   /**
-   * Components to render Block Components
+   * Components to render Inline Records
+   * @see StructuredTextComponents
+   */
+  components?: Partial<StructuredTextComponents>;
+  /**
+   * Components to render Blocks
    * @see BlockComponents
    */
-  blockComponents?: Partial<BlockComponents>;
-  /**
-   * Components to render Inline Components
-   * @see InlineComponents
-   */
-  inlineComponents?: Partial<InlineComponents>;
+  blocks?: Partial<BlockComponents>;
   /**
    * Callbacks to render default nodes:
    * @see NodeRules

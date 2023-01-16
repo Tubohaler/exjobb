@@ -3,7 +3,7 @@ import {
   StructuredTextGraphQlResponseRecord,
   StructuredTextPropTypes,
 } from 'react-datocms';
-import { DefaultMarkRules } from './defaults';
+import DefaultMarkRules from './defaults/DefaultMarkRules';
 import {
   MarkRules,
   CreateStructuredTextPropsConfig,

@@ -64,9 +64,7 @@ export default function createStructuredTextProps<
   config?: CreateStructuredTextPropsConfig
 ): Partial<StructuredTextPropTypes<R1, R2>> {
   const props: Partial<StructuredTextPropTypes<R1, R2>> = {
-    renderInlineRecord: createRenderInlineRecord<R1, R2>(
-      config?.inlineComponents
-    ),
+    renderInlineRecord: createRenderInlineRecord<R1, R2>(config?.components),
     customNodeRules: createCustomNodeRules<R1, R2>(config?.nodeRules),
     customMarkRules: createCustomMarkRules<R1, R2>(
       config?.markRules,
@@ -76,6 +74,6 @@ export default function createStructuredTextProps<
 
   return {
     ...props,
-    renderBlock: createRenderBlock<R1, R2>(props, config?.blockComponents),
+    renderBlock: createRenderBlock<R1, R2>(props, config?.blocks),
   };
 }

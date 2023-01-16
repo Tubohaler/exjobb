@@ -1,5 +1,5 @@
 import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
-import type { InlineComponents } from '@components/structured-text/createStructuredTextProps/types';
+import type { StructuredTextComponents } from '@components/structured-text/createStructuredTextProps/types';
 import {
   CurrentVacanciesFragment,
   StaticSocialLinksCollection,
@@ -7,7 +7,7 @@ import {
 } from '@lib/dato-cms';
 import Placeholder from '../Placeholder';
 
-const DefaultInlineComponents: InlineComponents = {
+const DefaultInlineComponents: StructuredTextComponents = {
   Address: () => {
     return <Placeholder type="Address" />;
   },
