@@ -1,10 +1,16 @@
 import type { BlockComponents } from '@components/structured-text/createStructuredTextProps/types';
-import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
+import { Section } from '@components/elements/layout';
+import { Title } from '@mantine/core';
 
 const DefaultBlockComponents: BlockComponents = {
-  ResponsiveVideo: (responsiveVideo) => (
-    <ResponsiveVideo video={responsiveVideo} />
-  ),
+  Subsection: ({ children, section }) => {
+    return (
+      <Section>
+        {section.title && <Title order={3}>{section.title}</Title>}
+        {children}
+      </Section>
+    );
+  },
 };
 
 export default DefaultBlockComponents;

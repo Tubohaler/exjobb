@@ -8,10 +8,10 @@ import createStructuredTextProps from './createStructuredTextProps';
 export type StructuredTextProps =
   StructuredTextPropTypes<StructuredTextGraphQlResponseRecord>;
 
-const defaultProps = createStructuredTextProps();
-
 const StructuredText = (props: StructuredTextProps) => {
-  return <RenderStructuredText {...{ ...defaultProps, ...props }} />;
+  return <RenderStructuredText {...props} />;
 };
+
+StructuredText.defaultProps = createStructuredTextProps();
 
 export default StructuredText;

@@ -4,8 +4,11 @@ import type {
   PeopleGalleryFragment,
   ProjectGalleryFragment,
   ResponsiveVideoFragment,
-  StaffFragment,
-  ProjectFragment,
+  SubsectionFragment,
+  CurrentVacanciesFragment,
+  StaticSocialLinksCollectionFragment,
+  SocialLinksCollectionFragment,
+  NavLinkCollectionFragment,
 } from '@lib/dato-cms';
 import { StructuredTextPropTypes } from 'react-datocms';
 import type { RenderMarkRule } from 'datocms-structured-text-generic-html-renderer';
@@ -64,8 +67,11 @@ export type DefaultMarkRuleFn<
  * @see {@link https://www.datocms.com/docs/structured-text/dast#block}
  */
 export interface BlockComponents {
-  /** @see ResponsiveVideoFragment */
-  ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
+  /** @see SubsectionFragment */
+  Subsection: (props: {
+    children?: React.ReactNode;
+    section: SubsectionFragment;
+  }) => JSX.Element;
 }
 
 /**
@@ -88,6 +94,17 @@ export interface InlineComponents {
    * @see ProjectFragment
    */
   ProjectGallery: (props: ProjectGalleryFragment) => JSX.Element;
+  /** @see ResponsiveVideoFragment */
+  ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
+  /** @see CurrentVacanciesFragment */
+  CurrentVacancies: (props: CurrentVacanciesFragment) => JSX.Element;
+  /**
+   * @see StaticSocialLinksCollectionFragment
+   * @see SocialLinksCollectionFragment
+   */
+  SocialLinks: (props: StaticSocialLinksCollectionFragment) => JSX.Element;
+  /** @see NavLinkCollectionFragment */
+  NavLinks: (props: NavLinkCollectionFragment) => JSX.Element;
 }
 
 export interface NodeRules {
