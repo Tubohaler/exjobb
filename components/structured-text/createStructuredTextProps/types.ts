@@ -6,7 +6,7 @@ import type {
   ResponsiveVideoFragment,
   SubsectionFragment,
   CurrentVacanciesFragment,
-  StaticSocialLinksCollectionFragment,
+  StaticSocialLinksCollection,
   SocialLinksCollectionFragment,
   NavLinkCollectionFragment,
 } from '@lib/dato-cms';
@@ -99,10 +99,10 @@ export interface InlineComponents {
   /** @see CurrentVacanciesFragment */
   CurrentVacancies: (props: CurrentVacanciesFragment) => JSX.Element;
   /**
-   * @see StaticSocialLinksCollectionFragment
+   * @see StaticSocialLinks
    * @see SocialLinksCollectionFragment
    */
-  SocialLinks: (props: StaticSocialLinksCollectionFragment) => JSX.Element;
+  SocialLinks: (props: StaticSocialLinksCollection) => JSX.Element;
   /** @see NavLinkCollectionFragment */
   NavLinks: (props: NavLinkCollectionFragment) => JSX.Element;
 }

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --no-cache",
+    "lint": "tsc && next lint --no-cache",
     "prettier": "prettier --w .",
     "prepare": "husky install",
     "pre-commit": "lint-staged && pretty-quick --staged",

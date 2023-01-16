@@ -1,4 +1,10 @@
+import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
 import type { InlineComponents } from '@components/structured-text/createStructuredTextProps/types';
+import {
+  CurrentVacanciesFragment,
+  StaticSocialLinksCollection,
+  NavLinkCollectionFragment,
+} from '@lib/dato-cms';
 import Placeholder from '../Placeholder';
 
 const DefaultInlineComponents: InlineComponents = {
@@ -13,6 +19,18 @@ const DefaultInlineComponents: InlineComponents = {
   },
   ProjectGallery: () => {
     return <Placeholder type="ProjectGallery" />;
+  },
+  ResponsiveVideo: (video) => {
+    return <ResponsiveVideo video={video} />;
+  },
+  CurrentVacancies: () => {
+    return <Placeholder type="CurrentVacancies" />;
+  },
+  SocialLinks: () => {
+    return <Placeholder type="SocialLinks" />;
+  },
+  NavLinks: () => {
+    return <Placeholder type="NavLinks" />;
   },
 };
 

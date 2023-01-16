@@ -5,6 +5,7 @@ query Page($name: String) {
   header {
     ...Header
   }
+
   footer {
     ...Footer
   }

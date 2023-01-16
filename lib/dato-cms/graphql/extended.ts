@@ -1,8 +1,8 @@
 import type {
   IconFragment,
   SocialLinkFragment,
-  SocialLinksCollectionFragment,
   PageQuery,
+  SocialLinksCollectionFragment,
 } from './generated';
 
 export interface SvgIconFragment extends IconFragment {
@@ -14,7 +14,7 @@ export interface StaticSocialLink extends SocialLinkFragment {
   icon: SvgIconFragment;
 }
 
-export interface StaticSocialLinksCollectionFragment
+export interface StaticSocialLinksCollection
   extends SocialLinksCollectionFragment {
   links: StaticSocialLink[];
 }
@@ -36,8 +36,7 @@ export interface StaticPageHeader extends Exclude<PageQuery['header'], null> {
     content:
       | (HeaderSectionContent & {
           links: Array<
-            | HeaderSectionContent['links'][number]
-            | StaticSocialLinksCollectionFragment
+            HeaderSectionContent['links'][number] | StaticSocialLinksCollection
           >;
         })
       | null;
@@ -49,8 +48,7 @@ export interface StaticPageFooter extends Exclude<PageQuery['footer'], null> {
     content:
       | (FooterSectionContent & {
           links: Array<
-            | FooterSectionContent['links'][number]
-            | StaticSocialLinksCollectionFragment
+            FooterSectionContent['links'][number] | StaticSocialLinksCollection
           >;
         })
       | null;

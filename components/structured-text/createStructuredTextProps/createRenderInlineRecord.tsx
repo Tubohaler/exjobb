@@ -3,6 +3,7 @@ import {
   ImageGalleryFragment,
   PeopleGalleryFragment,
   ProjectGalleryFragment,
+  ResponsiveVideoFragment,
   StaticPageData,
 } from '@lib/dato-cms';
 import {
@@ -58,6 +59,13 @@ export default function createRenderInlineRecord<
           <Components.ProjectGallery
             key={record.id}
             {...inferType<ProjectGalleryFragment>(record)}
+          />
+        );
+      case 'ResponsiveVideoRecord':
+        return (
+          <Components.ResponsiveVideo
+            key={record.id}
+            {...inferType<ResponsiveVideoFragment>(record)}
           />
         );
       default:

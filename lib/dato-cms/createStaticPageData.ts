@@ -3,11 +3,11 @@ import axios from 'axios';
 import isSvg from 'is-svg';
 import {
   PageQuery,
-  SocialLinksCollectionFragmentDoc,
-  StaticSocialLinksCollectionFragment,
+  StaticSocialLinksCollection,
   StaticPageData,
   StaticPageFooter,
   StaticPageHeader,
+  SocialLinksDocument,
 } from './graphql';
 import request from './request';
 import { isSvgIconFragment } from './typeGuard';
@@ -15,9 +15,8 @@ import { isSvgIconFragment } from './typeGuard';
 const createStaticPageData = async (
   queryData: PageQuery
 ): Promise<StaticPageData> => {
-  const socialLinks = (await request(
-    SocialLinksCollectionFragmentDoc
-  )) as unknown as StaticSocialLinksCollectionFragment;
+  const data = await request(SocialLinksDocument);
+  const socialLinks = data.socialLinksCollection as StaticSocialLinksCollection;
 
   await Promise.all(
     socialLinks.links.map(
