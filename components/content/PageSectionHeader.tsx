@@ -5,12 +5,10 @@ import { createStyles } from '@mantine/styles';
 const useStyles = createStyles((theme) => ({
   root: {
     width: '100%',
-    padding: theme.spacing.xl,
+    padding: theme.spacing.xl * 2,
   },
   title: {
-    fontSize: '2em',
     letterSpacing: '0.1em',
-    fontWeight: 'normal',
     textTransform: 'capitalize',
   },
 }));
@@ -21,7 +19,13 @@ const PageSectionHeader = ({ title }: SectionFragment) => {
     <></>
   ) : (
     <Center className={classes.root}>
-      <Title order={2} className={classes.title}>
+      <Title
+        order={2}
+        className={classes.title}
+        weight={400}
+        size="h1"
+        transform="uppercase"
+      >
         {title}
       </Title>
     </Center>
