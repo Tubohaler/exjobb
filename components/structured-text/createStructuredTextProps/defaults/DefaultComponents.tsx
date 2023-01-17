@@ -1,11 +1,7 @@
-import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
 import type { StructuredTextComponents } from '@components/structured-text/createStructuredTextProps/types';
-import {
-  CurrentVacanciesFragment,
-  StaticSocialLinksCollection,
-  NavLinkCollectionFragment,
-} from '@lib/dato-cms';
 import Placeholder from '../Placeholder';
+import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
+import ProjectGallery from '@components/content/ProjectGallery';
 
 const DefaultInlineComponents: StructuredTextComponents = {
   Address: () => {
@@ -17,8 +13,8 @@ const DefaultInlineComponents: StructuredTextComponents = {
   PeopleGallery: () => {
     return <Placeholder type="PeopleGallery" />;
   },
-  ProjectGallery: () => {
-    return <Placeholder type="ProjectGallery" />;
+  ProjectGallery: (props) => {
+    return <ProjectGallery {...props} />;
   },
   ResponsiveVideo: (video) => {
     return <ResponsiveVideo video={video} />;
