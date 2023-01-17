@@ -4,8 +4,11 @@ import type {
   PeopleGalleryFragment,
   ProjectGalleryFragment,
   ResponsiveVideoFragment,
-  StaffFragment,
-  ProjectFragment,
+  SubsectionFragment,
+  CurrentVacanciesFragment,
+  StaticSocialLinksCollection,
+  SocialLinksCollectionFragment,
+  NavLinkCollectionFragment,
 } from '@lib/dato-cms';
 import { StructuredTextPropTypes } from 'react-datocms';
 import type { RenderMarkRule } from 'datocms-structured-text-generic-html-renderer';
@@ -64,8 +67,11 @@ export type DefaultMarkRuleFn<
  * @see {@link https://www.datocms.com/docs/structured-text/dast#block}
  */
 export interface BlockComponents {
-  /** @see ResponsiveVideoFragment */
-  ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
+  /** @see SubsectionFragment */
+  Subsection: (props: {
+    children?: React.ReactNode;
+    section: SubsectionFragment;
+  }) => JSX.Element;
 }
 
 /**
@@ -73,7 +79,7 @@ export interface BlockComponents {
  *
  * @see {@link https://www.datocms.com/docs/structured-text/dast#inlineItem}
  */
-export interface InlineComponents {
+export interface StructuredTextComponents {
   /** @see AddressFragment */
   Address: (props: AddressFragment) => JSX.Element;
   /** @see ImageGalleryFragment */
@@ -88,6 +94,17 @@ export interface InlineComponents {
    * @see ProjectFragment
    */
   ProjectGallery: (props: ProjectGalleryFragment) => JSX.Element;
+  /** @see ResponsiveVideoFragment */
+  ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
+  /** @see CurrentVacanciesFragment */
+  CurrentVacancies: (props: CurrentVacanciesFragment) => JSX.Element;
+  /**
+   * @see StaticSocialLinks
+   * @see SocialLinksCollectionFragment
+   */
+  SocialLinks: (props: StaticSocialLinksCollection) => JSX.Element;
+  /** @see NavLinkCollectionFragment */
+  NavLinks: (props: NavLinkCollectionFragment) => JSX.Element;
 }
 
 export interface NodeRules {
@@ -124,15 +141,15 @@ export interface MarkRules {
 
 export interface CreateStructuredTextPropsConfig {
   /**
-   * Components to render Block Components
+   * Components to render Inline Records
+   * @see StructuredTextComponents
+   */
+  components?: Partial<StructuredTextComponents>;
+  /**
+   * Components to render Blocks
    * @see BlockComponents
    */
-  blockComponents?: Partial<BlockComponents>;
-  /**
-   * Components to render Inline Components
-   * @see InlineComponents
-   */
-  inlineComponents?: Partial<InlineComponents>;
+  blocks?: Partial<BlockComponents>;
   /**
    * Callbacks to render default nodes:
    * @see NodeRules

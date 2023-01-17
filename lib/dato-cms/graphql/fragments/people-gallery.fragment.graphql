@@ -1,7 +1,0 @@
-fragment PeopleGallery on PeopleGalleryRecord {
-  __typename
-  id
-  people {
-    ...Staff
-  }
-}

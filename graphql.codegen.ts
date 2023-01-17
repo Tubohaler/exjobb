@@ -1,9 +1,7 @@
-import dotenv from 'dotenv';
-dotenv.config();
 import type { CodegenConfig } from '@graphql-codegen/cli';
 import type { TypeScriptDocumentsPluginConfig } from '@graphql-codegen/typescript-operations';
 import type { TypeScriptPluginConfig } from '@graphql-codegen/typescript';
-import type { AddPluginConfig } from '@graphql-codegen/add/typings/config';
+import headers from './lib/dato-cms/request-headers';
 
 const tsPluginConfig: TypeScriptDocumentsPluginConfig &
   Omit<TypeScriptPluginConfig, keyof TypeScriptDocumentsPluginConfig> = {
@@ -31,51 +29,23 @@ const config: CodegenConfig = {
   schema: [
     {
       'https://graphql.datocms.com': {
-        headers: {
-          Authorization: process.env.DATO_CMS_TOKEN || '',
-          'X-Exclude-Invalid': 'true',
-          'X-Api-Version': '3',
-        },
+        headers,
       },
     },
   ],
   documents: ['lib/dato-cms/graphql/**/*.graphql'],
   generates: {
-    'lib/dato-cms/graphql/index.ts': {
+    'lib/dato-cms/graphql/generated.ts': {
       config: tsPluginConfig,
-      plugins: [
-        {
-          add: {
-            placement: 'append',
-            content: `
-        export type PageName = 'home' | 'about' | 'contact' | 'career';
-        
-        export interface SvgIconFragment extends IconFragment {
-          mimeType: "image/svg+xml"
-          inlineHTML?: string;
-        }
-        
-        export interface StaticPageData extends PageQuery {
-          allSocialLinks: Array<
-            Omit<SocialLinkFragment, 'icon'> & {
-              icon: SvgIconFragment;
-            }
-          >;
-        }
-        
-        export type StaticPageProps = { data: StaticPageData };
-        `,
-          },
-        },
-        'typescript',
-        'typescript-operations',
-        'typed-document-node',
-      ],
+      hooks: {
+        afterOneFileWrite: ['ts-node scripts/dato-cms/extend-generated.ts'],
+      },
+      plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
     },
-    'lib/dato-cms/graphql/introspection.json': {
-      config: { minify: true },
-      plugins: ['introspection'],
-    },
+    // 'lib/dato-cms/graphql/introspection.json': {
+    //   config: { minify: true },
+    //   plugins: ['introspection'],
+    // },
   },
   hooks: {
     afterOneFileWrite: ['prettier --write'],
