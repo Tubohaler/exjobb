@@ -1,5 +1,6 @@
 import React from 'react';
 import { Image } from 'react-datocms';
+import HumbleButton from '@components/elements/buttons/HumbleButton';
 import SteamButton from '@components/elements/buttons/SteamButton';
 
 import { ProjectFragment } from '@lib/dato-cms';
@@ -79,7 +80,7 @@ const Project = ({ name, featuredImage, description }: ProjectFragment) => {
           </Title>
         </Stack>
         <Group className={classes.buttonGroup} grow spacing={0}>
-          <Button>From us</Button>
+          <HumbleButton />
           <SteamButton />
         </Group>
       </Flex>
