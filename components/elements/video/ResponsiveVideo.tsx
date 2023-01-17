@@ -2,22 +2,35 @@ import { ResponsiveVideoFragment, VideoFragment } from '@lib/dato-cms';
 import { defaultTransition } from '@lib/theme/main';
 import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Video from './Video';
 
 export type ResponsiveVideoStylesNames = Selectors<typeof useStyles>;
 
-const useStyles = createStyles((theme) => ({
-  root: {},
-  landscape: {
-    width: '100%',
+const useStyles = createStyles((theme) => {
+  const videoStyles = {
+    width: '100vw',
     height: 'auto',
-  },
-  portrait: {
-    width: '100%',
-    height: 'auto',
-  },
-}));
+    minHeight: 0,
+    minWidth: 0,
+  };
+  return {
+    root: {
+      width: '100%',
+      maxHeight: '100vh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+    },
+    landscape: {
+      ...videoStyles,
+    },
+    portrait: {
+      ...videoStyles,
+    },
+  };
+});
 
 export type ResponsiveVideoProps = Parameters<typeof Box<'div'>>[0] &
   DefaultProps<ResponsiveVideoStylesNames> & {
@@ -32,6 +45,7 @@ function ResponsiveVideo({
   ...props
 }: ResponsiveVideoProps) {
   const isPortrait = useMediaQuery('(orientation: portrait)', false);
+
   const { classes, cx } = useStyles(undefined, {
     name: 'ResponsiveVideo',
     unstyled,
@@ -39,12 +53,11 @@ function ResponsiveVideo({
   });
 
   return (
-    <Box component="div" className={cx(classes.root, className)} {...props}>
-      {isPortrait ? (
-        <Video video={video.portrait} className={classes.portrait} />
-      ) : (
-        <Video video={video.landscape} className={classes.landscape} />
-      )}
+    <Box className={cx(classes.root, className)} {...props}>
+      <Video
+        video={video[isPortrait ? 'portrait' : 'landscape']}
+        className={classes[isPortrait ? 'portrait' : 'landscape']}
+      />
     </Box>
   );
 }
