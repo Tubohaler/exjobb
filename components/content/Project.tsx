@@ -8,7 +8,7 @@ import { Grid } from '@mantine/core';
 const Project = ({ name, featuredImage }: ProjectFragment) => {
   return (
     <>
-      <h2>{name}</h2>
+      {/* <h2>{name}</h2> */}
       <Image data={featuredImage.responsiveImage} />
     </>
   );
