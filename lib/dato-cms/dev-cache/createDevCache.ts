@@ -1,6 +1,5 @@
 import path from 'path';
 import fs from 'fs';
-import { fileURLToPath } from 'url';
 import { PageQuery, PageName, StaticPageData } from '../graphql';
 
 type DevCacheData = {
@@ -29,10 +28,7 @@ const isDevCacheData = (data: unknown): data is DevCacheData => {
   );
 };
 
-export const cachePath = path.resolve(
-  fileURLToPath(import.meta.url),
-  `../cache.json`
-);
+const cachePath = path.resolve(__dirname, 'cache.json');
 
 /**
  * @param maxAge Max-Age in seconds

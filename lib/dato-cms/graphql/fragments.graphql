@@ -1,0 +1,310 @@
+fragment Page on PageRecord {
+  __typename
+  name
+  pageTitle
+  urlSlug
+  id
+  metaTags {
+    __typename
+    description
+    title
+    twitterCard
+    image {
+      url
+      title
+      width
+      height
+    }
+  }
+  _seoMetaTags {
+    __typename
+    content
+    tag
+    attributes
+  }
+  sections {
+    ...Section
+  }
+}
+
+fragment Section on SectionRecord {
+  __typename
+  id
+  title
+  content {
+    __typename
+    value
+    blocks {
+      ... on SubsectionRecord {
+        ...Subsection
+      }
+    }
+    links {
+      ... on AddressRecord {
+        ...Address
+      }
+      ... on ProjectGalleryRecord {
+        ...ProjectGallery
+      }
+      ... on ImageGalleryRecord {
+        ...ImageGallery
+      }
+      ... on PeopleGalleryRecord {
+        ...PeopleGallery
+      }
+      ... on ResponsiveVideoRecord {
+        ...ResponsiveVideo
+      }
+    }
+  }
+}
+
+fragment Subsection on SubsectionRecord {
+  __typename
+  id
+  title
+  content {
+    value
+    links {
+      __typename
+      ... on AddressRecord {
+        ...Address
+      }
+      ... on CurrentVacanciesModelRecord {
+        ...CurrentVacancies
+      }
+    }
+  }
+}
+
+fragment CurrentVacancies on CurrentVacanciesModelRecord {
+  __typename
+  id
+  jobs {
+    __typename
+    id
+    jobTitle
+    minLevel
+    maxLevel
+  }
+}
+
+fragment SocialLinksCollection on SocialLinksCollectionRecord {
+  __typename
+  id
+  links {
+    ...SocialLink
+  }
+}
+
+fragment SocialLink on SocialLinkRecord {
+  __typename
+  linkTitle
+  id
+  title
+  href
+  icon {
+    ...Icon
+  }
+}
+
+fragment NavLinkCollection on NavLinksCollectionRecord {
+  __typename
+  id
+  links {
+    ...PageLink
+  }
+}
+
+fragment Icon on FileField {
+  __typename
+  mimeType
+  url
+  width
+  height
+}
+
+fragment ResponsiveImage on ImageFileField {
+  __typename
+  id
+  responsiveImage(
+    sizes: "(max-width: 512px) 100vw, 512px"
+    imgixParams: { fm: webp }
+  ) {
+    __typename
+    src
+    alt
+    title
+    width
+    height
+    srcSet
+    sizes
+    bgColor
+    aspectRatio
+  }
+}
+
+fragment Video on VideoFileField {
+  __typename
+  mimeType
+  width
+  height
+  video {
+    __typename
+    duration
+    framerate
+    mp4High: mp4Url(res: high)
+    mp4Med: mp4Url(res: medium)
+    mp4Low: mp4Url(res: low)
+    thumbJpg: thumbnailUrl(format: jpg)
+    thumbGif: thumbnailUrl(format: gif)
+  }
+}
+
+fragment ResponsiveVideo on ResponsiveVideoRecord {
+  id
+  __typename
+  landscape {
+    ...Video
+  }
+  portrait {
+    ...Video
+  }
+}
+
+fragment Address on AddressRecord {
+  __typename
+  id
+  name
+  title
+  zipCode
+  country
+  city
+  address
+}
+
+fragment Project on ProjectRecord {
+  __typename
+  id
+  name
+  pageUrl
+  steamUrl
+  humbleUrl
+  humbleButtonText
+  featuredImage {
+    ...ResponsiveImage
+  }
+}
+
+fragment ProjectGallery on ProjectGalleryRecord {
+  __typename
+  id
+  projects {
+    ...Project
+  }
+}
+
+fragment Staff on StaffRecord {
+  __typename
+  id
+  jobPosition
+  name
+  featuredImage {
+    ...ResponsiveImage
+  }
+}
+
+fragment PeopleGallery on PeopleGalleryRecord {
+  __typename
+  id
+  people {
+    ...Staff
+  }
+}
+
+fragment ImageGallery on ImageGalleryRecord {
+  __typename
+  id
+  title
+  images {
+    ...ResponsiveImage
+  }
+}
+
+fragment Footer on FooterRecord {
+  __typename
+  id
+  sections {
+    ...FooterSection
+  }
+}
+
+fragment PageLink on PageRecord {
+  __typename
+  id
+  urlSlug
+  name
+  position
+}
+
+fragment FooterSection on FooterSectionRecord {
+  __typename
+  id
+  content {
+    __typename
+    value
+    links {
+      ... on AddressRecord {
+        ...Address
+      }
+      ... on SocialLinksCollectionRecord {
+        ...SocialLinksCollection
+      }
+    }
+  }
+}
+
+fragment Header on HeaderRecord {
+  __typename
+  id
+  sections {
+    ...HeaderSection
+  }
+}
+
+fragment HeaderSection on HeaderSectionRecord {
+  __typename
+  id
+  content {
+    value
+    links {
+      ... on NavLinksCollectionRecord {
+        ...NavLinkCollection
+      }
+      ... on SocialLinksCollectionRecord {
+        ...SocialLinksCollection
+      }
+    }
+  }
+}
+
+fragment SiteMeta on Site {
+  __typename
+  globalSeo {
+    __typename
+    facebookPageUrl
+    twitterAccount
+    titleSuffix
+    siteName
+    fallbackSeo {
+      __typename
+      description
+      title
+      twitterCard
+    }
+  }
+  favicon {
+    url
+    mimeType
+  }
+}

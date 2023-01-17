@@ -1,0 +1,27 @@
+query Page($name: String) {
+  page(filter: { name: { eq: $name } }) {
+    ...Page
+  }
+  header {
+    ...Header
+  }
+
+  footer {
+    ...Footer
+  }
+  _site {
+    ...SiteMeta
+  }
+}
+
+query PageNames {
+  pages: allPages {
+    name
+  }
+}
+
+query SocialLinks {
+  socialLinksCollection {
+    ...SocialLinksCollection
+  }
+}

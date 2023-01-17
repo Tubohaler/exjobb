@@ -1,8 +1,0 @@
-fragment PageLinks on Query {
-  pageLinks: allPages(orderBy: position_ASC) {
-    id
-    urlSlug
-    name
-    position
-  }
-}

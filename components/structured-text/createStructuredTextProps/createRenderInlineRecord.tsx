@@ -3,34 +3,47 @@ import {
   ImageGalleryFragment,
   PeopleGalleryFragment,
   ProjectGalleryFragment,
+  ResponsiveVideoFragment,
   StaticPageData,
 } from '@lib/dato-cms';
 import {
   StructuredTextGraphQlResponseRecord,
   StructuredTextPropTypes,
 } from 'react-datocms';
-import { DefaultInlineComponents } from './defaults';
-import { InlineComponents } from './types';
+import DefaultComponents from './defaults/DefaultComponents';
+import { StructuredTextComponents } from './types';
 import inferType from './inferType';
 import Placeholder from './Placeholder';
 
-type InlineTypeNames = Exclude<
-  Exclude<StaticPageData['page'], null>['sections'][number]['content']['links'],
-  null
->[number]['__typename'];
+type RecordTypeNames =
+  | Exclude<
+      Exclude<
+        StaticPageData['page'],
+        null
+      >['sections'][number]['content']['links'],
+      null
+    >[number]['__typename']
+  | Exclude<
+      StaticPageData['header'],
+      null
+    >['sections'][number]['content']['links'][number]['__typename']
+  | Exclude<
+      StaticPageData['footer'],
+      null
+    >['sections'][number]['content']['links'][number]['__typename'];
 
 export default function createRenderInlineRecord<
   R1 extends StructuredTextGraphQlResponseRecord,
   R2 extends StructuredTextGraphQlResponseRecord = R1
 >(
-  inlineComponents?: Partial<InlineComponents>
+  components?: Partial<StructuredTextComponents>
 ): StructuredTextPropTypes<R1, R2>['renderInlineRecord'] {
-  const Components = !inlineComponents
-    ? DefaultInlineComponents
-    : { ...DefaultInlineComponents, ...inlineComponents };
+  const Components = !components
+    ? DefaultComponents
+    : { ...DefaultComponents, ...components };
 
   return ({ record }) => {
-    const typename = record.__typename as InlineTypeNames | 'unknown';
+    const typename = record.__typename as RecordTypeNames | 'unknown';
     switch (typename) {
       case 'AddressRecord':
         return (
@@ -58,6 +71,13 @@ export default function createRenderInlineRecord<
           <Components.ProjectGallery
             key={record.id}
             {...inferType<ProjectGalleryFragment>(record)}
+          />
+        );
+      case 'ResponsiveVideoRecord':
+        return (
+          <Components.ResponsiveVideo
+            key={record.id}
+            {...inferType<ResponsiveVideoFragment>(record)}
           />
         );
       default:
