@@ -1,6 +1,6 @@
 import { Title } from '@mantine/core';
 import Link from '@components/elements/links/Link';
-import { Article, Head, Main, PageWrapper } from '@components/elements/layout';
+import { Article, Head, PageWrapper } from '@components/elements/layout';
 
 const Home = () => {
   return (

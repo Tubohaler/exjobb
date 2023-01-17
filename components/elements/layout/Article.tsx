@@ -1,5 +1,4 @@
-import { Box } from '@mantine/core';
-import styled from '@emotion/styled';
+import { Box, createStyles } from '@mantine/core';
 
 export type ArticleProps = Omit<
   Parameters<typeof Box<'article'>>[0],
@@ -8,18 +7,30 @@ export type ArticleProps = Omit<
   children: React.ReactNode;
 };
 
-const StyledArticle = styled.article`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+const useStyles = createStyles((theme) => ({
+  root: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    '& > *': {
+      maxWidth: theme.breakpoints.md,
+    },
+  },
+}));
 
 /**
  * Wraps content with a html article element
  */
-const Article = (props: ArticleProps) => {
-  return <Box component={StyledArticle} {...props} />;
+const Article = ({ className, ...props }: ArticleProps) => {
+  const { classes, cx } = useStyles(undefined, { name: 'Article' });
+  return (
+    <Box
+      component="article"
+      className={cx(classes.root, className)}
+      {...props}
+    />
+  );
 };
 
 export default Article;

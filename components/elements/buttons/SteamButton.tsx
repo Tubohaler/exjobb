@@ -1,13 +1,12 @@
-import React from 'react';
-
 import { Button, createStyles } from '@mantine/core';
-
+import Link from 'next/link';
 import { createTransition } from '@lib/theme/utils';
 
-type Props = {};
+type Props = Omit<Parameters<typeof Button<typeof Link>>[0], 'children'>;
 
-const useStyles = createStyles((theme, params, getRef) => ({
+const useStyles = createStyles((theme, _, getRef) => ({
   icon: {
+    display: 'block',
     fill: theme.white,
     height: '75%',
     width: 'auto',
@@ -33,7 +32,7 @@ function SteamButton(props: Props) {
   const { classes } = useStyles(undefined, { name: 'SteamButton' });
 
   return (
-    <Button className={classes.button}>
+    <Button component={Link} className={classes.button} {...props}>
       <svg
         className={classes.icon}
         xmlns="http://www.w3.org/2000/svg"
