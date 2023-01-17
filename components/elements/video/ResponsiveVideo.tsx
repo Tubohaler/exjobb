@@ -1,18 +1,25 @@
-import { ResponsiveVideoFragment, VideoFragment } from '@lib/dato-cms';
-import { defaultTransition } from '@lib/theme/main';
-import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
+import { ResponsiveVideoFragment } from '@lib/dato-cms';
+import {
+  Box,
+  createStyles,
+  CSSObject,
+  DefaultProps,
+  Selectors,
+  Title,
+} from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import { useEffect, useRef, useState } from 'react';
 import Video from './Video';
 
 export type ResponsiveVideoStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => {
-  const videoStyles = {
+  const videoStyles: CSSObject = {
     width: '100vw',
     height: 'auto',
     minHeight: 0,
     minWidth: 0,
+    position: 'relative',
+    zIndex: 0,
   };
   return {
     root: {
@@ -23,6 +30,26 @@ const useStyles = createStyles((theme) => {
       alignItems: 'center',
       justifyContent: 'center',
       overflow: 'hidden',
+      position: 'relative',
+    },
+    titleWrapper: {
+      position: 'absolute',
+      inset: '0 0 0 0',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      zIndex: 1,
+    },
+    title: {
+      color: theme.white,
+      opacity: 0.9,
+      wordSpacing: '100vw',
+      fontWeight: 'normal',
+      fontSize: theme.fontSizes.xl * 5,
+      textAlign: 'center',
+      [theme.fn.smallerThan('sm')]: {
+        fontSize: theme.fontSizes.xl * 3,
+      },
     },
     landscape: {
       ...videoStyles,
@@ -46,7 +73,6 @@ function ResponsiveVideo({
   ...props
 }: ResponsiveVideoProps) {
   const isPortrait = useMediaQuery('(orientation: portrait)', false);
-
   const { classes, cx } = useStyles(undefined, {
     name: 'ResponsiveVideo',
     unstyled,
@@ -55,6 +81,13 @@ function ResponsiveVideo({
 
   return (
     <Box className={cx(classes.root, className)} {...props}>
+      {video.overlayText && (
+        <Box className={classes.titleWrapper}>
+          <Title order={1} className={classes.title}>
+            {video.overlayText}
+          </Title>
+        </Box>
+      )}
       <Video
         video={video[isPortrait ? 'portrait' : 'landscape']}
         className={classes[isPortrait ? 'portrait' : 'landscape']}

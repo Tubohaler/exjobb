@@ -22,6 +22,7 @@ const tsPluginConfig: TypeScriptDocumentsPluginConfig &
   avoidOptionals: true,
   nonOptionalTypename: true,
   dedupeFragments: true,
+  mergeFragmentTypes: true,
   declarationKind: 'interface',
 };
 

@@ -2828,9 +2828,9 @@ export interface ResponsiveVideoModelFilter {
   _updatedAt: InputMaybe<UpdatedAtFilter>;
   id: InputMaybe<ItemIdFilter>;
   landscape: InputMaybe<FileFilter>;
+  overlayText: InputMaybe<StringFilter>;
   portrait: InputMaybe<FileFilter>;
   presentationTitle: InputMaybe<StringFilter>;
-  title: InputMaybe<StringFilter>;
 }
 
 export enum ResponsiveVideoModelOrderBy {
@@ -2852,10 +2852,10 @@ export enum ResponsiveVideoModelOrderBy {
   UpdatedAtDesc = '_updatedAt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  OverlayTextAsc = 'overlayText_ASC',
+  OverlayTextDesc = 'overlayText_DESC',
   PresentationTitleAsc = 'presentationTitle_ASC',
   PresentationTitleDesc = 'presentationTitle_DESC',
-  TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC',
 }
 
 /** Record of type Responsive Video (responsive_video) */
@@ -2874,9 +2874,9 @@ export interface ResponsiveVideoRecord extends RecordInterface {
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   landscape: VideoFileField;
+  overlayText: Maybe<Scalars['String']>;
   portrait: VideoFileField;
   presentationTitle: Maybe<Scalars['String']>;
-  title: Maybe<Scalars['String']>;
 }
 
 /** Record of type Responsive Video (responsive_video) */
@@ -2915,7 +2915,7 @@ export interface SectionRecord extends RecordInterface {
   _updatedAt: Scalars['DateTime'];
   content: SectionModelContentField;
   id: Scalars['ItemId'];
-  title: Scalars['String'];
+  title: Maybe<Scalars['String']>;
 }
 
 /** Block of type Page Section (section) */
@@ -3657,47 +3657,205 @@ export interface FocalPoint {
 }
 
 export type PageFragment = {
-  __typename: 'PageRecord';
   name: string;
   pageTitle: string;
   urlSlug: string | null;
   id: string;
-  metaTags: {
-    __typename: 'SeoField';
-    description: string | null;
-    title: string | null;
-    twitterCard: string | null;
-    image: {
-      __typename: 'FileField';
-      url: string;
+  metaTags:
+    | ({
+        description: string | null;
+        title: string | null;
+        twitterCard: string | null;
+        image:
+          | ({
+              url: string;
+              title: string | null;
+              width: number | null;
+              height: number | null;
+            } & { __typename: 'FileField' })
+          | null;
+      } & { __typename: 'SeoField' })
+    | null;
+  _seoMetaTags: Array<
+    {
+      content: string | null;
+      tag: string;
+      attributes: Record<string, string> | null;
+    } & { __typename: 'Tag' }
+  >;
+  sections: Array<
+    {
+      id: string;
       title: string | null;
-      width: number | null;
-      height: number | null;
-    } | null;
-  } | null;
-  _seoMetaTags: Array<{
-    __typename: 'Tag';
-    content: string | null;
-    tag: string;
-    attributes: Record<string, string> | null;
-  }>;
-  sections: Array<{
-    __typename: 'SectionRecord';
-    id: string;
-    title: string;
-    content: {
-      __typename: 'SectionModelContentField';
-      value: unknown;
-      blocks: Array<{
-        __typename: 'SubsectionRecord';
+      content: {
+        value: unknown;
+        blocks: Array<
+          {
+            id: string;
+            title: string | null;
+            content: {
+              value: unknown;
+              links: Array<
+                | ({
+                    id: string;
+                    name: string;
+                    title: string;
+                    zipCode: string;
+                    country: string;
+                    city: string;
+                    address: string;
+                  } & { __typename: 'AddressRecord' })
+                | ({
+                    id: string;
+                    jobs: Array<
+                      {
+                        id: string;
+                        jobTitle: string;
+                        minLevel: string;
+                        maxLevel: string;
+                      } & { __typename: 'JobRecord' }
+                    >;
+                  } & { __typename: 'CurrentVacanciesModelRecord' })
+              >;
+            } & { __typename: 'SubsectionModelContentField' };
+          } & { __typename: 'SubsectionRecord' }
+        >;
+        links: Array<
+          | ({
+              id: string;
+              name: string;
+              title: string;
+              zipCode: string;
+              country: string;
+              city: string;
+              address: string;
+            } & { __typename: 'AddressRecord' })
+          | { __typename: 'CurrentVacanciesModelRecord' }
+          | ({
+              id: string;
+              title: string;
+              images: Array<
+                {
+                  id: string;
+                  responsiveImage: {
+                    src: string;
+                    alt: string | null;
+                    title: string | null;
+                    width: number;
+                    height: number;
+                    srcSet: string;
+                    sizes: string;
+                    bgColor: string | null;
+                    aspectRatio: number;
+                  } & { __typename: 'ResponsiveImage' };
+                } & { __typename: 'ImageFileField' }
+              >;
+            } & { __typename: 'ImageGalleryRecord' })
+          | ({
+              id: string;
+              people: Array<
+                {
+                  id: string;
+                  jobPosition: string;
+                  name: string;
+                  featuredImage:
+                    | ({
+                        id: string;
+                        responsiveImage: {
+                          src: string;
+                          alt: string | null;
+                          title: string | null;
+                          width: number;
+                          height: number;
+                          srcSet: string;
+                          sizes: string;
+                          bgColor: string | null;
+                          aspectRatio: number;
+                        } & { __typename: 'ResponsiveImage' };
+                      } & { __typename: 'ImageFileField' })
+                    | null;
+                } & { __typename: 'StaffRecord' }
+              >;
+            } & { __typename: 'PeopleGalleryRecord' })
+          | ({
+              id: string;
+              projects: Array<
+                {
+                  id: string;
+                  name: string;
+                  pageUrl: string | null;
+                  steamUrl: string | null;
+                  humbleUrl: string | null;
+                  humbleButtonText: string | null;
+                  description: string;
+                  featuredImage: {
+                    id: string;
+                    responsiveImage: {
+                      src: string;
+                      alt: string | null;
+                      title: string | null;
+                      width: number;
+                      height: number;
+                      srcSet: string;
+                      sizes: string;
+                      bgColor: string | null;
+                      aspectRatio: number;
+                    } & { __typename: 'ResponsiveImage' };
+                  } & { __typename: 'ImageFileField' };
+                } & { __typename: 'ProjectRecord' }
+              >;
+            } & { __typename: 'ProjectGalleryRecord' })
+          | ({
+              id: string;
+              overlayText: string | null;
+              landscape: {
+                mimeType: string;
+                width: number | null;
+                height: number | null;
+                video: {
+                  duration: number | null;
+                  framerate: number | null;
+                  mp4High: string | null;
+                  mp4Med: string | null;
+                  mp4Low: string | null;
+                  thumbJpg: string;
+                  thumbGif: string;
+                } & { __typename: 'UploadVideoField' };
+              } & { __typename: 'VideoFileField' };
+              portrait: {
+                mimeType: string;
+                width: number | null;
+                height: number | null;
+                video: {
+                  duration: number | null;
+                  framerate: number | null;
+                  mp4High: string | null;
+                  mp4Med: string | null;
+                  mp4Low: string | null;
+                  thumbJpg: string;
+                  thumbGif: string;
+                } & { __typename: 'UploadVideoField' };
+              } & { __typename: 'VideoFileField' };
+            } & { __typename: 'ResponsiveVideoRecord' })
+        >;
+      } & { __typename: 'SectionModelContentField' };
+    } & { __typename: 'SectionRecord' }
+  >;
+} & { __typename: 'PageRecord' };
+
+export type SectionFragment = {
+  id: string;
+  title: string | null;
+  content: {
+    value: unknown;
+    blocks: Array<
+      {
         id: string;
         title: string | null;
         content: {
-          __typename: 'SubsectionModelContentField';
           value: unknown;
           links: Array<
-            | {
-                __typename: 'AddressRecord';
+            | ({
                 id: string;
                 name: string;
                 title: string;
@@ -3705,42 +3863,40 @@ export type PageFragment = {
                 country: string;
                 city: string;
                 address: string;
-              }
-            | {
-                __typename: 'CurrentVacanciesModelRecord';
+              } & { __typename: 'AddressRecord' })
+            | ({
                 id: string;
-                jobs: Array<{
-                  __typename: 'JobRecord';
-                  id: string;
-                  jobTitle: string;
-                  minLevel: string;
-                  maxLevel: string;
-                }>;
-              }
+                jobs: Array<
+                  {
+                    id: string;
+                    jobTitle: string;
+                    minLevel: string;
+                    maxLevel: string;
+                  } & { __typename: 'JobRecord' }
+                >;
+              } & { __typename: 'CurrentVacanciesModelRecord' })
           >;
-        };
-      }>;
-      links: Array<
-        | {
-            __typename: 'AddressRecord';
-            id: string;
-            name: string;
-            title: string;
-            zipCode: string;
-            country: string;
-            city: string;
-            address: string;
-          }
-        | { __typename: 'CurrentVacanciesModelRecord' }
-        | {
-            __typename: 'ImageGalleryRecord';
-            id: string;
-            title: string;
-            images: Array<{
-              __typename: 'ImageFileField';
+        } & { __typename: 'SubsectionModelContentField' };
+      } & { __typename: 'SubsectionRecord' }
+    >;
+    links: Array<
+      | ({
+          id: string;
+          name: string;
+          title: string;
+          zipCode: string;
+          country: string;
+          city: string;
+          address: string;
+        } & { __typename: 'AddressRecord' })
+      | { __typename: 'CurrentVacanciesModelRecord' }
+      | ({
+          id: string;
+          title: string;
+          images: Array<
+            {
               id: string;
               responsiveImage: {
-                __typename: 'ResponsiveImage';
                 src: string;
                 alt: string | null;
                 title: string | null;
@@ -3750,40 +3906,40 @@ export type PageFragment = {
                 sizes: string;
                 bgColor: string | null;
                 aspectRatio: number;
-              };
-            }>;
-          }
-        | {
-            __typename: 'PeopleGalleryRecord';
-            id: string;
-            people: Array<{
-              __typename: 'StaffRecord';
+              } & { __typename: 'ResponsiveImage' };
+            } & { __typename: 'ImageFileField' }
+          >;
+        } & { __typename: 'ImageGalleryRecord' })
+      | ({
+          id: string;
+          people: Array<
+            {
               id: string;
               jobPosition: string;
               name: string;
-              featuredImage: {
-                __typename: 'ImageFileField';
-                id: string;
-                responsiveImage: {
-                  __typename: 'ResponsiveImage';
-                  src: string;
-                  alt: string | null;
-                  title: string | null;
-                  width: number;
-                  height: number;
-                  srcSet: string;
-                  sizes: string;
-                  bgColor: string | null;
-                  aspectRatio: number;
-                };
-              } | null;
-            }>;
-          }
-        | {
-            __typename: 'ProjectGalleryRecord';
-            id: string;
-            projects: Array<{
-              __typename: 'ProjectRecord';
+              featuredImage:
+                | ({
+                    id: string;
+                    responsiveImage: {
+                      src: string;
+                      alt: string | null;
+                      title: string | null;
+                      width: number;
+                      height: number;
+                      srcSet: string;
+                      sizes: string;
+                      bgColor: string | null;
+                      aspectRatio: number;
+                    } & { __typename: 'ResponsiveImage' };
+                  } & { __typename: 'ImageFileField' })
+                | null;
+            } & { __typename: 'StaffRecord' }
+          >;
+        } & { __typename: 'PeopleGalleryRecord' })
+      | ({
+          id: string;
+          projects: Array<
+            {
               id: string;
               name: string;
               pageUrl: string | null;
@@ -3792,10 +3948,8 @@ export type PageFragment = {
               humbleButtonText: string | null;
               description: string;
               featuredImage: {
-                __typename: 'ImageFileField';
                 id: string;
                 responsiveImage: {
-                  __typename: 'ResponsiveImage';
                   src: string;
                   alt: string | null;
                   title: string | null;
@@ -3805,189 +3959,19 @@ export type PageFragment = {
                   sizes: string;
                   bgColor: string | null;
                   aspectRatio: number;
-                };
-              };
-            }>;
-          }
-        | {
-            __typename: 'ResponsiveVideoRecord';
-            id: string;
-            landscape: {
-              __typename: 'VideoFileField';
-              mimeType: string;
-              width: number | null;
-              height: number | null;
-              video: {
-                __typename: 'UploadVideoField';
-                duration: number | null;
-                framerate: number | null;
-                mp4High: string | null;
-                mp4Med: string | null;
-                mp4Low: string | null;
-                thumbJpg: string;
-                thumbGif: string;
-              };
-            };
-            portrait: {
-              __typename: 'VideoFileField';
-              mimeType: string;
-              width: number | null;
-              height: number | null;
-              video: {
-                __typename: 'UploadVideoField';
-                duration: number | null;
-                framerate: number | null;
-                mp4High: string | null;
-                mp4Med: string | null;
-                mp4Low: string | null;
-                thumbJpg: string;
-                thumbGif: string;
-              };
-            };
-          }
-      >;
-    };
-  }>;
-};
-
-export type SectionFragment = {
-  __typename: 'SectionRecord';
-  id: string;
-  title: string;
-  content: {
-    __typename: 'SectionModelContentField';
-    value: unknown;
-    blocks: Array<{
-      __typename: 'SubsectionRecord';
-      id: string;
-      title: string | null;
-      content: {
-        __typename: 'SubsectionModelContentField';
-        value: unknown;
-        links: Array<
-          | {
-              __typename: 'AddressRecord';
-              id: string;
-              name: string;
-              title: string;
-              zipCode: string;
-              country: string;
-              city: string;
-              address: string;
-            }
-          | {
-              __typename: 'CurrentVacanciesModelRecord';
-              id: string;
-              jobs: Array<{
-                __typename: 'JobRecord';
-                id: string;
-                jobTitle: string;
-                minLevel: string;
-                maxLevel: string;
-              }>;
-            }
-        >;
-      };
-    }>;
-    links: Array<
-      | {
-          __typename: 'AddressRecord';
+                } & { __typename: 'ResponsiveImage' };
+              } & { __typename: 'ImageFileField' };
+            } & { __typename: 'ProjectRecord' }
+          >;
+        } & { __typename: 'ProjectGalleryRecord' })
+      | ({
           id: string;
-          name: string;
-          title: string;
-          zipCode: string;
-          country: string;
-          city: string;
-          address: string;
-        }
-      | { __typename: 'CurrentVacanciesModelRecord' }
-      | {
-          __typename: 'ImageGalleryRecord';
-          id: string;
-          title: string;
-          images: Array<{
-            __typename: 'ImageFileField';
-            id: string;
-            responsiveImage: {
-              __typename: 'ResponsiveImage';
-              src: string;
-              alt: string | null;
-              title: string | null;
-              width: number;
-              height: number;
-              srcSet: string;
-              sizes: string;
-              bgColor: string | null;
-              aspectRatio: number;
-            };
-          }>;
-        }
-      | {
-          __typename: 'PeopleGalleryRecord';
-          id: string;
-          people: Array<{
-            __typename: 'StaffRecord';
-            id: string;
-            jobPosition: string;
-            name: string;
-            featuredImage: {
-              __typename: 'ImageFileField';
-              id: string;
-              responsiveImage: {
-                __typename: 'ResponsiveImage';
-                src: string;
-                alt: string | null;
-                title: string | null;
-                width: number;
-                height: number;
-                srcSet: string;
-                sizes: string;
-                bgColor: string | null;
-                aspectRatio: number;
-              };
-            } | null;
-          }>;
-        }
-      | {
-          __typename: 'ProjectGalleryRecord';
-          id: string;
-          projects: Array<{
-            __typename: 'ProjectRecord';
-            id: string;
-            name: string;
-            pageUrl: string | null;
-            steamUrl: string | null;
-            humbleUrl: string | null;
-            humbleButtonText: string | null;
-            description: string;
-            featuredImage: {
-              __typename: 'ImageFileField';
-              id: string;
-              responsiveImage: {
-                __typename: 'ResponsiveImage';
-                src: string;
-                alt: string | null;
-                title: string | null;
-                width: number;
-                height: number;
-                srcSet: string;
-                sizes: string;
-                bgColor: string | null;
-                aspectRatio: number;
-              };
-            };
-          }>;
-        }
-      | {
-          __typename: 'ResponsiveVideoRecord';
-          id: string;
+          overlayText: string | null;
           landscape: {
-            __typename: 'VideoFileField';
             mimeType: string;
             width: number | null;
             height: number | null;
             video: {
-              __typename: 'UploadVideoField';
               duration: number | null;
               framerate: number | null;
               mp4High: string | null;
@@ -3995,15 +3979,13 @@ export type SectionFragment = {
               mp4Low: string | null;
               thumbJpg: string;
               thumbGif: string;
-            };
-          };
+            } & { __typename: 'UploadVideoField' };
+          } & { __typename: 'VideoFileField' };
           portrait: {
-            __typename: 'VideoFileField';
             mimeType: string;
             width: number | null;
             height: number | null;
             video: {
-              __typename: 'UploadVideoField';
               duration: number | null;
               framerate: number | null;
               mp4High: string | null;
@@ -4011,23 +3993,20 @@ export type SectionFragment = {
               mp4Low: string | null;
               thumbJpg: string;
               thumbGif: string;
-            };
-          };
-        }
+            } & { __typename: 'UploadVideoField' };
+          } & { __typename: 'VideoFileField' };
+        } & { __typename: 'ResponsiveVideoRecord' })
     >;
-  };
-};
+  } & { __typename: 'SectionModelContentField' };
+} & { __typename: 'SectionRecord' };
 
 export type SubsectionFragment = {
-  __typename: 'SubsectionRecord';
   id: string;
   title: string | null;
   content: {
-    __typename: 'SubsectionModelContentField';
     value: unknown;
     links: Array<
-      | {
-          __typename: 'AddressRecord';
+      | ({
           id: string;
           name: string;
           title: string;
@@ -4035,93 +4014,84 @@ export type SubsectionFragment = {
           country: string;
           city: string;
           address: string;
-        }
-      | {
-          __typename: 'CurrentVacanciesModelRecord';
+        } & { __typename: 'AddressRecord' })
+      | ({
           id: string;
-          jobs: Array<{
-            __typename: 'JobRecord';
-            id: string;
-            jobTitle: string;
-            minLevel: string;
-            maxLevel: string;
-          }>;
-        }
+          jobs: Array<
+            {
+              id: string;
+              jobTitle: string;
+              minLevel: string;
+              maxLevel: string;
+            } & { __typename: 'JobRecord' }
+          >;
+        } & { __typename: 'CurrentVacanciesModelRecord' })
     >;
-  };
-};
+  } & { __typename: 'SubsectionModelContentField' };
+} & { __typename: 'SubsectionRecord' };
 
 export type CurrentVacanciesFragment = {
-  __typename: 'CurrentVacanciesModelRecord';
   id: string;
-  jobs: Array<{
-    __typename: 'JobRecord';
-    id: string;
-    jobTitle: string;
-    minLevel: string;
-    maxLevel: string;
-  }>;
-};
+  jobs: Array<
+    { id: string; jobTitle: string; minLevel: string; maxLevel: string } & {
+      __typename: 'JobRecord';
+    }
+  >;
+} & { __typename: 'CurrentVacanciesModelRecord' };
 
 export type SocialLinksCollectionFragment = {
-  __typename: 'SocialLinksCollectionRecord';
   id: string;
-  links: Array<{
-    __typename: 'SocialLinkRecord';
-    linkTitle: string | null;
-    id: string;
-    title: string;
-    href: string;
-    icon: {
-      __typename: 'FileField';
-      mimeType: string;
-      url: string;
-      width: number | null;
-      height: number | null;
-    };
-  }>;
-};
+  links: Array<
+    {
+      linkTitle: string | null;
+      id: string;
+      title: string;
+      href: string;
+      icon: {
+        mimeType: string;
+        url: string;
+        width: number | null;
+        height: number | null;
+      } & { __typename: 'FileField' };
+    } & { __typename: 'SocialLinkRecord' }
+  >;
+} & { __typename: 'SocialLinksCollectionRecord' };
 
 export type SocialLinkFragment = {
-  __typename: 'SocialLinkRecord';
   linkTitle: string | null;
   id: string;
   title: string;
   href: string;
   icon: {
-    __typename: 'FileField';
     mimeType: string;
     url: string;
     width: number | null;
     height: number | null;
-  };
-};
+  } & { __typename: 'FileField' };
+} & { __typename: 'SocialLinkRecord' };
 
 export type NavLinkCollectionFragment = {
-  __typename: 'NavLinksCollectionRecord';
   id: string;
-  links: Array<{
-    __typename: 'PageRecord';
-    id: string;
-    urlSlug: string | null;
-    name: string;
-    position: number | null;
-  }>;
-};
+  links: Array<
+    {
+      id: string;
+      urlSlug: string | null;
+      name: string;
+      position: number | null;
+    } & { __typename: 'PageRecord' }
+  >;
+} & { __typename: 'NavLinksCollectionRecord' };
 
 export type IconFragment = {
-  __typename: 'FileField';
   mimeType: string;
   url: string;
   width: number | null;
   height: number | null;
-};
+} & { __typename: 'FileField' };
 
 export type ResponsiveImageFragment = {
-  __typename: 'ImageFileField';
   id: string;
   responsiveImage: {
-    __typename: 'ResponsiveImage';
     src: string;
     alt: string | null;
     title: string | null;
@@ -4131,16 +4101,14 @@ export type ResponsiveImageFragment = {
     sizes: string;
     bgColor: string | null;
     aspectRatio: number;
-  };
-};
+  } & { __typename: 'ResponsiveImage' };
+} & { __typename: 'ImageFileField' };
 
 export type VideoFragment = {
-  __typename: 'VideoFileField';
   mimeType: string;
   width: number | null;
   height: number | null;
   video: {
-    __typename: 'UploadVideoField';
     duration: number | null;
     framerate: number | null;
     mp4High: string | null;
@@ -4148,19 +4116,17 @@ export type VideoFragment = {
     mp4Low: string | null;
     thumbJpg: string;
     thumbGif: string;
-  };
-};
+  } & { __typename: 'UploadVideoField' };
+} & { __typename: 'VideoFileField' };
 
 export type ResponsiveVideoFragment = {
-  __typename: 'ResponsiveVideoRecord';
   id: string;
+  overlayText: string | null;
   landscape: {
-    __typename: 'VideoFileField';
     mimeType: string;
     width: number | null;
     height: number | null;
     video: {
-      __typename: 'UploadVideoField';
       duration: number | null;
       framerate: number | null;
       mp4High: string | null;
@@ -4168,15 +4134,13 @@ export type ResponsiveVideoFragment = {
       mp4Low: string | null;
       thumbJpg: string;
       thumbGif: string;
-    };
-  };
+    } & { __typename: 'UploadVideoField' };
+  } & { __typename: 'VideoFileField' };
   portrait: {
-    __typename: 'VideoFileField';
     mimeType: string;
     width: number | null;
     height: number | null;
     video: {
-      __typename: 'UploadVideoField';
       duration: number | null;
       framerate: number | null;
       mp4High: string | null;
@@ -4184,12 +4148,11 @@ export type ResponsiveVideoFragment = {
       mp4Low: string | null;
       thumbJpg: string;
       thumbGif: string;
-    };
-  };
-};
+    } & { __typename: 'UploadVideoField' };
+  } & { __typename: 'VideoFileField' };
+} & { __typename: 'ResponsiveVideoRecord' };
 
 export type AddressFragment = {
-  __typename: 'AddressRecord';
   id: string;
   name: string;
   title: string;
@@ -4197,10 +4160,9 @@ export type AddressFragment = {
   country: string;
   city: string;
   address: string;
-};
+} & { __typename: 'AddressRecord' };
 
 export type ProjectFragment = {
-  __typename: 'ProjectRecord';
   id: string;
   name: string;
   pageUrl: string | null;
@@ -4209,10 +4171,8 @@ export type ProjectFragment = {
   humbleButtonText: string | null;
   description: string;
   featuredImage: {
-    __typename: 'ImageFileField';
     id: string;
     responsiveImage: {
-      __typename: 'ResponsiveImage';
       src: string;
       alt: string | null;
       title: string | null;
@@ -4222,77 +4182,95 @@ export type ProjectFragment = {
       sizes: string;
       bgColor: string | null;
       aspectRatio: number;
-    };
-  };
-};
+    } & { __typename: 'ResponsiveImage' };
+  } & { __typename: 'ImageFileField' };
+} & { __typename: 'ProjectRecord' };
 
 export type ProjectGalleryFragment = {
-  __typename: 'ProjectGalleryRecord';
   id: string;
-  projects: Array<{
-    __typename: 'ProjectRecord';
-    id: string;
-    name: string;
-    pageUrl: string | null;
-    steamUrl: string | null;
-    humbleUrl: string | null;
-    humbleButtonText: string | null;
-    description: string;
-    featuredImage: {
-      __typename: 'ImageFileField';
+  projects: Array<
+    {
       id: string;
-      responsiveImage: {
-        __typename: 'ResponsiveImage';
-        src: string;
-        alt: string | null;
-        title: string | null;
-        width: number;
-        height: number;
-        srcSet: string;
-        sizes: string;
-        bgColor: string | null;
-        aspectRatio: number;
-      };
-    };
-  }>;
-};
+      name: string;
+      pageUrl: string | null;
+      steamUrl: string | null;
+      humbleUrl: string | null;
+      humbleButtonText: string | null;
+      description: string;
+      featuredImage: {
+        id: string;
+        responsiveImage: {
+          src: string;
+          alt: string | null;
+          title: string | null;
+          width: number;
+          height: number;
+          srcSet: string;
+          sizes: string;
+          bgColor: string | null;
+          aspectRatio: number;
+        } & { __typename: 'ResponsiveImage' };
+      } & { __typename: 'ImageFileField' };
+    } & { __typename: 'ProjectRecord' }
+  >;
+} & { __typename: 'ProjectGalleryRecord' };
 
 export type StaffFragment = {
-  __typename: 'StaffRecord';
   id: string;
   jobPosition: string;
   name: string;
-  featuredImage: {
-    __typename: 'ImageFileField';
-    id: string;
-    responsiveImage: {
-      __typename: 'ResponsiveImage';
-      src: string;
-      alt: string | null;
-      title: string | null;
-      width: number;
-      height: number;
-      srcSet: string;
-      sizes: string;
-      bgColor: string | null;
-      aspectRatio: number;
-    };
-  } | null;
-};
+  featuredImage:
+    | ({
+        id: string;
+        responsiveImage: {
+          src: string;
+          alt: string | null;
+          title: string | null;
+          width: number;
+          height: number;
+          srcSet: string;
+          sizes: string;
+          bgColor: string | null;
+          aspectRatio: number;
+        } & { __typename: 'ResponsiveImage' };
+      } & { __typename: 'ImageFileField' })
+    | null;
+} & { __typename: 'StaffRecord' };
 
 export type PeopleGalleryFragment = {
-  __typename: 'PeopleGalleryRecord';
   id: string;
-  people: Array<{
-    __typename: 'StaffRecord';
-    id: string;
-    jobPosition: string;
-    name: string;
-    featuredImage: {
-      __typename: 'ImageFileField';
+  people: Array<
+    {
+      id: string;
+      jobPosition: string;
+      name: string;
+      featuredImage:
+        | ({
+            id: string;
+            responsiveImage: {
+              src: string;
+              alt: string | null;
+              title: string | null;
+              width: number;
+              height: number;
+              srcSet: string;
+              sizes: string;
+              bgColor: string | null;
+              aspectRatio: number;
+            } & { __typename: 'ResponsiveImage' };
+          } & { __typename: 'ImageFileField' })
+        | null;
+    } & { __typename: 'StaffRecord' }
+  >;
+} & { __typename: 'PeopleGalleryRecord' };
+
+export type ImageGalleryFragment = {
+  id: string;
+  title: string;
+  images: Array<
+    {
       id: string;
       responsiveImage: {
-        __typename: 'ResponsiveImage';
         src: string;
         alt: string | null;
         title: string | null;
@@ -4302,93 +4280,64 @@ export type PeopleGalleryFragment = {
         sizes: string;
         bgColor: string | null;
         aspectRatio: number;
-      };
-    } | null;
-  }>;
-};
-
-export type ImageGalleryFragment = {
-  __typename: 'ImageGalleryRecord';
-  id: string;
-  title: string;
-  images: Array<{
-    __typename: 'ImageFileField';
-    id: string;
-    responsiveImage: {
-      __typename: 'ResponsiveImage';
-      src: string;
-      alt: string | null;
-      title: string | null;
-      width: number;
-      height: number;
-      srcSet: string;
-      sizes: string;
-      bgColor: string | null;
-      aspectRatio: number;
-    };
-  }>;
-};
+      } & { __typename: 'ResponsiveImage' };
+    } & { __typename: 'ImageFileField' }
+  >;
+} & { __typename: 'ImageGalleryRecord' };
 
 export type FooterFragment = {
-  __typename: 'FooterRecord';
   id: string;
-  sections: Array<{
-    __typename: 'FooterSectionRecord';
-    id: string;
-    content: {
-      __typename: 'FooterSectionModelContentField';
-      value: unknown;
-      links: Array<
-        | {
-            __typename: 'AddressRecord';
-            id: string;
-            name: string;
-            title: string;
-            zipCode: string;
-            country: string;
-            city: string;
-            address: string;
-          }
-        | {
-            __typename: 'SocialLinksCollectionRecord';
-            id: string;
-            links: Array<{
-              __typename: 'SocialLinkRecord';
-              linkTitle: string | null;
+  sections: Array<
+    {
+      id: string;
+      content: {
+        value: unknown;
+        links: Array<
+          | ({
               id: string;
+              name: string;
               title: string;
-              href: string;
-              icon: {
-                __typename: 'FileField';
-                mimeType: string;
-                url: string;
-                width: number | null;
-                height: number | null;
-              };
-            }>;
-          }
-      >;
-    };
-  }>;
-};
+              zipCode: string;
+              country: string;
+              city: string;
+              address: string;
+            } & { __typename: 'AddressRecord' })
+          | ({
+              id: string;
+              links: Array<
+                {
+                  linkTitle: string | null;
+                  id: string;
+                  title: string;
+                  href: string;
+                  icon: {
+                    mimeType: string;
+                    url: string;
+                    width: number | null;
+                    height: number | null;
+                  } & { __typename: 'FileField' };
+                } & { __typename: 'SocialLinkRecord' }
+              >;
+            } & { __typename: 'SocialLinksCollectionRecord' })
+        >;
+      } & { __typename: 'FooterSectionModelContentField' };
+    } & { __typename: 'FooterSectionRecord' }
+  >;
+} & { __typename: 'FooterRecord' };
 
 export type PageLinkFragment = {
-  __typename: 'PageRecord';
   id: string;
   urlSlug: string | null;
   name: string;
   position: number | null;
-};
+} & { __typename: 'PageRecord' };
 
 export type FooterSectionFragment = {
-  __typename: 'FooterSectionRecord';
   id: string;
   content: {
-    __typename: 'FooterSectionModelContentField';
     value: unknown;
     links: Array<
-      | {
-          __typename: 'AddressRecord';
+      | ({
           id: string;
           name: string;
           title: string;
@@ -4396,464 +4345,456 @@ export type FooterSectionFragment = {
           country: string;
           city: string;
           address: string;
-        }
-      | {
-          __typename: 'SocialLinksCollectionRecord';
+        } & { __typename: 'AddressRecord' })
+      | ({
           id: string;
-          links: Array<{
-            __typename: 'SocialLinkRecord';
-            linkTitle: string | null;
-            id: string;
-            title: string;
-            href: string;
-            icon: {
-              __typename: 'FileField';
-              mimeType: string;
-              url: string;
-              width: number | null;
-              height: number | null;
-            };
-          }>;
-        }
-    >;
-  };
-};
-
-export type HeaderFragment = {
-  __typename: 'HeaderRecord';
-  id: string;
-  sections: Array<{
-    __typename: 'HeaderSectionRecord';
-    id: string;
-    content: {
-      __typename: 'HeaderSectionModelContentField';
-      value: unknown;
-      links: Array<
-        | {
-            __typename: 'NavLinksCollectionRecord';
-            id: string;
-            links: Array<{
-              __typename: 'PageRecord';
-              id: string;
-              urlSlug: string | null;
-              name: string;
-              position: number | null;
-            }>;
-          }
-        | {
-            __typename: 'SocialLinksCollectionRecord';
-            id: string;
-            links: Array<{
-              __typename: 'SocialLinkRecord';
+          links: Array<
+            {
               linkTitle: string | null;
               id: string;
               title: string;
               href: string;
               icon: {
-                __typename: 'FileField';
                 mimeType: string;
                 url: string;
                 width: number | null;
                 height: number | null;
-              };
-            }>;
-          }
-      >;
-    };
-  }>;
-};
+              } & { __typename: 'FileField' };
+            } & { __typename: 'SocialLinkRecord' }
+          >;
+        } & { __typename: 'SocialLinksCollectionRecord' })
+    >;
+  } & { __typename: 'FooterSectionModelContentField' };
+} & { __typename: 'FooterSectionRecord' };
+
+export type HeaderFragment = {
+  id: string;
+  sections: Array<
+    {
+      id: string;
+      content: {
+        value: unknown;
+        links: Array<
+          | ({
+              id: string;
+              links: Array<
+                {
+                  id: string;
+                  urlSlug: string | null;
+                  name: string;
+                  position: number | null;
+                } & { __typename: 'PageRecord' }
+              >;
+            } & { __typename: 'NavLinksCollectionRecord' })
+          | ({
+              id: string;
+              links: Array<
+                {
+                  linkTitle: string | null;
+                  id: string;
+                  title: string;
+                  href: string;
+                  icon: {
+                    mimeType: string;
+                    url: string;
+                    width: number | null;
+                    height: number | null;
+                  } & { __typename: 'FileField' };
+                } & { __typename: 'SocialLinkRecord' }
+              >;
+            } & { __typename: 'SocialLinksCollectionRecord' })
+        >;
+      } & { __typename: 'HeaderSectionModelContentField' };
+    } & { __typename: 'HeaderSectionRecord' }
+  >;
+} & { __typename: 'HeaderRecord' };
 
 export type HeaderSectionFragment = {
-  __typename: 'HeaderSectionRecord';
   id: string;
   content: {
-    __typename: 'HeaderSectionModelContentField';
     value: unknown;
     links: Array<
-      | {
-          __typename: 'NavLinksCollectionRecord';
+      | ({
           id: string;
-          links: Array<{
-            __typename: 'PageRecord';
-            id: string;
-            urlSlug: string | null;
-            name: string;
-            position: number | null;
-          }>;
-        }
-      | {
-          __typename: 'SocialLinksCollectionRecord';
+          links: Array<
+            {
+              id: string;
+              urlSlug: string | null;
+              name: string;
+              position: number | null;
+            } & { __typename: 'PageRecord' }
+          >;
+        } & { __typename: 'NavLinksCollectionRecord' })
+      | ({
           id: string;
-          links: Array<{
-            __typename: 'SocialLinkRecord';
-            linkTitle: string | null;
-            id: string;
-            title: string;
-            href: string;
-            icon: {
-              __typename: 'FileField';
-              mimeType: string;
-              url: string;
-              width: number | null;
-              height: number | null;
-            };
-          }>;
-        }
+          links: Array<
+            {
+              linkTitle: string | null;
+              id: string;
+              title: string;
+              href: string;
+              icon: {
+                mimeType: string;
+                url: string;
+                width: number | null;
+                height: number | null;
+              } & { __typename: 'FileField' };
+            } & { __typename: 'SocialLinkRecord' }
+          >;
+        } & { __typename: 'SocialLinksCollectionRecord' })
     >;
-  };
-};
+  } & { __typename: 'HeaderSectionModelContentField' };
+} & { __typename: 'HeaderSectionRecord' };
 
 export type SiteMetaFragment = {
-  __typename: 'Site';
-  globalSeo: {
-    __typename: 'GlobalSeoField';
-    facebookPageUrl: string | null;
-    twitterAccount: string | null;
-    titleSuffix: string | null;
-    siteName: string | null;
-    fallbackSeo: {
-      __typename: 'SeoField';
-      description: string | null;
-      title: string | null;
-      twitterCard: string | null;
-    } | null;
-  } | null;
-  favicon: { __typename: 'FileField'; url: string; mimeType: string } | null;
-};
+  globalSeo:
+    | ({
+        facebookPageUrl: string | null;
+        twitterAccount: string | null;
+        titleSuffix: string | null;
+        siteName: string | null;
+        fallbackSeo:
+          | ({
+              description: string | null;
+              title: string | null;
+              twitterCard: string | null;
+            } & { __typename: 'SeoField' })
+          | null;
+      } & { __typename: 'GlobalSeoField' })
+    | null;
+  favicon:
+    | ({ url: string; mimeType: string } & { __typename: 'FileField' })
+    | null;
+} & { __typename: 'Site' };
 
 export type PageQueryVariables = Exact<{
   name: InputMaybe<Scalars['String']>;
 }>;
 
 export type PageQuery = {
-  __typename: 'Query';
-  page: {
-    __typename: 'PageRecord';
-    name: string;
-    pageTitle: string;
-    urlSlug: string | null;
-    id: string;
-    metaTags: {
-      __typename: 'SeoField';
-      description: string | null;
-      title: string | null;
-      twitterCard: string | null;
-      image: {
-        __typename: 'FileField';
-        url: string;
-        title: string | null;
-        width: number | null;
-        height: number | null;
-      } | null;
-    } | null;
-    _seoMetaTags: Array<{
-      __typename: 'Tag';
-      content: string | null;
-      tag: string;
-      attributes: Record<string, string> | null;
-    }>;
-    sections: Array<{
-      __typename: 'SectionRecord';
-      id: string;
-      title: string;
-      content: {
-        __typename: 'SectionModelContentField';
-        value: unknown;
-        blocks: Array<{
-          __typename: 'SubsectionRecord';
-          id: string;
-          title: string | null;
-          content: {
-            __typename: 'SubsectionModelContentField';
-            value: unknown;
-            links: Array<
-              | {
-                  __typename: 'AddressRecord';
+  page:
+    | ({
+        name: string;
+        pageTitle: string;
+        urlSlug: string | null;
+        id: string;
+        metaTags:
+          | ({
+              description: string | null;
+              title: string | null;
+              twitterCard: string | null;
+              image:
+                | ({
+                    url: string;
+                    title: string | null;
+                    width: number | null;
+                    height: number | null;
+                  } & { __typename: 'FileField' })
+                | null;
+            } & { __typename: 'SeoField' })
+          | null;
+        _seoMetaTags: Array<
+          {
+            content: string | null;
+            tag: string;
+            attributes: Record<string, string> | null;
+          } & { __typename: 'Tag' }
+        >;
+        sections: Array<
+          {
+            id: string;
+            title: string | null;
+            content: {
+              value: unknown;
+              blocks: Array<
+                {
                   id: string;
-                  name: string;
-                  title: string;
-                  zipCode: string;
-                  country: string;
-                  city: string;
-                  address: string;
-                }
-              | {
-                  __typename: 'CurrentVacanciesModelRecord';
-                  id: string;
-                  jobs: Array<{
-                    __typename: 'JobRecord';
-                    id: string;
-                    jobTitle: string;
-                    minLevel: string;
-                    maxLevel: string;
-                  }>;
-                }
-            >;
-          };
-        }>;
-        links: Array<
-          | {
-              __typename: 'AddressRecord';
-              id: string;
-              name: string;
-              title: string;
-              zipCode: string;
-              country: string;
-              city: string;
-              address: string;
-            }
-          | { __typename: 'CurrentVacanciesModelRecord' }
-          | {
-              __typename: 'ImageGalleryRecord';
-              id: string;
-              title: string;
-              images: Array<{
-                __typename: 'ImageFileField';
-                id: string;
-                responsiveImage: {
-                  __typename: 'ResponsiveImage';
-                  src: string;
-                  alt: string | null;
                   title: string | null;
-                  width: number;
-                  height: number;
-                  srcSet: string;
-                  sizes: string;
-                  bgColor: string | null;
-                  aspectRatio: number;
-                };
-              }>;
-            }
-          | {
-              __typename: 'PeopleGalleryRecord';
-              id: string;
-              people: Array<{
-                __typename: 'StaffRecord';
-                id: string;
-                jobPosition: string;
-                name: string;
-                featuredImage: {
-                  __typename: 'ImageFileField';
-                  id: string;
-                  responsiveImage: {
-                    __typename: 'ResponsiveImage';
-                    src: string;
-                    alt: string | null;
-                    title: string | null;
-                    width: number;
-                    height: number;
-                    srcSet: string;
-                    sizes: string;
-                    bgColor: string | null;
-                    aspectRatio: number;
-                  };
-                } | null;
-              }>;
-            }
-          | {
-              __typename: 'ProjectGalleryRecord';
-              id: string;
-              projects: Array<{
-                __typename: 'ProjectRecord';
-                id: string;
-                name: string;
-                pageUrl: string | null;
-                steamUrl: string | null;
-                humbleUrl: string | null;
-                humbleButtonText: string | null;
-                description: string;
-                featuredImage: {
-                  __typename: 'ImageFileField';
-                  id: string;
-                  responsiveImage: {
-                    __typename: 'ResponsiveImage';
-                    src: string;
-                    alt: string | null;
-                    title: string | null;
-                    width: number;
-                    height: number;
-                    srcSet: string;
-                    sizes: string;
-                    bgColor: string | null;
-                    aspectRatio: number;
-                  };
-                };
-              }>;
-            }
-          | {
-              __typename: 'ResponsiveVideoRecord';
-              id: string;
-              landscape: {
-                __typename: 'VideoFileField';
-                mimeType: string;
-                width: number | null;
-                height: number | null;
-                video: {
-                  __typename: 'UploadVideoField';
-                  duration: number | null;
-                  framerate: number | null;
-                  mp4High: string | null;
-                  mp4Med: string | null;
-                  mp4Low: string | null;
-                  thumbJpg: string;
-                  thumbGif: string;
-                };
-              };
-              portrait: {
-                __typename: 'VideoFileField';
-                mimeType: string;
-                width: number | null;
-                height: number | null;
-                video: {
-                  __typename: 'UploadVideoField';
-                  duration: number | null;
-                  framerate: number | null;
-                  mp4High: string | null;
-                  mp4Med: string | null;
-                  mp4Low: string | null;
-                  thumbJpg: string;
-                  thumbGif: string;
-                };
-              };
-            }
+                  content: {
+                    value: unknown;
+                    links: Array<
+                      | ({
+                          id: string;
+                          name: string;
+                          title: string;
+                          zipCode: string;
+                          country: string;
+                          city: string;
+                          address: string;
+                        } & { __typename: 'AddressRecord' })
+                      | ({
+                          id: string;
+                          jobs: Array<
+                            {
+                              id: string;
+                              jobTitle: string;
+                              minLevel: string;
+                              maxLevel: string;
+                            } & { __typename: 'JobRecord' }
+                          >;
+                        } & { __typename: 'CurrentVacanciesModelRecord' })
+                    >;
+                  } & { __typename: 'SubsectionModelContentField' };
+                } & { __typename: 'SubsectionRecord' }
+              >;
+              links: Array<
+                | ({
+                    id: string;
+                    name: string;
+                    title: string;
+                    zipCode: string;
+                    country: string;
+                    city: string;
+                    address: string;
+                  } & { __typename: 'AddressRecord' })
+                | { __typename: 'CurrentVacanciesModelRecord' }
+                | ({
+                    id: string;
+                    title: string;
+                    images: Array<
+                      {
+                        id: string;
+                        responsiveImage: {
+                          src: string;
+                          alt: string | null;
+                          title: string | null;
+                          width: number;
+                          height: number;
+                          srcSet: string;
+                          sizes: string;
+                          bgColor: string | null;
+                          aspectRatio: number;
+                        } & { __typename: 'ResponsiveImage' };
+                      } & { __typename: 'ImageFileField' }
+                    >;
+                  } & { __typename: 'ImageGalleryRecord' })
+                | ({
+                    id: string;
+                    people: Array<
+                      {
+                        id: string;
+                        jobPosition: string;
+                        name: string;
+                        featuredImage:
+                          | ({
+                              id: string;
+                              responsiveImage: {
+                                src: string;
+                                alt: string | null;
+                                title: string | null;
+                                width: number;
+                                height: number;
+                                srcSet: string;
+                                sizes: string;
+                                bgColor: string | null;
+                                aspectRatio: number;
+                              } & { __typename: 'ResponsiveImage' };
+                            } & { __typename: 'ImageFileField' })
+                          | null;
+                      } & { __typename: 'StaffRecord' }
+                    >;
+                  } & { __typename: 'PeopleGalleryRecord' })
+                | ({
+                    id: string;
+                    projects: Array<
+                      {
+                        id: string;
+                        name: string;
+                        pageUrl: string | null;
+                        steamUrl: string | null;
+                        humbleUrl: string | null;
+                        humbleButtonText: string | null;
+                        description: string;
+                        featuredImage: {
+                          id: string;
+                          responsiveImage: {
+                            src: string;
+                            alt: string | null;
+                            title: string | null;
+                            width: number;
+                            height: number;
+                            srcSet: string;
+                            sizes: string;
+                            bgColor: string | null;
+                            aspectRatio: number;
+                          } & { __typename: 'ResponsiveImage' };
+                        } & { __typename: 'ImageFileField' };
+                      } & { __typename: 'ProjectRecord' }
+                    >;
+                  } & { __typename: 'ProjectGalleryRecord' })
+                | ({
+                    id: string;
+                    overlayText: string | null;
+                    landscape: {
+                      mimeType: string;
+                      width: number | null;
+                      height: number | null;
+                      video: {
+                        duration: number | null;
+                        framerate: number | null;
+                        mp4High: string | null;
+                        mp4Med: string | null;
+                        mp4Low: string | null;
+                        thumbJpg: string;
+                        thumbGif: string;
+                      } & { __typename: 'UploadVideoField' };
+                    } & { __typename: 'VideoFileField' };
+                    portrait: {
+                      mimeType: string;
+                      width: number | null;
+                      height: number | null;
+                      video: {
+                        duration: number | null;
+                        framerate: number | null;
+                        mp4High: string | null;
+                        mp4Med: string | null;
+                        mp4Low: string | null;
+                        thumbJpg: string;
+                        thumbGif: string;
+                      } & { __typename: 'UploadVideoField' };
+                    } & { __typename: 'VideoFileField' };
+                  } & { __typename: 'ResponsiveVideoRecord' })
+              >;
+            } & { __typename: 'SectionModelContentField' };
+          } & { __typename: 'SectionRecord' }
         >;
-      };
-    }>;
-  } | null;
-  header: {
-    __typename: 'HeaderRecord';
-    id: string;
-    sections: Array<{
-      __typename: 'HeaderSectionRecord';
-      id: string;
-      content: {
-        __typename: 'HeaderSectionModelContentField';
-        value: unknown;
-        links: Array<
-          | {
-              __typename: 'NavLinksCollectionRecord';
-              id: string;
-              links: Array<{
-                __typename: 'PageRecord';
-                id: string;
-                urlSlug: string | null;
-                name: string;
-                position: number | null;
-              }>;
-            }
-          | {
-              __typename: 'SocialLinksCollectionRecord';
-              id: string;
-              links: Array<{
-                __typename: 'SocialLinkRecord';
-                linkTitle: string | null;
-                id: string;
-                title: string;
-                href: string;
-                icon: {
-                  __typename: 'FileField';
-                  mimeType: string;
-                  url: string;
-                  width: number | null;
-                  height: number | null;
-                };
-              }>;
-            }
+      } & { __typename: 'PageRecord' })
+    | null;
+  header:
+    | ({
+        id: string;
+        sections: Array<
+          {
+            id: string;
+            content: {
+              value: unknown;
+              links: Array<
+                | ({
+                    id: string;
+                    links: Array<
+                      {
+                        id: string;
+                        urlSlug: string | null;
+                        name: string;
+                        position: number | null;
+                      } & { __typename: 'PageRecord' }
+                    >;
+                  } & { __typename: 'NavLinksCollectionRecord' })
+                | ({
+                    id: string;
+                    links: Array<
+                      {
+                        linkTitle: string | null;
+                        id: string;
+                        title: string;
+                        href: string;
+                        icon: {
+                          mimeType: string;
+                          url: string;
+                          width: number | null;
+                          height: number | null;
+                        } & { __typename: 'FileField' };
+                      } & { __typename: 'SocialLinkRecord' }
+                    >;
+                  } & { __typename: 'SocialLinksCollectionRecord' })
+              >;
+            } & { __typename: 'HeaderSectionModelContentField' };
+          } & { __typename: 'HeaderSectionRecord' }
         >;
-      };
-    }>;
-  } | null;
-  footer: {
-    __typename: 'FooterRecord';
-    id: string;
-    sections: Array<{
-      __typename: 'FooterSectionRecord';
-      id: string;
-      content: {
-        __typename: 'FooterSectionModelContentField';
-        value: unknown;
-        links: Array<
-          | {
-              __typename: 'AddressRecord';
-              id: string;
-              name: string;
-              title: string;
-              zipCode: string;
-              country: string;
-              city: string;
-              address: string;
-            }
-          | {
-              __typename: 'SocialLinksCollectionRecord';
-              id: string;
-              links: Array<{
-                __typename: 'SocialLinkRecord';
-                linkTitle: string | null;
-                id: string;
-                title: string;
-                href: string;
-                icon: {
-                  __typename: 'FileField';
-                  mimeType: string;
-                  url: string;
-                  width: number | null;
-                  height: number | null;
-                };
-              }>;
-            }
+      } & { __typename: 'HeaderRecord' })
+    | null;
+  footer:
+    | ({
+        id: string;
+        sections: Array<
+          {
+            id: string;
+            content: {
+              value: unknown;
+              links: Array<
+                | ({
+                    id: string;
+                    name: string;
+                    title: string;
+                    zipCode: string;
+                    country: string;
+                    city: string;
+                    address: string;
+                  } & { __typename: 'AddressRecord' })
+                | ({
+                    id: string;
+                    links: Array<
+                      {
+                        linkTitle: string | null;
+                        id: string;
+                        title: string;
+                        href: string;
+                        icon: {
+                          mimeType: string;
+                          url: string;
+                          width: number | null;
+                          height: number | null;
+                        } & { __typename: 'FileField' };
+                      } & { __typename: 'SocialLinkRecord' }
+                    >;
+                  } & { __typename: 'SocialLinksCollectionRecord' })
+              >;
+            } & { __typename: 'FooterSectionModelContentField' };
+          } & { __typename: 'FooterSectionRecord' }
         >;
-      };
-    }>;
-  } | null;
+      } & { __typename: 'FooterRecord' })
+    | null;
   _site: {
-    __typename: 'Site';
-    globalSeo: {
-      __typename: 'GlobalSeoField';
-      facebookPageUrl: string | null;
-      twitterAccount: string | null;
-      titleSuffix: string | null;
-      siteName: string | null;
-      fallbackSeo: {
-        __typename: 'SeoField';
-        description: string | null;
-        title: string | null;
-        twitterCard: string | null;
-      } | null;
-    } | null;
-    favicon: { __typename: 'FileField'; url: string; mimeType: string } | null;
-  };
-};
+    globalSeo:
+      | ({
+          facebookPageUrl: string | null;
+          twitterAccount: string | null;
+          titleSuffix: string | null;
+          siteName: string | null;
+          fallbackSeo:
+            | ({
+                description: string | null;
+                title: string | null;
+                twitterCard: string | null;
+              } & { __typename: 'SeoField' })
+            | null;
+        } & { __typename: 'GlobalSeoField' })
+      | null;
+    favicon:
+      | ({ url: string; mimeType: string } & { __typename: 'FileField' })
+      | null;
+  } & { __typename: 'Site' };
+} & { __typename: 'Query' };
 
 export type PageNamesQueryVariables = Exact<{ [key: string]: never }>;
 
 export type PageNamesQuery = {
-  __typename: 'Query';
-  pages: Array<{ __typename: 'PageRecord'; name: string }>;
-};
+  pages: Array<{ name: string } & { __typename: 'PageRecord' }>;
+} & { __typename: 'Query' };
 
 export type SocialLinksQueryVariables = Exact<{ [key: string]: never }>;
 
 export type SocialLinksQuery = {
-  __typename: 'Query';
-  socialLinksCollection: {
-    __typename: 'SocialLinksCollectionRecord';
-    id: string;
-    links: Array<{
-      __typename: 'SocialLinkRecord';
-      linkTitle: string | null;
-      id: string;
-      title: string;
-      href: string;
-      icon: {
-        __typename: 'FileField';
-        mimeType: string;
-        url: string;
-        width: number | null;
-        height: number | null;
-      };
-    }>;
-  } | null;
-};
+  socialLinksCollection:
+    | ({
+        id: string;
+        links: Array<
+          {
+            linkTitle: string | null;
+            id: string;
+            title: string;
+            href: string;
+            icon: {
+              mimeType: string;
+              url: string;
+              width: number | null;
+              height: number | null;
+            } & { __typename: 'FileField' };
+          } & { __typename: 'SocialLinkRecord' }
+        >;
+      } & { __typename: 'SocialLinksCollectionRecord' })
+    | null;
+} & { __typename: 'Query' };
 
 export const AddressFragmentDoc = {
   kind: 'Document',
@@ -5341,6 +5282,7 @@ export const ResponsiveVideoFragmentDoc = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'overlayText' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'landscape' },
