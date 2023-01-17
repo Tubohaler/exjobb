@@ -3790,6 +3790,7 @@ export type PageFragment = {
               steamUrl: string | null;
               humbleUrl: string | null;
               humbleButtonText: string | null;
+              description: string;
               featuredImage: {
                 __typename: 'ImageFileField';
                 id: string;
@@ -3958,6 +3959,7 @@ export type SectionFragment = {
             steamUrl: string | null;
             humbleUrl: string | null;
             humbleButtonText: string | null;
+            description: string;
             featuredImage: {
               __typename: 'ImageFileField';
               id: string;
@@ -4205,6 +4207,7 @@ export type ProjectFragment = {
   steamUrl: string | null;
   humbleUrl: string | null;
   humbleButtonText: string | null;
+  description: string;
   featuredImage: {
     __typename: 'ImageFileField';
     id: string;
@@ -4234,6 +4237,7 @@ export type ProjectGalleryFragment = {
     steamUrl: string | null;
     humbleUrl: string | null;
     humbleButtonText: string | null;
+    description: string;
     featuredImage: {
       __typename: 'ImageFileField';
       id: string;
@@ -4657,6 +4661,7 @@ export type PageQuery = {
                 steamUrl: string | null;
                 humbleUrl: string | null;
                 humbleButtonText: string | null;
+                description: string;
                 featuredImage: {
                   __typename: 'ImageFileField';
                   id: string;
@@ -5073,6 +5078,7 @@ export const ProjectFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'steamUrl' } },
           { kind: 'Field', name: { kind: 'Name', value: 'humbleUrl' } },
           { kind: 'Field', name: { kind: 'Name', value: 'humbleButtonText' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'description' } },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'featuredImage' },

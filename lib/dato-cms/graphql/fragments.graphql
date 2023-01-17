@@ -191,6 +191,7 @@ fragment Project on ProjectRecord {
   steamUrl
   humbleUrl
   humbleButtonText
+  description
   featuredImage {
     ...ResponsiveImage
   }
