@@ -61,5 +61,4 @@ export interface StaticPageData extends PageQuery {
 }
 
 export type StaticPageProps = { data: StaticPageData };
-
 export type PageName = 'home' | 'about' | 'contact' | 'career';

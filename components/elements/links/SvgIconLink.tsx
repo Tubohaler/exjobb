@@ -10,8 +10,8 @@ import { defaultTransition } from '@lib/theme/main';
 
 import SvgIcon, { SvgIconProps } from '../SvgIcon';
 
-export type IconLinkStylesNames = 'root' | 'wrapper' | 'svg';
-export type IconLinkStylesParams = {
+export type SvgIconLinkStylesNames = 'root' | 'wrapper' | 'svg';
+export type SvgIconLinkStylesParams = {
   color?: string;
   baseShade?: number;
   hoverColor?: string;
@@ -19,12 +19,12 @@ export type IconLinkStylesParams = {
   size?: MantineNumberSize;
 };
 
-export type IconLinkProps = DefaultProps<
-  IconLinkStylesNames,
-  IconLinkStylesParams
+export type SvgIconLinkProps = DefaultProps<
+  SvgIconLinkStylesNames,
+  SvgIconLinkStylesParams
 > &
   Parameters<typeof ActionIcon<typeof Link>>[0] &
-  IconLinkStylesParams &
+  SvgIconLinkStylesParams &
   Pick<SvgIconProps, 'icon' | 'fallback'>;
 
 const useStyles = createStyles(
@@ -36,7 +36,7 @@ const useStyles = createStyles(
       hoverColor = 'red',
       baseShade = 9,
       hoverShade = 2,
-    }: IconLinkStylesParams
+    }: SvgIconLinkStylesParams
   ) => {
     const getColor = (color: string, shade?: number) => {
       return color === 'black' || color === 'white'
@@ -46,7 +46,7 @@ const useStyles = createStyles(
         : color;
     };
 
-    const styles: Record<IconLinkStylesNames, CSSObject> = {
+    const styles: Record<SvgIconLinkStylesNames, CSSObject> = {
       root: {
         fontSize:
           typeof size === 'number'
@@ -97,7 +97,7 @@ const SvgIconLink = ({
   hoverShade = 2,
   variant = 'transparent',
   ...props
-}: IconLinkProps) => {
+}: SvgIconLinkProps) => {
   const { classes, cx } = useStyles(
     {
       size,

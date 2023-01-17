@@ -19,10 +19,10 @@ export type VideoStylesParams = { loaded?: boolean };
 
 const useStyles = createStyles((theme) => {
   return {
-    video: {
+    root: {
       opacity: 0,
       background: theme.black,
-      transition: createTransition(['all'], 0.05, 'ease-in-out', 0),
+      transition: createTransition(['opacity'], 0.05, 'ease-in-out', 0),
       objectFit: 'cover',
       objectPosition: 'center',
     },
@@ -34,7 +34,7 @@ const useStyles = createStyles((theme) => {
 
 const Video = ({ video, fallback, className, ...props }: VideoProps) => {
   const [currentVideo, setCurrentVideo] = useState(video);
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const { classes, cx } = useStyles(undefined, { name: 'Video' });
   const prevVideo = useRef(currentVideo);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -56,7 +56,7 @@ const Video = ({ video, fallback, className, ...props }: VideoProps) => {
   return (
     <video
       ref={videoRef}
-      className={cx(classes.video, visible ? classes.loaded : null, className)}
+      className={cx(classes.root, visible ? classes.loaded : null, className)}
       width={currentVideo.width || 'auto'}
       height={currentVideo.height || 'auto'}
       src={

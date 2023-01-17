@@ -164,6 +164,7 @@ fragment Video on VideoFileField {
 fragment ResponsiveVideo on ResponsiveVideoRecord {
   id
   __typename
+  overlayText
   landscape {
     ...Video
   }

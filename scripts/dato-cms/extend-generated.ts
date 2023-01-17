@@ -12,7 +12,7 @@ const createPageNameType = async () => {
   return `export type PageName = ${names.join(' | ')};`;
 };
 
-const regExp = /export\s+type\s+PageName\b[^;]*;/g;
+const regExp = /\s+export\s+type\s+PageName\b[^;]*;/g;
 
 (async () => {
   try {
