@@ -1,36 +1,30 @@
 import { isStructuredText } from 'datocms-structured-text-utils';
-import StructuredText, { StructuredTextProps } from './StructuredText';
-
+import StructuredText, {
+  StructuredTextProps,
+} from '@components/structured-text/StructuredText';
 import type { SectionFragment } from '@lib/dato-cms';
-
-import { Title } from '@mantine/core';
 import { Article } from '@components/elements/layout';
+import PageSectionHeader from './PageSectionHeader';
 
 export type PageSectionProps<
   WrapperProps = { children: React.ReactNode } & Record<string, unknown>
 > = Omit<StructuredTextProps, 'data'> & {
   section: SectionFragment;
-  title?: React.ReactNode | ((title: string) => JSX.Element);
   wrapper?: (props: WrapperProps) => JSX.Element;
+  header?: (props: SectionFragment) => JSX.Element;
   wrapperProps?: Omit<WrapperProps, 'children'>;
 };
 
 const PageSection = ({
   section,
-  title,
   wrapper: WrapperElement = Article,
+  header: HeaderElement = PageSectionHeader,
   wrapperProps,
   ...props
 }: PageSectionProps) => {
   return (
     <WrapperElement {...(wrapperProps || {})}>
-      {!section.title ? null : !title ? (
-        <Title order={3}>{section.title}</Title>
-      ) : typeof title === 'function' ? (
-        title(section.title)
-      ) : (
-        title
-      )}
+      <HeaderElement {...section} />
       <StructuredText
         data={isStructuredText(section.content) ? section.content : null}
         {...props}

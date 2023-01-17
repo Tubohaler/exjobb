@@ -1,47 +1,55 @@
-import React from 'react';
-
-import { Button, createStyles, Text, Box } from '@mantine/core';
+import { Button, createStyles, Box } from '@mantine/core';
+import Link from 'next/link';
 
 import { createTransition } from '@lib/theme/utils';
+import { ProjectFragment } from '@lib/dato-cms';
 
-type Props = {};
-const useStyles = createStyles((theme, params, getRef) => ({
-  humbleText: {
-    fontWeight: 'normal',
-    width: 'auto',
-    color: 'black',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    ref: getRef('humbleText'),
-    transition: createTransition(['font-size', 'color']),
-  },
+type Props = Omit<Parameters<typeof Button<typeof Link>>[0], 'children'> & {
+  text?: ProjectFragment['humbleButtonText'];
+};
 
-  humbleButton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+const useStyles = createStyles((theme, _, getRef) => ({
+  root: {
     background: theme.colors.blue[2],
     opacity: 0.75,
     transition: createTransition(['opacity', 'background']),
     '&:hover': {
       opacity: 1,
       background: theme.colors.red[2],
-
-      [`& .${getRef('humbleText')}`]: { fontSize: '16px', color: 'white' },
+      [`& .${getRef('text')}`]: {
+        transform: 'scale(1.1)',
+        color: theme.white,
+      },
     },
+  },
+  text: {
+    fontWeight: 'normal',
+    color: theme.black,
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    ref: getRef('text'),
+    transition: createTransition(['transform', 'color']),
   },
 }));
 
-function HumbleButton(props: Props) {
+function HumbleButton({ text, ...props }: Props) {
   const { classes } = useStyles(undefined, {
-    name: ['humbleButton', 'humbleText'],
+    name: ['HumbleButton'],
   });
 
   return (
-    <Button className={classes.humbleButton}>
-      <Box className={classes.humbleText}>FROM US</Box>
+    <Button
+      component={Link}
+      className={classes.root}
+      classNames={{ inner: classes.text }}
+      {...props}
+    >
+      {text}
     </Button>
   );
 }
+
+HumbleButton.defaultProps = {
+  text: 'From us',
+};
 export default HumbleButton;

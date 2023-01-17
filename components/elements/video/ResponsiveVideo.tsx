@@ -23,7 +23,8 @@ const useStyles = createStyles((theme) => {
   };
   return {
     root: {
-      width: '100%',
+      width: '100vw',
+      maxWidth: '100vw',
       height: '100%',
       maxHeight: '100vh',
       display: 'flex',
