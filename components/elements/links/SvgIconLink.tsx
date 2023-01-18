@@ -1,16 +1,20 @@
 import Link from './Link';
 import {
   ActionIcon,
+  Box,
   createStyles,
   CSSObject,
   DefaultProps,
   MantineNumberSize,
+  Selectors,
 } from '@mantine/core';
 import { defaultTransition } from '@lib/theme/main';
 
 import SvgIcon, { SvgIconProps } from '../SvgIcon';
+import { useRef } from 'react';
+import { createTransition } from '@lib/theme/utils';
 
-export type SvgIconLinkStylesNames = 'root' | 'wrapper' | 'svg';
+export type SvgIconLinkStylesNames = Selectors<typeof useStyles>;
 export type SvgIconLinkStylesParams = {
   color?: string;
   baseShade?: number;
@@ -46,7 +50,7 @@ const useStyles = createStyles(
         : color;
     };
 
-    const styles: Record<SvgIconLinkStylesNames, CSSObject> = {
+    const styles: Record<'root' | 'wrapper', CSSObject> = {
       root: {
         fontSize:
           typeof size === 'number'
@@ -55,10 +59,13 @@ const useStyles = createStyles(
             ? theme.fontSizes[size]
             : 'inherit',
         color: !color ? 'inherit' : getColor(color, baseShade),
-        transition: defaultTransition,
+        outline: 'none',
+        transition: createTransition(['color', 'opacity']),
         lineHeight: 1,
+        opacity: 0.75,
         '&:hover': {
           color: !hoverColor ? 'inherit' : getColor(hoverColor, hoverShade),
+          opacity: 1,
         },
       },
       wrapper: {
@@ -69,14 +76,7 @@ const useStyles = createStyles(
         alignItems: 'center',
         padding: 0,
         color: 'inherit',
-      },
-      svg: {
-        height: '1em',
-        maxHeight: '100%',
-        width: 'auto',
-        fill: 'currentColor',
-        transition: defaultTransition,
-        pointerEvents: 'none',
+        fontSize: 'inherit',
       },
     };
     return styles;
@@ -90,45 +90,49 @@ const SvgIconLink = ({
   className,
   classNames,
   fallback,
-  size = 'md',
-  color = 'black',
-  hoverColor = 'red',
-  baseShade = 9,
-  hoverShade = 2,
-  variant = 'transparent',
+  size,
+  color,
+  hoverColor,
+  baseShade,
+  hoverShade,
+  variant,
   ...props
 }: SvgIconLinkProps) => {
-  const { classes, cx } = useStyles(
-    {
-      size,
-      color,
-      baseShade,
-      hoverColor,
-      hoverShade,
-    },
-    {
-      name: 'IconLink',
-      classNames,
-      styles,
-      unstyled,
-    }
-  );
+  const stylesParams = useRef<SvgIconLinkStylesParams>({
+    size,
+    color,
+    baseShade,
+    hoverColor,
+    hoverShade,
+  });
+  const { classes, cx } = useStyles(stylesParams.current, {
+    name: 'IconLink',
+    classNames,
+    styles,
+    unstyled,
+  });
 
   return (
-    <ActionIcon
+    <Box
       component={Link}
       className={cx(classes.root, className)}
-      variant={variant}
+      size="xs"
       {...props}
     >
-      <SvgIcon
-        icon={icon}
-        className={classes.wrapper}
-        svgClassName={classes.svg}
-        fallback={fallback}
-      />
-    </ActionIcon>
+      <SvgIcon icon={icon} className={classes.wrapper} fallback={fallback} />
+    </Box>
   );
 };
+
+const defaultProps: Partial<Omit<SvgIconLinkProps, 'icon' | 'href'>> = {
+  size: 'md',
+  color: 'black',
+  hoverColor: 'blue',
+  baseShade: 9,
+  hoverShade: 2,
+  variant: 'transparent',
+};
+
+SvgIconLink.defaultProps = defaultProps;
 
 export default SvgIconLink;

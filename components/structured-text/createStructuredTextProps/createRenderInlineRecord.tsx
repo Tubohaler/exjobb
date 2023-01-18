@@ -1,10 +1,12 @@
 import {
   AddressFragment,
+  CurrentVacanciesFragment,
   ImageGalleryFragment,
   PeopleGalleryFragment,
   ProjectGalleryFragment,
   ResponsiveVideoFragment,
   StaticPageData,
+  StaticSocialLinksCollection,
 } from '@lib/dato-cms';
 import {
   StructuredTextGraphQlResponseRecord,
@@ -23,10 +25,6 @@ type RecordTypeNames =
       >['sections'][number]['content']['links'],
       null
     >[number]['__typename']
-  | Exclude<
-      StaticPageData['header'],
-      null
-    >['sections'][number]['content']['links'][number]['__typename']
   | Exclude<
       StaticPageData['footer'],
       null
@@ -78,6 +76,20 @@ export default function createRenderInlineRecord<
           <Components.ResponsiveVideo
             key={record.id}
             {...inferType<ResponsiveVideoFragment>(record)}
+          />
+        );
+      case 'CurrentVacanciesModelRecord':
+        return (
+          <Components.CurrentVacancies
+            key={record.id}
+            {...inferType<CurrentVacanciesFragment>(record)}
+          />
+        );
+      case 'SocialLinksCollectionRecord':
+        return (
+          <Components.SocialLinks
+            key={record.id}
+            {...inferType<StaticSocialLinksCollection>(record)}
           />
         );
       default:

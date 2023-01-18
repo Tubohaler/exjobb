@@ -108,14 +108,6 @@ fragment SocialLink on SocialLinkRecord {
   }
 }
 
-fragment NavLinkCollection on NavLinksCollectionRecord {
-  __typename
-  id
-  links {
-    ...PageLink
-  }
-}
-
 fragment Icon on FileField {
   __typename
   mimeType
@@ -176,12 +168,12 @@ fragment ResponsiveVideo on ResponsiveVideoRecord {
 fragment Address on AddressRecord {
   __typename
   id
-  name
   title
+  name
+  streetAddress
   zipCode
-  country
   city
-  address
+  country
 }
 
 fragment Project on ProjectRecord {
@@ -241,14 +233,6 @@ fragment Footer on FooterRecord {
   }
 }
 
-fragment PageLink on PageRecord {
-  __typename
-  id
-  urlSlug
-  name
-  position
-}
-
 fragment FooterSection on FooterSectionRecord {
   __typename
   id
@@ -269,24 +253,11 @@ fragment FooterSection on FooterSectionRecord {
 fragment Header on HeaderRecord {
   __typename
   id
-  sections {
-    ...HeaderSection
+  navigationLinks {
+    ...PageLink
   }
-}
-
-fragment HeaderSection on HeaderSectionRecord {
-  __typename
-  id
-  content {
-    value
-    links {
-      ... on NavLinksCollectionRecord {
-        ...NavLinkCollection
-      }
-      ... on SocialLinksCollectionRecord {
-        ...SocialLinksCollection
-      }
-    }
+  socialLinks {
+    ...SocialLinksCollection
   }
 }
 
@@ -309,4 +280,12 @@ fragment SiteMeta on Site {
     url
     mimeType
   }
+}
+
+fragment PageLink on PageRecord {
+  __typename
+  id
+  urlSlug
+  name
+  position
 }

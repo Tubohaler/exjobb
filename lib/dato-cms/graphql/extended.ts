@@ -19,39 +19,22 @@ export interface StaticSocialLinksCollection
   links: StaticSocialLink[];
 }
 
-export type HeaderSections = Exclude<
-  Exclude<PageQuery['header'], null>['sections'],
-  null
->;
-export type FooterSections = Exclude<
-  Exclude<PageQuery['footer'], null>['sections'],
-  null
->;
+export type FooterSections = Exclude<PageQuery['footer'], null>['sections'];
 
-export type HeaderSectionContent = HeaderSections[number]['content'];
 export type FooterSectionContent = FooterSections[number]['content'];
 
 export interface StaticPageHeader extends Exclude<PageQuery['header'], null> {
-  sections: HeaderSections & {
-    content:
-      | (HeaderSectionContent & {
-          links: Array<
-            HeaderSectionContent['links'][number] | StaticSocialLinksCollection
-          >;
-        })
-      | null;
-  };
+  socialLinks: StaticSocialLinksCollection;
 }
 
 export interface StaticPageFooter extends Exclude<PageQuery['footer'], null> {
   sections: FooterSections & {
     content:
-      | (FooterSectionContent & {
+      | FooterSectionContent & {
           links: Array<
             FooterSectionContent['links'][number] | StaticSocialLinksCollection
           >;
-        })
-      | null;
+        };
   };
 }
 

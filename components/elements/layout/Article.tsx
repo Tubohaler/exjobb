@@ -13,6 +13,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: `${theme.spacing.xl * 3}px 0`,
     '& > *': {
       maxWidth: theme.breakpoints.md,
     },
