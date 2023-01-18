@@ -43,10 +43,6 @@ const config: CodegenConfig = {
       },
       plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
     },
-    // 'lib/dato-cms/graphql/introspection.json': {
-    //   config: { minify: true },
-    //   plugins: ['introspection'],
-    // },
   },
   hooks: {
     afterOneFileWrite: ['prettier --write'],

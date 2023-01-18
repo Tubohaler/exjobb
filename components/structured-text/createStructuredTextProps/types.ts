@@ -8,9 +8,7 @@ import type {
   CurrentVacanciesFragment,
   StaticSocialLinksCollection,
   SocialLinksCollectionFragment,
-  NavLinkCollectionFragment,
 } from '@lib/dato-cms';
-import { StructuredTextPropTypes } from 'react-datocms';
 import type { RenderMarkRule } from 'datocms-structured-text-generic-html-renderer';
 import type {
   Heading,
@@ -103,8 +101,6 @@ export interface StructuredTextComponents {
    * @see SocialLinksCollectionFragment
    */
   SocialLinks: (props: StaticSocialLinksCollection) => JSX.Element;
-  /** @see NavLinkCollectionFragment */
-  NavLinks: (props: NavLinkCollectionFragment) => JSX.Element;
 }
 
 export interface NodeRules {

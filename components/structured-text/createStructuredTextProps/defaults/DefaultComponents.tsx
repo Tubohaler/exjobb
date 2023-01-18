@@ -2,10 +2,12 @@ import type { StructuredTextComponents } from '@components/structured-text/creat
 import Placeholder from '../Placeholder';
 import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
 import ProjectGallery from '@components/content/ProjectGallery';
+import SocialLinkGroup from '@components/content/SocialLinkGroup';
+import Address from '@components/content/Address';
 
 const DefaultInlineComponents: StructuredTextComponents = {
-  Address: () => {
-    return <Placeholder type="Address" />;
+  Address: (address) => {
+    return <Address address={address} />;
   },
   ImageGallery: () => {
     return <Placeholder type="ImageGallery" />;
@@ -22,11 +24,8 @@ const DefaultInlineComponents: StructuredTextComponents = {
   CurrentVacancies: () => {
     return <Placeholder type="CurrentVacancies" />;
   },
-  SocialLinks: () => {
-    return <Placeholder type="SocialLinks" />;
-  },
-  NavLinks: () => {
-    return <Placeholder type="NavLinks" />;
+  SocialLinks: ({ links }) => {
+    return <SocialLinkGroup links={links} />;
   },
 };
 

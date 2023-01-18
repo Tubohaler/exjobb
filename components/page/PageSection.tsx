@@ -1,4 +1,3 @@
-import { isStructuredText } from 'datocms-structured-text-utils';
 import StructuredText, {
   StructuredTextProps,
 } from '@components/structured-text/StructuredText';
@@ -25,10 +24,7 @@ const PageSection = ({
   return (
     <WrapperElement {...(wrapperProps || {})}>
       <HeaderElement {...section} />
-      <StructuredText
-        data={isStructuredText(section.content) ? section.content : null}
-        {...props}
-      />
+      <StructuredText data={section.content} {...props} />
     </WrapperElement>
   );
 };

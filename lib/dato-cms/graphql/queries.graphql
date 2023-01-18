@@ -14,9 +14,9 @@ query Page($name: String) {
   }
 }
 
-query PageNames {
+query PageLinks {
   pages: allPages {
-    name
+    ...PageLink
   }
 }
 

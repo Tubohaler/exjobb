@@ -38,11 +38,11 @@ export interface AddressModelFilter {
   _status: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
   _updatedAt: InputMaybe<UpdatedAtFilter>;
-  address: InputMaybe<StringFilter>;
   city: InputMaybe<StringFilter>;
   country: InputMaybe<StringFilter>;
   id: InputMaybe<ItemIdFilter>;
   name: InputMaybe<StringFilter>;
+  streetAddress: InputMaybe<StringFilter>;
   title: InputMaybe<StringFilter>;
   zipCode: InputMaybe<StringFilter>;
 }
@@ -64,8 +64,6 @@ export enum AddressModelOrderBy {
   UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
   UpdatedAtAsc = '_updatedAt_ASC',
   UpdatedAtDesc = '_updatedAt_DESC',
-  AddressAsc = 'address_ASC',
-  AddressDesc = 'address_DESC',
   CityAsc = 'city_ASC',
   CityDesc = 'city_DESC',
   CountryAsc = 'country_ASC',
@@ -74,6 +72,8 @@ export enum AddressModelOrderBy {
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
+  StreetAddressAsc = 'streetAddress_ASC',
+  StreetAddressDesc = 'streetAddress_DESC',
   TitleAsc = 'title_ASC',
   TitleDesc = 'title_DESC',
   ZipCodeAsc = 'zipCode_ASC',
@@ -94,11 +94,11 @@ export interface AddressRecord extends RecordInterface {
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  address: Scalars['String'];
   city: Scalars['String'];
   country: Scalars['String'];
   id: Scalars['ItemId'];
   name: Scalars['String'];
+  streetAddress: Scalars['String'];
   title: Scalars['String'];
   zipCode: Scalars['String'];
 }
@@ -422,6 +422,11 @@ export interface GlobalSeoField {
   twitterAccount: Maybe<Scalars['String']>;
 }
 
+/** Linking fields */
+export enum HeaderModelFieldsReferencingPageModel {
+  HeaderNavigationLinks = 'header_navigationLinks',
+}
+
 /** Record of type Header (header) */
 export interface HeaderRecord extends RecordInterface {
   __typename: 'HeaderRecord';
@@ -437,45 +442,12 @@ export interface HeaderRecord extends RecordInterface {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-  sections: Array<HeaderSectionRecord>;
+  navigationLinks: Array<PageRecord>;
+  socialLinks: SocialLinksCollectionRecord;
 }
 
 /** Record of type Header (header) */
 export interface HeaderRecord_SeoMetaTagsArgs {
-  locale: InputMaybe<SiteLocale>;
-}
-
-export interface HeaderSectionModelContentField {
-  __typename: 'HeaderSectionModelContentField';
-  blocks: Array<Scalars['String']>;
-  links: Array<HeaderSectionModelContentLinksField>;
-  value: Scalars['JsonField'];
-}
-
-export type HeaderSectionModelContentLinksField =
-  | NavLinksCollectionRecord
-  | SocialLinksCollectionRecord;
-
-/** Block of type Header Section (header_section) */
-export interface HeaderSectionRecord extends RecordInterface {
-  __typename: 'HeaderSectionRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
-  _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  content: HeaderSectionModelContentField;
-  id: Scalars['ItemId'];
-}
-
-/** Block of type Header Section (header_section) */
-export interface HeaderSectionRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -1985,17 +1957,17 @@ export interface InUseFilter {
 }
 
 /** Specifies how to filter by linking fields */
-export interface InverseRelationshipFieldFilterBetweenNavLinksCollectionAndPage {
+export interface InverseRelationshipFieldFilterBetweenHeaderAndPage {
   /** Filter linking records that reference current record in at least one of the specified fields */
-  anyIn: InputMaybe<Array<NavLinksCollectionModelFieldsReferencingPageModel>>;
+  anyIn: InputMaybe<Array<HeaderModelFieldsReferencingPageModel>>;
   /** Filter linking records that do not reference current record in any of the specified fields */
-  notIn: InputMaybe<Array<NavLinksCollectionModelFieldsReferencingPageModel>>;
+  notIn: InputMaybe<Array<HeaderModelFieldsReferencingPageModel>>;
 }
 
 /** Specifies how to filter linking records */
-export interface InverseRelationshipFilterBetweenNavLinksCollectionAndPage {
+export interface InverseRelationshipFilterBetweenHeaderAndPage {
   /** Specifies how to filter by linking fields */
-  fields: InputMaybe<InverseRelationshipFieldFilterBetweenNavLinksCollectionAndPage>;
+  fields: InputMaybe<InverseRelationshipFieldFilterBetweenHeaderAndPage>;
   /** Specifies how to filter by linking locales */
   locales: InputMaybe<LinkingLocalesFilter>;
 }
@@ -2106,35 +2078,6 @@ export enum MuxThumbnailFormatType {
   Png = 'png',
 }
 
-/** Linking fields */
-export enum NavLinksCollectionModelFieldsReferencingPageModel {
-  NavLinksCollectionLinks = 'navLinksCollection_links',
-}
-
-/** Record of type Navigation Links (nav_links_collection) */
-export interface NavLinksCollectionRecord extends RecordInterface {
-  __typename: 'NavLinksCollectionRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
-  _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  links: Array<PageRecord>;
-  presentationTitle: Maybe<Scalars['String']>;
-}
-
-/** Record of type Navigation Links (nav_links_collection) */
-export interface NavLinksCollectionRecord_SeoMetaTagsArgs {
-  locale: InputMaybe<SiteLocale>;
-}
-
 /** Specifies how to filter by image orientation */
 export interface OrientationFilter {
   /** Search uploads with the specified orientation */
@@ -2192,9 +2135,9 @@ export enum PageModelOrderBy {
 /** Record of type Page (page) */
 export interface PageRecord extends RecordInterface {
   __typename: 'PageRecord';
-  _allReferencingNavLinksCollections: Array<NavLinksCollectionRecord>;
+  _allReferencingHeaders: Array<HeaderRecord>;
   /** Returns meta information regarding a record collection */
-  _allReferencingNavLinksCollectionsMeta: CollectionMetadata;
+  _allReferencingHeadersMeta: CollectionMetadata;
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -2218,17 +2161,17 @@ export interface PageRecord extends RecordInterface {
 }
 
 /** Record of type Page (page) */
-export interface PageRecord_AllReferencingNavLinksCollectionsArgs {
+export interface PageRecord_AllReferencingHeadersArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   skip: InputMaybe<Scalars['IntType']>;
-  through: InputMaybe<InverseRelationshipFilterBetweenNavLinksCollectionAndPage>;
+  through: InputMaybe<InverseRelationshipFilterBetweenHeaderAndPage>;
 }
 
 /** Record of type Page (page) */
-export interface PageRecord_AllReferencingNavLinksCollectionsMetaArgs {
-  through: InputMaybe<InverseRelationshipFilterBetweenNavLinksCollectionAndPage>;
+export interface PageRecord_AllReferencingHeadersMetaArgs {
+  through: InputMaybe<InverseRelationshipFilterBetweenHeaderAndPage>;
 }
 
 /** Record of type Page (page) */
@@ -2469,8 +2412,6 @@ export interface Query {
   imageGallery: Maybe<ImageGalleryRecord>;
   /** Returns a specific record */
   job: Maybe<JobRecord>;
-  /** Returns the single instance record */
-  navLinksCollection: Maybe<NavLinksCollectionRecord>;
   /** Returns a specific record */
   page: Maybe<PageRecord>;
   /** Returns the single instance record */
@@ -2689,12 +2630,6 @@ export interface QueryJobArgs {
   filter: InputMaybe<JobModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<JobModelOrderBy>>>;
-}
-
-/** The query root for this schema */
-export interface QueryNavLinksCollectionArgs {
-  fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  locale: InputMaybe<SiteLocale>;
 }
 
 /** The query root for this schema */
@@ -3698,12 +3633,12 @@ export type PageFragment = {
               links: Array<
                 | ({
                     id: string;
-                    name: string;
                     title: string;
+                    name: string;
+                    streetAddress: string;
                     zipCode: string;
-                    country: string;
                     city: string;
-                    address: string;
+                    country: string;
                   } & { __typename: 'AddressRecord' })
                 | ({
                     id: string;
@@ -3723,12 +3658,12 @@ export type PageFragment = {
         links: Array<
           | ({
               id: string;
-              name: string;
               title: string;
+              name: string;
+              streetAddress: string;
               zipCode: string;
-              country: string;
               city: string;
-              address: string;
+              country: string;
             } & { __typename: 'AddressRecord' })
           | { __typename: 'CurrentVacanciesModelRecord' }
           | ({
@@ -3857,12 +3792,12 @@ export type SectionFragment = {
           links: Array<
             | ({
                 id: string;
-                name: string;
                 title: string;
+                name: string;
+                streetAddress: string;
                 zipCode: string;
-                country: string;
                 city: string;
-                address: string;
+                country: string;
               } & { __typename: 'AddressRecord' })
             | ({
                 id: string;
@@ -3882,12 +3817,12 @@ export type SectionFragment = {
     links: Array<
       | ({
           id: string;
-          name: string;
           title: string;
+          name: string;
+          streetAddress: string;
           zipCode: string;
-          country: string;
           city: string;
-          address: string;
+          country: string;
         } & { __typename: 'AddressRecord' })
       | { __typename: 'CurrentVacanciesModelRecord' }
       | ({
@@ -4008,12 +3943,12 @@ export type SubsectionFragment = {
     links: Array<
       | ({
           id: string;
-          name: string;
           title: string;
+          name: string;
+          streetAddress: string;
           zipCode: string;
-          country: string;
           city: string;
-          address: string;
+          country: string;
         } & { __typename: 'AddressRecord' })
       | ({
           id: string;
@@ -4069,18 +4004,6 @@ export type SocialLinkFragment = {
     height: number | null;
   } & { __typename: 'FileField' };
 } & { __typename: 'SocialLinkRecord' };
-
-export type NavLinkCollectionFragment = {
-  id: string;
-  links: Array<
-    {
-      id: string;
-      urlSlug: string | null;
-      name: string;
-      position: number | null;
-    } & { __typename: 'PageRecord' }
-  >;
-} & { __typename: 'NavLinksCollectionRecord' };
 
 export type IconFragment = {
   mimeType: string;
@@ -4154,12 +4077,12 @@ export type ResponsiveVideoFragment = {
 
 export type AddressFragment = {
   id: string;
-  name: string;
   title: string;
+  name: string;
+  streetAddress: string;
   zipCode: string;
-  country: string;
   city: string;
-  address: string;
+  country: string;
 } & { __typename: 'AddressRecord' };
 
 export type ProjectFragment = {
@@ -4295,12 +4218,12 @@ export type FooterFragment = {
         links: Array<
           | ({
               id: string;
-              name: string;
               title: string;
+              name: string;
+              streetAddress: string;
               zipCode: string;
-              country: string;
               city: string;
-              address: string;
+              country: string;
             } & { __typename: 'AddressRecord' })
           | ({
               id: string;
@@ -4325,13 +4248,6 @@ export type FooterFragment = {
   >;
 } & { __typename: 'FooterRecord' };
 
-export type PageLinkFragment = {
-  id: string;
-  urlSlug: string | null;
-  name: string;
-  position: number | null;
-} & { __typename: 'PageRecord' };
-
 export type FooterSectionFragment = {
   id: string;
   content: {
@@ -4339,12 +4255,12 @@ export type FooterSectionFragment = {
     links: Array<
       | ({
           id: string;
-          name: string;
           title: string;
+          name: string;
+          streetAddress: string;
           zipCode: string;
-          country: string;
           city: string;
-          address: string;
+          country: string;
         } & { __typename: 'AddressRecord' })
       | ({
           id: string;
@@ -4369,82 +4285,32 @@ export type FooterSectionFragment = {
 
 export type HeaderFragment = {
   id: string;
-  sections: Array<
+  navigationLinks: Array<
     {
       id: string;
-      content: {
-        value: unknown;
-        links: Array<
-          | ({
-              id: string;
-              links: Array<
-                {
-                  id: string;
-                  urlSlug: string | null;
-                  name: string;
-                  position: number | null;
-                } & { __typename: 'PageRecord' }
-              >;
-            } & { __typename: 'NavLinksCollectionRecord' })
-          | ({
-              id: string;
-              links: Array<
-                {
-                  linkTitle: string | null;
-                  id: string;
-                  title: string;
-                  href: string;
-                  icon: {
-                    mimeType: string;
-                    url: string;
-                    width: number | null;
-                    height: number | null;
-                  } & { __typename: 'FileField' };
-                } & { __typename: 'SocialLinkRecord' }
-              >;
-            } & { __typename: 'SocialLinksCollectionRecord' })
-        >;
-      } & { __typename: 'HeaderSectionModelContentField' };
-    } & { __typename: 'HeaderSectionRecord' }
+      urlSlug: string | null;
+      name: string;
+      position: number | null;
+    } & { __typename: 'PageRecord' }
   >;
-} & { __typename: 'HeaderRecord' };
-
-export type HeaderSectionFragment = {
-  id: string;
-  content: {
-    value: unknown;
+  socialLinks: {
+    id: string;
     links: Array<
-      | ({
-          id: string;
-          links: Array<
-            {
-              id: string;
-              urlSlug: string | null;
-              name: string;
-              position: number | null;
-            } & { __typename: 'PageRecord' }
-          >;
-        } & { __typename: 'NavLinksCollectionRecord' })
-      | ({
-          id: string;
-          links: Array<
-            {
-              linkTitle: string | null;
-              id: string;
-              title: string;
-              href: string;
-              icon: {
-                mimeType: string;
-                url: string;
-                width: number | null;
-                height: number | null;
-              } & { __typename: 'FileField' };
-            } & { __typename: 'SocialLinkRecord' }
-          >;
-        } & { __typename: 'SocialLinksCollectionRecord' })
+      {
+        linkTitle: string | null;
+        id: string;
+        title: string;
+        href: string;
+        icon: {
+          mimeType: string;
+          url: string;
+          width: number | null;
+          height: number | null;
+        } & { __typename: 'FileField' };
+      } & { __typename: 'SocialLinkRecord' }
     >;
-  } & { __typename: 'HeaderSectionModelContentField' };
-} & { __typename: 'HeaderSectionRecord' };
+  } & { __typename: 'SocialLinksCollectionRecord' };
+} & { __typename: 'HeaderRecord' };
 
 export type SiteMetaFragment = {
   globalSeo:
@@ -4466,6 +4332,13 @@ export type SiteMetaFragment = {
     | ({ url: string; mimeType: string } & { __typename: 'FileField' })
     | null;
 } & { __typename: 'Site' };
+
+export type PageLinkFragment = {
+  id: string;
+  urlSlug: string | null;
+  name: string;
+  position: number | null;
+} & { __typename: 'PageRecord' };
 
 export type PageQueryVariables = Exact<{
   name: InputMaybe<Scalars['String']>;
@@ -4515,12 +4388,12 @@ export type PageQuery = {
                     links: Array<
                       | ({
                           id: string;
-                          name: string;
                           title: string;
+                          name: string;
+                          streetAddress: string;
                           zipCode: string;
-                          country: string;
                           city: string;
-                          address: string;
+                          country: string;
                         } & { __typename: 'AddressRecord' })
                       | ({
                           id: string;
@@ -4540,12 +4413,12 @@ export type PageQuery = {
               links: Array<
                 | ({
                     id: string;
-                    name: string;
                     title: string;
+                    name: string;
+                    streetAddress: string;
                     zipCode: string;
-                    country: string;
                     city: string;
-                    address: string;
+                    country: string;
                   } & { __typename: 'AddressRecord' })
                 | { __typename: 'CurrentVacanciesModelRecord' }
                 | ({
@@ -4663,44 +4536,31 @@ export type PageQuery = {
   header:
     | ({
         id: string;
-        sections: Array<
+        navigationLinks: Array<
           {
             id: string;
-            content: {
-              value: unknown;
-              links: Array<
-                | ({
-                    id: string;
-                    links: Array<
-                      {
-                        id: string;
-                        urlSlug: string | null;
-                        name: string;
-                        position: number | null;
-                      } & { __typename: 'PageRecord' }
-                    >;
-                  } & { __typename: 'NavLinksCollectionRecord' })
-                | ({
-                    id: string;
-                    links: Array<
-                      {
-                        linkTitle: string | null;
-                        id: string;
-                        title: string;
-                        href: string;
-                        icon: {
-                          mimeType: string;
-                          url: string;
-                          width: number | null;
-                          height: number | null;
-                        } & { __typename: 'FileField' };
-                      } & { __typename: 'SocialLinkRecord' }
-                    >;
-                  } & { __typename: 'SocialLinksCollectionRecord' })
-              >;
-            } & { __typename: 'HeaderSectionModelContentField' };
-          } & { __typename: 'HeaderSectionRecord' }
+            urlSlug: string | null;
+            name: string;
+            position: number | null;
+          } & { __typename: 'PageRecord' }
         >;
+        socialLinks: {
+          id: string;
+          links: Array<
+            {
+              linkTitle: string | null;
+              id: string;
+              title: string;
+              href: string;
+              icon: {
+                mimeType: string;
+                url: string;
+                width: number | null;
+                height: number | null;
+              } & { __typename: 'FileField' };
+            } & { __typename: 'SocialLinkRecord' }
+          >;
+        } & { __typename: 'SocialLinksCollectionRecord' };
       } & { __typename: 'HeaderRecord' })
     | null;
   footer:
@@ -4714,12 +4574,12 @@ export type PageQuery = {
               links: Array<
                 | ({
                     id: string;
-                    name: string;
                     title: string;
+                    name: string;
+                    streetAddress: string;
                     zipCode: string;
-                    country: string;
                     city: string;
-                    address: string;
+                    country: string;
                   } & { __typename: 'AddressRecord' })
                 | ({
                     id: string;
@@ -4766,10 +4626,17 @@ export type PageQuery = {
   } & { __typename: 'Site' };
 } & { __typename: 'Query' };
 
-export type PageNamesQueryVariables = Exact<{ [key: string]: never }>;
+export type PageLinksQueryVariables = Exact<{ [key: string]: never }>;
 
-export type PageNamesQuery = {
-  pages: Array<{ name: string } & { __typename: 'PageRecord' }>;
+export type PageLinksQuery = {
+  pages: Array<
+    {
+      id: string;
+      urlSlug: string | null;
+      name: string;
+      position: number | null;
+    } & { __typename: 'PageRecord' }
+  >;
 } & { __typename: 'Query' };
 
 export type SocialLinksQueryVariables = Exact<{ [key: string]: never }>;
@@ -4811,12 +4678,12 @@ export const AddressFragmentDoc = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'streetAddress' } },
           { kind: 'Field', name: { kind: 'Name', value: 'zipCode' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'country' } },
           { kind: 'Field', name: { kind: 'Name', value: 'city' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'address' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'country' } },
         ],
       },
     },
@@ -5767,122 +5634,6 @@ export const PageLinkFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PageLinkFragment, unknown>;
-export const NavLinkCollectionFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'NavLinkCollection' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'NavLinksCollectionRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'links' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'PageLink' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<NavLinkCollectionFragment, unknown>;
-export const HeaderSectionFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'HeaderSection' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'HeaderSectionRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'content' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'value' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'links' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: {
-                            kind: 'Name',
-                            value: 'NavLinksCollectionRecord',
-                          },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: {
-                                kind: 'Name',
-                                value: 'NavLinkCollection',
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: {
-                            kind: 'Name',
-                            value: 'SocialLinksCollectionRecord',
-                          },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: {
-                                kind: 'Name',
-                                value: 'SocialLinksCollection',
-                              },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<HeaderSectionFragment, unknown>;
 export const HeaderFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -5900,13 +5651,26 @@ export const HeaderFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'sections' },
+            name: { kind: 'Name', value: 'navigationLinks' },
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
                 {
                   kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'HeaderSection' },
+                  name: { kind: 'Name', value: 'PageLink' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'socialLinks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'SocialLinksCollection' },
                 },
               ],
             },
@@ -6102,8 +5866,6 @@ export const PageDocument = {
     ...ResponsiveVideoFragmentDoc.definitions,
     ...VideoFragmentDoc.definitions,
     ...HeaderFragmentDoc.definitions,
-    ...HeaderSectionFragmentDoc.definitions,
-    ...NavLinkCollectionFragmentDoc.definitions,
     ...PageLinkFragmentDoc.definitions,
     ...SocialLinksCollectionFragmentDoc.definitions,
     ...SocialLinkFragmentDoc.definitions,
@@ -6113,13 +5875,13 @@ export const PageDocument = {
     ...SiteMetaFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;
-export const PageNamesDocument = {
+export const PageLinksDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'PageNames' },
+      name: { kind: 'Name', value: 'PageLinks' },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
@@ -6130,15 +5892,19 @@ export const PageNamesDocument = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'PageLink' },
+                },
               ],
             },
           },
         ],
       },
     },
+    ...PageLinkFragmentDoc.definitions,
   ],
-} as unknown as DocumentNode<PageNamesQuery, PageNamesQueryVariables>;
+} as unknown as DocumentNode<PageLinksQuery, PageLinksQueryVariables>;
 export const SocialLinksDocument = {
   kind: 'Document',
   definitions: [

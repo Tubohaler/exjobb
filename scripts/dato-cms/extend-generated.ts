@@ -1,5 +1,4 @@
-import request from '../../lib/dato-cms/request';
-import { PageNamesDocument } from '../../lib/dato-cms/graphql/generated';
+import getPageLinks from '../../lib/dato-cms/getPageLinks';
 import codegenConfig from '../../graphql.codegen';
 import path from 'path';
 import fs from 'fs';
@@ -7,8 +6,8 @@ import fs from 'fs';
 const generatedPath = Object.keys(codegenConfig.generates)[0];
 
 const createPageNameType = async () => {
-  const { pages } = await request(PageNamesDocument);
-  const names = pages.map(({ name }) => `"${name}"`);
+  const pageLinks = await getPageLinks();
+  const names = pageLinks.map(({ name }) => `"${name}"`);
   return `export type PageName = ${names.join(' | ')};`;
 };
 

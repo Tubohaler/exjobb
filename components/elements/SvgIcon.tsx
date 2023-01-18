@@ -10,10 +10,13 @@ const useStyles = createStyles(() => ({
     display: 'inline-block',
     fontSize: 'inherit',
     color: 'inherit',
+    verticalAlign: 'baseline',
   },
   svg: {
     height: '1em',
+    maxHeight: '100%',
     width: 'auto',
+    pointerEvents: 'none',
   },
 }));
 
@@ -42,6 +45,7 @@ const SvgIcon = ({ icon, svgClassName, className, fallback }: SvgIconProps) => {
         .filter((v) => !!v)
     );
   };
+  console.log('isSvgIconFragment(icon): ', isSvgIconFragment(icon));
   if (!isSvgIconFragment(icon)) {
     return (
       <ReactSVG
