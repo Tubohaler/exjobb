@@ -1,6 +1,14 @@
 import { SectionFragment } from '@lib/dato-cms';
-import { Center, Title } from '@mantine/core';
+import { Center, DefaultProps, Selectors, Title } from '@mantine/core';
 import { createStyles } from '@mantine/styles';
+
+export type PageSectionHeaderProps =
+  DefaultProps<PageSectionHeaderStylesNames> &
+    Omit<Parameters<typeof Center<'div'>>[0], 'children'> & {
+      title: string;
+    };
+
+export type PageSectionHeaderStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -13,12 +21,22 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const PageSectionHeader = ({ title }: SectionFragment) => {
-  const { classes } = useStyles(undefined, { name: 'PageSectionHeader' });
+const PageSectionHeader = ({
+  title,
+  className,
+  classNames,
+  styles,
+  ...props
+}: PageSectionHeaderProps) => {
+  const { classes, cx } = useStyles(undefined, {
+    name: 'PageSectionHeader',
+    classNames,
+    styles,
+  });
   return !title ? (
     <></>
   ) : (
-    <Center className={classes.root}>
+    <Center component="div" className={cx(classes.root, className)} {...props}>
       <Title
         order={2}
         className={classes.title}

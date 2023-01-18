@@ -14,17 +14,16 @@ export type ResponsiveVideoStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => {
   const videoStyles: CSSObject = {
-    width: '100vw',
-    height: 'auto',
-    minHeight: 0,
-    minWidth: 0,
+    height: '100%',
+    width: '100%',
+    minHeight: '90vh',
+    minWidth: '100vw',
     position: 'relative',
     zIndex: 0,
   };
   return {
     root: {
       width: '100vw',
-      maxWidth: '100vw',
       height: '100%',
       maxHeight: '100vh',
       display: 'flex',
@@ -33,21 +32,19 @@ const useStyles = createStyles((theme) => {
       overflow: 'hidden',
       position: 'relative',
     },
-    titleWrapper: {
-      position: 'absolute',
-      inset: '0 0 0 0',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      zIndex: 1,
-    },
     title: {
       color: theme.white,
       opacity: 0.9,
       wordSpacing: '100vw',
       fontWeight: 'normal',
-      fontSize: theme.fontSizes.xl * 5,
+      fontSize: theme.fontSizes.xl * 6,
       textAlign: 'center',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%,-50%)',
+      userSelect: 'none',
+      zIndex: 1,
       [theme.fn.smallerThan('sm')]: {
         fontSize: theme.fontSizes.xl * 3,
       },
@@ -83,11 +80,9 @@ function ResponsiveVideo({
   return (
     <Box className={cx(classes.root, className)} {...props}>
       {video.overlayText && (
-        <Box className={classes.titleWrapper}>
-          <Title order={1} className={classes.title}>
-            {video.overlayText}
-          </Title>
-        </Box>
+        <Title order={1} className={classes.title}>
+          {video.overlayText}
+        </Title>
       )}
       <Video
         video={video[isPortrait ? 'portrait' : 'landscape']}

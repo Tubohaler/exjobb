@@ -4,28 +4,46 @@ import StructuredText, {
 import type { SectionFragment } from '@lib/dato-cms';
 import { Article } from '@components/elements/layout';
 import PageSectionHeader from './PageSectionHeader';
+import { createStyles } from '@mantine/styles';
+import { Box, DefaultProps, Selectors } from '@mantine/core';
 
-export type PageSectionProps<
-  WrapperProps = { children: React.ReactNode } & Record<string, unknown>
-> = Omit<StructuredTextProps, 'data'> & {
+export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
   section: SectionFragment;
-  wrapper?: (props: WrapperProps) => JSX.Element;
-  header?: (props: SectionFragment) => JSX.Element;
-  wrapperProps?: Omit<WrapperProps, 'children'>;
+  structuredTextProps?: Omit<StructuredTextProps, 'data'>;
 };
+
+export type PageSectionStylesNames = Selectors<typeof useStyles>;
+
+const useStyles = createStyles((theme) => ({
+  root: {},
+  header: {},
+  content: {
+    position: 'relative',
+  },
+}));
 
 const PageSection = ({
   section,
-  wrapper: WrapperElement = Article,
-  header: HeaderElement = PageSectionHeader,
-  wrapperProps,
+  className,
+  classNames,
+  styles,
+  structuredTextProps = {},
   ...props
 }: PageSectionProps) => {
+  const { classes, cx } = useStyles(undefined, {
+    name: 'PageSection',
+    classNames,
+    styles,
+  });
   return (
-    <WrapperElement {...(wrapperProps || {})}>
-      <HeaderElement {...section} />
-      <StructuredText data={section.content} {...props} />
-    </WrapperElement>
+    <Article className={cx(classes.root, className)} {...props}>
+      {section.title && (
+        <PageSectionHeader title={section.title} className={classes.header} />
+      )}
+      <Box className={classes.content}>
+        <StructuredText data={section.content} {...structuredTextProps} />
+      </Box>
+    </Article>
   );
 };
 
