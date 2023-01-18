@@ -10,7 +10,6 @@ import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { StaticPageHeader } from '@lib/dato-cms';
 import { useMediaQuery } from '@mantine/hooks';
-import { createTransition } from '@lib/theme/utils';
 
 const useStyles = createStyles((theme) => ({
   root: {
