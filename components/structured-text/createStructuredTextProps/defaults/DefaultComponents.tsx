@@ -1,6 +1,6 @@
 import type { StructuredTextComponents } from '@components/structured-text/createStructuredTextProps/types';
 import Placeholder from '../Placeholder';
-import ResponsiveVideo from '@components/elements/video/ResponsiveVideo';
+import ResponsiveVideo from '@components/content/video/ResponsiveVideo';
 import ProjectGallery from '@components/content/ProjectGallery';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import Address from '@components/content/Address';

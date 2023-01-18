@@ -11,7 +11,11 @@ const Placeholder = ({ type }: { type: string }) => {
   return !devMode ? (
     <>{null}</>
   ) : (
-    <Code p="xl" m="xl" sx={(theme) => ({ fontSize: theme.fontSizes.xl })}>
+    <Code
+      p="xl"
+      m="xl"
+      sx={(theme) => ({ fontSize: theme.fontSizes.xl, display: 'block' })}
+    >
       {type} Placeholder
     </Code>
   );
