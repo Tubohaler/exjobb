@@ -1,12 +1,12 @@
-import { StaticSocialLink } from '@lib/dato-cms';
+import { SocialLinkFragment } from '@lib/dato-cms';
 import { Group, GroupProps } from '@mantine/core';
 import SvgIconLink, {
   SvgIconLinkProps,
 } from '@components/elements/links/SvgIconLink';
 
 export type SocialLinkGroup = Omit<GroupProps, 'children'> & {
-  links: StaticSocialLink[];
-  linkProps?: Omit<SvgIconLinkProps, 'icon' | 'href' | 'title'>;
+  links: SocialLinkFragment[];
+  linkProps?: Omit<SvgIconLinkProps, 'src' | 'href' | 'title'>;
 };
 
 const SocialLinkGroup = ({
@@ -21,7 +21,7 @@ const SocialLinkGroup = ({
           <SvgIconLink
             key={id}
             href={href}
-            icon={icon}
+            src={icon.url}
             title={linkTitle || title || undefined}
             {...linkProps}
           />

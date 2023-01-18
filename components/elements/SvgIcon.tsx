@@ -1,8 +1,4 @@
-import { SvgIconFragment } from '@lib/dato-cms';
-import { isSvgIconFragment } from '@lib/dato-cms/typeGuard';
-import { setSvgAttribute } from '@lib/svg-utils';
 import { createStyles } from '@mantine/core';
-import isSvg from 'is-svg';
 import { ReactSVG, Props as ReactSVGProps } from 'react-svg';
 
 const useStyles = createStyles(() => ({
@@ -21,8 +17,7 @@ const useStyles = createStyles(() => ({
 }));
 
 export type SvgIconProps = {
-  /** URL or SvgIconFragment object */
-  icon: string | SvgIconFragment;
+  src: string;
   /** Wrapper className */
   className?: string;
   /** SVG Element className */
@@ -35,7 +30,7 @@ export type SvgIconProps = {
   fallback?: ReactSVGProps['fallback'];
 };
 
-const SvgIcon = ({ icon, svgClassName, className, fallback }: SvgIconProps) => {
+const SvgIcon = ({ src, svgClassName, className, fallback }: SvgIconProps) => {
   const { classes, cx } = useStyles(undefined, { name: 'SvgIcon' });
 
   const beforeInjection: ReactSVGProps['beforeInjection'] = (svg) => {
@@ -44,34 +39,37 @@ const SvgIcon = ({ icon, svgClassName, className, fallback }: SvgIconProps) => {
         .split(' ')
         .filter((v) => !!v)
     );
+    svg.setAttribute('fill', 'currentColor');
+    console.log(svg.getAttribute('class'));
   };
-  if (!isSvgIconFragment(icon)) {
-    return (
-      <ReactSVG
-        src={icon}
-        beforeInjection={beforeInjection}
-        className={cx(classes.wrapper, className)}
-        fallback={fallback}
-      />
-    );
-  }
-  if (typeof icon.inlineHTML === 'string' && isSvg(icon.inlineHTML)) {
-    return (
-      <div
-        className={className}
-        dangerouslySetInnerHTML={{
-          __html: setSvgAttribute(
-            icon.inlineHTML,
-            'class',
-            cx(classes.svg, svgClassName)
-          ),
-        }}
-      />
-    );
-  }
+
+  // if (!isSvgIconFragment(icon)) {
+  //   return (
+  //     <ReactSVG
+  //       src={icon}
+  //       beforeInjection={beforeInjection}
+  //       className={cx(classes.wrapper, className)}
+  //       fallback={fallback}
+  //     />
+  //   );
+  // }
+  // if (typeof icon.inlineHTML === 'string' && isSvg(icon.inlineHTML)) {
+  //   return (
+  //     <div
+  //       className={className}
+  //       dangerouslySetInnerHTML={{
+  //         __html: setSvgAttribute(
+  //           icon.inlineHTML,
+  //           'class',
+  //           cx(classes.svg, svgClassName)
+  //         ),
+  //       }}
+  //     />
+  //   );
+  // }
   return (
     <ReactSVG
-      src={icon.url}
+      src={src}
       beforeInjection={beforeInjection}
       className={className}
       fallback={fallback}

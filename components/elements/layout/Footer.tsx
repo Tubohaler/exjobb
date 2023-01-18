@@ -1,4 +1,4 @@
-import { StaticPageFooter } from '@lib/dato-cms';
+import { FooterFragment } from '@lib/dato-cms';
 import { Box, createStyles } from '@mantine/core';
 import StructuredText from '@components/structured-text/StructuredText';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
@@ -7,7 +7,7 @@ export type FooterProps = Omit<
   Parameters<typeof Box<'footer'>>[0],
   'children'
 > & {
-  data: StaticPageFooter;
+  data: FooterFragment;
 };
 
 const useStyles = createStyles((theme) => ({

@@ -1,4 +1,4 @@
-import type { StaticPageData, SubsectionFragment } from '@lib/dato-cms';
+import type { PageQuery, SubsectionFragment } from '@lib/dato-cms';
 import {
   StructuredText,
   StructuredTextGraphQlResponseRecord,
@@ -11,10 +11,7 @@ import DefaultBlocks from './defaults/DefaultBlocks';
 import { isStructuredText } from 'datocms-structured-text-utils';
 
 type BlockTypeNames = Exclude<
-  Exclude<
-    StaticPageData['page'],
-    null
-  >['sections'][number]['content']['blocks'],
+  Exclude<PageQuery['page'], null>['sections'][number]['content']['blocks'],
   null
 >[number]['__typename'];
 

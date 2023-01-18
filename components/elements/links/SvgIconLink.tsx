@@ -8,7 +8,6 @@ import {
   MantineNumberSize,
   Selectors,
 } from '@mantine/core';
-import { defaultTransition } from '@lib/theme/main';
 
 import SvgIcon, { SvgIconProps } from '../SvgIcon';
 import { useRef } from 'react';
@@ -29,7 +28,7 @@ export type SvgIconLinkProps = DefaultProps<
 > &
   Parameters<typeof ActionIcon<typeof Link>>[0] &
   SvgIconLinkStylesParams &
-  Pick<SvgIconProps, 'icon' | 'fallback'>;
+  Pick<SvgIconProps, 'src' | 'fallback'>;
 
 const useStyles = createStyles(
   (
@@ -84,7 +83,7 @@ const useStyles = createStyles(
 );
 
 const SvgIconLink = ({
-  icon,
+  src,
   styles,
   unstyled,
   className,
@@ -119,7 +118,7 @@ const SvgIconLink = ({
       size="xs"
       {...props}
     >
-      <SvgIcon icon={icon} className={classes.wrapper} fallback={fallback} />
+      <SvgIcon src={src} className={classes.wrapper} fallback={fallback} />
     </Box>
   );
 };

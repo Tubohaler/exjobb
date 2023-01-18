@@ -1,7 +1,5 @@
 import { AppShell, createStyles } from '@mantine/core';
-
-import { StaticPageData } from '@lib/dato-cms';
-
+import { PageQuery } from '@lib/dato-cms';
 import Header from './Header';
 import Footer from './Footer';
 
@@ -12,7 +10,7 @@ const useStyles = createStyles((theme) => ({
 
 export type PageWrapperProps = {
   children: React.ReactNode;
-  data: StaticPageData;
+  data: PageQuery;
 };
 
 const PageWrapper = ({ children, data }: PageWrapperProps) => {

@@ -1,5 +1,5 @@
 import {
-  FooterSectionContent,
+  FooterSectionFragment,
   SectionFragment,
   SubsectionFragment,
 } from '@lib/dato-cms';
@@ -19,7 +19,7 @@ export type StructuredTextProps<
     | StructuredTextPropTypes<R1, R2>['data']
     | SectionFragment['content']
     | SubsectionFragment['content']
-    | FooterSectionContent;
+    | FooterSectionFragment['content'];
 };
 
 const devMode = process.env.NODE_ENV === 'development';
