@@ -22,7 +22,11 @@ const PageWrapper = ({ children, data }: PageWrapperProps) => {
       padding={0}
       className={classes.root}
       classNames={{ body: classes.body }}
-      header={data.header ? <Header data={data.header} /> : undefined}
+      header={
+        data.header ? (
+          <Header data={data.header} currentPage={data.page?.name} />
+        ) : undefined
+      }
     >
       {children}
       {data.footer && <Footer data={data.footer} />}
