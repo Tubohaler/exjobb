@@ -4,16 +4,7 @@ import HumbleButton from '@components/elements/buttons/HumbleButton';
 import SteamButton from '@components/elements/buttons/SteamButton';
 
 import { ProjectFragment } from '@lib/dato-cms';
-import {
-  createStyles,
-  Box,
-  Title,
-  Overlay,
-  Flex,
-  Stack,
-  Group,
-  Button,
-} from '@mantine/core';
+import { createStyles, Box, Title, Group } from '@mantine/core';
 
 import { createTransition } from '@lib/theme/utils';
 import Link from 'next/link';

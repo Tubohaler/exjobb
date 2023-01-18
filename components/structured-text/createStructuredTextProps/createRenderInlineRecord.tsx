@@ -2,11 +2,11 @@ import {
   AddressFragment,
   CurrentVacanciesFragment,
   ImageGalleryFragment,
+  PageQuery,
   PeopleGalleryFragment,
   ProjectGalleryFragment,
   ResponsiveVideoFragment,
-  StaticPageData,
-  StaticSocialLinksCollection,
+  SocialLinksCollectionFragment,
 } from '@lib/dato-cms';
 import {
   StructuredTextGraphQlResponseRecord,
@@ -19,14 +19,11 @@ import Placeholder from './Placeholder';
 
 type RecordTypeNames =
   | Exclude<
-      Exclude<
-        StaticPageData['page'],
-        null
-      >['sections'][number]['content']['links'],
+      Exclude<PageQuery['page'], null>['sections'][number]['content']['links'],
       null
     >[number]['__typename']
   | Exclude<
-      StaticPageData['footer'],
+      PageQuery['footer'],
       null
     >['sections'][number]['content']['links'][number]['__typename'];
 
@@ -89,7 +86,7 @@ export default function createRenderInlineRecord<
         return (
           <Components.SocialLinks
             key={record.id}
-            {...inferType<StaticSocialLinksCollection>(record)}
+            {...inferType<SocialLinksCollectionFragment>(record)}
           />
         );
       default:

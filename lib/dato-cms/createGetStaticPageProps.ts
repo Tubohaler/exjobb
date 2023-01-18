@@ -2,14 +2,7 @@ import { GetStaticProps } from 'next';
 import request from './request';
 import createDevCache from './dev-cache/createDevCache';
 
-import {
-  PageDocument,
-  PageName,
-  StaticPageData,
-  StaticPageProps,
-} from './graphql';
-
-import createStaticPageData from './createStaticPageData';
+import { PageDocument, PageName, PageQuery, StaticPageProps } from './graphql';
 
 export default function createGetStaticPageProps<T extends PageName>(
   pageName: T,
@@ -19,16 +12,13 @@ export default function createGetStaticPageProps<T extends PageName>(
   const cache = createDevCache(devCacheMaxAge);
 
   return async () => {
-    let data: StaticPageData | null = null;
+    let data: PageQuery | null = null;
     if (devMode) data = await cache.get(pageName);
     if (data) return { props: { data } };
 
-    const queryData = await request(PageDocument, { name: pageName });
-    data = await createStaticPageData(queryData);
+    data = await request(PageDocument, { name: pageName });
     if (devMode) await cache.set(pageName, data);
-    if (!data) {
-      throw new Error('Failed getting Static Page Data');
-    }
+
     return { props: { data } };
   };
 }

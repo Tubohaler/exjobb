@@ -6,7 +6,6 @@ import type {
   ResponsiveVideoFragment,
   SubsectionFragment,
   CurrentVacanciesFragment,
-  StaticSocialLinksCollection,
   SocialLinksCollectionFragment,
 } from '@lib/dato-cms';
 import type { RenderMarkRule } from 'datocms-structured-text-generic-html-renderer';
@@ -96,11 +95,8 @@ export interface StructuredTextComponents {
   ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
   /** @see CurrentVacanciesFragment */
   CurrentVacancies: (props: CurrentVacanciesFragment) => JSX.Element;
-  /**
-   * @see StaticSocialLinks
-   * @see SocialLinksCollectionFragment
-   */
-  SocialLinks: (props: StaticSocialLinksCollection) => JSX.Element;
+  /** @see SocialLinksCollectionFragment */
+  SocialLinks: (props: SocialLinksCollectionFragment) => JSX.Element;
 }
 
 export interface NodeRules {

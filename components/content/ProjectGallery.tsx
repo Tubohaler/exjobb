@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Project from './Project';
 
 import { Box, createStyles } from '@mantine/core';
