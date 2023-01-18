@@ -45,7 +45,6 @@ const SvgIcon = ({ icon, svgClassName, className, fallback }: SvgIconProps) => {
         .filter((v) => !!v)
     );
   };
-  console.log('isSvgIconFragment(icon): ', isSvgIconFragment(icon));
   if (!isSvgIconFragment(icon)) {
     return (
       <ReactSVG

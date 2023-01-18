@@ -4,18 +4,18 @@ import {
   Header as MantineHeader,
   HeaderProps as MantineHeaderProps,
   Title,
+  useMantineTheme,
 } from '@mantine/core';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { StaticPageHeader } from '@lib/dato-cms';
+import { useMediaQuery } from '@mantine/hooks';
+import { createTransition } from '@lib/theme/utils';
 
 const useStyles = createStyles((theme) => ({
   root: {
     padding: theme.spacing.md,
     backgroundColor: theme.white,
-    [theme.fn.largerThan('md')]: {
-      height: 70,
-    },
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -71,6 +71,11 @@ const Header = ({
   styles,
   ...props
 }: HeaderProps) => {
+  const theme = useMantineTheme();
+  const smallScreen = useMediaQuery(
+    `(max-width: ${theme.breakpoints.md}px)`,
+    false
+  );
   const { classes, cx } = useStyles(undefined, {
     name: 'Header',
     classNames,
@@ -78,7 +83,7 @@ const Header = ({
   });
   return (
     <MantineHeader
-      height={110}
+      height={smallScreen ? 110 : 70}
       className={cx(classes.root, className)}
       {...props}
     >
