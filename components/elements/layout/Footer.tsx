@@ -1,5 +1,5 @@
 import { FooterFragment } from '@lib/dato-cms';
-import { Box, createStyles } from '@mantine/core';
+import { Box, createStyles, List } from '@mantine/core';
 import StructuredText from '@components/structured-text/StructuredText';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
 import Address from '@components/content/Address';
@@ -10,20 +10,28 @@ export type FooterProps = Omit<
   data: FooterFragment;
 };
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, _, getRef) => ({
   root: {
-    height: 110,
+    minHeight: 110,
     width: '100%',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: theme.spacing.md,
     [theme.fn.smallerThan('sm')]: {
-      height: 250,
+      minHeight: 250,
+      flexDirection: 'column-reverse',
+      [`& .${getRef('section')}:first-of-type, & .${getRef(
+        'section'
+      )}:last-of-type`]: {
+        alignItems: 'center',
+      },
     },
   },
   section: {
+    ref: getRef('section'),
     flexGrow: 1,
     width: '100%',
     height: '100%',
@@ -41,9 +49,13 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const structuredTextProps = createStructuredTextProps({
-  components: {
-    Address: (address) => {
-      return <Address address={address} sx={() => ({ textAlign: 'center' })} />;
+  nodeRules: {
+    List: ({ key, children }) => {
+      return (
+        <List key={key} listStyleType="none" p={0} sx={{ textAlign: 'center' }}>
+          {children}
+        </List>
+      );
     },
   },
 });
