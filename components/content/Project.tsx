@@ -109,7 +109,7 @@ const Project = ({
           </Title>
         </InfoWrapper>
         {(humbleUrl || steamUrl) && (
-          <Group className={classes.buttonGroup} grow spacing={0}>
+          <Group className={classes.buttonGroup} grow spacing={0} p={0}>
             {humbleUrl && (
               <HumbleButton href={humbleUrl} text={humbleButtonText} />
             )}
