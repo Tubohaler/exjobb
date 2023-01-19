@@ -13,11 +13,16 @@ import { useMediaQuery } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   root: {
+    width: '100%',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 70,
+    [theme.fn.smallerThan('md')]: {
+      height: 110,
+    },
   },
   leftSection: {
     height: '100%',
@@ -81,11 +86,7 @@ const Header = ({
     styles,
   });
   return (
-    <MantineHeader
-      height={smallScreen ? 110 : 70}
-      className={cx(classes.root, className)}
-      {...props}
-    >
+    <Box className={cx(classes.root, className)} component="header" {...props}>
       <Box className={classes.leftSection}>
         <Title order={3} className={classes.leftSectionTitle} weight="bold">
           +
@@ -98,7 +99,7 @@ const Header = ({
           linkProps={{ className: classes.socialLink }}
         />
       </Box>
-    </MantineHeader>
+    </Box>
   );
 };
 

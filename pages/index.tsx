@@ -24,7 +24,11 @@ const Home = ({ data }: StaticPageProps) => {
                     minHeight: '90vh',
                   },
                 },
-                body: {},
+                body: {
+                  '&:first-of-type': {
+                    maxWidth: '100%',
+                  },
+                },
               })}
             />
           );
