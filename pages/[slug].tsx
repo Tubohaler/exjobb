@@ -1,4 +1,4 @@
-import PageWrapper from '@components/elements/layout/UpdatedPageWrapper';
+import { PageWrapper } from '@components/elements/layout';
 import {
   getPageLinks,
   getStaticPageProps,
