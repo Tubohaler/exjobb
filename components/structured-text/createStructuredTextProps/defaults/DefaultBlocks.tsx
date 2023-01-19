@@ -6,7 +6,7 @@ const DefaultBlockComponents: BlockComponents = {
   Subsection: ({ children, section }) => {
     return (
       <Section>
-        {section.title && <Title order={3}>{section.title}</Title>}
+        {section.title && <Title order={4}>{section.title}</Title>}
         {children}
       </Section>
     );
