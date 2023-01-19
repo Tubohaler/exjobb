@@ -10,12 +10,7 @@ const props = createStructuredTextProps({
   blocks: {
     Subsection: ({ children, section }) => {
       return (
-        <Box
-          sx={(theme) => ({
-            /*    display:"grid", */
-            /* flexBasis:"20vw" */
-          })}
-        >
+        <Box>
           {section.title && (
             <Title order={3} mb="sm" italic>
               {section.title}
