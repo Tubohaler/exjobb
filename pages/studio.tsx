@@ -1,4 +1,4 @@
-import PageWrapper from '@components/elements/layout/UpdatedPageWrapper';
+import { PageWrapper } from '@components/elements/layout';
 import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
 import Head from '@components/page/Head';
 import PageSection from '@components/page/PageSection';
