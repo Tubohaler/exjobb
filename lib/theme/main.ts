@@ -86,8 +86,11 @@ const mainTheme: MantineTheme = {
     fontWeight: 400,
   },
   globalStyles: (theme) => ({
+    // body: {
+    //   background: theme.colors.beige[1],
+    // },
     body: {
-      background: theme.colors.beige[1],
+      width: '100%',
     },
     'main > article': {
       '&:nth-of-type(odd)': {
