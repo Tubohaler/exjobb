@@ -39,6 +39,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    fontSize: theme.fontSizes.sm,
     '&:first-of-type': {
       alignItems: 'flex-start',
     },
@@ -52,7 +53,15 @@ const structuredTextProps = createStructuredTextProps({
   nodeRules: {
     List: ({ key, children }) => {
       return (
-        <List key={key} listStyleType="none" p={0} sx={{ textAlign: 'center' }}>
+        <List
+          key={key}
+          listStyleType="none"
+          p={0}
+          sx={(theme) => ({
+            textAlign: 'center',
+            fontSize: theme.fontSizes.md,
+          })}
+        >
           {children}
         </List>
       );
