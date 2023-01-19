@@ -42,13 +42,7 @@ const useStyles = createStyles((theme) => ({
 const structuredTextProps = createStructuredTextProps({
   components: {
     Address: (address) => {
-      return (
-        <Address
-          address={address}
-          displayTitle={false}
-          sx={() => ({ textAlign: 'center' })}
-        />
-      );
+      return <Address address={address} sx={() => ({ textAlign: 'center' })} />;
     },
   },
 });

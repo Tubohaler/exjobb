@@ -11,20 +11,17 @@ import {
 export type AddressProps = DefaultProps<AddressStylesNames> &
   Omit<Parameters<typeof Box<'div'>>[0], 'children'> & {
     address: AddressFragment;
-    displayTitle?: boolean;
   };
 
 export type AddressStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles(() => ({
   root: {},
-  title: { fontStyle: 'italic' },
   address: { fontStyle: 'normal' },
 }));
 
 const Address = ({
-  address: { title, name, streetAddress, zipCode, city, country },
-  displayTitle = true,
+  address: { name, streetAddress, zipCode, city, country },
   className,
   classNames,
   styles,
@@ -37,11 +34,6 @@ const Address = ({
   });
   return (
     <Box className={cx(classes.root, className)} {...props}>
-      {displayTitle && (
-        <Title order={4} size="h4" weight="normal" className={classes.title}>
-          {title}
-        </Title>
-      )}
       <Box component="address" className={classes.address}>
         <Text>{name}</Text>
         <Text>{streetAddress}</Text>
