@@ -1,15 +1,15 @@
 import path from 'path';
 import fs from 'fs';
-import { PageQuery, PageName } from '../graphql';
+import { PageQuery } from '../graphql';
 
 type DevCacheData = {
   modified_at: number;
-  pages: Partial<Record<PageName, PageQuery>>;
+  pages: Partial<Record<string, PageQuery>>;
 };
 
 export interface DevCache {
-  get(name: PageName): Promise<PageQuery | null>;
-  set(name: PageName, data: PageQuery): Promise<boolean>;
+  get(name: string): Promise<PageQuery | null>;
+  set(name: string, data: PageQuery): Promise<boolean>;
 }
 
 const isDevCacheData = (data: unknown): data is DevCacheData => {
@@ -23,7 +23,7 @@ const isDevCacheData = (data: unknown): data is DevCacheData => {
     return false;
   }
   const pages = data.pages as { [key: string]: unknown };
-  return (['home', 'about', 'contact', 'career'] as PageName[]).every(
+  return ['home', 'about', 'contact', 'career'].every(
     (key) => !(key in pages) || pages[key] instanceof Object
   );
 };

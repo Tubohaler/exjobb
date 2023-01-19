@@ -38,9 +38,6 @@ const config: CodegenConfig = {
   generates: {
     'lib/dato-cms/graphql/generated.ts': {
       config: tsPluginConfig,
-      hooks: {
-        afterOneFileWrite: ['ts-node scripts/dato-cms/extend-generated.ts'],
-      },
       plugins: ['typescript', 'typescript-operations', 'typed-document-node'],
     },
   },

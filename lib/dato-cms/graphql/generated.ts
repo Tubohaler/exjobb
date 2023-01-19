@@ -4341,7 +4341,7 @@ export type PageLinkFragment = {
 } & { __typename: 'PageRecord' };
 
 export type PageQueryVariables = Exact<{
-  name: InputMaybe<Scalars['String']>;
+  urlSlug: InputMaybe<Scalars['String']>;
 }>;
 
 export type PageQuery = {
@@ -5762,7 +5762,10 @@ export const PageDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'name' } },
+          variable: {
+            kind: 'Variable',
+            name: { kind: 'Name', value: 'urlSlug' },
+          },
           type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
         },
       ],
@@ -5781,7 +5784,7 @@ export const PageDocument = {
                   fields: [
                     {
                       kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'name' },
+                      name: { kind: 'Name', value: 'urlSlug' },
                       value: {
                         kind: 'ObjectValue',
                         fields: [
@@ -5790,7 +5793,7 @@ export const PageDocument = {
                             name: { kind: 'Name', value: 'eq' },
                             value: {
                               kind: 'Variable',
-                              name: { kind: 'Name', value: 'name' },
+                              name: { kind: 'Name', value: 'urlSlug' },
                             },
                           },
                         ],

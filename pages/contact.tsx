@@ -5,7 +5,7 @@ import PageSection from '@components/page/PageSection';
 
 export const getStaticProps = createGetStaticPageProps('contact');
 
-const Home = ({ data }: StaticPageProps) => {
+const Career = ({ data }: StaticPageProps) => {
   return (
     <>
       <Head />
@@ -18,4 +18,4 @@ const Home = ({ data }: StaticPageProps) => {
   );
 };
 
-export default Home;
+export default Career;
