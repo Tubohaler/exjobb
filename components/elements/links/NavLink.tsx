@@ -7,22 +7,32 @@ export type NavLinkProps = LinkProps & {
 
 export type NavLinkStylesNames = Selectors<typeof useStyles>;
 
-const useStyles = createStyles((theme) => ({
-  root: {
-    color: theme.black,
-    textTransform: 'capitalize',
-    '&:not(:last-of-type):after': {
-      pointerEvents: 'none',
-      content: '"/"',
-      position: 'relative',
+const useStyles = createStyles((theme) => {
+  const margin = 0.5;
+  return {
+    root: {
       color: theme.black,
-      right: '-5px',
+      textTransform: 'capitalize',
+      margin: `0 ${margin}em`,
+      '&:not(:last-of-type):after': {
+        pointerEvents: 'none',
+        content: '"/"',
+        position: 'relative',
+        color: theme.black,
+        right: `-${margin}em`,
+      },
+      '&:first-of-type': {
+        marginLeft: 0,
+      },
+      '&:last-of-type': {
+        marginRight: 0,
+      },
     },
-  },
-  active: {
-    color: theme.colors.blue[2],
-  },
-}));
+    active: {
+      color: theme.colors.blue[2],
+    },
+  };
+});
 
 const NavLink = ({
   className,
