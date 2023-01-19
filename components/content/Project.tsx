@@ -63,7 +63,6 @@ const useStyles = createStyles((theme) => ({
   },
   buttonGroup: {
     width: '100%',
-    minHeight: '3em',
     '& > *': {
       height: '100%',
     },
@@ -109,12 +108,14 @@ const Project = ({
             {description}
           </Title>
         </InfoWrapper>
-        <Group className={classes.buttonGroup} grow spacing={0}>
-          {humbleUrl && (
-            <HumbleButton href={humbleUrl} text={humbleButtonText} />
-          )}
-          {steamUrl && <SteamButton href={steamUrl} />}
-        </Group>
+        {(humbleUrl || steamUrl) && (
+          <Group className={classes.buttonGroup} grow spacing={0}>
+            {humbleUrl && (
+              <HumbleButton href={humbleUrl} text={humbleButtonText} />
+            )}
+            {steamUrl && <SteamButton href={steamUrl} />}
+          </Group>
+        )}
       </Box>
       <Image className={classes.image} data={featuredImage.responsiveImage} />
     </Box>

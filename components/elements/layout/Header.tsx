@@ -86,7 +86,7 @@ const Header = ({
       className={cx(classes.root, className)}
       {...props}
     >
-      <Box>
+      <Box className={classes.leftSection}>
         <Title order={3} className={classes.leftSectionTitle} weight="bold">
           +
         </Title>

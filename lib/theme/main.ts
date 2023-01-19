@@ -83,10 +83,11 @@ const mainTheme: MantineTheme = {
   headings: {
     ...DEFAULT_THEME.headings,
     fontFamily: ebGaramond.style.fontFamily,
+    fontWeight: 400,
   },
   globalStyles: (theme) => ({
     body: {
-      // background: theme.colors.beige[1],
+      background: theme.colors.beige[1],
     },
     'main > article': {
       '&:nth-of-type(odd)': {

@@ -15,10 +15,14 @@ export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
 export type PageSectionStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => ({
-  root: {},
+  root: {
+    overflowX: 'hidden',
+  },
   header: {},
-  content: {
+  body: {
     position: 'relative',
+    width: '100%',
+    maxWidth: theme.breakpoints.md,
   },
 }));
 
@@ -40,7 +44,7 @@ const PageSection = ({
       {section.title && (
         <PageSectionHeader title={section.title} className={classes.header} />
       )}
-      <Box className={classes.content}>
+      <Box className={classes.body}>
         <StructuredText data={section.content} {...structuredTextProps} />
       </Box>
     </Article>

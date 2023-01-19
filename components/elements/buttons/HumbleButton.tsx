@@ -13,6 +13,9 @@ const useStyles = createStyles((theme, _, getRef) => ({
     background: theme.colors.blue[2],
     opacity: 0.75,
     transition: createTransition(['opacity', 'background']),
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     '&:hover': {
       opacity: 1,
       background: theme.colors.red[2],
@@ -41,7 +44,7 @@ function HumbleButton({ text, ...props }: Props) {
     <Button
       component={Link}
       className={classes.root}
-      classNames={{ inner: classes.text }}
+      classNames={{ label: classes.text }}
       {...props}
     >
       {text}

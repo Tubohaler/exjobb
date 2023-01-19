@@ -3,9 +3,9 @@ import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
 import Head from '@components/page/Head';
 import PageSection from '@components/page/PageSection';
 
-export const getStaticProps = createGetStaticPageProps('about');
+export const getStaticProps = createGetStaticPageProps('studio');
 
-const Home = ({ data }: StaticPageProps) => {
+const Studio = ({ data }: StaticPageProps) => {
   return (
     <>
       <Head />
@@ -18,4 +18,4 @@ const Home = ({ data }: StaticPageProps) => {
   );
 };
 
-export default Home;
+export default Studio;

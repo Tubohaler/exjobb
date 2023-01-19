@@ -1,5 +1,5 @@
-query Page($name: String) {
-  page(filter: { name: { eq: $name } }) {
+query Page($urlSlug: String) {
+  page(filter: { urlSlug: { eq: $urlSlug } }) {
     ...Page
   }
   header {
