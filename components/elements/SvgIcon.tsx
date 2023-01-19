@@ -6,7 +6,13 @@ const useStyles = createStyles(() => ({
     display: 'inline-block',
     fontSize: 'inherit',
     color: 'inherit',
-    verticalAlign: 'baseline',
+    '& > div': {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
   },
   svg: {
     height: '1em',
@@ -71,7 +77,7 @@ const SvgIcon = ({ src, svgClassName, className, fallback }: SvgIconProps) => {
     <ReactSVG
       src={src}
       beforeInjection={beforeInjection}
-      className={className}
+      className={cx(classes.wrapper, className)}
       fallback={fallback}
     />
   );

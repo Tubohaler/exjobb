@@ -15,7 +15,7 @@ const SocialLinkGroup = ({
   ...props
 }: SocialLinkGroup) => {
   return (
-    <Group {...props}>
+    <Group {...props} align="center">
       {links.map(({ id, href, icon, title, linkTitle }) => {
         return (
           <SvgIconLink
