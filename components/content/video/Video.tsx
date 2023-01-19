@@ -22,9 +22,10 @@ const useStyles = createStyles((theme) => {
     root: {
       opacity: 0,
       background: theme.black,
-      transition: createTransition(['opacity'], 0.05, 'ease-in-out', 0),
+      transition: createTransition(['opacity'], 0.1, 'ease-in-out', 0),
       objectFit: 'cover',
       objectPosition: 'center',
+      overflow: 'hidden',
     },
     loaded: {
       opacity: 1,
@@ -44,12 +45,13 @@ const Video = ({ video, fallback, className, ...props }: VideoProps) => {
     const videoElement = videoRef.current;
     videoElement.pause();
     setVisible(false);
-    videoElement.removeAttribute('src');
+
     const timeout = setTimeout(() => {
+      videoElement.removeAttribute('src');
       videoElement.load();
       setCurrentVideo(video);
       prevVideo.current = video;
-    }, 100);
+    }, 150);
     return () => clearTimeout(timeout);
   }, [video]);
 

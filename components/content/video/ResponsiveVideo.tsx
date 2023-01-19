@@ -17,13 +17,13 @@ const useStyles = createStyles((theme) => {
     height: '100%',
     width: '100%',
     minHeight: '90vh',
-    minWidth: '100vw',
     position: 'relative',
     zIndex: 0,
   };
   return {
     root: {
-      width: '100vw',
+      width: '100%',
+      maxWidth: '100%',
       height: '100%',
       maxHeight: '100vh',
       display: 'flex',
@@ -35,7 +35,7 @@ const useStyles = createStyles((theme) => {
     title: {
       color: theme.white,
       opacity: 0.9,
-      wordSpacing: '100vw',
+      wordSpacing: '100%',
       fontWeight: 'normal',
       fontSize: theme.fontSizes.xl * 6,
       textAlign: 'center',

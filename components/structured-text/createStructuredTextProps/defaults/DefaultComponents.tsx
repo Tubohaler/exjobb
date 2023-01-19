@@ -4,6 +4,7 @@ import ResponsiveVideo from '@components/content/video/ResponsiveVideo';
 import ProjectGallery from '@components/content/ProjectGallery';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import Address from '@components/content/Address';
+import CurrentVacancies from '@components/content/CurrentVacancies';
 
 const DefaultInlineComponents: StructuredTextComponents = {
   Address: (address) => {
@@ -21,9 +22,7 @@ const DefaultInlineComponents: StructuredTextComponents = {
   ResponsiveVideo: (video) => {
     return <ResponsiveVideo video={video} />;
   },
-  CurrentVacancies: () => {
-    return <Placeholder type="CurrentVacancies" />;
-  },
+  CurrentVacancies,
   SocialLinks: ({ links }) => {
     return <SocialLinkGroup links={links} />;
   },

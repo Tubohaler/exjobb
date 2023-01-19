@@ -13,6 +13,7 @@ export type FooterProps = Omit<
 const useStyles = createStyles((theme) => ({
   root: {
     height: 110,
+    width: '100%',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
