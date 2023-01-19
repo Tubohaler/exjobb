@@ -17,7 +17,7 @@ const props = createStructuredTextProps({
           })}
         >
           {section.title && (
-            <Title order={3} italic size="h4">
+            <Title order={3} mb="sm" italic>
               {section.title}
             </Title>
           )}
@@ -38,31 +38,13 @@ const Career = ({ data }: StaticPageProps) => {
               styles={(theme) => ({
                 root: {
                   padding: theme.spacing.xl,
-                  justifyContent: 'center',
-                  display: 'flex',
                 },
                 body: {
                   padding: theme.spacing.xl,
-
+                  maxWidth: theme.breakpoints.sm,
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
                   gap: theme.spacing.xl,
-                  /*  flexDirection:"column",
-                    flexWrap:"wrap",
-                    maxHeight:"70vh",
-                    gap:theme.spacing.md */
-                  /* columnCount:2,
-                    columnWidth:"50%",
-                    columnFill:"balance" */
-                  /* gridTemplateColumns: 'repeat(2, 1fr)', */
-
-                  /*  alignContent:"center" */
-                  /*      alignContent: 'center',
-                    justifyItems: 'center',
-                    alignItems:"center",
-                    justifyContent:"center", */
-
-                  /*       [theme.fn.largerThan('md')]: { gridTemplateColumns: 'repeat(4, 1fr)' }, */
                 },
               })}
               key={section.id}

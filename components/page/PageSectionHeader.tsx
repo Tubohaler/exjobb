@@ -13,7 +13,7 @@ export type PageSectionHeaderStylesNames = Selectors<typeof useStyles>;
 const useStyles = createStyles((theme) => ({
   root: {
     width: '100%',
-    padding: theme.spacing.xl * 2,
+    marginBottom: theme.spacing.xl * 2,
   },
   title: {
     letterSpacing: '0.1em',
