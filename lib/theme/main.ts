@@ -74,24 +74,24 @@ export const colors: MantineTheme['colors'] = {
 
 export const defaultTransition = 'all 0.33s ease-in-out 0.1s';
 
+const breakpoints: MantineTheme['breakpoints'] = {
+  ...DEFAULT_THEME.breakpoints,
+  xs: 480,
+};
+
 const mainTheme: MantineTheme = {
   ...DEFAULT_THEME,
   colors,
   colorScheme: 'light',
   defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
+  breakpoints,
   headings: {
     ...DEFAULT_THEME.headings,
     fontFamily: ebGaramond.style.fontFamily,
     fontWeight: 400,
   },
-  globalStyles: (theme) => ({
-    // body: {
-    //   background: theme.colors.beige[1],
-    // },
-    body: {
-      width: '100%',
-    },
+  globalStyles: () => ({
     'main > article': {
       '&:nth-of-type(odd)': {
         backgroundColor: 'rgba(0,0,0,0.02)',

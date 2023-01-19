@@ -11,17 +11,17 @@ import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { HeaderFragment } from '@lib/dato-cms';
 import { useMediaQuery } from '@mantine/hooks';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, _, getRef) => ({
   root: {
+    minHeight: 70,
     width: '100%',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: 70,
     [theme.fn.smallerThan('md')]: {
-      height: 110,
+      minHeight: 110,
     },
   },
   leftSection: {
@@ -43,22 +43,34 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     height: '100%',
     gap: theme.spacing.xl,
+
+    fontSize: theme.fontSizes.lg,
+    [`& .${getRef('socialLink')}`]: {
+      fontSize: theme.fontSizes.sm,
+    },
     [theme.fn.smallerThan('md')]: {
       justifyContent: 'center',
       flexDirection: 'column',
+      gap: theme.spacing.md,
       fontSize: theme.fontSizes.xl,
-      gap: theme.spacing.xs,
+      [`& .${getRef('socialLink')}`]: {
+        fontSize: theme.fontSizes.md,
+      },
     },
     [theme.fn.smallerThan('xs')]: {
       fontSize: theme.fontSizes.md,
-      gap: theme.spacing.xs * 0.5,
+      gap: theme.spacing.sm,
+      [`& .${getRef('socialLink')}`]: {
+        fontSize: theme.fontSizes.sm,
+      },
     },
   },
   socialLink: {
-    fontSize: theme.fontSizes.sm,
-    [theme.fn.smallerThan('md')]: {
-      fontSize: theme.fontSizes.lg,
-    },
+    ref: getRef('socialLink'),
+    // fontSize: theme.fontSizes.sm,
+    // [theme.fn.smallerThan('md')]: {
+    //   fontSize: theme.fontSizes.lg,
+    // },
   },
 }));
 
