@@ -15,6 +15,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
   root: {
     minHeight: 70,
     width: '100%',
+    maxWidth: '100vw',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
@@ -67,10 +68,6 @@ const useStyles = createStyles((theme, _, getRef) => ({
   },
   socialLink: {
     ref: getRef('socialLink'),
-    // fontSize: theme.fontSizes.sm,
-    // [theme.fn.smallerThan('md')]: {
-    //   fontSize: theme.fontSizes.lg,
-    // },
   },
 }));
 

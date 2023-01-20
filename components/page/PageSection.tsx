@@ -15,14 +15,12 @@ export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
 export type PageSectionStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => ({
-  root: {
-    overflowX: 'hidden',
-  },
+  root: {},
   header: {},
   body: {
     position: 'relative',
-    width: '100%',
-    maxWidth: theme.breakpoints.md,
+    width: theme.breakpoints.md,
+    maxWidth: '100%',
   },
 }));
 

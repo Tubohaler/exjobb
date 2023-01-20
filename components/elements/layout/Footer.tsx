@@ -14,6 +14,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
   root: {
     minHeight: 110,
     width: '100%',
+    maxWidth: '100vw',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',

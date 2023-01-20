@@ -23,9 +23,7 @@ const isDevCacheData = (data: unknown): data is DevCacheData => {
     return false;
   }
   const pages = data.pages as { [key: string]: unknown };
-  return ['home', 'about', 'contact', 'career'].every(
-    (key) => !(key in pages) || pages[key] instanceof Object
-  );
+  return Object.keys(pages).every((key) => pages[key] instanceof Object);
 };
 
 const cachePath = path.resolve(__dirname, 'cache.json');
