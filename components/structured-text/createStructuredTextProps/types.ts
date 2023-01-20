@@ -7,6 +7,7 @@ import type {
   SubsectionFragment,
   CurrentVacanciesFragment,
   SocialLinksCollectionFragment,
+  PageLinkFragment,
 } from '@lib/dato-cms';
 import type { RenderMarkRule } from 'datocms-structured-text-generic-html-renderer';
 import type {
@@ -29,6 +30,7 @@ import type {
   Span,
   RenderRule,
 } from 'datocms-structured-text-utils';
+import { RenderRecordLinkContext } from 'react-datocms';
 
 type RenderMarkContext<
   H extends TrasformFn,
@@ -99,6 +101,16 @@ export interface StructuredTextComponents {
   SocialLinks: (props: SocialLinksCollectionFragment) => JSX.Element;
 }
 
+/**
+ * Components used to render links to CMS Records items in StructuredText
+ *
+ * @see {@link https://www.datocms.com/docs/structured-text/dast#itemLink}
+ */
+export interface RecordLinkComponents {
+  /** @see PageLinkFragment */
+  Page: (context: RenderRecordLinkContext<PageLinkFragment>) => JSX.Element;
+}
+
 export interface NodeRules {
   /** @see {@link https://www.datocms.com/docs/structured-text/dast#root} */
   Root: NodeRuleFn<Root>;
@@ -142,6 +154,11 @@ export interface CreateStructuredTextPropsConfig {
    * @see BlockComponents
    */
   blocks?: Partial<BlockComponents>;
+  /**
+   * Components to render links to records
+   * @see RecordLinkComponents
+   */
+  recordLinks?: Partial<RecordLinkComponents>;
   /**
    * Callbacks to render default nodes:
    * @see NodeRules

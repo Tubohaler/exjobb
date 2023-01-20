@@ -26,6 +26,7 @@
     "@next/font": "13.0.7",
     "@tabler/icons": "^1.119.0",
     "axios": "^1.2.2",
+    "datocms-html-to-structured-text": "^2.1.11",
     "datocms-structured-text-generic-html-renderer": "^2.0.4",
     "datocms-structured-text-utils": "^2.0.4",
     "graphql": "^16.6.0",
