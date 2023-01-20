@@ -1,22 +1,45 @@
-import { PageWrapper } from '@components/elements/layout';
+import { PageWrapper, Section } from '@components/elements/layout';
 import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
 import Head from '@components/page/Head';
 import PageSection from '@components/page/PageSection';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
-import { Title, Box, createStyles } from '@mantine/core';
+import { Title, createStyles } from '@mantine/core';
 
 export const getStaticProps = createGetStaticPageProps('contact');
+
+const useStyles = createStyles((theme) => {
+  return {
+    root: {
+      height: '100%',
+    },
+    body: {
+      width: 'min(100%, 40ch)',
+      height: 'min(100%, 40rem)',
+      display: 'flex',
+      flexDirection: 'column',
+      alignContent: 'center',
+      flexWrap: 'wrap',
+      gap: theme.spacing.xl,
+      [theme.fn.smallerThan('sm')]: {
+        height: 'auto',
+        flexWrap: 'nowrap',
+      },
+    },
+  };
+});
 
 const structuredTextProps = createStructuredTextProps({
   blocks: {
     Subsection: ({ children, section }) => {
       return (
-        <Box
-          sx={{
-            boxShadow: '0 0 0 2px rgba(255,0,0,0.5)',
-            minWidth: '50%',
-            height: '100%',
-          }}
+        <Section
+          sx={(theme) => ({
+            width: '100%',
+            minHeight: '25%',
+            [theme.fn.smallerThan('sm')]: {
+              minHeight: '5em',
+            },
+          })}
         >
           {section.title && (
             <Title order={3} mb="sm" italic>
@@ -24,35 +47,14 @@ const structuredTextProps = createStructuredTextProps({
             </Title>
           )}
           {children}
-        </Box>
+        </Section>
       );
     },
   },
 });
 
-const useStyles = createStyles((theme) => {
-  return {
-    root: {
-      [theme.fn.largerThan('sm')]: {
-        paddingLeft: theme.spacing.xl,
-        paddingRight: theme.spacing.xl,
-      },
-    },
-    body: {
-      width: theme.breakpoints.sm,
-      display: 'flex',
-      flexDirection: 'column',
-      flexWrap: 'wrap',
-      gap: theme.spacing.md,
-      [theme.fn.smallerThan('sm')]: {
-        gridTemplateColumns: '1fr',
-      },
-    },
-  };
-});
-
 const Career = ({ data }: StaticPageProps) => {
-  const { classes } = useStyles(undefined, { name: 'ContactSection' });
+  const { classes } = useStyles();
   return (
     <>
       <Head />

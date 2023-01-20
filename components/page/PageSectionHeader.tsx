@@ -19,7 +19,6 @@ const useStyles = createStyles((theme) => {
     },
     title: {
       letterSpacing: '0.1em',
-      textTransform: 'capitalize',
       textAlign: 'center',
     },
   };
@@ -44,7 +43,6 @@ const PageSectionHeader = ({
       <Title
         order={2}
         className={classes.title}
-        weight={400}
         size="h1"
         transform="uppercase"
       >

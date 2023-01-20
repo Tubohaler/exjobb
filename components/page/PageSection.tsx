@@ -10,7 +10,6 @@ import { Box, DefaultProps, Selectors, useMantineTheme } from '@mantine/core';
 export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
   section: SectionFragment;
   structuredTextProps?: Omit<StructuredTextProps, 'data'>;
-  headerHeight?: number;
 };
 
 export type PageSectionStylesNames = Selectors<typeof useStyles>;
@@ -22,27 +21,29 @@ const useStyles = createStyles(
       root: {
         width: '100%',
         maxWidth: '100vw',
-        flexBasis: '80vh',
-        padding: `${theme.spacing.xl * 3}px ${theme.spacing.xl}px`,
+        minHeight: '50vh',
+        padding: `${theme.spacing.xl * 4}px ${theme.spacing.xl}px`,
         position: 'relative',
-        justifyContent: 'center',
         display: 'grid',
         gridTemplateRows: withHeader ? 'auto 1fr' : '1fr',
         gridTemplateColumns: '1fr',
-        gap: theme.spacing.xl,
+        gap: theme.spacing.xl * 2,
         alignContent: 'center',
-        justifyItems: 'center',
-        flexDirection: 'column',
         alignItems: 'center',
+        justifyItems: 'center',
+
         [theme.fn.smallerThan('sm')]: {
-          padding: `${theme.spacing.xl * 3}px ${theme.spacing.md}px`,
+          paddingLeft: theme.spacing.sm,
+          paddingRight: theme.spacing.sm,
         },
       },
       header: {},
       body: {
         position: 'relative',
-        width: theme.breakpoints.md,
-        maxWidth: '100%',
+        width: '100%',
+        height: 'auto',
+        maxWidth: theme.breakpoints.md,
+        minWidth: 0,
       },
     };
   }
@@ -56,8 +57,6 @@ const PageSection = ({
   structuredTextProps = {},
   ...props
 }: PageSectionProps) => {
-  const theme = useMantineTheme();
-
   const { classes, cx } = useStyles(
     { withHeader: !!section.title },
     {
