@@ -140,24 +140,17 @@ fragment Icon on FileField {
   height
 }
 
-fragment ResponsiveImage on ImageFileField {
+fragment ResponsiveImage on ResponsiveImage {
   __typename
-  id
-  responsiveImage(
-    sizes: "(max-width: 512px) 100vw, 512px"
-    imgixParams: { fm: webp }
-  ) {
-    __typename
-    src
-    alt
-    title
-    width
-    height
-    srcSet
-    sizes
-    bgColor
-    aspectRatio
-  }
+  src
+  alt
+  title
+  width
+  height
+  srcSet
+  sizes
+  bgColor
+  aspectRatio
 }
 
 fragment Video on VideoFileField {
@@ -210,7 +203,14 @@ fragment Project on ProjectRecord {
   humbleButtonText
   description
   featuredImage {
-    ...ResponsiveImage
+    __typename
+    id
+    responsiveImage(
+      sizes: "(max-width: 512px) 100vw, 512px"
+      imgixParams: { fm: webp, fit: crop, ar: "1", dpi: "72", w: "800" }
+    ) {
+      ...ResponsiveImage
+    }
   }
 }
 
@@ -228,7 +228,14 @@ fragment Staff on StaffRecord {
   jobPosition
   name
   featuredImage {
-    ...ResponsiveImage
+    __typename
+    id
+    responsiveImage(
+      sizes: "(max-width: 512px) 100vw, 512px"
+      imgixParams: { fm: webp, fit: crop, w: "800", ar: "3:4", dpi: "72" }
+    ) {
+      ...ResponsiveImage
+    }
   }
 }
 
@@ -245,7 +252,14 @@ fragment ImageGallery on ImageGalleryRecord {
   id
   title
   images {
-    ...ResponsiveImage
+    __typename
+    id
+    responsiveImage(
+      sizes: "(max-width: 512px) 100vw, 512px"
+      imgixParams: { fm: webp, fit: crop, ar: "3:2", dpi: "72" }
+    ) {
+      ...ResponsiveImage
+    }
   }
 }
 
