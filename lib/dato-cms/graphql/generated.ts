@@ -3062,7 +3062,7 @@ export interface StaffRecord extends RecordInterface {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   email: Maybe<Scalars['String']>;
-  featuredImage: Maybe<ImageFileField>;
+  featuredImage: ImageFileField;
   id: Scalars['ItemId'];
   jobPosition: Scalars['String'];
   name: Scalars['String'];
@@ -3693,22 +3693,20 @@ export type PageFragment = {
                   id: string;
                   jobPosition: string;
                   name: string;
-                  featuredImage:
-                    | ({
-                        id: string;
-                        responsiveImage: {
-                          src: string;
-                          alt: string | null;
-                          title: string | null;
-                          width: number;
-                          height: number;
-                          srcSet: string;
-                          sizes: string;
-                          bgColor: string | null;
-                          aspectRatio: number;
-                        } & { __typename: 'ResponsiveImage' };
-                      } & { __typename: 'ImageFileField' })
-                    | null;
+                  featuredImage: {
+                    id: string;
+                    responsiveImage: {
+                      src: string;
+                      alt: string | null;
+                      title: string | null;
+                      width: number;
+                      height: number;
+                      srcSet: string;
+                      sizes: string;
+                      bgColor: string | null;
+                      aspectRatio: number;
+                    } & { __typename: 'ResponsiveImage' };
+                  } & { __typename: 'ImageFileField' };
                 } & { __typename: 'StaffRecord' }
               >;
             } & { __typename: 'PeopleGalleryRecord' })
@@ -3852,22 +3850,20 @@ export type SectionFragment = {
               id: string;
               jobPosition: string;
               name: string;
-              featuredImage:
-                | ({
-                    id: string;
-                    responsiveImage: {
-                      src: string;
-                      alt: string | null;
-                      title: string | null;
-                      width: number;
-                      height: number;
-                      srcSet: string;
-                      sizes: string;
-                      bgColor: string | null;
-                      aspectRatio: number;
-                    } & { __typename: 'ResponsiveImage' };
-                  } & { __typename: 'ImageFileField' })
-                | null;
+              featuredImage: {
+                id: string;
+                responsiveImage: {
+                  src: string;
+                  alt: string | null;
+                  title: string | null;
+                  width: number;
+                  height: number;
+                  srcSet: string;
+                  sizes: string;
+                  bgColor: string | null;
+                  aspectRatio: number;
+                } & { __typename: 'ResponsiveImage' };
+              } & { __typename: 'ImageFileField' };
             } & { __typename: 'StaffRecord' }
           >;
         } & { __typename: 'PeopleGalleryRecord' })
@@ -4142,8 +4138,30 @@ export type StaffFragment = {
   id: string;
   jobPosition: string;
   name: string;
-  featuredImage:
-    | ({
+  featuredImage: {
+    id: string;
+    responsiveImage: {
+      src: string;
+      alt: string | null;
+      title: string | null;
+      width: number;
+      height: number;
+      srcSet: string;
+      sizes: string;
+      bgColor: string | null;
+      aspectRatio: number;
+    } & { __typename: 'ResponsiveImage' };
+  } & { __typename: 'ImageFileField' };
+} & { __typename: 'StaffRecord' };
+
+export type PeopleGalleryFragment = {
+  id: string;
+  people: Array<
+    {
+      id: string;
+      jobPosition: string;
+      name: string;
+      featuredImage: {
         id: string;
         responsiveImage: {
           src: string;
@@ -4156,33 +4174,7 @@ export type StaffFragment = {
           bgColor: string | null;
           aspectRatio: number;
         } & { __typename: 'ResponsiveImage' };
-      } & { __typename: 'ImageFileField' })
-    | null;
-} & { __typename: 'StaffRecord' };
-
-export type PeopleGalleryFragment = {
-  id: string;
-  people: Array<
-    {
-      id: string;
-      jobPosition: string;
-      name: string;
-      featuredImage:
-        | ({
-            id: string;
-            responsiveImage: {
-              src: string;
-              alt: string | null;
-              title: string | null;
-              width: number;
-              height: number;
-              srcSet: string;
-              sizes: string;
-              bgColor: string | null;
-              aspectRatio: number;
-            } & { __typename: 'ResponsiveImage' };
-          } & { __typename: 'ImageFileField' })
-        | null;
+      } & { __typename: 'ImageFileField' };
     } & { __typename: 'StaffRecord' }
   >;
 } & { __typename: 'PeopleGalleryRecord' };
@@ -4448,22 +4440,20 @@ export type PageQuery = {
                         id: string;
                         jobPosition: string;
                         name: string;
-                        featuredImage:
-                          | ({
-                              id: string;
-                              responsiveImage: {
-                                src: string;
-                                alt: string | null;
-                                title: string | null;
-                                width: number;
-                                height: number;
-                                srcSet: string;
-                                sizes: string;
-                                bgColor: string | null;
-                                aspectRatio: number;
-                              } & { __typename: 'ResponsiveImage' };
-                            } & { __typename: 'ImageFileField' })
-                          | null;
+                        featuredImage: {
+                          id: string;
+                          responsiveImage: {
+                            src: string;
+                            alt: string | null;
+                            title: string | null;
+                            width: number;
+                            height: number;
+                            srcSet: string;
+                            sizes: string;
+                            bgColor: string | null;
+                            aspectRatio: number;
+                          } & { __typename: 'ResponsiveImage' };
+                        } & { __typename: 'ImageFileField' };
                       } & { __typename: 'StaffRecord' }
                     >;
                   } & { __typename: 'PeopleGalleryRecord' })
