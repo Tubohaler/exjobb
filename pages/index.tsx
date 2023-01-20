@@ -10,9 +10,13 @@ const useVideoSectionStyles = createStyles((theme) => ({
   root: {
     padding: 0,
     minHeight: '80vh',
+    maxWidth: '100vw',
+    overflowX: 'hidden',
   },
   body: {
     width: '100%',
+    maxWidth: '100%',
+    overflowX: 'hidden',
   },
 }));
 
