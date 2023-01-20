@@ -3,7 +3,7 @@ import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
 import Head from '@components/page/Head';
 import PageSection from '@components/page/PageSection';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
-import { Title, createStyles } from '@mantine/core';
+import { Title, createStyles, Text } from '@mantine/core';
 
 export const getStaticProps = createGetStaticPageProps('contact');
 
@@ -13,31 +13,38 @@ const useStyles = createStyles((theme) => {
       height: '100%',
     },
     body: {
-      width: 'min(100%, 40ch)',
-      height: 'min(100%, 40rem)',
+      width: 'min(100%, 35ch)',
+      height: 'min(100%, 30rem)',
       display: 'flex',
       flexDirection: 'column',
       alignContent: 'center',
       flexWrap: 'wrap',
-      gap: theme.spacing.xl,
+      rowGap: theme.spacing.lg,
+      columnGap: theme.spacing.xl * 4,
       [theme.fn.smallerThan('sm')]: {
         height: 'auto',
         flexWrap: 'nowrap',
+        rowGap: theme.spacing.xl,
       },
     },
   };
 });
 
 const structuredTextProps = createStructuredTextProps({
+  nodeRules: {
+    Paragraph: ({ key, children }) => {
+      return <Text key={key}>{children}</Text>;
+    },
+  },
   blocks: {
     Subsection: ({ children, section }) => {
       return (
         <Section
           sx={(theme) => ({
             width: '100%',
-            minHeight: '25%',
+            minHeight: '20%',
             [theme.fn.smallerThan('sm')]: {
-              minHeight: '5em',
+              minHeight: 'auto',
             },
           })}
         >

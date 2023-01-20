@@ -10,19 +10,20 @@ export type PageSectionHeaderProps =
 
 export type PageSectionHeaderStylesNames = Selectors<typeof useStyles>;
 
-const useStyles = createStyles((theme) => {
-  return {
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    title: {
+const useStyles = createStyles((theme, _, getRef) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    [`& .${getRef('title')}`]: {
       letterSpacing: '0.1em',
       textAlign: 'center',
     },
-  };
-});
+  },
+  title: {
+    ref: getRef('title'),
+  },
+}));
 
 const PageSectionHeader = ({
   title,
@@ -43,8 +44,8 @@ const PageSectionHeader = ({
       <Title
         order={2}
         className={classes.title}
-        size="h1"
         transform="uppercase"
+        size="h1"
       >
         {title}
       </Title>
