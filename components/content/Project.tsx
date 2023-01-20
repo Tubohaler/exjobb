@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React from 'react';
 import { Image } from 'react-datocms';
 import HumbleButton from '@components/elements/buttons/HumbleButton';
 import SteamButton from '@components/elements/buttons/SteamButton';

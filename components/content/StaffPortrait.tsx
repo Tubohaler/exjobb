@@ -2,27 +2,24 @@ import React from 'react';
 import { Image } from 'react-datocms';
 
 import { Box, createStyles, Title } from '@mantine/core';
-
-import { StaffFragment } from '@lib/dato-cms';
 import { createTransition } from '@lib/theme/utils';
 
-const useStyles = createStyles((theme) => ({
-  root: {},
+import { StaffFragment } from '@lib/dato-cms';
 
+const useStyles = createStyles((theme) => ({
+  root: {
+    width: '100%',
+    height: '100%',
+    aspectRatio: '5/7',
+    position: 'relative',
+    overflow: 'hidden',
+  },
   image: {
     position: 'absolute',
     inset: '0 0 0 0',
     zIndex: 0,
     objectFit: 'cover',
     objectPosition: 'center',
-  },
-  name: {
-    fontWeight: 'normal',
-    textAlign: 'center',
-  },
-  title: {
-    fontWeight: 'normal',
-    textAlign: 'center',
   },
   overlay: {
     position: 'absolute',
@@ -38,17 +35,30 @@ const useStyles = createStyles((theme) => ({
     transition: createTransition(['opacity']),
     '&:hover': { opacity: 1 },
   },
+  name: {
+    fontWeight: 'normal',
+    textAlign: 'center',
+  },
+  title: {
+    fontWeight: 'normal',
+    textAlign: 'center',
+  },
 }));
 
 function StaffPortrait({ featuredImage, name, jobPosition }: StaffFragment) {
   const { classes } = useStyles(undefined, { name: 'StaffPortrait' });
 
   return (
-    <Box classNames={classes.root}>
-      <Title className={classes.name}>{name}</Title>
-      <Title className={classes.title}>{jobPosition}</Title>
-
-      <Image data={featuredImage.responsiveImage} />
+    <Box className={classes.root}>
+      <Box className={classes.overlay}>
+        <Title className={classes.name} order={3} size="h4">
+          {name}
+        </Title>
+        <Title className={classes.title} order={4} size="h4" italic>
+          {jobPosition}
+        </Title>
+      </Box>
+      <Image className={classes.image} data={featuredImage.responsiveImage} />
     </Box>
   );
 }

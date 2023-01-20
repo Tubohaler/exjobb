@@ -5,6 +5,7 @@ import ProjectGallery from '@components/content/ProjectGallery';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import Address from '@components/content/Address';
 import CurrentVacancies from '@components/content/CurrentVacancies';
+import PeopleGallery from '@components/content/PeopleGallery';
 
 const DefaultInlineComponents: StructuredTextComponents = {
   Address: (address) => {
@@ -13,9 +14,8 @@ const DefaultInlineComponents: StructuredTextComponents = {
   ImageGallery: () => {
     return <Placeholder type="ImageGallery" />;
   },
-  PeopleGallery: () => {
-    return <Placeholder type="PeopleGallery" />;
-  },
+  PeopleGallery,
+
   ProjectGallery: (props) => {
     return <ProjectGallery {...props} />;
   },
