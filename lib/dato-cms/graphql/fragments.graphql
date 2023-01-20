@@ -11,7 +11,7 @@ fragment Page on PageRecord {
     ...PageSeo
   }
   sections {
-    ...PageSection
+    ...Section
   }
 }
 
@@ -48,7 +48,7 @@ fragment PageSeo on Tag {
   attributes
 }
 
-fragment PageSection on PageSectionRecord {
+fragment Section on PageSectionRecord {
   __typename
   id
   title
