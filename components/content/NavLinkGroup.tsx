@@ -15,7 +15,7 @@ const NavLinkGroup = ({
   ...props
 }: NavLinkGroupProps) => {
   return (
-    <Group {...props}>
+    <Group {...props} spacing={0}>
       {links.map(({ id, urlSlug, name }) => {
         return (
           <NavLink key={id} href={`/${urlSlug}`} active={name === currentPage}>

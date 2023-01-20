@@ -1,32 +1,64 @@
-import { AppShell, createStyles } from '@mantine/core';
+import {
+  AppShell,
+  Box,
+  createStyles,
+  DefaultProps,
+  Selectors,
+} from '@mantine/core';
 import { PageQuery } from '@lib/dato-cms';
 import Header from './Header';
 import Footer from './Footer';
 
-const useStyles = createStyles((theme) => ({
-  root: {},
-  body: { background: theme.colors.beige[1] },
-}));
+export type PageWrapperStylesNames = Selectors<typeof useStyles>;
 
-export type PageWrapperProps = {
+export type PageWrapperProps = DefaultProps<PageWrapperStylesNames> & {
   children: React.ReactNode;
   data: PageQuery;
 };
 
-const PageWrapper = ({ children, data }: PageWrapperProps) => {
-  const { classes } = useStyles(undefined, { name: 'PageWrapper' });
+const useStyles = createStyles((theme) => ({
+  root: {
+    padding: 0,
+    width: '100%',
+    minHeight: '100vh',
+    display: 'grid',
+    gridTemplateRows: 'auto 1fr auto',
+    gridTemplateColumns: '1fr',
+    alignContent: 'center',
+    justifyItems: 'center',
+  },
+  main: {
+    width: '100%',
+    height: '100%',
+    minHeight: 'fit-content',
+    background: theme.colors.beige[1],
+    padding: 0,
+  },
+}));
+
+const PageWrapper = ({
+  children,
+  data,
+  className,
+  classNames,
+  styles,
+  ...props
+}: PageWrapperProps) => {
+  const { classes, cx } = useStyles(undefined, {
+    name: 'PageWrapper',
+    styles,
+    classNames,
+  });
   return (
-    <AppShell
-      padding={0}
-      className={classes.root}
-      classNames={{ body: classes.body }}
-    >
+    <Box className={cx(classes.root, className)} {...props}>
       {data.header && (
         <Header data={data.header} currentPage={data.page?.name} />
       )}
-      {children}
+      <Box className={classes.main} component="main">
+        {children}
+      </Box>
       {data.footer && <Footer data={data.footer} />}
-    </AppShell>
+    </Box>
   );
 };
 export default PageWrapper;

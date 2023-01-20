@@ -30,12 +30,22 @@ const DefaultNodeRules: Partial<NodeRules> = {
   Root: ({ key, children }) => (
     <React.Fragment key={key}>{children}</React.Fragment>
   ),
-  Paragraph: ({ key, children }) => {
-    return <Text key={key}>{children}</Text>;
+  Paragraph: ({ key, children, ancestors }) => {
+    return (
+      <Text key={key} mb={ancestors[0]?.type === 'listItem' ? 0 : 'sm'}>
+        {children}
+      </Text>
+    );
   },
   Heading: ({ key, children, node }) => {
     return (
-      <Title key={key} order={node.level}>
+      <Title
+        key={key}
+        order={node.level}
+        sx={{
+          margin: '1em 0',
+        }}
+      >
         {children}
       </Title>
     );
@@ -45,6 +55,8 @@ const DefaultNodeRules: Partial<NodeRules> = {
       <List
         key={key}
         type={node.style === 'numbered' ? 'ordered' : 'unordered'}
+        mb="md"
+        p={0}
       >
         {children}
       </List>

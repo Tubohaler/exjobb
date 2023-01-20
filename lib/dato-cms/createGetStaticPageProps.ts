@@ -4,11 +4,12 @@ import createDevCache from './dev-cache/createDevCache';
 
 import { PageDocument, PageQuery, StaticPageProps } from './graphql';
 
+const devMode = process.env.NODE_ENV === 'development';
+
 export async function getStaticPageProps(
   urlSlug: string = '',
   devCacheMaxAge?: number
 ): Promise<StaticPageProps> {
-  const devMode = process.env.NODE_ENV === 'development';
   const cache = createDevCache(devCacheMaxAge);
   let data: PageQuery | null = null;
   if (devMode) data = await cache.get(urlSlug);

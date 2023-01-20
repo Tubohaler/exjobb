@@ -11,13 +11,19 @@ import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { HeaderFragment } from '@lib/dato-cms';
 import { useMediaQuery } from '@mantine/hooks';
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, _, getRef) => ({
   root: {
+    minHeight: 70,
+    width: '100%',
+    maxWidth: '100vw',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    [theme.fn.smallerThan('md')]: {
+      minHeight: 110,
+    },
   },
   leftSection: {
     height: '100%',
@@ -38,22 +44,30 @@ const useStyles = createStyles((theme) => ({
     width: '100%',
     height: '100%',
     gap: theme.spacing.xl,
+
+    fontSize: theme.fontSizes.lg,
+    [`& .${getRef('socialLink')}`]: {
+      fontSize: theme.fontSizes.sm,
+    },
     [theme.fn.smallerThan('md')]: {
       justifyContent: 'center',
       flexDirection: 'column',
+      gap: theme.spacing.md,
       fontSize: theme.fontSizes.xl,
-      gap: theme.spacing.xs,
+      [`& .${getRef('socialLink')}`]: {
+        fontSize: theme.fontSizes.md,
+      },
     },
     [theme.fn.smallerThan('xs')]: {
       fontSize: theme.fontSizes.md,
-      gap: theme.spacing.xs * 0.5,
+      gap: theme.spacing.sm,
+      [`& .${getRef('socialLink')}`]: {
+        fontSize: theme.fontSizes.sm,
+      },
     },
   },
   socialLink: {
-    fontSize: theme.fontSizes.sm,
-    [theme.fn.smallerThan('md')]: {
-      fontSize: theme.fontSizes.lg,
-    },
+    ref: getRef('socialLink'),
   },
 }));
 
@@ -81,11 +95,7 @@ const Header = ({
     styles,
   });
   return (
-    <MantineHeader
-      height={smallScreen ? 110 : 70}
-      className={cx(classes.root, className)}
-      {...props}
-    >
+    <Box className={cx(classes.root, className)} component="header" {...props}>
       <Box className={classes.leftSection}>
         <Title order={3} className={classes.leftSectionTitle} weight="bold">
           +
@@ -98,7 +108,7 @@ const Header = ({
           linkProps={{ className: classes.socialLink }}
         />
       </Box>
-    </MantineHeader>
+    </Box>
   );
 };
 

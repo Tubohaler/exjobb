@@ -5,29 +5,50 @@ fragment Page on PageRecord {
   urlSlug
   id
   metaTags {
-    __typename
-    description
-    title
-    twitterCard
-    image {
-      url
-      title
-      width
-      height
-    }
+    ...PageMetaTags
   }
   _seoMetaTags {
-    __typename
-    content
-    tag
-    attributes
+    ...PageSeo
   }
   sections {
     ...Section
   }
 }
 
-fragment Section on SectionRecord {
+fragment PageLink on PageRecord {
+  __typename
+  id
+  urlSlug
+  name
+  metaTags {
+    ...PageMetaTags
+  }
+  _seoMetaTags {
+    ...PageSeo
+  }
+}
+
+fragment PageMetaTags on SeoField {
+  __typename
+  description
+  title
+  twitterCard
+  image {
+    url
+    title
+    width
+    height
+  }
+}
+
+fragment PageSeo on Tag {
+  __typename
+  content
+  tag
+  attributes
+}
+
+fragment Section on PageSectionRecord {
   __typename
   id
   title
@@ -54,6 +75,9 @@ fragment Section on SectionRecord {
       }
       ... on ResponsiveVideoRecord {
         ...ResponsiveVideo
+      }
+      ... on CurrentVacanciesModelRecord {
+        ...CurrentVacancies
       }
     }
   }
@@ -246,6 +270,9 @@ fragment FooterSection on FooterSectionRecord {
       ... on SocialLinksCollectionRecord {
         ...SocialLinksCollection
       }
+      ... on PageRecord {
+        ...PageLink
+      }
     }
   }
 }
@@ -280,12 +307,4 @@ fragment SiteMeta on Site {
     url
     mimeType
   }
-}
-
-fragment PageLink on PageRecord {
-  __typename
-  id
-  urlSlug
-  name
-  position
 }
