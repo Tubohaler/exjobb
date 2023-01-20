@@ -4217,19 +4217,16 @@ export type IconFragment = {
 } & { __typename: 'FileField' };
 
 export type ResponsiveImageFragment = {
-  id: string;
-  responsiveImage: {
-    src: string;
-    alt: string | null;
-    title: string | null;
-    width: number;
-    height: number;
-    srcSet: string;
-    sizes: string;
-    bgColor: string | null;
-    aspectRatio: number;
-  } & { __typename: 'ResponsiveImage' };
-} & { __typename: 'ImageFileField' };
+  src: string;
+  alt: string | null;
+  title: string | null;
+  width: number;
+  height: number;
+  srcSet: string;
+  sizes: string;
+  bgColor: string | null;
+  aspectRatio: number;
+} & { __typename: 'ResponsiveImage' };
 
 export type VideoFragment = {
   mimeType: string;
@@ -5213,57 +5210,21 @@ export const ResponsiveImageFragmentDoc = {
       name: { kind: 'Name', value: 'ResponsiveImage' },
       typeCondition: {
         kind: 'NamedType',
-        name: { kind: 'Name', value: 'ImageFileField' },
+        name: { kind: 'Name', value: 'ResponsiveImage' },
       },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'responsiveImage' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'sizes' },
-                value: {
-                  kind: 'StringValue',
-                  value: '(max-width: 512px) 100vw, 512px',
-                  block: false,
-                },
-              },
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'imgixParams' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'fm' },
-                      value: { kind: 'EnumValue', value: 'webp' },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'src' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'width' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'height' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'srcSet' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'sizes' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'bgColor' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'aspectRatio' } },
-              ],
-            },
-          },
+          { kind: 'Field', name: { kind: 'Name', value: 'src' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'alt' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'srcSet' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'sizes' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'bgColor' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'aspectRatio' } },
         ],
       },
     },
@@ -5296,9 +5257,77 @@ export const ProjectFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'ResponsiveImage' },
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'responsiveImage' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'sizes' },
+                      value: {
+                        kind: 'StringValue',
+                        value: '(max-width: 512px) 100vw, 512px',
+                        block: false,
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'imgixParams' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fm' },
+                            value: { kind: 'EnumValue', value: 'webp' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fit' },
+                            value: { kind: 'EnumValue', value: 'crop' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'ar' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '1',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'dpi' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '72',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'w' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '800',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'ResponsiveImage' },
+                      },
+                    ],
+                  },
                 },
               ],
             },
@@ -5363,9 +5392,68 @@ export const ImageGalleryFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'ResponsiveImage' },
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'responsiveImage' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'sizes' },
+                      value: {
+                        kind: 'StringValue',
+                        value: '(max-width: 512px) 100vw, 512px',
+                        block: false,
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'imgixParams' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fm' },
+                            value: { kind: 'EnumValue', value: 'webp' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fit' },
+                            value: { kind: 'EnumValue', value: 'crop' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'ar' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '3:2',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'dpi' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '72',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'ResponsiveImage' },
+                      },
+                    ],
+                  },
                 },
               ],
             },
@@ -5398,9 +5486,77 @@ export const StaffFragmentDoc = {
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'ResponsiveImage' },
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'responsiveImage' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'sizes' },
+                      value: {
+                        kind: 'StringValue',
+                        value: '(max-width: 512px) 100vw, 512px',
+                        block: false,
+                      },
+                    },
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'imgixParams' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fm' },
+                            value: { kind: 'EnumValue', value: 'webp' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fit' },
+                            value: { kind: 'EnumValue', value: 'crop' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'w' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '800',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'ar' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '3:4',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'dpi' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '72',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'ResponsiveImage' },
+                      },
+                    ],
+                  },
                 },
               ],
             },
