@@ -1,8 +1,8 @@
 import { FooterFragment } from '@lib/dato-cms';
-import { Box, createStyles, List } from '@mantine/core';
+import { Box, createStyles, List, Text } from '@mantine/core';
 import StructuredText from '@components/structured-text/StructuredText';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
-import Address from '@components/content/Address';
+
 export type FooterProps = Omit<
   Parameters<typeof Box<'footer'>>[0],
   'children'
@@ -52,6 +52,13 @@ const useStyles = createStyles((theme, _, getRef) => ({
 
 const structuredTextProps = createStructuredTextProps({
   nodeRules: {
+    Paragraph: ({ key, children }) => {
+      return (
+        <Text key={key} m={0}>
+          {children}
+        </Text>
+      );
+    },
     List: ({ key, children }) => {
       return (
         <List

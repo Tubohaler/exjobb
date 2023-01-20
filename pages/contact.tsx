@@ -3,14 +3,21 @@ import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
 import Head from '@components/page/Head';
 import PageSection from '@components/page/PageSection';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
-import { Title, Box } from '@mantine/core';
+import { Title, Box, createStyles } from '@mantine/core';
 
 export const getStaticProps = createGetStaticPageProps('contact');
-const structuredTextBlocks = createStructuredTextProps({
+
+const structuredTextProps = createStructuredTextProps({
   blocks: {
     Subsection: ({ children, section }) => {
       return (
-        <Box>
+        <Box
+          sx={{
+            boxShadow: '0 0 0 2px rgba(255,0,0,0.5)',
+            minWidth: '50%',
+            height: '100%',
+          }}
+        >
           {section.title && (
             <Title order={3} mb="sm" italic>
               {section.title}
@@ -22,7 +29,30 @@ const structuredTextBlocks = createStructuredTextProps({
     },
   },
 });
+
+const useStyles = createStyles((theme) => {
+  return {
+    root: {
+      [theme.fn.largerThan('sm')]: {
+        paddingLeft: theme.spacing.xl,
+        paddingRight: theme.spacing.xl,
+      },
+    },
+    body: {
+      width: theme.breakpoints.sm,
+      display: 'flex',
+      flexDirection: 'column',
+      flexWrap: 'wrap',
+      gap: theme.spacing.md,
+      [theme.fn.smallerThan('sm')]: {
+        gridTemplateColumns: '1fr',
+      },
+    },
+  };
+});
+
 const Career = ({ data }: StaticPageProps) => {
+  const { classes } = useStyles(undefined, { name: 'ContactSection' });
   return (
     <>
       <Head />
@@ -30,23 +60,10 @@ const Career = ({ data }: StaticPageProps) => {
         {data.page?.sections.map((section) => {
           return (
             <PageSection
-              styles={(theme) => ({
-                root: {
-                  padding: theme.spacing.xl,
-                },
-                body: {
-                  padding: theme.spacing.xl,
-                  width: theme.breakpoints.sm,
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                  [theme.fn.smallerThan('sm')]: {
-                    gridTemplateColumns: '1fr',
-                  },
-                },
-              })}
               key={section.id}
               section={section}
-              structuredTextProps={structuredTextBlocks}
+              classNames={classes}
+              structuredTextProps={structuredTextProps}
             />
           );
         })}

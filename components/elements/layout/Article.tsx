@@ -7,20 +7,7 @@ export type ArticleProps = DefaultProps<ArticleStylesNames> &
 
 export type ArticleStylesNames = Selectors<typeof useStyles>;
 
-const useStyles = createStyles((theme) => {
-  const px = theme.spacing.xl * 3;
-  const py = theme.spacing.xl;
-  return {
-    root: {
-      width: '100%',
-      maxWidth: '100vw',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: `${px}px ${py}px`,
-    },
-  };
-});
+const useStyles = createStyles((theme) => ({ root: {} }));
 
 /**
  * Wraps content with a html article element
