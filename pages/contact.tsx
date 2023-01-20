@@ -6,7 +6,7 @@ import createStructuredTextProps from '@components/structured-text/createStructu
 import { Title, Box } from '@mantine/core';
 
 export const getStaticProps = createGetStaticPageProps('contact');
-const props = createStructuredTextProps({
+const structuredTextBlocks = createStructuredTextProps({
   blocks: {
     Subsection: ({ children, section }) => {
       return (
@@ -36,15 +36,17 @@ const Career = ({ data }: StaticPageProps) => {
                 },
                 body: {
                   padding: theme.spacing.xl,
-                  maxWidth: theme.breakpoints.sm,
+                  width: theme.breakpoints.sm,
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)',
-                  gap: theme.spacing.xl,
+                  [theme.fn.smallerThan('sm')]: {
+                    gridTemplateColumns: '1fr',
+                  },
                 },
               })}
               key={section.id}
               section={section}
-              structuredTextProps={props}
+              structuredTextProps={structuredTextBlocks}
             />
           );
         })}
