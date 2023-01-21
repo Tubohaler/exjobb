@@ -317,8 +317,10 @@ fragment SiteMeta on Site {
       twitterCard
     }
   }
-  favicon {
-    url
-    mimeType
+  favicon: faviconMetaTags {
+    content
+    tag
+    attributes
   }
+  locales
 }

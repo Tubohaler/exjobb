@@ -2,8 +2,7 @@ import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
 import { PageQuery } from '@lib/dato-cms';
 import Header from './Header';
 import Footer from './Footer';
-import { CSSObject } from '@emotion/react';
-import { useState } from 'react';
+import Head from '@components/page/Head';
 
 export type PageWrapperStylesNames = Selectors<typeof useStyles>;
 
@@ -58,19 +57,24 @@ const PageWrapper = ({
     classNames,
   });
   return (
-    <Box className={cx(classes.root, className)} {...props}>
-      {data.header && (
-        <Header
-          data={data.header}
-          currentPage={data.page?.name}
-          className={classes.header}
-        />
-      )}
-      <Box className={classes.main} component="main">
-        {children}
+    <>
+      <Head data={data} />
+      <Box className={cx(classes.root, className)} {...props}>
+        {data.header && (
+          <Header
+            data={data.header}
+            currentPage={data.page?.name}
+            className={classes.header}
+          />
+        )}
+        <Box className={classes.main} component="main">
+          {children}
+        </Box>
+        {data.footer && (
+          <Footer data={data.footer} className={classes.footer} />
+        )}
       </Box>
-      {data.footer && <Footer data={data.footer} className={classes.footer} />}
-    </Box>
+    </>
   );
 };
 export default PageWrapper;

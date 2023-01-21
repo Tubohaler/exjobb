@@ -7,14 +7,11 @@ export const { getStaticPaths, getStaticProps } = createGetStaticPaths('slug');
 
 const Page = ({ data }: StaticPageProps) => {
   return (
-    <>
-      <Head />
-      <PageWrapper data={data}>
-        {data.page?.sections.map((section) => {
-          return <PageSection key={section.id} section={section} />;
-        })}
-      </PageWrapper>
-    </>
+    <PageWrapper data={data}>
+      {data.page?.sections.map((section) => {
+        return <PageSection key={section.id} section={section} />;
+      })}
+    </PageWrapper>
   );
 };
 

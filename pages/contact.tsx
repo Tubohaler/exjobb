@@ -63,21 +63,18 @@ const structuredTextProps = createStructuredTextProps({
 const Career = ({ data }: StaticPageProps) => {
   const { classes } = useStyles();
   return (
-    <>
-      <Head />
-      <PageWrapper data={data}>
-        {data.page?.sections.map((section) => {
-          return (
-            <PageSection
-              key={section.id}
-              section={section}
-              classNames={classes}
-              structuredTextProps={structuredTextProps}
-            />
-          );
-        })}
-      </PageWrapper>
-    </>
+    <PageWrapper data={data}>
+      {data.page?.sections.map((section) => {
+        return (
+          <PageSection
+            key={section.id}
+            section={section}
+            classNames={classes}
+            structuredTextProps={structuredTextProps}
+          />
+        );
+      })}
+    </PageWrapper>
   );
 };
 
