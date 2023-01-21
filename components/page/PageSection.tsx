@@ -9,6 +9,7 @@ import { Box, DefaultProps, Selectors, useMantineTheme } from '@mantine/core';
 
 export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
   section: SectionFragment;
+  fullscreen?: boolean;
   structuredTextProps?: Omit<StructuredTextProps, 'data'>;
 };
 
@@ -16,7 +17,7 @@ export type PageSectionStylesNames = Selectors<typeof useStyles>;
 export type PageSectionStylesParams = { withHeader?: boolean };
 
 const useStyles = createStyles(
-  (theme, { withHeader }: PageSectionStylesParams) => {
+  (theme, { withHeader }: PageSectionStylesParams, getRef) => {
     return {
       root: {
         width: '100%',
@@ -36,14 +37,29 @@ const useStyles = createStyles(
           paddingLeft: theme.spacing.sm,
           paddingRight: theme.spacing.sm,
         },
+        [`&.${getRef('fullscreen')}`]: {
+          padding: 0,
+          minHeight: '80vh',
+          maxWidth: '100vw',
+          overflowX: 'hidden',
+          [`& .${getRef('body')}`]: {
+            width: '100%',
+            maxWidth: '100%',
+            overflowX: 'hidden',
+          },
+        },
       },
       header: {},
       body: {
+        ref: getRef('body'),
         position: 'relative',
         width: '100%',
         height: 'auto',
         maxWidth: theme.breakpoints.md,
         minWidth: 0,
+      },
+      fullscreen: {
+        ref: getRef('fullscreen'),
       },
     };
   }
@@ -55,6 +71,7 @@ const PageSection = ({
   classNames,
   styles,
   structuredTextProps = {},
+  fullscreen,
   ...props
 }: PageSectionProps) => {
   const { classes, cx } = useStyles(
@@ -66,7 +83,10 @@ const PageSection = ({
     }
   );
   return (
-    <Article className={cx(classes.root, className)} {...props}>
+    <Article
+      className={cx(classes.root, fullscreen && classes.fullscreen, className)}
+      {...props}
+    >
       {section.title && (
         <PageSectionHeader title={section.title} className={classes.header} />
       )}

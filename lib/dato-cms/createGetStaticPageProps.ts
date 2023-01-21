@@ -1,8 +1,8 @@
-import { GetStaticProps } from 'next';
+import { GetStaticProps, PreviewData } from 'next';
 import request from './request';
 import createDevCache from './dev-cache/createDevCache';
-
 import { PageDocument, PageQuery, StaticPageProps } from './graphql';
+import { ParsedUrlQuery } from 'querystring';
 
 const devMode = process.env.NODE_ENV === 'development';
 
@@ -21,10 +21,13 @@ export async function getStaticPageProps(
   return { data };
 }
 
-export default function createGetStaticPageProps(
+export default function createGetStaticPageProps<
+  Q extends ParsedUrlQuery = ParsedUrlQuery,
+  D extends PreviewData = PreviewData
+>(
   urlSlug?: string,
   devCacheMaxAge?: number
-): GetStaticProps<StaticPageProps> {
+): GetStaticProps<StaticPageProps, Q, D> {
   return async () => {
     const props = await getStaticPageProps(urlSlug, devCacheMaxAge);
     return { props };

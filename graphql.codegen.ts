@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import type { CodegenConfig } from '@graphql-codegen/cli';
 import type { TypeScriptDocumentsPluginConfig } from '@graphql-codegen/typescript-operations';
 import type { TypeScriptPluginConfig } from '@graphql-codegen/typescript';
