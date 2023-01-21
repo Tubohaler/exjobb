@@ -2970,7 +2970,7 @@ export enum ResponsiveVideoModelOrderBy {
   PresentationTitleDesc = 'presentationTitle_DESC',
 }
 
-/** Record of type Responsive Video (responsive_video) */
+/** Record of type Cover Video (responsive_video) */
 export interface ResponsiveVideoRecord extends RecordInterface {
   __typename: 'ResponsiveVideoRecord';
   _createdAt: Scalars['DateTime'];
@@ -2991,7 +2991,7 @@ export interface ResponsiveVideoRecord extends RecordInterface {
   presentationTitle: Maybe<Scalars['String']>;
 }
 
-/** Record of type Responsive Video (responsive_video) */
+/** Record of type Cover Video (responsive_video) */
 export interface ResponsiveVideoRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
