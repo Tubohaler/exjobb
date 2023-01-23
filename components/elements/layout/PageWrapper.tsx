@@ -1,14 +1,19 @@
 import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
-import { PageQuery } from '@lib/dato-cms';
+import { PageQuery, SectionFragment } from '@lib/dato-cms';
 import Header from './Header';
 import Footer from './Footer';
 import Head from '@components/page/Head';
+import PageSection, { PageSectionProps } from '@components/page/PageSection';
 
 export type PageWrapperStylesNames = Selectors<typeof useStyles>;
 
 export type PageWrapperProps = DefaultProps<PageWrapperStylesNames> & {
-  children: React.ReactNode;
   data: PageQuery;
+  sectionProps?:
+    | Partial<Omit<PageSectionProps, 'section'>>
+    | ((
+        section: SectionFragment
+      ) => Partial<Omit<PageSectionProps, 'section'>>);
 };
 
 const useStyles = createStyles((theme, _, getRef) => ({
@@ -44,11 +49,11 @@ const useStyles = createStyles((theme, _, getRef) => ({
 }));
 
 const PageWrapper = ({
-  children,
   data,
   className,
   classNames,
   styles,
+  sectionProps,
   ...props
 }: PageWrapperProps) => {
   const { classes, cx } = useStyles(undefined, {
@@ -68,7 +73,15 @@ const PageWrapper = ({
           />
         )}
         <Box className={classes.main} component="main">
-          {children}
+          {data.page?.sections.map((section) => {
+            const props =
+              typeof sectionProps === 'function'
+                ? sectionProps(section)
+                : sectionProps || {};
+            return (
+              <PageSection key={section.id} section={section} {...props} />
+            );
+          })}
         </Box>
         {data.footer && (
           <Footer data={data.footer} className={classes.footer} />
