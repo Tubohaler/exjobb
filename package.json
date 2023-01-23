@@ -3,15 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run clear-dev-cache && next dev",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "tsc && next lint --no-cache",
     "prettier": "prettier --w .",
     "prepare": "husky install",
     "pre-commit": "lint-staged && pretty-quick --staged",
-    "clear-dev-cache": "ts-node scripts/dato-cms/clear-dev-cache.ts",
-    "generate-cms-types": " graphql-codegen --config ./graphql.codegen.ts && npm run clear-dev-cache"
+    "generate-cms-types": " graphql-codegen --config ./graphql.codegen.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
