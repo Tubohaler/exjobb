@@ -22,7 +22,7 @@ const useStyles = createStyles(
       root: {
         width: '100%',
         maxWidth: '100vw',
-        minHeight: '75vh',
+        minHeight: '50vh',
         padding: `${theme.spacing.xl * 4}px ${theme.spacing.xl}px`,
         display: 'grid',
         gridTemplateRows: withHeader ? 'auto 1fr' : '1fr',
