@@ -45,7 +45,7 @@ export type ImageGalleryThumbnailProps = {
 };
 
 function ImageGalleryThumbnail({ image, onClick }: ImageGalleryThumbnailProps) {
-  const { classes } = useStyles(undefined, { name: 'Gallery' });
+  const { classes } = useStyles(undefined, { name: 'ImageGalleryThumbnail' });
   const theme = useMantineTheme();
 
   return (
