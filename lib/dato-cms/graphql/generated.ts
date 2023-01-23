@@ -2097,6 +2097,12 @@ export interface JobRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
+/** Specifies how to filter JSON fields */
+export interface JsonFilter {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists: InputMaybe<Scalars['BooleanType']>;
+}
+
 /** Linking locales */
 export enum LinkingLocale {
   NonLocalized = '_nonLocalized',
@@ -2109,6 +2115,20 @@ export interface LinkingLocalesFilter {
   anyIn: InputMaybe<Array<LinkingLocale>>;
   /** Filter linking records that do not link to current record in any of the specified locales */
   notIn: InputMaybe<Array<LinkingLocale>>;
+}
+
+/** Specifies how to filter Multiple-links fields */
+export interface LinksFilter {
+  /** Filter records linked to all of the specified records. The specified values must be Record IDs */
+  allIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Filter records linked to at least one of the specified records. The specified values must be Record IDs */
+  anyIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Search for records with an exact match. The specified values must be Record IDs */
+  eq: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records not linked to any of the specified records. The specified values must be Record IDs */
+  notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
 }
 
 export enum MuxThumbnailFormatType {
@@ -2523,9 +2543,13 @@ export interface Query {
   /** Returns meta information regarding a record collection */
   _allResponsiveVideosMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allSocialLinksCollectionsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allSocialLinksMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allStaffsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allThemesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
@@ -2547,7 +2571,11 @@ export interface Query {
   /** Returns a collection of records */
   allSocialLinks: Array<SocialLinkRecord>;
   /** Returns a collection of records */
+  allSocialLinksCollections: Array<SocialLinksCollectionRecord>;
+  /** Returns a collection of records */
   allStaffs: Array<StaffRecord>;
+  /** Returns a collection of records */
+  allThemes: Array<ThemeRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
@@ -2572,10 +2600,12 @@ export interface Query {
   responsiveVideo: Maybe<ResponsiveVideoRecord>;
   /** Returns a specific record */
   socialLink: Maybe<SocialLinkRecord>;
-  /** Returns the single instance record */
+  /** Returns a specific record */
   socialLinksCollection: Maybe<SocialLinksCollectionRecord>;
   /** Returns a specific record */
   staff: Maybe<StaffRecord>;
+  /** Returns a specific record */
+  theme: Maybe<ThemeRecord>;
   /** Returns a specific asset */
   upload: Maybe<FileField>;
 }
@@ -2623,6 +2653,13 @@ export interface Query_AllResponsiveVideosMetaArgs {
 }
 
 /** The query root for this schema */
+export interface Query_AllSocialLinksCollectionsMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<SocialLinksCollectionModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
 export interface Query_AllSocialLinksMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<SocialLinkModelFilter>;
@@ -2633,6 +2670,13 @@ export interface Query_AllSocialLinksMetaArgs {
 export interface Query_AllStaffsMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<StaffModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
+export interface Query_AllThemesMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<ThemeModelFilter>;
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -2727,12 +2771,32 @@ export interface QueryAllSocialLinksArgs {
 }
 
 /** The query root for this schema */
+export interface QueryAllSocialLinksCollectionsArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<SocialLinksCollectionModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<SocialLinksCollectionModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
 export interface QueryAllStaffsArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<StaffModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
+export interface QueryAllThemesArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<ThemeModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ThemeModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
 }
 
@@ -2827,7 +2891,9 @@ export interface QuerySocialLinkArgs {
 /** The query root for this schema */
 export interface QuerySocialLinksCollectionArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<SocialLinksCollectionModelFilter>;
   locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<SocialLinksCollectionModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -2836,6 +2902,14 @@ export interface QueryStaffArgs {
   filter: InputMaybe<StaffModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<StaffModelOrderBy>>>;
+}
+
+/** The query root for this schema */
+export interface QueryThemeArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<ThemeModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ThemeModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -3088,6 +3162,44 @@ export interface SocialLinkRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
+export interface SocialLinksCollectionModelFilter {
+  OR: InputMaybe<Array<InputMaybe<SocialLinksCollectionModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  links: InputMaybe<LinksFilter>;
+  presentationTitle: InputMaybe<StringFilter>;
+}
+
+export enum SocialLinksCollectionModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PresentationTitleAsc = 'presentationTitle_ASC',
+  PresentationTitleDesc = 'presentationTitle_DESC',
+}
+
 /** Record of type Social Links (social_links_collection) */
 export interface SocialLinksCollectionRecord extends RecordInterface {
   __typename: 'SocialLinksCollectionRecord';
@@ -3104,7 +3216,7 @@ export interface SocialLinksCollectionRecord extends RecordInterface {
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   links: Array<SocialLinkRecord>;
-  presentationTitle: Maybe<Scalars['String']>;
+  presentationTitle: Scalars['String'];
 }
 
 /** Record of type Social Links (social_links_collection) */
@@ -3260,6 +3372,68 @@ export interface Tag {
   attributes: Maybe<Scalars['MetaTagAttributes']>;
   content: Maybe<Scalars['String']>;
   tag: Scalars['String'];
+}
+
+export interface ThemeModelFilter {
+  OR: InputMaybe<Array<InputMaybe<ThemeModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  content: InputMaybe<JsonFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  name: InputMaybe<StringFilter>;
+}
+
+export enum ThemeModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+}
+
+/** Record of type Theme (theme) */
+export interface ThemeRecord extends RecordInterface {
+  __typename: 'ThemeRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  content: Scalars['JsonField'];
+  id: Scalars['ItemId'];
+  name: Scalars['String'];
+}
+
+/** Record of type Theme (theme) */
+export interface ThemeRecord_SeoMetaTagsArgs {
+  locale: InputMaybe<SiteLocale>;
 }
 
 /** Specifies how to filter by upload type */
@@ -5379,15 +5553,6 @@ export const ImageGalleryFragmentDoc = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'responsiveImage' },
                   arguments: [
-                    {
-                      kind: 'Argument',
-                      name: { kind: 'Name', value: 'sizes' },
-                      value: {
-                        kind: 'StringValue',
-                        value: '(max-width: 512px) 100vw, 512px',
-                        block: false,
-                      },
-                    },
                     {
                       kind: 'Argument',
                       name: { kind: 'Name', value: 'imgixParams' },

@@ -2,12 +2,13 @@ import React from 'react';
 import { Image } from 'react-datocms';
 
 import { ImageGalleryFragment } from '@lib/dato-cms';
-import { createStyles, Box, Title } from '@mantine/core';
+import { createStyles, Box, Title, useMantineTheme } from '@mantine/core';
 import { createTransition } from '@lib/theme/utils';
 
 const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
+    cursor: 'pointer',
   },
   image: {
     position: 'absolute',
@@ -15,8 +16,6 @@ const useStyles = createStyles((theme) => ({
     height: '100%',
     inset: '0 0 0 0',
     zIndex: 0,
-    objectFit: 'cover',
-    objectPosition: 'center',
   },
   overlay: {
     position: 'absolute',
@@ -36,6 +35,7 @@ const useStyles = createStyles((theme) => ({
   },
   title: {
     color: theme.white,
+    userSelect: 'none',
   },
 }));
 
@@ -44,21 +44,29 @@ export type ImageGalleryThumbnailProps = {
   onClick?: (id: string) => unknown;
 };
 
-function ImageGalleryThumbnail({
-  responsiveImage,
-}: ImageGalleryFragment['images'][number]) {
+function ImageGalleryThumbnail({ image, onClick }: ImageGalleryThumbnailProps) {
   const { classes } = useStyles(undefined, { name: 'Gallery' });
+  const theme = useMantineTheme();
 
   return (
-    <Box className={classes.root}>
-      {responsiveImage.title && (
+    <Box className={classes.root} onClick={() => onClick && onClick(image.id)}>
+      {image.responsiveImage.title && (
         <Box className={classes.overlay}>
           <Title className={classes.title} italic order={3}>
-            {responsiveImage.title}
+            {image.responsiveImage.title}
           </Title>
         </Box>
       )}
-      <Image className={classes.image} data={responsiveImage} />
+      <Image
+        className={classes.image}
+        data={image.responsiveImage}
+        layout="responsive"
+        objectFit="cover"
+        objectPosition="center"
+        sizes={`(max-width: ${theme.breakpoints.md}px) 100vw, ${
+          theme.breakpoints.md * 0.33
+        }px`}
+      />
     </Box>
   );
 }

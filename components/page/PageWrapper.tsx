@@ -1,7 +1,7 @@
 import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
 import { PageQuery, SectionFragment } from '@lib/dato-cms';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../elements/layout/Header';
+import Footer from '../elements/layout/Footer';
 import Head from '@components/page/Head';
 import PageSection, { PageSectionProps } from '@components/page/PageSection';
 
