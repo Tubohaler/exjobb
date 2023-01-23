@@ -10,7 +10,7 @@ const useStyles = createStyles((theme) => ({
   root: {
     width: '100%',
     height: '100%',
-    aspectRatio: '5/7',
+    aspectRatio: '3/4',
     position: 'relative',
     overflow: 'hidden',
   },
