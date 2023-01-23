@@ -17,7 +17,7 @@ const ProjectGallery = ({ projects }: ProjectGalleryFragment) => {
 
   return (
     <Box className={classes.root}>
-      {projects.map((project, i) => (
+      {projects.map((project) => (
         <Project key={project.id} {...project} />
       ))}
     </Box>

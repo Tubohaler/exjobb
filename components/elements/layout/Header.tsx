@@ -8,6 +8,7 @@ import {
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { HeaderFragment } from '@lib/dato-cms';
+import Link from '../links/Link';
 
 const useStyles = createStyles((theme, _, getRef) => ({
   root: {
@@ -17,11 +18,37 @@ const useStyles = createStyles((theme, _, getRef) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    [theme.fn.smallerThan('md')]: {
+      minHeight: 110,
+    },
+    [theme.fn.smallerThan('xs')]: {
+      padding: theme.spacing.xs,
+    },
+  },
+  leftSection: {
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    [theme.fn.smallerThan('xs')]: {
+      display: 'none',
+    },
+  },
+  leftSectionTitle: {
+    userSelect: 'none',
+    fontFamily: 'verdana',
+    fontSize: '1.5em',
+  },
+  rightSection: {
+    display: 'flex',
+    flexGrow: 1,
+    justifyContent: 'flex-end',
+    height: '100%',
+    gap: theme.spacing.xl,
+    fontSize: theme.fontSizes.lg,
     [`& .${getRef('socialLink')}`]: {
       fontSize: theme.fontSizes.sm,
     },
     [theme.fn.smallerThan('md')]: {
-      minHeight: 110,
       justifyContent: 'center',
       flexDirection: 'column',
       alignItems: 'center',
@@ -32,7 +59,6 @@ const useStyles = createStyles((theme, _, getRef) => ({
       },
     },
     [theme.fn.smallerThan('xs')]: {
-      padding: theme.spacing.xs,
       fontSize: theme.fontSizes.md,
       gap: theme.spacing.sm,
       [`& .${getRef('socialLink')}`]: {
@@ -65,11 +91,20 @@ const Header = ({
   });
   return (
     <Box className={cx(classes.root, className)} component="header" {...props}>
-      <NavLinkGroup links={data.navigationLinks} currentPage={currentPage} />
-      <SocialLinkGroup
-        links={data.socialLinks.links}
-        linkProps={{ className: classes.socialLink }}
-      />
+      <Box className={classes.leftSection}>
+        <Link href="/" title="Home">
+          <Title order={3} className={classes.leftSectionTitle} weight="bold">
+            +
+          </Title>
+        </Link>
+      </Box>
+      <Box className={classes.rightSection}>
+        <NavLinkGroup links={data.navigationLinks} currentPage={currentPage} />
+        <SocialLinkGroup
+          links={data.socialLinks.links}
+          linkProps={{ className: classes.socialLink }}
+        />
+      </Box>
     </Box>
   );
 };
