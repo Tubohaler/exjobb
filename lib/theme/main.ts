@@ -91,7 +91,7 @@ const mainTheme: MantineTheme = {
     fontFamily: ebGaramond.style.fontFamily,
     fontWeight: 400,
   },
-  globalStyles: () => ({
+  globalStyles: (theme) => ({
     html: {
       height: '100%',
     },
@@ -99,7 +99,9 @@ const mainTheme: MantineTheme = {
       minHeight: '100%',
       width: '100%',
     },
-
+    p: {
+      margin: 0,
+    },
     'html, body': {
       margin: 0,
       padding: 0,

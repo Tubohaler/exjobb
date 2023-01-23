@@ -3,7 +3,7 @@ import type {
   ImageGalleryFragment,
   PeopleGalleryFragment,
   ProjectGalleryFragment,
-  ResponsiveVideoFragment,
+  CoverVideoFragment,
   SubsectionFragment,
   CurrentVacanciesFragment,
   SocialLinksCollectionFragment,
@@ -17,7 +17,6 @@ import type {
   TrasformFn,
   DefaultMark,
   Root,
-  Block,
   Blockquote,
   Code,
   List,
@@ -25,14 +24,20 @@ import type {
   Paragraph,
   ThematicBreak,
   InlineItem,
-  ItemLink,
   Link,
   Span,
-  RenderRule,
 } from 'datocms-structured-text-utils';
 import { RenderRecordLinkContext } from 'react-datocms';
 
-type RenderMarkContext<
+export interface EmptyParagraph extends Paragraph {
+  children: Span[];
+}
+
+export interface InlineParagraph extends Paragraph {
+  children: InlineItem[];
+}
+
+export type RenderMarkContext<
   H extends TrasformFn,
   T extends TrasformFn,
   F extends TrasformFn,
@@ -93,8 +98,8 @@ export interface StructuredTextComponents {
    * @see ProjectFragment
    */
   ProjectGallery: (props: ProjectGalleryFragment) => JSX.Element;
-  /** @see ResponsiveVideoFragment */
-  ResponsiveVideo: (props: ResponsiveVideoFragment) => JSX.Element;
+  /** @see CoverVideoFragment */
+  CoverVideo: (props: CoverVideoFragment) => JSX.Element;
   /** @see CurrentVacanciesFragment */
   CurrentVacancies: (props: CurrentVacanciesFragment) => JSX.Element;
   /** @see SocialLinksCollectionFragment */

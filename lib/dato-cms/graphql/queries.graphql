@@ -2,12 +2,6 @@ query Page($urlSlug: String) {
   page(filter: { urlSlug: { eq: $urlSlug } }) {
     ...Page
   }
-  header {
-    ...Header
-  }
-  footer {
-    ...Footer
-  }
   _site {
     ...SiteMeta
   }

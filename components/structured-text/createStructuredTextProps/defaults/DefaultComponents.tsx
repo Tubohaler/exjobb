@@ -1,6 +1,5 @@
 import type { StructuredTextComponents } from '@components/structured-text/createStructuredTextProps/types';
-import Placeholder from '../Placeholder';
-import ResponsiveVideo from '@components/content/video/ResponsiveVideo';
+import CoverVideo from '@components/content/video/CoverVideo';
 import ProjectGallery from '@components/content/ProjectGallery';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import Address from '@components/content/Address';
@@ -12,8 +11,8 @@ const DefaultInlineComponents: StructuredTextComponents = {
   Address: (address) => {
     return <Address address={address} />;
   },
-  ResponsiveVideo: (video) => {
-    return <ResponsiveVideo video={video} />;
+  CoverVideo: (video) => {
+    return <CoverVideo video={video} />;
   },
   SocialLinks: ({ links }) => {
     return <SocialLinkGroup links={links} />;

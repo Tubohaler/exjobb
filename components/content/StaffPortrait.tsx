@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-datocms';
 
-import { Box, createStyles, Title } from '@mantine/core';
+import { Box, createStyles, Title, useMantineTheme } from '@mantine/core';
 import { createTransition } from '@lib/theme/utils';
 
 import { StaffFragment } from '@lib/dato-cms';
@@ -9,19 +9,18 @@ import { StaffFragment } from '@lib/dato-cms';
 const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
-  },
-  image: {
-    position: 'absolute',
     width: '100%',
     height: '100%',
-    zIndex: 0,
-    objectFit: 'cover',
-    objectPosition: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
   overlay: {
     position: 'absolute',
     width: '100%',
     height: '100%',
+    inset: '0 0 0 0',
     zIndex: 10,
     display: 'flex',
     flexDirection: 'column',
@@ -45,7 +44,7 @@ const useStyles = createStyles((theme) => ({
 
 function StaffPortrait({ featuredImage, name, jobPosition }: StaffFragment) {
   const { classes } = useStyles(undefined, { name: 'StaffPortrait' });
-
+  const theme = useMantineTheme();
   return (
     <Box className={classes.root}>
       <Box className={classes.overlay}>
@@ -56,7 +55,16 @@ function StaffPortrait({ featuredImage, name, jobPosition }: StaffFragment) {
           {jobPosition}
         </Title>
       </Box>
-      <Image className={classes.image} data={featuredImage.responsiveImage} />
+      <Image
+        className={classes.image}
+        data={featuredImage.responsiveImage}
+        layout="responsive"
+        objectFit="cover"
+        objectPosition="center"
+        sizes={`(max-width: ${theme.breakpoints.md}px) ${Math.floor(
+          theme.breakpoints.md / 2
+        )}px, ${Math.floor(theme.breakpoints.md / 3)}px`}
+      />
     </Box>
   );
 }

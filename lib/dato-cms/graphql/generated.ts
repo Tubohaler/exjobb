@@ -143,6 +143,74 @@ export interface ColorField {
   red: Scalars['IntType'];
 }
 
+export interface CoverVideoModelFilter {
+  OR: InputMaybe<Array<InputMaybe<CoverVideoModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  landscape: InputMaybe<FileFilter>;
+  overlayText: InputMaybe<StringFilter>;
+  portrait: InputMaybe<FileFilter>;
+  presentationTitle: InputMaybe<StringFilter>;
+}
+
+export enum CoverVideoModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  OverlayTextAsc = 'overlayText_ASC',
+  OverlayTextDesc = 'overlayText_DESC',
+  PresentationTitleAsc = 'presentationTitle_ASC',
+  PresentationTitleDesc = 'presentationTitle_DESC',
+}
+
+/** Record of type Cover Video (cover_video) */
+export interface CoverVideoRecord extends RecordInterface {
+  __typename: 'CoverVideoRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  landscape: VideoFileField;
+  overlayText: Maybe<Scalars['String']>;
+  portrait: VideoFileField;
+  presentationTitle: Maybe<Scalars['String']>;
+}
+
+/** Record of type Cover Video (cover_video) */
+export interface CoverVideoRecord_SeoMetaTagsArgs {
+  locale: InputMaybe<SiteLocale>;
+}
+
 /** Specifies how to filter by creation datetime */
 export interface CreatedAtFilter {
   /** Filter records with a value that's within the specified minute range. Seconds and milliseconds are truncated from the argument. */
@@ -348,6 +416,46 @@ export enum FooterModelFieldsReferencingPageModel {
   FooterSectionsFooterSectionContent = 'footer_sections__footerSection_content',
 }
 
+export interface FooterModelFilter {
+  OR: InputMaybe<Array<InputMaybe<FooterModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  presentationTitle: InputMaybe<StringFilter>;
+  title: InputMaybe<StringFilter>;
+}
+
+export enum FooterModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PresentationTitleAsc = 'presentationTitle_ASC',
+  PresentationTitleDesc = 'presentationTitle_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 /** Record of type Footer (footer) */
 export interface FooterRecord extends RecordInterface {
   __typename: 'FooterRecord';
@@ -363,7 +471,9 @@ export interface FooterRecord extends RecordInterface {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
+  presentationTitle: Maybe<Scalars['String']>;
   sections: Array<FooterSectionRecord>;
+  title: Scalars['String'];
 }
 
 /** Record of type Footer (footer) */
@@ -434,6 +544,48 @@ export enum HeaderModelFieldsReferencingPageModel {
   HeaderNavigationLinks = 'header_navigationLinks',
 }
 
+export interface HeaderModelFilter {
+  OR: InputMaybe<Array<InputMaybe<HeaderModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  navigationLinks: InputMaybe<LinksFilter>;
+  presentationTitle: InputMaybe<StringFilter>;
+  socialLinks: InputMaybe<LinkFilter>;
+  title: InputMaybe<StringFilter>;
+}
+
+export enum HeaderModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PresentationTitleAsc = 'presentationTitle_ASC',
+  PresentationTitleDesc = 'presentationTitle_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
 /** Record of type Header (header) */
 export interface HeaderRecord extends RecordInterface {
   __typename: 'HeaderRecord';
@@ -450,7 +602,9 @@ export interface HeaderRecord extends RecordInterface {
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   navigationLinks: Array<PageRecord>;
+  presentationTitle: Maybe<Scalars['String']>;
   socialLinks: SocialLinksCollectionRecord;
+  title: Scalars['String'];
 }
 
 /** Record of type Header (header) */
@@ -2103,6 +2257,20 @@ export interface JsonFilter {
   exists: InputMaybe<Scalars['BooleanType']>;
 }
 
+/** Specifies how to filter Single-link fields */
+export interface LinkFilter {
+  /** Search for records with an exact match. The specified value must be a Record ID */
+  eq: InputMaybe<Scalars['ItemId']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records linked to one of the specified records */
+  in: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+  /** Exclude records with an exact match. The specified value must be a Record ID */
+  neq: InputMaybe<Scalars['ItemId']>;
+  /** Filter records not linked to one of the specified records */
+  notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
+}
+
 /** Linking locales */
 export enum LinkingLocale {
   NonLocalized = '_nonLocalized',
@@ -2161,6 +2329,8 @@ export interface PageModelFilter {
   _status: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
   _updatedAt: InputMaybe<UpdatedAtFilter>;
+  footer: InputMaybe<LinkFilter>;
+  header: InputMaybe<LinkFilter>;
   id: InputMaybe<ItemIdFilter>;
   metaTags: InputMaybe<SeoFilter>;
   name: InputMaybe<StringFilter>;
@@ -2197,6 +2367,8 @@ export enum PageModelOrderBy {
   PositionDesc = 'position_DESC',
 }
 
+export type PageModelSectionsField = PageSectionHtmlRecord | PageSectionRecord;
+
 /** Record of type Page (page) */
 export interface PageRecord extends RecordInterface {
   __typename: 'PageRecord';
@@ -2221,13 +2393,15 @@ export interface PageRecord extends RecordInterface {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   children: Maybe<Array<Maybe<PageRecord>>>;
+  footer: FooterRecord;
+  header: HeaderRecord;
   id: Scalars['ItemId'];
   metaTags: Maybe<SeoField>;
   name: Scalars['String'];
   pageTitle: Scalars['String'];
   parent: Maybe<PageRecord>;
   position: Maybe<Scalars['IntType']>;
-  sections: Array<PageSectionRecord>;
+  sections: Array<PageModelSectionsField>;
   urlSlug: Maybe<Scalars['String']>;
 }
 
@@ -2292,7 +2466,7 @@ export interface PageSectionHtmlRecord extends RecordInterface {
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  content: Scalars['String'];
+  htmlContent: Scalars['String'];
   id: Scalars['ItemId'];
   title: Maybe<Scalars['String']>;
 }
@@ -2303,7 +2477,7 @@ export interface PageSectionHtmlRecord_SeoMetaTagsArgs {
 }
 
 /** Block of type Page Section - HTML (page_section_html) */
-export interface PageSectionHtmlRecordContentArgs {
+export interface PageSectionHtmlRecordHtmlContentArgs {
   markdown: InputMaybe<Scalars['Boolean']>;
 }
 
@@ -2316,12 +2490,12 @@ export interface PageSectionModelContentField {
 
 export type PageSectionModelContentLinksField =
   | AddressRecord
+  | CoverVideoRecord
   | CurrentVacanciesModelRecord
   | ImageGalleryRecord
   | PageRecord
   | PeopleGalleryRecord
-  | ProjectGalleryRecord
-  | ResponsiveVideoRecord;
+  | ProjectGalleryRecord;
 
 /** Block of type Page Section - Structured Text (page_section) */
 export interface PageSectionRecord extends RecordInterface {
@@ -2533,6 +2707,12 @@ export interface Query {
   /** Returns meta information regarding a record collection */
   _allAddressesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allCoverVideosMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allFootersMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allHeadersMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allImageGalleriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allJobsMeta: CollectionMetadata;
@@ -2540,8 +2720,6 @@ export interface Query {
   _allPagesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allProjectsMeta: CollectionMetadata;
-  /** Returns meta information regarding a record collection */
-  _allResponsiveVideosMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allSocialLinksCollectionsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
@@ -2559,6 +2737,12 @@ export interface Query {
   /** Returns a collection of records */
   allAddresses: Array<AddressRecord>;
   /** Returns a collection of records */
+  allCoverVideos: Array<CoverVideoRecord>;
+  /** Returns a collection of records */
+  allFooters: Array<FooterRecord>;
+  /** Returns a collection of records */
+  allHeaders: Array<HeaderRecord>;
+  /** Returns a collection of records */
   allImageGalleries: Array<ImageGalleryRecord>;
   /** Returns a collection of records */
   allJobs: Array<JobRecord>;
@@ -2566,8 +2750,6 @@ export interface Query {
   allPages: Array<PageRecord>;
   /** Returns a collection of records */
   allProjects: Array<ProjectRecord>;
-  /** Returns a collection of records */
-  allResponsiveVideos: Array<ResponsiveVideoRecord>;
   /** Returns a collection of records */
   allSocialLinks: Array<SocialLinkRecord>;
   /** Returns a collection of records */
@@ -2578,11 +2760,13 @@ export interface Query {
   allThemes: Array<ThemeRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
+  /** Returns a specific record */
+  coverVideo: Maybe<CoverVideoRecord>;
   /** Returns the single instance record */
   currentVacanciesModel: Maybe<CurrentVacanciesModelRecord>;
-  /** Returns the single instance record */
+  /** Returns a specific record */
   footer: Maybe<FooterRecord>;
-  /** Returns the single instance record */
+  /** Returns a specific record */
   header: Maybe<HeaderRecord>;
   /** Returns a specific record */
   imageGallery: Maybe<ImageGalleryRecord>;
@@ -2596,8 +2780,6 @@ export interface Query {
   project: Maybe<ProjectRecord>;
   /** Returns the single instance record */
   projectGallery: Maybe<ProjectGalleryRecord>;
-  /** Returns a specific record */
-  responsiveVideo: Maybe<ResponsiveVideoRecord>;
   /** Returns a specific record */
   socialLink: Maybe<SocialLinkRecord>;
   /** Returns a specific record */
@@ -2614,6 +2796,27 @@ export interface Query {
 export interface Query_AllAddressesMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<AddressModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
+export interface Query_AllCoverVideosMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<CoverVideoModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
+export interface Query_AllFootersMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<FooterModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
+export interface Query_AllHeadersMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<HeaderModelFilter>;
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -2642,13 +2845,6 @@ export interface Query_AllPagesMetaArgs {
 export interface Query_AllProjectsMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ProjectModelFilter>;
-  locale: InputMaybe<SiteLocale>;
-}
-
-/** The query root for this schema */
-export interface Query_AllResponsiveVideosMetaArgs {
-  fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  filter: InputMaybe<ResponsiveVideoModelFilter>;
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -2711,6 +2907,36 @@ export interface QueryAllAddressesArgs {
 }
 
 /** The query root for this schema */
+export interface QueryAllCoverVideosArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<CoverVideoModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<CoverVideoModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
+export interface QueryAllFootersArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<FooterModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<FooterModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
+export interface QueryAllHeadersArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<HeaderModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HeaderModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
 export interface QueryAllImageGalleriesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<ImageGalleryModelFilter>;
@@ -2747,16 +2973,6 @@ export interface QueryAllProjectsArgs {
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ProjectModelOrderBy>>>;
-  skip: InputMaybe<Scalars['IntType']>;
-}
-
-/** The query root for this schema */
-export interface QueryAllResponsiveVideosArgs {
-  fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  filter: InputMaybe<ResponsiveVideoModelFilter>;
-  first?: InputMaybe<Scalars['IntType']>;
-  locale: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ResponsiveVideoModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
 }
 
@@ -2811,6 +3027,14 @@ export interface QueryAllUploadsArgs {
 }
 
 /** The query root for this schema */
+export interface QueryCoverVideoArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<CoverVideoModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<CoverVideoModelOrderBy>>>;
+}
+
+/** The query root for this schema */
 export interface QueryCurrentVacanciesModelArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
@@ -2819,13 +3043,17 @@ export interface QueryCurrentVacanciesModelArgs {
 /** The query root for this schema */
 export interface QueryFooterArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<FooterModelFilter>;
   locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<FooterModelOrderBy>>>;
 }
 
 /** The query root for this schema */
 export interface QueryHeaderArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<HeaderModelFilter>;
   locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HeaderModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -2870,14 +3098,6 @@ export interface QueryProjectArgs {
 export interface QueryProjectGalleryArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   locale: InputMaybe<SiteLocale>;
-}
-
-/** The query root for this schema */
-export interface QueryResponsiveVideoArgs {
-  fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  filter: InputMaybe<ResponsiveVideoModelFilter>;
-  locale: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ResponsiveVideoModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -2971,74 +3191,6 @@ export interface ResponsiveImage {
   title: Maybe<Scalars['String']>;
   webpSrcSet: Scalars['String'];
   width: Scalars['IntType'];
-}
-
-export interface ResponsiveVideoModelFilter {
-  OR: InputMaybe<Array<InputMaybe<ResponsiveVideoModelFilter>>>;
-  _createdAt: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
-  _isValid: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
-  _publishedAt: InputMaybe<PublishedAtFilter>;
-  _status: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
-  _updatedAt: InputMaybe<UpdatedAtFilter>;
-  id: InputMaybe<ItemIdFilter>;
-  landscape: InputMaybe<FileFilter>;
-  overlayText: InputMaybe<StringFilter>;
-  portrait: InputMaybe<FileFilter>;
-  presentationTitle: InputMaybe<StringFilter>;
-}
-
-export enum ResponsiveVideoModelOrderBy {
-  CreatedAtAsc = '_createdAt_ASC',
-  CreatedAtDesc = '_createdAt_DESC',
-  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
-  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
-  IsValidAsc = '_isValid_ASC',
-  IsValidDesc = '_isValid_DESC',
-  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
-  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
-  PublishedAtAsc = '_publishedAt_ASC',
-  PublishedAtDesc = '_publishedAt_DESC',
-  StatusAsc = '_status_ASC',
-  StatusDesc = '_status_DESC',
-  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
-  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
-  UpdatedAtAsc = '_updatedAt_ASC',
-  UpdatedAtDesc = '_updatedAt_DESC',
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  OverlayTextAsc = 'overlayText_ASC',
-  OverlayTextDesc = 'overlayText_DESC',
-  PresentationTitleAsc = 'presentationTitle_ASC',
-  PresentationTitleDesc = 'presentationTitle_DESC',
-}
-
-/** Record of type Cover Video (responsive_video) */
-export interface ResponsiveVideoRecord extends RecordInterface {
-  __typename: 'ResponsiveVideoRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
-  _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  landscape: VideoFileField;
-  overlayText: Maybe<Scalars['String']>;
-  portrait: VideoFileField;
-  presentationTitle: Maybe<Scalars['String']>;
-}
-
-/** Record of type Cover Video (responsive_video) */
-export interface ResponsiveVideoRecord_SeoMetaTagsArgs {
-  locale: InputMaybe<SiteLocale>;
 }
 
 export interface SeoField {
@@ -3879,6 +4031,291 @@ export type PageFragment = {
   pageTitle: string;
   urlSlug: string | null;
   id: string;
+  header: {
+    id: string;
+    navigationLinks: Array<
+      {
+        id: string;
+        urlSlug: string | null;
+        name: string;
+        metaTags:
+          | ({
+              description: string | null;
+              title: string | null;
+              twitterCard: string | null;
+              image:
+                | ({
+                    url: string;
+                    title: string | null;
+                    width: number | null;
+                    height: number | null;
+                  } & { __typename: 'FileField' })
+                | null;
+            } & { __typename: 'SeoField' })
+          | null;
+        _seoMetaTags: Array<
+          {
+            content: string | null;
+            tag: string;
+            attributes: Record<string, string> | null;
+          } & { __typename: 'Tag' }
+        >;
+      } & { __typename: 'PageRecord' }
+    >;
+    socialLinks: {
+      id: string;
+      links: Array<
+        {
+          linkTitle: string | null;
+          id: string;
+          title: string;
+          href: string;
+          icon: {
+            mimeType: string;
+            url: string;
+            width: number | null;
+            height: number | null;
+          } & { __typename: 'FileField' };
+        } & { __typename: 'SocialLinkRecord' }
+      >;
+    } & { __typename: 'SocialLinksCollectionRecord' };
+  } & { __typename: 'HeaderRecord' };
+  footer: {
+    id: string;
+    sections: Array<
+      {
+        id: string;
+        content: {
+          value: unknown;
+          links: Array<
+            | ({
+                id: string;
+                title: string;
+                name: string;
+                streetAddress: string;
+                zipCode: string;
+                city: string;
+                country: string;
+              } & { __typename: 'AddressRecord' })
+            | ({
+                id: string;
+                urlSlug: string | null;
+                name: string;
+                metaTags:
+                  | ({
+                      description: string | null;
+                      title: string | null;
+                      twitterCard: string | null;
+                      image:
+                        | ({
+                            url: string;
+                            title: string | null;
+                            width: number | null;
+                            height: number | null;
+                          } & { __typename: 'FileField' })
+                        | null;
+                    } & { __typename: 'SeoField' })
+                  | null;
+                _seoMetaTags: Array<
+                  {
+                    content: string | null;
+                    tag: string;
+                    attributes: Record<string, string> | null;
+                  } & { __typename: 'Tag' }
+                >;
+              } & { __typename: 'PageRecord' })
+            | ({
+                id: string;
+                links: Array<
+                  {
+                    linkTitle: string | null;
+                    id: string;
+                    title: string;
+                    href: string;
+                    icon: {
+                      mimeType: string;
+                      url: string;
+                      width: number | null;
+                      height: number | null;
+                    } & { __typename: 'FileField' };
+                  } & { __typename: 'SocialLinkRecord' }
+                >;
+              } & { __typename: 'SocialLinksCollectionRecord' })
+          >;
+        } & { __typename: 'FooterSectionModelContentField' };
+      } & { __typename: 'FooterSectionRecord' }
+    >;
+  } & { __typename: 'FooterRecord' };
+  sections: Array<
+    | ({ id: string; title: string | null; htmlContent: string } & {
+        __typename: 'PageSectionHtmlRecord';
+      })
+    | ({
+        id: string;
+        title: string | null;
+        content: {
+          value: unknown;
+          blocks: Array<
+            {
+              id: string;
+              title: string | null;
+              content: {
+                value: unknown;
+                links: Array<
+                  | ({
+                      id: string;
+                      title: string;
+                      name: string;
+                      streetAddress: string;
+                      zipCode: string;
+                      city: string;
+                      country: string;
+                    } & { __typename: 'AddressRecord' })
+                  | ({
+                      id: string;
+                      jobs: Array<
+                        {
+                          id: string;
+                          jobTitle: string;
+                          minLevel: string;
+                          maxLevel: string;
+                        } & { __typename: 'JobRecord' }
+                      >;
+                    } & { __typename: 'CurrentVacanciesModelRecord' })
+                >;
+              } & { __typename: 'SubsectionModelContentField' };
+            } & { __typename: 'SubsectionRecord' }
+          >;
+          links: Array<
+            | ({
+                id: string;
+                title: string;
+                name: string;
+                streetAddress: string;
+                zipCode: string;
+                city: string;
+                country: string;
+              } & { __typename: 'AddressRecord' })
+            | ({
+                id: string;
+                overlayText: string | null;
+                landscape: {
+                  mimeType: string;
+                  width: number | null;
+                  height: number | null;
+                  video: {
+                    duration: number | null;
+                    framerate: number | null;
+                    mp4High: string | null;
+                    mp4Med: string | null;
+                    mp4Low: string | null;
+                    thumbJpg: string;
+                    thumbGif: string;
+                  } & { __typename: 'UploadVideoField' };
+                } & { __typename: 'VideoFileField' };
+                portrait: {
+                  mimeType: string;
+                  width: number | null;
+                  height: number | null;
+                  video: {
+                    duration: number | null;
+                    framerate: number | null;
+                    mp4High: string | null;
+                    mp4Med: string | null;
+                    mp4Low: string | null;
+                    thumbJpg: string;
+                    thumbGif: string;
+                  } & { __typename: 'UploadVideoField' };
+                } & { __typename: 'VideoFileField' };
+              } & { __typename: 'CoverVideoRecord' })
+            | ({
+                id: string;
+                jobs: Array<
+                  {
+                    id: string;
+                    jobTitle: string;
+                    minLevel: string;
+                    maxLevel: string;
+                  } & { __typename: 'JobRecord' }
+                >;
+              } & { __typename: 'CurrentVacanciesModelRecord' })
+            | ({
+                id: string;
+                title: string;
+                images: Array<
+                  {
+                    id: string;
+                    responsiveImage: {
+                      src: string;
+                      alt: string | null;
+                      title: string | null;
+                      width: number;
+                      height: number;
+                      srcSet: string;
+                      sizes: string;
+                      bgColor: string | null;
+                      aspectRatio: number;
+                    } & { __typename: 'ResponsiveImage' };
+                  } & { __typename: 'ImageFileField' }
+                >;
+              } & { __typename: 'ImageGalleryRecord' })
+            | { __typename: 'PageRecord' }
+            | ({
+                id: string;
+                people: Array<
+                  {
+                    id: string;
+                    jobPosition: string;
+                    name: string;
+                    featuredImage: {
+                      id: string;
+                      responsiveImage: {
+                        src: string;
+                        alt: string | null;
+                        title: string | null;
+                        width: number;
+                        height: number;
+                        srcSet: string;
+                        sizes: string;
+                        bgColor: string | null;
+                        aspectRatio: number;
+                      } & { __typename: 'ResponsiveImage' };
+                    } & { __typename: 'ImageFileField' };
+                  } & { __typename: 'StaffRecord' }
+                >;
+              } & { __typename: 'PeopleGalleryRecord' })
+            | ({
+                id: string;
+                projects: Array<
+                  {
+                    id: string;
+                    name: string;
+                    pageUrl: string | null;
+                    steamUrl: string | null;
+                    humbleUrl: string | null;
+                    humbleButtonText: string | null;
+                    description: string;
+                    featuredImage: {
+                      id: string;
+                      responsiveImage: {
+                        src: string;
+                        alt: string | null;
+                        title: string | null;
+                        width: number;
+                        height: number;
+                        srcSet: string;
+                        sizes: string;
+                        bgColor: string | null;
+                        aspectRatio: number;
+                      } & { __typename: 'ResponsiveImage' };
+                    } & { __typename: 'ImageFileField' };
+                  } & { __typename: 'ProjectRecord' }
+                >;
+              } & { __typename: 'ProjectGalleryRecord' })
+          >;
+        } & { __typename: 'PageSectionModelContentField' };
+      } & { __typename: 'PageSectionRecord' })
+  >;
   metaTags:
     | ({
         description: string | null;
@@ -3900,173 +4337,6 @@ export type PageFragment = {
       tag: string;
       attributes: Record<string, string> | null;
     } & { __typename: 'Tag' }
-  >;
-  sections: Array<
-    {
-      id: string;
-      title: string | null;
-      content: {
-        value: unknown;
-        blocks: Array<
-          {
-            id: string;
-            title: string | null;
-            content: {
-              value: unknown;
-              links: Array<
-                | ({
-                    id: string;
-                    title: string;
-                    name: string;
-                    streetAddress: string;
-                    zipCode: string;
-                    city: string;
-                    country: string;
-                  } & { __typename: 'AddressRecord' })
-                | ({
-                    id: string;
-                    jobs: Array<
-                      {
-                        id: string;
-                        jobTitle: string;
-                        minLevel: string;
-                        maxLevel: string;
-                      } & { __typename: 'JobRecord' }
-                    >;
-                  } & { __typename: 'CurrentVacanciesModelRecord' })
-              >;
-            } & { __typename: 'SubsectionModelContentField' };
-          } & { __typename: 'SubsectionRecord' }
-        >;
-        links: Array<
-          | ({
-              id: string;
-              title: string;
-              name: string;
-              streetAddress: string;
-              zipCode: string;
-              city: string;
-              country: string;
-            } & { __typename: 'AddressRecord' })
-          | ({
-              id: string;
-              jobs: Array<
-                {
-                  id: string;
-                  jobTitle: string;
-                  minLevel: string;
-                  maxLevel: string;
-                } & { __typename: 'JobRecord' }
-              >;
-            } & { __typename: 'CurrentVacanciesModelRecord' })
-          | ({
-              id: string;
-              title: string;
-              images: Array<
-                {
-                  id: string;
-                  responsiveImage: {
-                    src: string;
-                    alt: string | null;
-                    title: string | null;
-                    width: number;
-                    height: number;
-                    srcSet: string;
-                    sizes: string;
-                    bgColor: string | null;
-                    aspectRatio: number;
-                  } & { __typename: 'ResponsiveImage' };
-                } & { __typename: 'ImageFileField' }
-              >;
-            } & { __typename: 'ImageGalleryRecord' })
-          | { __typename: 'PageRecord' }
-          | ({
-              id: string;
-              people: Array<
-                {
-                  id: string;
-                  jobPosition: string;
-                  name: string;
-                  featuredImage: {
-                    id: string;
-                    responsiveImage: {
-                      src: string;
-                      alt: string | null;
-                      title: string | null;
-                      width: number;
-                      height: number;
-                      srcSet: string;
-                      sizes: string;
-                      bgColor: string | null;
-                      aspectRatio: number;
-                    } & { __typename: 'ResponsiveImage' };
-                  } & { __typename: 'ImageFileField' };
-                } & { __typename: 'StaffRecord' }
-              >;
-            } & { __typename: 'PeopleGalleryRecord' })
-          | ({
-              id: string;
-              projects: Array<
-                {
-                  id: string;
-                  name: string;
-                  pageUrl: string | null;
-                  steamUrl: string | null;
-                  humbleUrl: string | null;
-                  humbleButtonText: string | null;
-                  description: string;
-                  featuredImage: {
-                    id: string;
-                    responsiveImage: {
-                      src: string;
-                      alt: string | null;
-                      title: string | null;
-                      width: number;
-                      height: number;
-                      srcSet: string;
-                      sizes: string;
-                      bgColor: string | null;
-                      aspectRatio: number;
-                    } & { __typename: 'ResponsiveImage' };
-                  } & { __typename: 'ImageFileField' };
-                } & { __typename: 'ProjectRecord' }
-              >;
-            } & { __typename: 'ProjectGalleryRecord' })
-          | ({
-              id: string;
-              overlayText: string | null;
-              landscape: {
-                mimeType: string;
-                width: number | null;
-                height: number | null;
-                video: {
-                  duration: number | null;
-                  framerate: number | null;
-                  mp4High: string | null;
-                  mp4Med: string | null;
-                  mp4Low: string | null;
-                  thumbJpg: string;
-                  thumbGif: string;
-                } & { __typename: 'UploadVideoField' };
-              } & { __typename: 'VideoFileField' };
-              portrait: {
-                mimeType: string;
-                width: number | null;
-                height: number | null;
-                video: {
-                  duration: number | null;
-                  framerate: number | null;
-                  mp4High: string | null;
-                  mp4Med: string | null;
-                  mp4Low: string | null;
-                  thumbJpg: string;
-                  thumbGif: string;
-                } & { __typename: 'UploadVideoField' };
-              } & { __typename: 'VideoFileField' };
-            } & { __typename: 'ResponsiveVideoRecord' })
-        >;
-      } & { __typename: 'PageSectionModelContentField' };
-    } & { __typename: 'PageSectionRecord' }
   >;
 } & { __typename: 'PageRecord' };
 
@@ -4118,7 +4388,13 @@ export type PageSeoFragment = {
   attributes: Record<string, string> | null;
 } & { __typename: 'Tag' };
 
-export type SectionFragment = {
+export type HtmlSectionFragment = {
+  id: string;
+  title: string | null;
+  htmlContent: string;
+} & { __typename: 'PageSectionHtmlRecord' };
+
+export type PageSectionFragment = {
   id: string;
   title: string | null;
   content: {
@@ -4164,6 +4440,38 @@ export type SectionFragment = {
           city: string;
           country: string;
         } & { __typename: 'AddressRecord' })
+      | ({
+          id: string;
+          overlayText: string | null;
+          landscape: {
+            mimeType: string;
+            width: number | null;
+            height: number | null;
+            video: {
+              duration: number | null;
+              framerate: number | null;
+              mp4High: string | null;
+              mp4Med: string | null;
+              mp4Low: string | null;
+              thumbJpg: string;
+              thumbGif: string;
+            } & { __typename: 'UploadVideoField' };
+          } & { __typename: 'VideoFileField' };
+          portrait: {
+            mimeType: string;
+            width: number | null;
+            height: number | null;
+            video: {
+              duration: number | null;
+              framerate: number | null;
+              mp4High: string | null;
+              mp4Med: string | null;
+              mp4Low: string | null;
+              thumbJpg: string;
+              thumbGif: string;
+            } & { __typename: 'UploadVideoField' };
+          } & { __typename: 'VideoFileField' };
+        } & { __typename: 'CoverVideoRecord' })
       | ({
           id: string;
           jobs: Array<
@@ -4248,38 +4556,6 @@ export type SectionFragment = {
             } & { __typename: 'ProjectRecord' }
           >;
         } & { __typename: 'ProjectGalleryRecord' })
-      | ({
-          id: string;
-          overlayText: string | null;
-          landscape: {
-            mimeType: string;
-            width: number | null;
-            height: number | null;
-            video: {
-              duration: number | null;
-              framerate: number | null;
-              mp4High: string | null;
-              mp4Med: string | null;
-              mp4Low: string | null;
-              thumbJpg: string;
-              thumbGif: string;
-            } & { __typename: 'UploadVideoField' };
-          } & { __typename: 'VideoFileField' };
-          portrait: {
-            mimeType: string;
-            width: number | null;
-            height: number | null;
-            video: {
-              duration: number | null;
-              framerate: number | null;
-              mp4High: string | null;
-              mp4Med: string | null;
-              mp4Low: string | null;
-              thumbJpg: string;
-              thumbGif: string;
-            } & { __typename: 'UploadVideoField' };
-          } & { __typename: 'VideoFileField' };
-        } & { __typename: 'ResponsiveVideoRecord' })
     >;
   } & { __typename: 'PageSectionModelContentField' };
 } & { __typename: 'PageSectionRecord' };
@@ -4388,7 +4664,7 @@ export type VideoFragment = {
   } & { __typename: 'UploadVideoField' };
 } & { __typename: 'VideoFileField' };
 
-export type ResponsiveVideoFragment = {
+export type CoverVideoFragment = {
   id: string;
   overlayText: string | null;
   landscape: {
@@ -4419,7 +4695,7 @@ export type ResponsiveVideoFragment = {
       thumbGif: string;
     } & { __typename: 'UploadVideoField' };
   } & { __typename: 'VideoFileField' };
-} & { __typename: 'ResponsiveVideoRecord' };
+} & { __typename: 'CoverVideoRecord' };
 
 export type AddressFragment = {
   id: string;
@@ -4766,6 +5042,291 @@ export type PageQuery = {
         pageTitle: string;
         urlSlug: string | null;
         id: string;
+        header: {
+          id: string;
+          navigationLinks: Array<
+            {
+              id: string;
+              urlSlug: string | null;
+              name: string;
+              metaTags:
+                | ({
+                    description: string | null;
+                    title: string | null;
+                    twitterCard: string | null;
+                    image:
+                      | ({
+                          url: string;
+                          title: string | null;
+                          width: number | null;
+                          height: number | null;
+                        } & { __typename: 'FileField' })
+                      | null;
+                  } & { __typename: 'SeoField' })
+                | null;
+              _seoMetaTags: Array<
+                {
+                  content: string | null;
+                  tag: string;
+                  attributes: Record<string, string> | null;
+                } & { __typename: 'Tag' }
+              >;
+            } & { __typename: 'PageRecord' }
+          >;
+          socialLinks: {
+            id: string;
+            links: Array<
+              {
+                linkTitle: string | null;
+                id: string;
+                title: string;
+                href: string;
+                icon: {
+                  mimeType: string;
+                  url: string;
+                  width: number | null;
+                  height: number | null;
+                } & { __typename: 'FileField' };
+              } & { __typename: 'SocialLinkRecord' }
+            >;
+          } & { __typename: 'SocialLinksCollectionRecord' };
+        } & { __typename: 'HeaderRecord' };
+        footer: {
+          id: string;
+          sections: Array<
+            {
+              id: string;
+              content: {
+                value: unknown;
+                links: Array<
+                  | ({
+                      id: string;
+                      title: string;
+                      name: string;
+                      streetAddress: string;
+                      zipCode: string;
+                      city: string;
+                      country: string;
+                    } & { __typename: 'AddressRecord' })
+                  | ({
+                      id: string;
+                      urlSlug: string | null;
+                      name: string;
+                      metaTags:
+                        | ({
+                            description: string | null;
+                            title: string | null;
+                            twitterCard: string | null;
+                            image:
+                              | ({
+                                  url: string;
+                                  title: string | null;
+                                  width: number | null;
+                                  height: number | null;
+                                } & { __typename: 'FileField' })
+                              | null;
+                          } & { __typename: 'SeoField' })
+                        | null;
+                      _seoMetaTags: Array<
+                        {
+                          content: string | null;
+                          tag: string;
+                          attributes: Record<string, string> | null;
+                        } & { __typename: 'Tag' }
+                      >;
+                    } & { __typename: 'PageRecord' })
+                  | ({
+                      id: string;
+                      links: Array<
+                        {
+                          linkTitle: string | null;
+                          id: string;
+                          title: string;
+                          href: string;
+                          icon: {
+                            mimeType: string;
+                            url: string;
+                            width: number | null;
+                            height: number | null;
+                          } & { __typename: 'FileField' };
+                        } & { __typename: 'SocialLinkRecord' }
+                      >;
+                    } & { __typename: 'SocialLinksCollectionRecord' })
+                >;
+              } & { __typename: 'FooterSectionModelContentField' };
+            } & { __typename: 'FooterSectionRecord' }
+          >;
+        } & { __typename: 'FooterRecord' };
+        sections: Array<
+          | ({ id: string; title: string | null; htmlContent: string } & {
+              __typename: 'PageSectionHtmlRecord';
+            })
+          | ({
+              id: string;
+              title: string | null;
+              content: {
+                value: unknown;
+                blocks: Array<
+                  {
+                    id: string;
+                    title: string | null;
+                    content: {
+                      value: unknown;
+                      links: Array<
+                        | ({
+                            id: string;
+                            title: string;
+                            name: string;
+                            streetAddress: string;
+                            zipCode: string;
+                            city: string;
+                            country: string;
+                          } & { __typename: 'AddressRecord' })
+                        | ({
+                            id: string;
+                            jobs: Array<
+                              {
+                                id: string;
+                                jobTitle: string;
+                                minLevel: string;
+                                maxLevel: string;
+                              } & { __typename: 'JobRecord' }
+                            >;
+                          } & { __typename: 'CurrentVacanciesModelRecord' })
+                      >;
+                    } & { __typename: 'SubsectionModelContentField' };
+                  } & { __typename: 'SubsectionRecord' }
+                >;
+                links: Array<
+                  | ({
+                      id: string;
+                      title: string;
+                      name: string;
+                      streetAddress: string;
+                      zipCode: string;
+                      city: string;
+                      country: string;
+                    } & { __typename: 'AddressRecord' })
+                  | ({
+                      id: string;
+                      overlayText: string | null;
+                      landscape: {
+                        mimeType: string;
+                        width: number | null;
+                        height: number | null;
+                        video: {
+                          duration: number | null;
+                          framerate: number | null;
+                          mp4High: string | null;
+                          mp4Med: string | null;
+                          mp4Low: string | null;
+                          thumbJpg: string;
+                          thumbGif: string;
+                        } & { __typename: 'UploadVideoField' };
+                      } & { __typename: 'VideoFileField' };
+                      portrait: {
+                        mimeType: string;
+                        width: number | null;
+                        height: number | null;
+                        video: {
+                          duration: number | null;
+                          framerate: number | null;
+                          mp4High: string | null;
+                          mp4Med: string | null;
+                          mp4Low: string | null;
+                          thumbJpg: string;
+                          thumbGif: string;
+                        } & { __typename: 'UploadVideoField' };
+                      } & { __typename: 'VideoFileField' };
+                    } & { __typename: 'CoverVideoRecord' })
+                  | ({
+                      id: string;
+                      jobs: Array<
+                        {
+                          id: string;
+                          jobTitle: string;
+                          minLevel: string;
+                          maxLevel: string;
+                        } & { __typename: 'JobRecord' }
+                      >;
+                    } & { __typename: 'CurrentVacanciesModelRecord' })
+                  | ({
+                      id: string;
+                      title: string;
+                      images: Array<
+                        {
+                          id: string;
+                          responsiveImage: {
+                            src: string;
+                            alt: string | null;
+                            title: string | null;
+                            width: number;
+                            height: number;
+                            srcSet: string;
+                            sizes: string;
+                            bgColor: string | null;
+                            aspectRatio: number;
+                          } & { __typename: 'ResponsiveImage' };
+                        } & { __typename: 'ImageFileField' }
+                      >;
+                    } & { __typename: 'ImageGalleryRecord' })
+                  | { __typename: 'PageRecord' }
+                  | ({
+                      id: string;
+                      people: Array<
+                        {
+                          id: string;
+                          jobPosition: string;
+                          name: string;
+                          featuredImage: {
+                            id: string;
+                            responsiveImage: {
+                              src: string;
+                              alt: string | null;
+                              title: string | null;
+                              width: number;
+                              height: number;
+                              srcSet: string;
+                              sizes: string;
+                              bgColor: string | null;
+                              aspectRatio: number;
+                            } & { __typename: 'ResponsiveImage' };
+                          } & { __typename: 'ImageFileField' };
+                        } & { __typename: 'StaffRecord' }
+                      >;
+                    } & { __typename: 'PeopleGalleryRecord' })
+                  | ({
+                      id: string;
+                      projects: Array<
+                        {
+                          id: string;
+                          name: string;
+                          pageUrl: string | null;
+                          steamUrl: string | null;
+                          humbleUrl: string | null;
+                          humbleButtonText: string | null;
+                          description: string;
+                          featuredImage: {
+                            id: string;
+                            responsiveImage: {
+                              src: string;
+                              alt: string | null;
+                              title: string | null;
+                              width: number;
+                              height: number;
+                              srcSet: string;
+                              sizes: string;
+                              bgColor: string | null;
+                              aspectRatio: number;
+                            } & { __typename: 'ResponsiveImage' };
+                          } & { __typename: 'ImageFileField' };
+                        } & { __typename: 'ProjectRecord' }
+                      >;
+                    } & { __typename: 'ProjectGalleryRecord' })
+                >;
+              } & { __typename: 'PageSectionModelContentField' };
+            } & { __typename: 'PageSectionRecord' })
+        >;
         metaTags:
           | ({
               description: string | null;
@@ -4788,293 +5349,7 @@ export type PageQuery = {
             attributes: Record<string, string> | null;
           } & { __typename: 'Tag' }
         >;
-        sections: Array<
-          {
-            id: string;
-            title: string | null;
-            content: {
-              value: unknown;
-              blocks: Array<
-                {
-                  id: string;
-                  title: string | null;
-                  content: {
-                    value: unknown;
-                    links: Array<
-                      | ({
-                          id: string;
-                          title: string;
-                          name: string;
-                          streetAddress: string;
-                          zipCode: string;
-                          city: string;
-                          country: string;
-                        } & { __typename: 'AddressRecord' })
-                      | ({
-                          id: string;
-                          jobs: Array<
-                            {
-                              id: string;
-                              jobTitle: string;
-                              minLevel: string;
-                              maxLevel: string;
-                            } & { __typename: 'JobRecord' }
-                          >;
-                        } & { __typename: 'CurrentVacanciesModelRecord' })
-                    >;
-                  } & { __typename: 'SubsectionModelContentField' };
-                } & { __typename: 'SubsectionRecord' }
-              >;
-              links: Array<
-                | ({
-                    id: string;
-                    title: string;
-                    name: string;
-                    streetAddress: string;
-                    zipCode: string;
-                    city: string;
-                    country: string;
-                  } & { __typename: 'AddressRecord' })
-                | ({
-                    id: string;
-                    jobs: Array<
-                      {
-                        id: string;
-                        jobTitle: string;
-                        minLevel: string;
-                        maxLevel: string;
-                      } & { __typename: 'JobRecord' }
-                    >;
-                  } & { __typename: 'CurrentVacanciesModelRecord' })
-                | ({
-                    id: string;
-                    title: string;
-                    images: Array<
-                      {
-                        id: string;
-                        responsiveImage: {
-                          src: string;
-                          alt: string | null;
-                          title: string | null;
-                          width: number;
-                          height: number;
-                          srcSet: string;
-                          sizes: string;
-                          bgColor: string | null;
-                          aspectRatio: number;
-                        } & { __typename: 'ResponsiveImage' };
-                      } & { __typename: 'ImageFileField' }
-                    >;
-                  } & { __typename: 'ImageGalleryRecord' })
-                | { __typename: 'PageRecord' }
-                | ({
-                    id: string;
-                    people: Array<
-                      {
-                        id: string;
-                        jobPosition: string;
-                        name: string;
-                        featuredImage: {
-                          id: string;
-                          responsiveImage: {
-                            src: string;
-                            alt: string | null;
-                            title: string | null;
-                            width: number;
-                            height: number;
-                            srcSet: string;
-                            sizes: string;
-                            bgColor: string | null;
-                            aspectRatio: number;
-                          } & { __typename: 'ResponsiveImage' };
-                        } & { __typename: 'ImageFileField' };
-                      } & { __typename: 'StaffRecord' }
-                    >;
-                  } & { __typename: 'PeopleGalleryRecord' })
-                | ({
-                    id: string;
-                    projects: Array<
-                      {
-                        id: string;
-                        name: string;
-                        pageUrl: string | null;
-                        steamUrl: string | null;
-                        humbleUrl: string | null;
-                        humbleButtonText: string | null;
-                        description: string;
-                        featuredImage: {
-                          id: string;
-                          responsiveImage: {
-                            src: string;
-                            alt: string | null;
-                            title: string | null;
-                            width: number;
-                            height: number;
-                            srcSet: string;
-                            sizes: string;
-                            bgColor: string | null;
-                            aspectRatio: number;
-                          } & { __typename: 'ResponsiveImage' };
-                        } & { __typename: 'ImageFileField' };
-                      } & { __typename: 'ProjectRecord' }
-                    >;
-                  } & { __typename: 'ProjectGalleryRecord' })
-                | ({
-                    id: string;
-                    overlayText: string | null;
-                    landscape: {
-                      mimeType: string;
-                      width: number | null;
-                      height: number | null;
-                      video: {
-                        duration: number | null;
-                        framerate: number | null;
-                        mp4High: string | null;
-                        mp4Med: string | null;
-                        mp4Low: string | null;
-                        thumbJpg: string;
-                        thumbGif: string;
-                      } & { __typename: 'UploadVideoField' };
-                    } & { __typename: 'VideoFileField' };
-                    portrait: {
-                      mimeType: string;
-                      width: number | null;
-                      height: number | null;
-                      video: {
-                        duration: number | null;
-                        framerate: number | null;
-                        mp4High: string | null;
-                        mp4Med: string | null;
-                        mp4Low: string | null;
-                        thumbJpg: string;
-                        thumbGif: string;
-                      } & { __typename: 'UploadVideoField' };
-                    } & { __typename: 'VideoFileField' };
-                  } & { __typename: 'ResponsiveVideoRecord' })
-              >;
-            } & { __typename: 'PageSectionModelContentField' };
-          } & { __typename: 'PageSectionRecord' }
-        >;
       } & { __typename: 'PageRecord' })
-    | null;
-  header:
-    | ({
-        id: string;
-        navigationLinks: Array<
-          {
-            id: string;
-            urlSlug: string | null;
-            name: string;
-            metaTags:
-              | ({
-                  description: string | null;
-                  title: string | null;
-                  twitterCard: string | null;
-                  image:
-                    | ({
-                        url: string;
-                        title: string | null;
-                        width: number | null;
-                        height: number | null;
-                      } & { __typename: 'FileField' })
-                    | null;
-                } & { __typename: 'SeoField' })
-              | null;
-            _seoMetaTags: Array<
-              {
-                content: string | null;
-                tag: string;
-                attributes: Record<string, string> | null;
-              } & { __typename: 'Tag' }
-            >;
-          } & { __typename: 'PageRecord' }
-        >;
-        socialLinks: {
-          id: string;
-          links: Array<
-            {
-              linkTitle: string | null;
-              id: string;
-              title: string;
-              href: string;
-              icon: {
-                mimeType: string;
-                url: string;
-                width: number | null;
-                height: number | null;
-              } & { __typename: 'FileField' };
-            } & { __typename: 'SocialLinkRecord' }
-          >;
-        } & { __typename: 'SocialLinksCollectionRecord' };
-      } & { __typename: 'HeaderRecord' })
-    | null;
-  footer:
-    | ({
-        id: string;
-        sections: Array<
-          {
-            id: string;
-            content: {
-              value: unknown;
-              links: Array<
-                | ({
-                    id: string;
-                    title: string;
-                    name: string;
-                    streetAddress: string;
-                    zipCode: string;
-                    city: string;
-                    country: string;
-                  } & { __typename: 'AddressRecord' })
-                | ({
-                    id: string;
-                    urlSlug: string | null;
-                    name: string;
-                    metaTags:
-                      | ({
-                          description: string | null;
-                          title: string | null;
-                          twitterCard: string | null;
-                          image:
-                            | ({
-                                url: string;
-                                title: string | null;
-                                width: number | null;
-                                height: number | null;
-                              } & { __typename: 'FileField' })
-                            | null;
-                        } & { __typename: 'SeoField' })
-                      | null;
-                    _seoMetaTags: Array<
-                      {
-                        content: string | null;
-                        tag: string;
-                        attributes: Record<string, string> | null;
-                      } & { __typename: 'Tag' }
-                    >;
-                  } & { __typename: 'PageRecord' })
-                | ({
-                    id: string;
-                    links: Array<
-                      {
-                        linkTitle: string | null;
-                        id: string;
-                        title: string;
-                        href: string;
-                        icon: {
-                          mimeType: string;
-                          url: string;
-                          width: number | null;
-                          height: number | null;
-                        } & { __typename: 'FileField' };
-                      } & { __typename: 'SocialLinkRecord' }
-                    >;
-                  } & { __typename: 'SocialLinksCollectionRecord' })
-              >;
-            } & { __typename: 'FooterSectionModelContentField' };
-          } & { __typename: 'FooterSectionRecord' }
-        >;
-      } & { __typename: 'FooterRecord' })
     | null;
   _site: {
     locales: Array<SiteLocale>;
@@ -5218,6 +5493,192 @@ export const PageSeoFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PageSeoFragment, unknown>;
+export const PageLinkFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PageLink' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'PageRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'urlSlug' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'metaTags' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'PageMetaTags' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: '_seoMetaTags' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'PageSeo' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PageLinkFragment, unknown>;
+export const IconFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Icon' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'FileField' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<IconFragment, unknown>;
+export const SocialLinkFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'SocialLink' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'SocialLinkRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'linkTitle' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'href' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'icon' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Icon' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SocialLinkFragment, unknown>;
+export const SocialLinksCollectionFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'SocialLinksCollection' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'SocialLinksCollectionRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'links' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'SocialLink' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<SocialLinksCollectionFragment, unknown>;
+export const HeaderFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Header' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'HeaderRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'navigationLinks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'PageLink' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'socialLinks' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'SocialLinksCollection' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<HeaderFragment, unknown>;
 export const AddressFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -5244,6 +5705,133 @@ export const AddressFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<AddressFragment, unknown>;
+export const FooterSectionFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'FooterSection' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'FooterSectionRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'content' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'value' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'links' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'AddressRecord' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'Address' },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: {
+                            kind: 'Name',
+                            value: 'SocialLinksCollectionRecord',
+                          },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: {
+                                kind: 'Name',
+                                value: 'SocialLinksCollection',
+                              },
+                            },
+                          ],
+                        },
+                      },
+                      {
+                        kind: 'InlineFragment',
+                        typeCondition: {
+                          kind: 'NamedType',
+                          name: { kind: 'Name', value: 'PageRecord' },
+                        },
+                        selectionSet: {
+                          kind: 'SelectionSet',
+                          selections: [
+                            {
+                              kind: 'FragmentSpread',
+                              name: { kind: 'Name', value: 'PageLink' },
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FooterSectionFragment, unknown>;
+export const FooterFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Footer' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'FooterRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sections' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'FooterSection' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<FooterFragment, unknown>;
 export const CurrentVacanciesFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -5418,15 +6006,6 @@ export const ProjectFragmentDoc = {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'responsiveImage' },
                   arguments: [
-                    {
-                      kind: 'Argument',
-                      name: { kind: 'Name', value: 'sizes' },
-                      value: {
-                        kind: 'StringValue',
-                        value: '(max-width: 512px) 100vw, 512px',
-                        block: false,
-                      },
-                    },
                     {
                       kind: 'Argument',
                       name: { kind: 'Name', value: 'imgixParams' },
@@ -5640,15 +6219,6 @@ export const StaffFragmentDoc = {
                   arguments: [
                     {
                       kind: 'Argument',
-                      name: { kind: 'Name', value: 'sizes' },
-                      value: {
-                        kind: 'StringValue',
-                        value: '(max-width: 512px) 100vw, 512px',
-                        block: false,
-                      },
-                    },
-                    {
-                      kind: 'Argument',
                       name: { kind: 'Name', value: 'imgixParams' },
                       value: {
                         kind: 'ObjectValue',
@@ -5839,15 +6409,15 @@ export const VideoFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<VideoFragment, unknown>;
-export const ResponsiveVideoFragmentDoc = {
+export const CoverVideoFragmentDoc = {
   kind: 'Document',
   definitions: [
     {
       kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'ResponsiveVideo' },
+      name: { kind: 'Name', value: 'CoverVideo' },
       typeCondition: {
         kind: 'NamedType',
-        name: { kind: 'Name', value: 'ResponsiveVideoRecord' },
+        name: { kind: 'Name', value: 'CoverVideoRecord' },
       },
       selectionSet: {
         kind: 'SelectionSet',
@@ -5885,13 +6455,13 @@ export const ResponsiveVideoFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<ResponsiveVideoFragment, unknown>;
-export const SectionFragmentDoc = {
+} as unknown as DocumentNode<CoverVideoFragment, unknown>;
+export const PageSectionFragmentDoc = {
   kind: 'Document',
   definitions: [
     {
       kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Section' },
+      name: { kind: 'Name', value: 'PageSection' },
       typeCondition: {
         kind: 'NamedType',
         name: { kind: 'Name', value: 'PageSectionRecord' },
@@ -6009,17 +6579,14 @@ export const SectionFragmentDoc = {
                         kind: 'InlineFragment',
                         typeCondition: {
                           kind: 'NamedType',
-                          name: {
-                            kind: 'Name',
-                            value: 'ResponsiveVideoRecord',
-                          },
+                          name: { kind: 'Name', value: 'CoverVideoRecord' },
                         },
                         selectionSet: {
                           kind: 'SelectionSet',
                           selections: [
                             {
                               kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'ResponsiveVideo' },
+                              name: { kind: 'Name', value: 'CoverVideo' },
                             },
                           ],
                         },
@@ -6053,7 +6620,29 @@ export const SectionFragmentDoc = {
       },
     },
   ],
-} as unknown as DocumentNode<SectionFragment, unknown>;
+} as unknown as DocumentNode<PageSectionFragment, unknown>;
+export const HtmlSectionFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'HtmlSection' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'PageSectionHtmlRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'htmlContent' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<HtmlSectionFragment, unknown>;
 export const PageFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -6074,6 +6663,73 @@ export const PageFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           {
             kind: 'Field',
+            name: { kind: 'Name', value: 'header' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Header' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'footer' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Footer' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'sections' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: {
+                    kind: 'NamedType',
+                    name: { kind: 'Name', value: 'PageSectionRecord' },
+                  },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'PageSection' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'InlineFragment',
+                  typeCondition: {
+                    kind: 'NamedType',
+                    name: { kind: 'Name', value: 'PageSectionHtmlRecord' },
+                  },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'HtmlSection' },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
             name: { kind: 'Name', value: 'metaTags' },
             selectionSet: {
               kind: 'SelectionSet',
@@ -6094,19 +6750,6 @@ export const PageFragmentDoc = {
                 {
                   kind: 'FragmentSpread',
                   name: { kind: 'Name', value: 'PageSeo' },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'sections' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Section' },
                 },
               ],
             },
@@ -6116,319 +6759,6 @@ export const PageFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PageFragment, unknown>;
-export const IconFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Icon' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'FileField' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<IconFragment, unknown>;
-export const SocialLinkFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'SocialLink' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'SocialLinkRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'linkTitle' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'title' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'href' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'icon' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Icon' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<SocialLinkFragment, unknown>;
-export const SocialLinksCollectionFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'SocialLinksCollection' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'SocialLinksCollectionRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'links' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'SocialLink' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<SocialLinksCollectionFragment, unknown>;
-export const PageLinkFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'PageLink' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'PageRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'urlSlug' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'name' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'metaTags' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'PageMetaTags' },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: '_seoMetaTags' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'PageSeo' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<PageLinkFragment, unknown>;
-export const FooterSectionFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'FooterSection' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'FooterSectionRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'content' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'value' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'links' },
-                  selectionSet: {
-                    kind: 'SelectionSet',
-                    selections: [
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: { kind: 'Name', value: 'AddressRecord' },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'Address' },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: {
-                            kind: 'Name',
-                            value: 'SocialLinksCollectionRecord',
-                          },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: {
-                                kind: 'Name',
-                                value: 'SocialLinksCollection',
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: 'InlineFragment',
-                        typeCondition: {
-                          kind: 'NamedType',
-                          name: { kind: 'Name', value: 'PageRecord' },
-                        },
-                        selectionSet: {
-                          kind: 'SelectionSet',
-                          selections: [
-                            {
-                              kind: 'FragmentSpread',
-                              name: { kind: 'Name', value: 'PageLink' },
-                            },
-                          ],
-                        },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<FooterSectionFragment, unknown>;
-export const FooterFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Footer' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'FooterRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'sections' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'FooterSection' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<FooterFragment, unknown>;
-export const HeaderFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Header' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'HeaderRecord' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'navigationLinks' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'PageLink' },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'socialLinks' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'SocialLinksCollection' },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<HeaderFragment, unknown>;
 export const SiteMetaFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -6567,32 +6897,6 @@ export const PageDocument = {
           },
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'header' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Header' },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'footer' },
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                {
-                  kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Footer' },
-                },
-              ],
-            },
-          },
-          {
-            kind: 'Field',
             name: { kind: 'Name', value: '_site' },
             selectionSet: {
               kind: 'SelectionSet',
@@ -6608,11 +6912,18 @@ export const PageDocument = {
       },
     },
     ...PageFragmentDoc.definitions,
+    ...HeaderFragmentDoc.definitions,
+    ...PageLinkFragmentDoc.definitions,
     ...PageMetaTagsFragmentDoc.definitions,
     ...PageSeoFragmentDoc.definitions,
-    ...SectionFragmentDoc.definitions,
-    ...SubsectionFragmentDoc.definitions,
+    ...SocialLinksCollectionFragmentDoc.definitions,
+    ...SocialLinkFragmentDoc.definitions,
+    ...IconFragmentDoc.definitions,
+    ...FooterFragmentDoc.definitions,
+    ...FooterSectionFragmentDoc.definitions,
     ...AddressFragmentDoc.definitions,
+    ...PageSectionFragmentDoc.definitions,
+    ...SubsectionFragmentDoc.definitions,
     ...CurrentVacanciesFragmentDoc.definitions,
     ...ProjectGalleryFragmentDoc.definitions,
     ...ProjectFragmentDoc.definitions,
@@ -6620,15 +6931,9 @@ export const PageDocument = {
     ...ImageGalleryFragmentDoc.definitions,
     ...PeopleGalleryFragmentDoc.definitions,
     ...StaffFragmentDoc.definitions,
-    ...ResponsiveVideoFragmentDoc.definitions,
+    ...CoverVideoFragmentDoc.definitions,
     ...VideoFragmentDoc.definitions,
-    ...HeaderFragmentDoc.definitions,
-    ...PageLinkFragmentDoc.definitions,
-    ...SocialLinksCollectionFragmentDoc.definitions,
-    ...SocialLinkFragmentDoc.definitions,
-    ...IconFragmentDoc.definitions,
-    ...FooterFragmentDoc.definitions,
-    ...FooterSectionFragmentDoc.definitions,
+    ...HtmlSectionFragmentDoc.definitions,
     ...SiteMetaFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;

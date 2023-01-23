@@ -4,7 +4,13 @@ import HumbleButton from '@components/elements/buttons/HumbleButton';
 import SteamButton from '@components/elements/buttons/SteamButton';
 
 import { ProjectFragment } from '@lib/dato-cms';
-import { createStyles, Box, Title, Group } from '@mantine/core';
+import {
+  createStyles,
+  Box,
+  Title,
+  Group,
+  useMantineTheme,
+} from '@mantine/core';
 
 import { createTransition } from '@lib/theme/utils';
 import Link from 'next/link';
@@ -14,12 +20,9 @@ const useStyles = createStyles((theme) => ({
     position: 'relative',
   },
   image: {
-    position: 'absolute',
     width: '100%',
     height: '100%',
     zIndex: 0,
-    objectFit: 'cover',
-    objectPosition: 'center',
   },
   overlay: {
     position: 'absolute',
@@ -93,6 +96,7 @@ const Project = ({
   pageUrl,
 }: ProjectFragment) => {
   const { classes, cx } = useStyles(undefined, { name: 'Project' });
+  const theme = useMantineTheme();
   return (
     <Box className={classes.root}>
       <Box className={classes.overlay}>
@@ -116,7 +120,16 @@ const Project = ({
           </Group>
         )}
       </Box>
-      <Image className={classes.image} data={featuredImage.responsiveImage} />
+      <Image
+        className={classes.image}
+        data={featuredImage.responsiveImage}
+        layout="responsive"
+        objectFit="cover"
+        objectPosition="center"
+        sizes={`(max-width: ${theme.breakpoints.md}px) ${Math.floor(
+          theme.breakpoints.md / 2
+        )}px, ${Math.floor(theme.breakpoints.md / 4)}px`}
+      />
     </Box>
   );
 };

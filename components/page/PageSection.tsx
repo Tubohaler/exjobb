@@ -1,14 +1,14 @@
 import StructuredText, {
   StructuredTextProps,
 } from '@components/structured-text/StructuredText';
-import type { SectionFragment } from '@lib/dato-cms';
+import type { PageSectionFragment } from '@lib/dato-cms';
 import { Article } from '@components/elements/layout';
 import PageSectionHeader from './PageSectionHeader';
 import { createStyles } from '@mantine/styles';
 import { Box, DefaultProps, Selectors, useMantineTheme } from '@mantine/core';
 
 export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
-  section: SectionFragment;
+  section: PageSectionFragment;
   fullscreen?: boolean;
   structuredTextProps?: Omit<StructuredTextProps, 'data'>;
 };
@@ -60,6 +60,12 @@ const useStyles = createStyles(
         height: 'auto',
         maxWidth: theme.breakpoints.md,
         minWidth: 0,
+        '& > section + :not(section)': {
+          marginTop: theme.spacing.xl,
+        },
+        '& > :not(section, h1, h2, h3, h4, h5, h6):has(+ section)': {
+          marginBottom: theme.spacing.xl * 2,
+        },
       },
       fullscreen: {
         ref: getRef('fullscreen'),

@@ -1,5 +1,5 @@
 import type { NodeRules } from '@components/structured-text/createStructuredTextProps/types';
-import type { Link as LinkNode } from 'datocms-structured-text-utils';
+import { isListItem, Link as LinkNode } from 'datocms-structured-text-utils';
 import Link, { LinkProps } from '@components/elements/links/Link';
 import {
   Text,
@@ -26,13 +26,19 @@ const getLinkPropsFromMeta = (meta: LinkNode['meta']): Partial<LinkProps> => {
   return props;
 };
 
-const DefaultNodeRules: Partial<NodeRules> = {
+const DefaultNodeRules: NodeRules = {
   Root: ({ key, children }) => (
     <React.Fragment key={key}>{children}</React.Fragment>
   ),
   Paragraph: ({ key, children, ancestors }) => {
     return (
-      <Text key={key} mb={ancestors[0]?.type === 'listItem' ? 0 : 'sm'}>
+      <Text
+        component="p"
+        key={key}
+        sx={(theme) => ({
+          marginBottom: isListItem(ancestors[0]) ? 0 : theme.spacing.xs * 0.5,
+        })}
+      >
         {children}
       </Text>
     );
@@ -91,6 +97,9 @@ const DefaultNodeRules: Partial<NodeRules> = {
         {children}
       </Link>
     );
+  },
+  Span: ({ key, node: { value } }) => {
+    return <React.Fragment key={key}>{value}</React.Fragment>;
   },
 };
 

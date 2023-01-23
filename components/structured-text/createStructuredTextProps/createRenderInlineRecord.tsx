@@ -5,8 +5,9 @@ import {
   PageQuery,
   PeopleGalleryFragment,
   ProjectGalleryFragment,
-  ResponsiveVideoFragment,
+  CoverVideoFragment,
   SocialLinksCollectionFragment,
+  HtmlSectionFragment,
 } from '@lib/dato-cms';
 import {
   StructuredTextGraphQlResponseRecord,
@@ -17,15 +18,20 @@ import { StructuredTextComponents } from './types';
 import inferType from './inferType';
 import Placeholder from './Placeholder';
 
+import { Section } from '@components/elements/layout';
+
 type RecordTypeNames =
   | Exclude<
-      Exclude<PageQuery['page'], null>['sections'][number]['content']['links'],
+      Exclude<
+        Exclude<PageQuery['page'], null>['sections'][number],
+        HtmlSectionFragment
+      >['content']['links'],
       null
     >[number]['__typename']
   | Exclude<
-      PageQuery['footer'],
+      PageQuery['page'],
       null
-    >['sections'][number]['content']['links'][number]['__typename'];
+    >['footer']['sections'][number]['content']['links'][number]['__typename'];
 
 export default function createRenderInlineRecord<
   R1 extends StructuredTextGraphQlResponseRecord,
@@ -49,30 +55,36 @@ export default function createRenderInlineRecord<
         );
       case 'ImageGalleryRecord':
         return (
-          <Components.ImageGallery
-            key={record.id}
-            {...inferType<ImageGalleryFragment>(record)}
-          />
+          <Section>
+            <Components.ImageGallery
+              key={record.id}
+              {...inferType<ImageGalleryFragment>(record)}
+            />
+          </Section>
         );
       case 'PeopleGalleryRecord':
         return (
-          <Components.PeopleGallery
-            key={record.id}
-            {...inferType<PeopleGalleryFragment>(record)}
-          />
+          <Section>
+            <Components.PeopleGallery
+              key={record.id}
+              {...inferType<PeopleGalleryFragment>(record)}
+            />
+          </Section>
         );
       case 'ProjectGalleryRecord':
         return (
-          <Components.ProjectGallery
-            key={record.id}
-            {...inferType<ProjectGalleryFragment>(record)}
-          />
+          <Section>
+            <Components.ProjectGallery
+              key={record.id}
+              {...inferType<ProjectGalleryFragment>(record)}
+            />
+          </Section>
         );
-      case 'ResponsiveVideoRecord':
+      case 'CoverVideoRecord':
         return (
-          <Components.ResponsiveVideo
+          <Components.CoverVideo
             key={record.id}
-            {...inferType<ResponsiveVideoFragment>(record)}
+            {...inferType<CoverVideoFragment>(record)}
           />
         );
       case 'CurrentVacanciesModelRecord':

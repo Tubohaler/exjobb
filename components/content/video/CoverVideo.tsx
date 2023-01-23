@@ -1,4 +1,4 @@
-import { ResponsiveVideoFragment } from '@lib/dato-cms';
+import { CoverVideoFragment } from '@lib/dato-cms';
 import {
   Box,
   createStyles,
@@ -10,7 +10,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks';
 import Video from './Video';
 
-export type ResponsiveVideoStylesNames = Selectors<typeof useStyles>;
+export type CoverVideoStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => {
   const absoluteCenter: CSSObject = {
@@ -60,21 +60,21 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-export type ResponsiveVideoProps = Parameters<typeof Box<'div'>>[0] &
-  DefaultProps<ResponsiveVideoStylesNames> & {
-    video: ResponsiveVideoFragment;
+export type CoverVideoProps = Parameters<typeof Box<'div'>>[0] &
+  DefaultProps<CoverVideoStylesNames> & {
+    video: CoverVideoFragment;
   };
 
-function ResponsiveVideo({
+function CoverVideo({
   video,
   unstyled,
   className,
   classNames,
   ...props
-}: ResponsiveVideoProps) {
+}: CoverVideoProps) {
   const isPortrait = useMediaQuery('(orientation: portrait)', false);
   const { classes, cx } = useStyles(undefined, {
-    name: 'ResponsiveVideo',
+    name: 'CoverVideo',
     unstyled,
     classNames,
   });
@@ -94,4 +94,4 @@ function ResponsiveVideo({
   );
 }
 
-export default ResponsiveVideo;
+export default CoverVideo;

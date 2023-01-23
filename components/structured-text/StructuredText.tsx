@@ -1,6 +1,6 @@
 import {
   FooterSectionFragment,
-  SectionFragment,
+  PageSectionFragment,
   SubsectionFragment,
 } from '@lib/dato-cms';
 import { isStructuredText } from 'datocms-structured-text-utils';
@@ -17,7 +17,7 @@ export type StructuredTextProps<
 > = Omit<StructuredTextPropTypes<R1, R2>, 'data'> & {
   data:
     | StructuredTextPropTypes<R1, R2>['data']
-    | SectionFragment['content']
+    | PageSectionFragment['content']
     | SubsectionFragment['content']
     | FooterSectionFragment['content'];
 };
