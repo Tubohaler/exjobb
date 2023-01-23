@@ -15,6 +15,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
   root: {
     display: 'flex',
     flexWrap: 'nowrap',
+    alignItems: 'center',
   },
   link: {
     display: 'block',
