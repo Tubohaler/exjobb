@@ -1,7 +1,5 @@
 import { PageWrapper, Section } from '@components/elements/layout';
 import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
-import Head from '@components/page/Head';
-import PageSection from '@components/page/PageSection';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
 import { Title, createStyles, Text } from '@mantine/core';
 
@@ -63,18 +61,10 @@ const structuredTextProps = createStructuredTextProps({
 const Career = ({ data }: StaticPageProps) => {
   const { classes } = useStyles();
   return (
-    <PageWrapper data={data}>
-      {data.page?.sections.map((section) => {
-        return (
-          <PageSection
-            key={section.id}
-            section={section}
-            classNames={classes}
-            structuredTextProps={structuredTextProps}
-          />
-        );
-      })}
-    </PageWrapper>
+    <PageWrapper
+      data={data}
+      sectionProps={{ classNames: classes, structuredTextProps }}
+    />
   );
 };
 
