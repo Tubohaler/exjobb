@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Image } from 'react-datocms';
-import { Box, createStyles, Title } from '@mantine/core';
+import { Box, Title, createStyles } from '@mantine/core';
 
 import StaffPortrait from './StaffPortrait';
 import { PeopleGalleryFragment } from '@lib/dato-cms';
