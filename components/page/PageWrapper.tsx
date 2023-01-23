@@ -1,7 +1,7 @@
 import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
-import { PageQuery, SectionFragment } from '@lib/dato-cms';
-import Header from '../elements/layout/Header';
-import Footer from '../elements/layout/Footer';
+import { PageQuery, PageSectionFragment } from '@lib/dato-cms';
+import Header from './Header';
+import Footer from './Footer';
 import Head from '@components/page/Head';
 import PageSection, { PageSectionProps } from '@components/page/PageSection';
 
@@ -12,7 +12,7 @@ export type PageWrapperProps = DefaultProps<PageWrapperStylesNames> & {
   sectionProps?:
     | Partial<Omit<PageSectionProps, 'section'>>
     | ((
-        section: SectionFragment
+        section: PageSectionFragment
       ) => Partial<Omit<PageSectionProps, 'section'>>);
 };
 
@@ -65,31 +65,30 @@ const PageWrapper = ({
     <>
       <Head data={data} />
       <Box className={cx(classes.root, className)} {...props}>
-        {data.header && (
-          <Header
-            data={data.header}
-            currentPage={data.page?.name}
-            className={classes.header}
-          />
-        )}
-        <Box className={classes.main} component="main">
-          {data.page?.sections.map((section) => {
-            const props =
-              typeof sectionProps === 'function'
-                ? sectionProps(section)
-                : sectionProps || {};
-            if (!('fullscreen' in props)) {
-              props.fullscreen =
-                section.content.links[0]?.__typename ===
-                'ResponsiveVideoRecord';
-            }
-            return (
-              <PageSection key={section.id} section={section} {...props} />
-            );
-          })}
-        </Box>
-        {data.footer && (
-          <Footer data={data.footer} className={classes.footer} />
+        {data.page && (
+          <>
+            <Header
+              data={data.page.header}
+              currentPage={data.page?.name}
+              className={classes.header}
+            />
+            <Box className={classes.main} component="main">
+              {data.page.sections.map((section) => {
+                if (section.__typename === 'PageSectionHtmlRecord') return null;
+                const props: Partial<Omit<PageSectionProps, 'section'>> = {
+                  fullscreen:
+                    section.content.links[0]?.__typename === 'CoverVideoRecord',
+                  ...(typeof sectionProps === 'function'
+                    ? sectionProps(section)
+                    : sectionProps || {}),
+                };
+                return (
+                  <PageSection key={section.id} section={section} {...props} />
+                );
+              })}
+            </Box>
+            <Footer data={data.page.footer} className={classes.footer} />
+          </>
         )}
       </Box>
     </>

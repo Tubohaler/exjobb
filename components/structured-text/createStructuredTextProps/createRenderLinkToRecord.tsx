@@ -1,4 +1,8 @@
-import { PageLinkFragment, PageQuery } from '@lib/dato-cms';
+import {
+  HtmlSectionFragment,
+  PageLinkFragment,
+  PageQuery,
+} from '@lib/dato-cms';
 import {
   StructuredTextGraphQlResponseRecord,
   StructuredTextPropTypes,
@@ -11,13 +15,16 @@ import Placeholder from './Placeholder';
 
 type RecordTypeNames =
   | Exclude<
-      Exclude<PageQuery['page'], null>['sections'][number]['content']['links'],
+      Exclude<
+        Exclude<PageQuery['page'], null>['sections'][number],
+        HtmlSectionFragment
+      >['content']['links'],
       null
     >[number]['__typename']
   | Exclude<
-      PageQuery['footer'],
+      PageQuery['page'],
       null
-    >['sections'][number]['content']['links'][number]['__typename'];
+    >['footer']['sections'][number]['content']['links'][number]['__typename'];
 
 export default function createRenderLinkToRecord<
   R1 extends StructuredTextGraphQlResponseRecord,

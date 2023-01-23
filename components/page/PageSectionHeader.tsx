@@ -1,4 +1,3 @@
-import { SectionFragment } from '@lib/dato-cms';
 import { Box, DefaultProps, Selectors, Title } from '@mantine/core';
 import { createStyles } from '@mantine/styles';
 

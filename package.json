@@ -30,6 +30,7 @@
     "datocms-structured-text-utils": "^2.0.4",
     "graphql": "^16.6.0",
     "next": "13.0.7",
+    "parse5": "^7.1.2",
     "prism-react-renderer": "^1.3.5",
     "prop-types": "^15.8.1",
     "react": "18.2.0",

@@ -1,4 +1,8 @@
-import type { PageQuery, SubsectionFragment } from '@lib/dato-cms';
+import type {
+  HtmlSectionFragment,
+  PageQuery,
+  SubsectionFragment,
+} from '@lib/dato-cms';
 import {
   StructuredText,
   StructuredTextGraphQlResponseRecord,
@@ -11,7 +15,10 @@ import DefaultBlocks from './defaults/DefaultBlocks';
 import { isStructuredText } from 'datocms-structured-text-utils';
 
 type BlockTypeNames = Exclude<
-  Exclude<PageQuery['page'], null>['sections'][number]['content']['blocks'],
+  Exclude<
+    Exclude<PageQuery['page'], null>['sections'][number],
+    HtmlSectionFragment
+  >['content']['blocks'],
   null
 >[number]['__typename'];
 

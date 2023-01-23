@@ -1,17 +1,39 @@
-import { Box } from '@mantine/core';
+import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
 
-export type ArticleProps = Omit<
-  Parameters<typeof Box<'article'>>[0],
-  'component'
-> & {
-  children: React.ReactNode;
-};
+export type ArticleStylesNames = Selectors<typeof useStyles>;
+
+export type ArticleProps = DefaultProps<ArticleStylesNames> &
+  Parameters<typeof Box<'article'>>[0] & {
+    children: React.ReactNode;
+  };
+
+const useStyles = createStyles((theme) => ({
+  root: {},
+}));
 
 /**
  * Wraps content with a html article element
  */
-const Article = (props: ArticleProps) => {
-  return <Box component="article" {...props} />;
+const Article = ({
+  className,
+  classNames,
+  styles,
+  unstyled,
+  ...props
+}: ArticleProps) => {
+  const { classes, cx } = useStyles(undefined, {
+    name: 'Article',
+    classNames,
+    styles,
+    unstyled,
+  });
+  return (
+    <Box
+      component="article"
+      className={cx(classes.root, className)}
+      {...props}
+    />
+  );
 };
 
 export default Article;

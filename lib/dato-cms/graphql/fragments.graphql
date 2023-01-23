@@ -4,14 +4,25 @@ fragment Page on PageRecord {
   pageTitle
   urlSlug
   id
+  header {
+    ...Header
+  }
+  footer {
+    ...Footer
+  }
+  sections {
+    ... on PageSectionRecord {
+      ...PageSection
+    }
+    ... on PageSectionHtmlRecord {
+      ...HtmlSection
+    }
+  }
   metaTags {
     ...PageMetaTags
   }
   _seoMetaTags {
     ...PageSeo
-  }
-  sections {
-    ...Section
   }
 }
 
@@ -48,7 +59,14 @@ fragment PageSeo on Tag {
   attributes
 }
 
-fragment Section on PageSectionRecord {
+fragment HtmlSection on PageSectionHtmlRecord {
+  __typename
+  id
+  title
+  htmlContent
+}
+
+fragment PageSection on PageSectionRecord {
   __typename
   id
   title
@@ -73,8 +91,8 @@ fragment Section on PageSectionRecord {
       ... on PeopleGalleryRecord {
         ...PeopleGallery
       }
-      ... on ResponsiveVideoRecord {
-        ...ResponsiveVideo
+      ... on CoverVideoRecord {
+        ...CoverVideo
       }
       ... on CurrentVacanciesModelRecord {
         ...CurrentVacancies
@@ -170,7 +188,7 @@ fragment Video on VideoFileField {
   }
 }
 
-fragment ResponsiveVideo on ResponsiveVideoRecord {
+fragment CoverVideo on CoverVideoRecord {
   id
   __typename
   overlayText
@@ -206,7 +224,6 @@ fragment Project on ProjectRecord {
     __typename
     id
     responsiveImage(
-      sizes: "(max-width: 512px) 100vw, 512px"
       imgixParams: { fm: webp, fit: crop, ar: "1", dpi: "72", w: "800" }
     ) {
       ...ResponsiveImage
@@ -231,7 +248,6 @@ fragment Staff on StaffRecord {
     __typename
     id
     responsiveImage(
-      sizes: "(max-width: 512px) 100vw, 512px"
       imgixParams: { fm: webp, fit: crop, w: "800", ar: "3:4", dpi: "72" }
     ) {
       ...ResponsiveImage

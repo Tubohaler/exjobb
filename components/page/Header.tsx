@@ -8,7 +8,7 @@ import {
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { HeaderFragment } from '@lib/dato-cms';
-import Link from '../links/Link';
+import Link from '../elements/links/Link';
 
 const useStyles = createStyles((theme, _, getRef) => ({
   root: {

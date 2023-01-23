@@ -63,9 +63,9 @@ function ImageGalleryThumbnail({ image, onClick }: ImageGalleryThumbnailProps) {
         layout="responsive"
         objectFit="cover"
         objectPosition="center"
-        sizes={`(max-width: ${theme.breakpoints.md}px) 100vw, ${
-          theme.breakpoints.md * 0.33
-        }px`}
+        sizes={`(max-width: ${theme.breakpoints.md}px) ${
+          theme.breakpoints.md
+        }px, ${Math.floor(theme.breakpoints.md / 3)}px`}
       />
     </Box>
   );

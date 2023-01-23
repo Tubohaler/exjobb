@@ -12,7 +12,7 @@ const useStyles = createStyles((theme) => {
     },
     body: {
       width: 'min(100%, 35ch)',
-      height: 'min(100%, 30rem)',
+      height: 'min(100%, 28em)',
       display: 'flex',
       flexDirection: 'column',
       alignContent: 'center',
@@ -29,18 +29,13 @@ const useStyles = createStyles((theme) => {
 });
 
 const structuredTextProps = createStructuredTextProps({
-  nodeRules: {
-    Paragraph: ({ key, children }) => {
-      return <Text key={key}>{children}</Text>;
-    },
-  },
   blocks: {
     Subsection: ({ children, section }) => {
       return (
         <Section
           sx={(theme) => ({
             width: '100%',
-            minHeight: '20%',
+            minHeight: '5em',
             [theme.fn.smallerThan('sm')]: {
               minHeight: 'auto',
             },
