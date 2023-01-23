@@ -22,9 +22,8 @@ const useStyles = createStyles(
       root: {
         width: '100%',
         maxWidth: '100vw',
-        minHeight: '50vh',
+        minHeight: '75vh',
         padding: `${theme.spacing.xl * 4}px ${theme.spacing.xl}px`,
-        position: 'relative',
         display: 'grid',
         gridTemplateRows: withHeader ? 'auto 1fr' : '1fr',
         gridTemplateColumns: '1fr',
@@ -32,7 +31,6 @@ const useStyles = createStyles(
         alignContent: 'center',
         alignItems: 'center',
         justifyItems: 'center',
-
         [theme.fn.smallerThan('sm')]: {
           paddingLeft: theme.spacing.sm,
           paddingRight: theme.spacing.sm,
@@ -43,6 +41,7 @@ const useStyles = createStyles(
           maxHeight: 'calc(100vh - 70px)',
           maxWidth: '100vw',
           overflow: 'hidden',
+          position: 'relative',
           [`& .${getRef('body')}`]: {
             width: '100%',
             maxWidth: '100%',

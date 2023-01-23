@@ -12,7 +12,7 @@ import { createTransition } from '@lib/theme/utils';
 export type LinkStylesNames = Selectors<typeof useStyles>;
 
 export type LinkProps = DefaultProps<LinkStylesNames> &
-  Parameters<typeof Anchor<typeof NextLink>>[0];
+  Parameters<typeof Anchor<'a'>>[0];
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -40,11 +40,7 @@ const Link = ({
     styles,
   });
   return (
-    <Anchor
-      component={NextLink}
-      className={cx(classes.root, className)}
-      {...props}
-    />
+    <Anchor component="a" className={cx(classes.root, className)} {...props} />
   );
 };
 

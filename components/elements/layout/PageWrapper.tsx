@@ -78,6 +78,11 @@ const PageWrapper = ({
               typeof sectionProps === 'function'
                 ? sectionProps(section)
                 : sectionProps || {};
+            if (!('fullscreen' in props)) {
+              props.fullscreen =
+                section.content.links[0]?.__typename ===
+                'ResponsiveVideoRecord';
+            }
             return (
               <PageSection key={section.id} section={section} {...props} />
             );

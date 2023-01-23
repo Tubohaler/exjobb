@@ -1,6 +1,3 @@
-import fs from 'fs';
-import path from 'path';
-
 import type {
   GetStaticPaths,
   GetStaticPathsResult,
@@ -19,10 +16,7 @@ export type StaticUrlParams<
   locale: L;
 };
 
-const pagesDir = path.resolve('pages');
-const pageFiles = !fs.existsSync(pagesDir)
-  ? []
-  : fs.readdirSync(pagesDir).filter((file) => /^[^_[][a-z_-]+.tsx$/.test(file));
+const existingSlugs = ['', 'contact'];
 
 const createGetStaticPaths = <
   K extends string = string,
@@ -31,21 +25,20 @@ const createGetStaticPaths = <
 >(
   key: K,
   fallback: GetStaticPathsResult['fallback'] = false,
-  locale?: L | ((urlSlug: string) => L),
-  devCacheMaxAge?: number
+  locale?: L | ((urlSlug: string) => L)
 ): {
   getStaticPaths: GetStaticPaths<StaticUrlParams<K, L>>;
   getStaticProps: GetStaticProps<StaticPageProps, StaticUrlParams<K, L>, D>;
 } => {
   return {
     getStaticPaths: async () => {
-      const slugs = pageFiles.map((file) =>
-        file.replace('.tsx', '').replace('index', '')
-      );
       const pages = await getPageLinks();
       const paths = (
         pages
-          .filter(({ urlSlug }) => urlSlug && !slugs.includes(urlSlug))
+          .filter(
+            ({ urlSlug }) =>
+              urlSlug !== null && !existingSlugs.includes(urlSlug)
+          )
           .map(({ urlSlug }) => urlSlug) as string[]
       ).map((slug) => ({
         params: { [key]: slug },
@@ -59,8 +52,7 @@ const createGetStaticPaths = <
     },
     getStaticProps: async (context) => {
       const props = await getStaticPageProps(
-        !context.params ? undefined : context.params[key],
-        devCacheMaxAge
+        !context.params ? undefined : context.params[key]
       );
       return { props };
     },
