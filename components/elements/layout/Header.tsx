@@ -1,15 +1,13 @@
 import {
   Box,
   createStyles,
-  Header as MantineHeader,
   HeaderProps as MantineHeaderProps,
+  MantineSizes,
   Title,
-  useMantineTheme,
 } from '@mantine/core';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { HeaderFragment } from '@lib/dato-cms';
-import { useMediaQuery } from '@mantine/hooks';
 
 const useStyles = createStyles((theme, _, getRef) => ({
   root: {

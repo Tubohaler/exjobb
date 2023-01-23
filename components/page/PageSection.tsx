@@ -39,13 +39,17 @@ const useStyles = createStyles(
         },
         [`&.${getRef('fullscreen')}`]: {
           padding: 0,
-          minHeight: '80vh',
+          height: '100%',
+          maxHeight: 'calc(100vh - 70px)',
           maxWidth: '100vw',
-          overflowX: 'hidden',
+          overflow: 'hidden',
           [`& .${getRef('body')}`]: {
             width: '100%',
             maxWidth: '100%',
             overflowX: 'hidden',
+          },
+          [theme.fn.smallerThan('md')]: {
+            maxHeight: 'calc(100vh - 110px)',
           },
         },
       },
