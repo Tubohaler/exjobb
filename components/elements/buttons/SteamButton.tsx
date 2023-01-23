@@ -10,8 +10,12 @@ const useStyles = createStyles((theme, _, getRef) => ({
     fill: theme.white,
     height: '75%',
     width: 'auto',
+    objectFit: 'contain',
+    objectPosition: 'center',
+    maxWidth: '100%',
     ref: getRef('icon'),
     transition: createTransition(['transform']),
+    overflow: 'visible',
   },
   button: {
     display: 'flex',
@@ -19,6 +23,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
     justifyContent: 'center',
     background: theme.black,
     opacity: 0.75,
+    padding: 0,
     transition: createTransition(['opacity', 'background']),
     '&:hover': {
       opacity: 1,
@@ -38,7 +43,7 @@ function SteamButton(props: Props) {
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 99 35"
         fill="white"
-        width="100"
+        width="150"
         height="35"
       >
         <g id="Layer_1" data-name="Layer 1">

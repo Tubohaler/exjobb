@@ -32,6 +32,9 @@ const useStyles = createStyles((theme, _, getRef) => ({
     letterSpacing: '0.1em',
     ref: getRef('text'),
     transition: createTransition(['transform', 'color']),
+    [theme.fn.smallerThan('xs')]: {
+      fontSize: '0.8em',
+    },
   },
 }));
 
