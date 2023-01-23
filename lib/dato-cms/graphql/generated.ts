@@ -2287,35 +2287,6 @@ export interface PageSectionHtmlRecordContentArgs {
   markdown: InputMaybe<Scalars['Boolean']>;
 }
 
-/** Block of type Page Section - Markdown (page_section_markdown) */
-export interface PageSectionMarkdownRecord extends RecordInterface {
-  __typename: 'PageSectionMarkdownRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
-  _publishedAt: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  content: Scalars['String'];
-  id: Scalars['ItemId'];
-  title: Maybe<Scalars['String']>;
-}
-
-/** Block of type Page Section - Markdown (page_section_markdown) */
-export interface PageSectionMarkdownRecord_SeoMetaTagsArgs {
-  locale: InputMaybe<SiteLocale>;
-}
-
-/** Block of type Page Section - Markdown (page_section_markdown) */
-export interface PageSectionMarkdownRecordContentArgs {
-  markdown: InputMaybe<Scalars['Boolean']>;
-}
-
 export interface PageSectionModelContentField {
   __typename: 'PageSectionModelContentField';
   blocks: Array<SubsectionRecord>;
@@ -2970,7 +2941,7 @@ export enum ResponsiveVideoModelOrderBy {
   PresentationTitleDesc = 'presentationTitle_DESC',
 }
 
-/** Record of type Responsive Video (responsive_video) */
+/** Record of type Cover Video (responsive_video) */
 export interface ResponsiveVideoRecord extends RecordInterface {
   __typename: 'ResponsiveVideoRecord';
   _createdAt: Scalars['DateTime'];
@@ -2991,7 +2962,7 @@ export interface ResponsiveVideoRecord extends RecordInterface {
   presentationTitle: Maybe<Scalars['String']>;
 }
 
-/** Record of type Responsive Video (responsive_video) */
+/** Record of type Cover Video (responsive_video) */
 export interface ResponsiveVideoRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
@@ -4585,6 +4556,7 @@ export type HeaderFragment = {
 } & { __typename: 'HeaderRecord' };
 
 export type SiteMetaFragment = {
+  locales: Array<SiteLocale>;
   globalSeo:
     | ({
         facebookPageUrl: string | null;
@@ -4600,9 +4572,13 @@ export type SiteMetaFragment = {
           | null;
       } & { __typename: 'GlobalSeoField' })
     | null;
-  favicon:
-    | ({ url: string; mimeType: string } & { __typename: 'FileField' })
-    | null;
+  favicon: Array<
+    {
+      content: string | null;
+      tag: string;
+      attributes: Record<string, string> | null;
+    } & { __typename: 'Tag' }
+  >;
 } & { __typename: 'Site' };
 
 export type PageQueryVariables = Exact<{
@@ -4927,6 +4903,7 @@ export type PageQuery = {
       } & { __typename: 'FooterRecord' })
     | null;
   _site: {
+    locales: Array<SiteLocale>;
     globalSeo:
       | ({
           facebookPageUrl: string | null;
@@ -4942,9 +4919,13 @@ export type PageQuery = {
             | null;
         } & { __typename: 'GlobalSeoField' })
       | null;
-    favicon:
-      | ({ url: string; mimeType: string } & { __typename: 'FileField' })
-      | null;
+    favicon: Array<
+      {
+        content: string | null;
+        tag: string;
+        attributes: Record<string, string> | null;
+      } & { __typename: 'Tag' }
+    >;
   } & { __typename: 'Site' };
 } & { __typename: 'Query' };
 
@@ -6341,15 +6322,18 @@ export const SiteMetaFragmentDoc = {
           },
           {
             kind: 'Field',
-            name: { kind: 'Name', value: 'favicon' },
+            alias: { kind: 'Name', value: 'favicon' },
+            name: { kind: 'Name', value: 'faviconMetaTags' },
             selectionSet: {
               kind: 'SelectionSet',
               selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'content' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'tag' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'attributes' } },
               ],
             },
           },
+          { kind: 'Field', name: { kind: 'Name', value: 'locales' } },
         ],
       },
     },

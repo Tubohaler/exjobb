@@ -1,7 +1,5 @@
 import Project from './Project';
-
 import { Box, createStyles } from '@mantine/core';
-
 import { ProjectGalleryFragment } from '@lib/dato-cms';
 
 const useStyles = createStyles((theme) => ({
@@ -10,7 +8,6 @@ const useStyles = createStyles((theme) => ({
     gridTemplateColumns: 'repeat(2, 1fr)',
     alignContent: 'center',
     justifyItems: 'center',
-
     [theme.fn.largerThan('md')]: { gridTemplateColumns: 'repeat(4, 1fr)' },
   },
 }));

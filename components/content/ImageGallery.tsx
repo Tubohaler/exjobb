@@ -1,11 +1,8 @@
-import React from 'react';
-
-import { Box, Title, createStyles } from '@mantine/core';
-
-import SingleImage from './SingleImage';
+import { Box, createStyles } from '@mantine/core';
 import { ImageGalleryFragment } from '@lib/dato-cms';
+import ImageGalleryThumbnail from './ImageGalleryThumbnail';
 
-const useStyles = createStyles((theme) => ({
+const useGalleryStyles = createStyles((theme) => ({
   root: {
     display: 'grid',
     gridTemplateRows: 'auto',
@@ -13,18 +10,18 @@ const useStyles = createStyles((theme) => ({
     alignContent: 'center',
     justifyContent: 'center',
 
-    [theme.fn.largerThan('md')]: { gridTemplateColumns: 'repeat(3, 1fr)' },
+    [theme.fn.smallerThan('md')]: { gridTemplateColumns: '1fr' },
   },
 }));
 
-function ImageGallery({ images }: ImageGalleryFragment) {
-  const { classes } = useStyles(undefined, { name: 'ImageGallery' });
+function ImageGallery({ title, images }: ImageGalleryFragment) {
+  const { classes } = useGalleryStyles(undefined, { name: 'ImageGallery' });
 
   return (
-    <Box>
-      {/* {images.map((image) => (
-        <SingleImage key={image.id} {...image} />
-      ))} */}
+    <Box className={classes.root}>
+      {images.map((image) => (
+        <ImageGalleryThumbnail key={image.id} {...image} />
+      ))}
     </Box>
   );
 }
