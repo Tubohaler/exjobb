@@ -50,8 +50,14 @@ const useGalleryStyles = createStyles((theme) => ({
     transform: 'rotate(45deg)',
     transformOrigin: 'center',
     transition: createTransition(['color', 'transform']),
+    border: 'none',
+    outline: 'none',
     '&:hover': {
       color: theme.colors.red[2],
+    },
+    '&:focus': {
+      border: 'none',
+      outline: 'none',
     },
   },
   modalImage: {
