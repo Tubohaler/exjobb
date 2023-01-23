@@ -1,8 +1,8 @@
 import { FooterFragment } from '@lib/dato-cms';
-import { Box, createStyles, List } from '@mantine/core';
+import { Box, createStyles, List, Text } from '@mantine/core';
 import StructuredText from '@components/structured-text/StructuredText';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
-import Address from '@components/content/Address';
+
 export type FooterProps = Omit<
   Parameters<typeof Box<'footer'>>[0],
   'children'
@@ -13,8 +13,6 @@ export type FooterProps = Omit<
 const useStyles = createStyles((theme, _, getRef) => ({
   root: {
     minHeight: 110,
-    width: '100%',
-    maxWidth: '100vw',
     padding: theme.spacing.md,
     backgroundColor: theme.white,
     display: 'flex',
@@ -24,6 +22,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
     [theme.fn.smallerThan('sm')]: {
       minHeight: 250,
       flexDirection: 'column-reverse',
+      padding: theme.spacing.xs,
       [`& .${getRef('section')}:first-of-type, & .${getRef(
         'section'
       )}:last-of-type`]: {
@@ -33,7 +32,6 @@ const useStyles = createStyles((theme, _, getRef) => ({
   },
   section: {
     ref: getRef('section'),
-    flexGrow: 1,
     width: '100%',
     height: '100%',
     display: 'flex',
@@ -52,6 +50,13 @@ const useStyles = createStyles((theme, _, getRef) => ({
 
 const structuredTextProps = createStructuredTextProps({
   nodeRules: {
+    Paragraph: ({ key, children }) => {
+      return (
+        <Text key={key} m={0}>
+          {children}
+        </Text>
+      );
+    },
     List: ({ key, children }) => {
       return (
         <List

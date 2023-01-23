@@ -92,8 +92,20 @@ const mainTheme: MantineTheme = {
     fontWeight: 400,
   },
   globalStyles: () => ({
+    html: {
+      height: '100%',
+    },
+    body: {
+      minHeight: '100%',
+      width: '100%',
+    },
+
+    'html, body': {
+      margin: 0,
+      padding: 0,
+    },
     'main > article': {
-      '&:nth-of-type(odd)': {
+      '&:nth-of-type(even)': {
         backgroundColor: 'rgba(0,0,0,0.02)',
       },
     },

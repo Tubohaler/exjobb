@@ -6,26 +6,22 @@ import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import Address from '@components/content/Address';
 import CurrentVacancies from '@components/content/CurrentVacancies';
 import PeopleGallery from '@components/content/PeopleGallery';
+import ImageGallery from '@components/content/ImageGallery';
 
 const DefaultInlineComponents: StructuredTextComponents = {
   Address: (address) => {
     return <Address address={address} />;
   },
-  ImageGallery: () => {
-    return <Placeholder type="ImageGallery" />;
-  },
-  PeopleGallery,
-
-  ProjectGallery: (props) => {
-    return <ProjectGallery {...props} />;
-  },
   ResponsiveVideo: (video) => {
     return <ResponsiveVideo video={video} />;
   },
-  CurrentVacancies,
   SocialLinks: ({ links }) => {
     return <SocialLinkGroup links={links} />;
   },
+  ProjectGallery,
+  ImageGallery,
+  PeopleGallery,
+  CurrentVacancies,
 };
 
 export default DefaultInlineComponents;

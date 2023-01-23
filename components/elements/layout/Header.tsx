@@ -14,23 +14,25 @@ import { useMediaQuery } from '@mantine/hooks';
 const useStyles = createStyles((theme, _, getRef) => ({
   root: {
     minHeight: 70,
-    width: '100%',
-    maxWidth: '100vw',
     padding: theme.spacing.md,
-    backgroundColor: theme.white,
+    background: theme.white,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     [theme.fn.smallerThan('md')]: {
       minHeight: 110,
     },
+    [theme.fn.smallerThan('xs')]: {
+      padding: theme.spacing.xs,
+    },
   },
   leftSection: {
     height: '100%',
-    width: 'auto',
     display: 'flex',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    [theme.fn.smallerThan('xs')]: {
+      display: 'none',
+    },
   },
   leftSectionTitle: {
     userSelect: 'none',
@@ -39,12 +41,10 @@ const useStyles = createStyles((theme, _, getRef) => ({
   },
   rightSection: {
     display: 'flex',
+    flexGrow: 1,
     justifyContent: 'flex-end',
-    alignItems: 'center',
-    width: '100%',
     height: '100%',
     gap: theme.spacing.xl,
-
     fontSize: theme.fontSizes.lg,
     [`& .${getRef('socialLink')}`]: {
       fontSize: theme.fontSizes.sm,
@@ -52,6 +52,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
     [theme.fn.smallerThan('md')]: {
       justifyContent: 'center',
       flexDirection: 'column',
+      alignItems: 'center',
       gap: theme.spacing.md,
       fontSize: theme.fontSizes.xl,
       [`& .${getRef('socialLink')}`]: {
@@ -84,11 +85,6 @@ const Header = ({
   styles,
   ...props
 }: HeaderProps) => {
-  const theme = useMantineTheme();
-  const smallScreen = useMediaQuery(
-    `(max-width: ${theme.breakpoints.md}px)`,
-    false
-  );
   const { classes, cx } = useStyles(undefined, {
     name: 'Header',
     classNames,

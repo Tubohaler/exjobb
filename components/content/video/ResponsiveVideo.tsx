@@ -13,38 +13,40 @@ import Video from './Video';
 export type ResponsiveVideoStylesNames = Selectors<typeof useStyles>;
 
 const useStyles = createStyles((theme) => {
+  const absoluteCenter: CSSObject = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%,-50%)',
+  };
   const videoStyles: CSSObject = {
+    ...absoluteCenter,
     height: '100%',
     width: '100%',
-    minHeight: '90vh',
-    position: 'relative',
-    zIndex: 0,
+    zIndex: 1,
   };
   return {
     root: {
-      width: '100%',
+      width: '100vw',
+      height: '100vh',
       maxWidth: '100%',
-      height: '100%',
-      maxHeight: '100vh',
+      maxHeight: '100%',
+      overflow: 'hidden',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      overflow: 'hidden',
       position: 'relative',
     },
     title: {
+      ...absoluteCenter,
       color: theme.white,
       opacity: 0.9,
       wordSpacing: '100%',
       fontWeight: 'normal',
       fontSize: theme.fontSizes.xl * 6,
       textAlign: 'center',
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%,-50%)',
       userSelect: 'none',
-      zIndex: 1,
+      zIndex: 10,
       [theme.fn.smallerThan('sm')]: {
         fontSize: theme.fontSizes.xl * 3,
       },

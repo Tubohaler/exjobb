@@ -12,8 +12,7 @@ const useStyles = createStyles((theme) => ({
     gridTemplateColumns: 'repeat(3, 1fr)',
     alignContent: 'center',
     justifyItems: 'center',
-
-    [theme.fn.largerThan('md')]: { gridTemplateColumns: 'repeat(3, 1fr)' },
+    [theme.fn.smallerThan('md')]: { gridTemplateColumns: 'repeat(2, 1fr)' },
   },
 }));
 

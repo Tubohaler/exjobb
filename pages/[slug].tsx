@@ -1,37 +1,10 @@
 import { PageWrapper } from '@components/elements/layout';
-import {
-  getPageLinks,
-  getStaticPageProps,
-  StaticPageProps,
-} from '@lib/dato-cms';
-import Head from '@components/page/Head';
-import PageSection from '@components/page/PageSection';
-import { GetStaticProps } from 'next';
-import createGetStaticPaths, {
-  StaticUrlParams,
-} from '@lib/dato-cms/createGetStaticPaths';
+import { StaticPageProps, createGetStaticPaths } from '@lib/dato-cms';
 
-export const getStaticPaths = createGetStaticPaths();
-
-export const getStaticProps: GetStaticProps<
-  StaticPageProps,
-  StaticUrlParams
-> = async (context) => {
-  const props = await getStaticPageProps(context.params?.slug);
-  return { props };
-};
+export const { getStaticPaths, getStaticProps } = createGetStaticPaths('slug');
 
 const Page = ({ data }: StaticPageProps) => {
-  return (
-    <>
-      <Head />
-      <PageWrapper data={data}>
-        {data.page?.sections.map((section) => {
-          return <PageSection key={section.id} section={section} />;
-        })}
-      </PageWrapper>
-    </>
-  );
+  return <PageWrapper data={data} />;
 };
 
 export default Page;

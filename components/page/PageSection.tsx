@@ -5,24 +5,65 @@ import type { SectionFragment } from '@lib/dato-cms';
 import { Article } from '@components/elements/layout';
 import PageSectionHeader from './PageSectionHeader';
 import { createStyles } from '@mantine/styles';
-import { Box, DefaultProps, Selectors } from '@mantine/core';
+import { Box, DefaultProps, Selectors, useMantineTheme } from '@mantine/core';
 
 export type PageSectionProps = DefaultProps<PageSectionStylesNames> & {
   section: SectionFragment;
+  fullscreen?: boolean;
   structuredTextProps?: Omit<StructuredTextProps, 'data'>;
 };
 
 export type PageSectionStylesNames = Selectors<typeof useStyles>;
+export type PageSectionStylesParams = { withHeader?: boolean };
 
-const useStyles = createStyles((theme) => ({
-  root: {},
-  header: {},
-  body: {
-    position: 'relative',
-    width: theme.breakpoints.md,
-    maxWidth: '100%',
-  },
-}));
+const useStyles = createStyles(
+  (theme, { withHeader }: PageSectionStylesParams, getRef) => {
+    return {
+      root: {
+        width: '100%',
+        maxWidth: '100vw',
+        minHeight: '50vh',
+        padding: `${theme.spacing.xl * 4}px ${theme.spacing.xl}px`,
+        position: 'relative',
+        display: 'grid',
+        gridTemplateRows: withHeader ? 'auto 1fr' : '1fr',
+        gridTemplateColumns: '1fr',
+        gap: theme.spacing.xl * 2,
+        alignContent: 'center',
+        alignItems: 'center',
+        justifyItems: 'center',
+
+        [theme.fn.smallerThan('sm')]: {
+          paddingLeft: theme.spacing.sm,
+          paddingRight: theme.spacing.sm,
+        },
+        [`&.${getRef('fullscreen')}`]: {
+          padding: 0,
+          minHeight: '80vh',
+          maxWidth: '100vw',
+          overflowX: 'hidden',
+          [`& .${getRef('body')}`]: {
+            width: '100%',
+            maxWidth: '100%',
+            overflowX: 'hidden',
+          },
+        },
+      },
+      header: {},
+      body: {
+        ref: getRef('body'),
+        position: 'relative',
+        width: '100%',
+        height: 'auto',
+        maxWidth: theme.breakpoints.md,
+        minWidth: 0,
+      },
+      fullscreen: {
+        ref: getRef('fullscreen'),
+      },
+    };
+  }
+);
 
 const PageSection = ({
   section,
@@ -30,15 +71,22 @@ const PageSection = ({
   classNames,
   styles,
   structuredTextProps = {},
+  fullscreen,
   ...props
 }: PageSectionProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'PageSection',
-    classNames,
-    styles,
-  });
+  const { classes, cx } = useStyles(
+    { withHeader: !!section.title },
+    {
+      name: 'PageSection',
+      classNames,
+      styles,
+    }
+  );
   return (
-    <Article className={cx(classes.root, className)} {...props}>
+    <Article
+      className={cx(classes.root, fullscreen && classes.fullscreen, className)}
+      {...props}
+    >
       {section.title && (
         <PageSectionHeader title={section.title} className={classes.header} />
       )}
