@@ -255,7 +255,6 @@ fragment ImageGallery on ImageGalleryRecord {
     __typename
     id
     responsiveImage(
-      sizes: "(max-width: 512px) 100vw, 512px"
       imgixParams: { fm: webp, fit: crop, ar: "3:2", dpi: "72" }
     ) {
       ...ResponsiveImage
