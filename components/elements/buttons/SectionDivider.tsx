@@ -1,12 +1,7 @@
 import useDidMount from '@hooks/useDidMount';
 import { IconFragment } from '@lib/dato-cms';
 import { createTransition } from '@lib/theme/utils';
-import {
-  ActionIcon,
-  createStyles,
-  DefaultProps,
-  Selectors,
-} from '@mantine/core';
+import { createStyles, DefaultProps, Selectors } from '@mantine/core';
 import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import SvgIconLink, { SvgIconLinkProps } from '../links/SvgIconLink';
 
@@ -17,8 +12,8 @@ const useStyles = createStyles(
   (theme, { direction = 'down' }: SectionDividerStylesParams) => ({
     root: {
       color: theme.colors.blue[2],
-      transition: createTransition(['color', 'transform']),
-      transform: direction === 'up' ? 'rotate(90deg)' : 'rotate(0)',
+      transition: createTransition(['color', 'transform'], 0.33),
+      transform: direction === 'up' ? 'rotate(180deg)' : 'rotate(0)',
       '&:hover': {
         color: theme.colors.red[2],
       },
@@ -26,24 +21,24 @@ const useStyles = createStyles(
   })
 );
 
-export type SectionDividerProps = DefaultProps<
-  SectionDividerStylesNames,
-  SectionDividerStylesParams
+export type SectionDividerProps = Omit<
+  DefaultProps<SectionDividerStylesNames, SectionDividerStylesParams>,
+  'onClick'
 > &
   Omit<SvgIconLinkProps, 'onClick' | 'href' | 'src'> & {
     icon: IconFragment;
     getTargetId?: (direction: 'up' | 'down') => string;
-    rootMargin?: IntersectionObserverInit['rootMargin'];
+    onClick?: (direction: 'up' | 'down') => unknown;
   };
 
 const SectionDivider = ({
   icon,
-  rootMargin = '10%',
   getTargetId,
   className,
   classNames,
   styles,
   unstyled,
+  onClick,
   ...props
 }: SectionDividerProps) => {
   const didMount = useDidMount();
@@ -56,10 +51,7 @@ const SectionDivider = ({
 
   const handleClick: MouseEventHandler<HTMLAnchorElement> = (ev) => {
     ev.preventDefault();
-    if (!getTargetId) return;
-    document
-      .querySelector(getTargetId(direction))
-      ?.scrollIntoView({ behavior: 'smooth' });
+    if (onClick) onClick(direction);
   };
 
   useEffect(() => {
@@ -67,21 +59,34 @@ const SectionDivider = ({
       return;
     }
 
-    const observerCallback: IntersectionObserverCallback = ([entry]) => {
-      console.log(entry);
-    };
+    const marginTop = 0.3;
+    const marginBottom = 0.25;
 
-    const observer = new IntersectionObserver(observerCallback, {
-      rootMargin,
-      threshold: 1,
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.rootBounds) return;
+        const { top, height } = entry.boundingClientRect;
+        const viewHeight =
+          entry.rootBounds.height *
+          (marginTop + marginBottom <= 0 ? 1 : 1 / (marginTop + marginBottom));
+        const direction =
+          viewHeight * (0.5 + marginTop - marginBottom) > top + height * 0.5
+            ? 'up'
+            : 'down';
+        setDirection(direction);
+      },
+      {
+        root: window.document,
+        rootMargin: `-${marginTop * 100}% 0% -${marginBottom * 100}% 0%`,
+        threshold: [0.25, 0.5, 0.75],
+      }
+    );
+
     observer.observe(linkRef.current);
-    console.log('observer.observe');
     return () => {
-      console.log('observer.disconnect');
       observer.disconnect();
     };
-  }, [didMount, rootMargin]);
+  }, [didMount]);
 
   return (
     <SvgIconLink

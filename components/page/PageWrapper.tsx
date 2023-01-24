@@ -107,6 +107,11 @@ const PageWrapper = ({
                 if (section.__typename === 'PageSectionHtmlRecord') return null;
                 const props: Partial<Omit<PageSectionProps, 'section'>> =
                   sectionProps || {};
+                const getTargetId = (direction: 'up' | 'down') => {
+                  return `#section-${
+                    direction === 'up' ? section.id : sections[i + 1]?.id
+                  }`;
+                };
                 return (
                   <PageSection
                     id={`section-${section.id}`}
@@ -116,12 +121,16 @@ const PageWrapper = ({
                       data.page?.sectionDivider && i < sections.length - 1 ? (
                         <SectionDivider
                           icon={data.page.sectionDivider}
-                          getTargetId={(direction) => {
-                            return `#section-${
-                              direction === 'up'
-                                ? section.id
-                                : sections[i + 1]?.id
-                            }`;
+                          getTargetId={getTargetId}
+                          onClick={(direction) => {
+                            const rect = document
+                              .querySelector(getTargetId(direction))
+                              ?.getBoundingClientRect();
+                            if (!rect) return;
+                            window.scrollTo({
+                              top: rect.top - headerHeight,
+                              behavior: 'smooth',
+                            });
                           }}
                         />
                       ) : undefined
