@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import Link from './Link';
 import {
   ActionIcon,
@@ -5,7 +6,6 @@ import {
   createStyles,
   CSSObject,
   DefaultProps,
-  MantineNumberSize,
   Selectors,
 } from '@mantine/core';
 
@@ -25,7 +25,7 @@ export type SvgIconLinkProps = DefaultProps<
   SvgIconLinkStylesNames,
   SvgIconLinkStylesParams
 > &
-  Parameters<typeof ActionIcon<typeof Link>>[0] &
+  Parameters<typeof Link>[0] &
   SvgIconLinkStylesParams &
   Pick<SvgIconProps, 'src' | 'fallback'>;
 
@@ -49,6 +49,7 @@ const useStyles = createStyles(
 
     const styles: Record<'root' | 'wrapper', CSSObject> = {
       root: {
+        display: 'inline-block',
         color: !color ? 'inherit' : getColor(color, baseShade),
         outline: 'none',
         transition: createTransition(['color', 'opacity']),
@@ -72,46 +73,50 @@ const useStyles = createStyles(
   }
 );
 
-const SvgIconLink = ({
-  src,
-  styles,
-  unstyled,
-  className,
-  classNames,
-  fallback,
-  color,
-  hoverColor,
-  baseShade,
-  hoverShade,
-  variant,
-  ...props
-}: SvgIconLinkProps) => {
-  const stylesParams = useRef<SvgIconLinkStylesParams>({
-    color,
-    baseShade,
-    hoverColor,
-    hoverShade,
-  });
-  const { classes, cx } = useStyles(stylesParams.current, {
-    name: 'IconLink',
-    classNames,
-    styles,
-    unstyled,
-  });
+const SvgIconLink = forwardRef<HTMLAnchorElement, SvgIconLinkProps>(
+  (
+    {
+      src,
+      styles,
+      unstyled,
+      className,
+      classNames,
+      fallback,
+      color,
+      hoverColor,
+      baseShade,
+      hoverShade,
+      variant,
+      ...props
+    },
+    ref
+  ) => {
+    const stylesParams = useRef<SvgIconLinkStylesParams>({
+      color,
+      baseShade,
+      hoverColor,
+      hoverShade,
+    });
+    const { classes, cx } = useStyles(stylesParams.current, {
+      name: 'IconLink',
+      classNames,
+      styles,
+      unstyled,
+    });
 
-  return (
-    <Box component={Link} className={cx(classes.root, className)} {...props}>
-      <SvgIcon src={src} className={classes.wrapper} fallback={fallback} />
-    </Box>
-  );
-};
+    return (
+      <Link ref={ref} className={cx(classes.root, className)} {...props}>
+        <SvgIcon src={src} className={classes.wrapper} fallback={fallback} />
+      </Link>
+    );
+  }
+);
 
 const defaultProps: Partial<Omit<SvgIconLinkProps, 'icon' | 'href'>> = {
   color: 'black',
   hoverColor: 'blue',
-  baseShade: 9,
+  baseShade: 2,
   hoverShade: 2,
-  variant: 'transparent',
 };
 
 SvgIconLink.defaultProps = defaultProps;

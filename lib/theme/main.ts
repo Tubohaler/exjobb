@@ -81,8 +81,11 @@ const breakpoints: MantineTheme['breakpoints'] = {
 
 const mainTheme: MantineTheme = {
   ...DEFAULT_THEME,
+
   colors,
   colorScheme: 'light',
+  primaryShade: { dark: 6, light: 2 },
+  primaryColor: 'red',
   defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
   breakpoints,
@@ -91,7 +94,7 @@ const mainTheme: MantineTheme = {
     fontFamily: ebGaramond.style.fontFamily,
     fontWeight: 400,
   },
-  globalStyles: (theme) => ({
+  globalStyles: () => ({
     html: {
       height: '100%',
     },

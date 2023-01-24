@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
 
 export type ArticleStylesNames = Selectors<typeof useStyles>;
@@ -14,26 +15,23 @@ const useStyles = createStyles((theme) => ({
 /**
  * Wraps content with a html article element
  */
-const Article = ({
-  className,
-  classNames,
-  styles,
-  unstyled,
-  ...props
-}: ArticleProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'Article',
-    classNames,
-    styles,
-    unstyled,
-  });
-  return (
-    <Box
-      component="article"
-      className={cx(classes.root, className)}
-      {...props}
-    />
-  );
-};
+const Article = forwardRef<HTMLDivElement, ArticleProps>(
+  ({ className, classNames, styles, unstyled, ...props }, ref) => {
+    const { classes, cx } = useStyles(undefined, {
+      name: 'Article',
+      classNames,
+      styles,
+      unstyled,
+    });
+    return (
+      <Box
+        ref={ref}
+        component="article"
+        className={cx(classes.root, className)}
+        {...props}
+      />
+    );
+  }
+);
 
 export default Article;
