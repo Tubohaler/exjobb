@@ -2,9 +2,8 @@ import { createStyles } from '@mantine/core';
 import { ReactSVG, Props as ReactSVGProps } from 'react-svg';
 
 const useStyles = createStyles(() => ({
-  wrapper: {
+  root: {
     display: 'inline-block',
-    fontSize: 'inherit',
     color: 'inherit',
     '& > div': {
       width: '100%',
@@ -48,36 +47,11 @@ const SvgIcon = ({ src, svgClassName, className, fallback }: SvgIconProps) => {
     svg.setAttribute('fill', 'currentColor');
     console.log(svg.getAttribute('class'));
   };
-
-  // if (!isSvgIconFragment(icon)) {
-  //   return (
-  //     <ReactSVG
-  //       src={icon}
-  //       beforeInjection={beforeInjection}
-  //       className={cx(classes.wrapper, className)}
-  //       fallback={fallback}
-  //     />
-  //   );
-  // }
-  // if (typeof icon.inlineHTML === 'string' && isSvg(icon.inlineHTML)) {
-  //   return (
-  //     <div
-  //       className={className}
-  //       dangerouslySetInnerHTML={{
-  //         __html: setSvgAttribute(
-  //           icon.inlineHTML,
-  //           'class',
-  //           cx(classes.svg, svgClassName)
-  //         ),
-  //       }}
-  //     />
-  //   );
-  // }
   return (
     <ReactSVG
       src={src}
       beforeInjection={beforeInjection}
-      className={cx(classes.wrapper, className)}
+      className={cx(classes.root, className)}
       fallback={fallback}
     />
   );

@@ -555,6 +555,7 @@ export interface HeaderModelFilter {
   _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
   _updatedAt: InputMaybe<UpdatedAtFilter>;
   id: InputMaybe<ItemIdFilter>;
+  logo: InputMaybe<FileFilter>;
   navigationLinks: InputMaybe<LinksFilter>;
   presentationTitle: InputMaybe<StringFilter>;
   socialLinks: InputMaybe<LinkFilter>;
@@ -601,6 +602,7 @@ export interface HeaderRecord extends RecordInterface {
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
+  logo: FileField;
   navigationLinks: Array<PageRecord>;
   presentationTitle: Maybe<Scalars['String']>;
   socialLinks: SocialLinksCollectionRecord;
@@ -2337,6 +2339,7 @@ export interface PageModelFilter {
   pageTitle: InputMaybe<StringFilter>;
   parent: InputMaybe<ParentFilter>;
   position: InputMaybe<PositionFilter>;
+  sectionDivider: InputMaybe<FileFilter>;
   urlSlug: InputMaybe<SlugFilter>;
 }
 
@@ -2401,6 +2404,7 @@ export interface PageRecord extends RecordInterface {
   pageTitle: Scalars['String'];
   parent: Maybe<PageRecord>;
   position: Maybe<Scalars['IntType']>;
+  sectionDivider: Maybe<FileField>;
   sections: Array<PageModelSectionsField>;
   urlSlug: Maybe<Scalars['String']>;
 }
@@ -2410,6 +2414,7 @@ export interface PageRecord_AllReferencingFootersArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<FooterModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
   through: InputMaybe<InverseRelationshipFilterBetweenFooterAndPage>;
 }
@@ -2424,6 +2429,7 @@ export interface PageRecord_AllReferencingHeadersArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HeaderModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
   through: InputMaybe<InverseRelationshipFilterBetweenHeaderAndPage>;
 }
@@ -2438,6 +2444,7 @@ export interface PageRecord_AllReferencingPagesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<PageModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
   through: InputMaybe<InverseRelationshipFilterBetweenPageAndPage>;
 }
@@ -3327,6 +3334,7 @@ export interface SocialLinksCollectionModelFilter {
   id: InputMaybe<ItemIdFilter>;
   links: InputMaybe<LinksFilter>;
   presentationTitle: InputMaybe<StringFilter>;
+  title: InputMaybe<StringFilter>;
 }
 
 export enum SocialLinksCollectionModelOrderBy {
@@ -3350,6 +3358,8 @@ export enum SocialLinksCollectionModelOrderBy {
   IdDesc = 'id_DESC',
   PresentationTitleAsc = 'presentationTitle_ASC',
   PresentationTitleDesc = 'presentationTitle_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
 /** Record of type Social Links (social_links_collection) */
@@ -3368,7 +3378,8 @@ export interface SocialLinksCollectionRecord extends RecordInterface {
   _updatedAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   links: Array<SocialLinkRecord>;
-  presentationTitle: Scalars['String'];
+  presentationTitle: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 }
 
 /** Record of type Social Links (social_links_collection) */
@@ -4033,6 +4044,12 @@ export type PageFragment = {
   id: string;
   header: {
     id: string;
+    logo: {
+      mimeType: string;
+      url: string;
+      width: number | null;
+      height: number | null;
+    } & { __typename: 'FileField' };
     navigationLinks: Array<
       {
         id: string;
@@ -4316,6 +4333,14 @@ export type PageFragment = {
         } & { __typename: 'PageSectionModelContentField' };
       } & { __typename: 'PageSectionRecord' })
   >;
+  sectionDivider:
+    | ({
+        mimeType: string;
+        url: string;
+        width: number | null;
+        height: number | null;
+      } & { __typename: 'FileField' })
+    | null;
   metaTags:
     | ({
         description: string | null;
@@ -4957,6 +4982,12 @@ export type FooterSectionFragment = {
 
 export type HeaderFragment = {
   id: string;
+  logo: {
+    mimeType: string;
+    url: string;
+    width: number | null;
+    height: number | null;
+  } & { __typename: 'FileField' };
   navigationLinks: Array<
     {
       id: string;
@@ -5044,6 +5075,12 @@ export type PageQuery = {
         id: string;
         header: {
           id: string;
+          logo: {
+            mimeType: string;
+            url: string;
+            width: number | null;
+            height: number | null;
+          } & { __typename: 'FileField' };
           navigationLinks: Array<
             {
               id: string;
@@ -5327,6 +5364,14 @@ export type PageQuery = {
               } & { __typename: 'PageSectionModelContentField' };
             } & { __typename: 'PageSectionRecord' })
         >;
+        sectionDivider:
+          | ({
+              mimeType: string;
+              url: string;
+              width: number | null;
+              height: number | null;
+            } & { __typename: 'FileField' })
+          | null;
         metaTags:
           | ({
               description: string | null;
@@ -5436,6 +5481,29 @@ export type SocialLinksQuery = {
     | null;
 } & { __typename: 'Query' };
 
+export const IconFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'Icon' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'FileField' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<IconFragment, unknown>;
 export const PageMetaTagsFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -5541,29 +5609,6 @@ export const PageLinkFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<PageLinkFragment, unknown>;
-export const IconFragmentDoc = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'FragmentDefinition',
-      name: { kind: 'Name', value: 'Icon' },
-      typeCondition: {
-        kind: 'NamedType',
-        name: { kind: 'Name', value: 'FileField' },
-      },
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'mimeType' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'url' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'width' } },
-          { kind: 'Field', name: { kind: 'Name', value: 'height' } },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<IconFragment, unknown>;
 export const SocialLinkFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -5648,6 +5693,19 @@ export const HeaderFragmentDoc = {
         selections: [
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'logo' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Icon' },
+                },
+              ],
+            },
+          },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'navigationLinks' },
@@ -6730,6 +6788,19 @@ export const PageFragmentDoc = {
           },
           {
             kind: 'Field',
+            name: { kind: 'Name', value: 'sectionDivider' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Icon' },
+                },
+              ],
+            },
+          },
+          {
+            kind: 'Field',
             name: { kind: 'Name', value: 'metaTags' },
             selectionSet: {
               kind: 'SelectionSet',
@@ -6913,12 +6984,12 @@ export const PageDocument = {
     },
     ...PageFragmentDoc.definitions,
     ...HeaderFragmentDoc.definitions,
+    ...IconFragmentDoc.definitions,
     ...PageLinkFragmentDoc.definitions,
     ...PageMetaTagsFragmentDoc.definitions,
     ...PageSeoFragmentDoc.definitions,
     ...SocialLinksCollectionFragmentDoc.definitions,
     ...SocialLinkFragmentDoc.definitions,
-    ...IconFragmentDoc.definitions,
     ...FooterFragmentDoc.definitions,
     ...FooterSectionFragmentDoc.definitions,
     ...AddressFragmentDoc.definitions,

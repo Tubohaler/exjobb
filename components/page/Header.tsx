@@ -9,100 +9,111 @@ import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';
 import type { HeaderFragment } from '@lib/dato-cms';
 import Link from '../elements/links/Link';
+import SvgIcon from '@components/elements/SvgIcon';
+import { createTransition } from '@lib/theme/utils';
 
-const useStyles = createStyles((theme, _, getRef) => ({
-  root: {
-    minHeight: 70,
-    padding: theme.spacing.md,
-    background: theme.white,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    [theme.fn.smallerThan('md')]: {
-      minHeight: 110,
-    },
-    [theme.fn.smallerThan('xs')]: {
-      padding: theme.spacing.xs,
-    },
-  },
-  leftSection: {
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    [theme.fn.smallerThan('xs')]: {
-      display: 'none',
-    },
-  },
-  leftSectionTitle: {
-    userSelect: 'none',
-    fontFamily: 'verdana',
-    fontSize: '1.5em',
-  },
-  rightSection: {
-    display: 'flex',
-    flexGrow: 1,
-    justifyContent: 'flex-end',
-    height: '100%',
-    gap: theme.spacing.xl,
-    fontSize: theme.fontSizes.lg,
-    [`& .${getRef('socialLink')}`]: {
-      fontSize: theme.fontSizes.sm,
-    },
-    [theme.fn.smallerThan('md')]: {
-      justifyContent: 'center',
-      flexDirection: 'column',
+export type HeaderStylesParams = { height: number };
+
+const useStyles = createStyles(
+  (theme, { height }: HeaderStylesParams, getRef) => ({
+    root: {
+      height,
+      padding: theme.spacing.md,
+      background: theme.white,
+      display: 'flex',
+      justifyContent: 'space-between',
       alignItems: 'center',
-      gap: theme.spacing.md,
+      position: 'fixed',
+      zIndex: 999,
+      [theme.fn.smallerThan('md')]: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+      },
+      [theme.fn.smallerThan('xs')]: {
+        padding: theme.spacing.xs,
+      },
+    },
+    logo: {
+      fontSize: theme.fontSizes.xl * 3,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      '& svg': {
+        transition: createTransition(['transform']),
+        transformOrigin: 'center',
+      },
+      '&:hover': {
+        '& svg': {
+          transform: 'scale(1.05)',
+        },
+      },
+    },
+    rightSection: {
+      display: 'flex',
+      flexGrow: 1,
+      justifyContent: 'flex-end',
+      height: '100%',
+      gap: theme.spacing.xl,
       fontSize: theme.fontSizes.xl,
       [`& .${getRef('socialLink')}`]: {
-        fontSize: theme.fontSizes.md,
+        fontSize: theme.fontSizes.lg,
+      },
+      [theme.fn.smallerThan('md')]: {
+        justifyContent: 'center',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: theme.spacing.md,
+        [`& .${getRef('socialLink')}`]: {
+          fontSize: theme.fontSizes.lg,
+        },
+      },
+      [theme.fn.smallerThan('xs')]: {
+        fontSize: theme.fontSizes.lg,
+        gap: theme.spacing.sm,
+        [`& .${getRef('socialLink')}`]: {
+          fontSize: theme.fontSizes.md,
+        },
       },
     },
-    [theme.fn.smallerThan('xs')]: {
-      fontSize: theme.fontSizes.md,
-      gap: theme.spacing.sm,
-      [`& .${getRef('socialLink')}`]: {
-        fontSize: theme.fontSizes.sm,
-      },
+    socialLinks: {
+      ref: getRef('socialLink'),
     },
-  },
-  socialLink: {
-    ref: getRef('socialLink'),
-  },
-}));
+  })
+);
 
 export type HeaderProps = Omit<MantineHeaderProps, 'children' | 'height'> & {
+  height: number;
   data: HeaderFragment;
   currentPage?: string;
 };
 
 const Header = ({
   data,
+  height,
   currentPage = 'home',
   className,
   classNames,
   styles,
   ...props
 }: HeaderProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'Header',
-    classNames,
-    styles,
-  });
+  const { classes, cx } = useStyles(
+    { height },
+    {
+      name: 'Header',
+      classNames,
+      styles,
+    }
+  );
   return (
     <Box className={cx(classes.root, className)} component="header" {...props}>
-      <Box className={classes.leftSection}>
-        <Link href="/" title="Home">
-          <Title order={3} className={classes.leftSectionTitle} weight="bold">
-            +
-          </Title>
-        </Link>
-      </Box>
+      <Link href="/" title="Home" className={classes.logo}>
+        <SvgIcon src={data.logo.url} />
+      </Link>
       <Box className={classes.rightSection}>
         <NavLinkGroup links={data.navigationLinks} currentPage={currentPage} />
         <SocialLinkGroup
           links={data.socialLinks.links}
-          linkProps={{ className: classes.socialLink }}
+          linkProps={{ className: classes.socialLinks }}
         />
       </Box>
     </Box>
