@@ -85,10 +85,10 @@ const useStyles = createStyles(
             ? theme.breakpoints[contentWidth]
             : theme.breakpoints.md,
         minWidth: 0,
-        '& > section + *': {
+        '& > section + :not(section)': {
           marginTop: theme.spacing.xl,
         },
-        '& > :not(h1, h2, h3, h4, h5, h6):has(+ section)': {
+        '& > :not(section, h1, h2, h3, h4, h5, h6):has(+ section)': {
           marginBottom: theme.spacing.xl * 2,
         },
       },
