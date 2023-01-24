@@ -13,7 +13,7 @@ export type FooterProps = Omit<
 const useStyles = createStyles((theme, _, getRef) => ({
   root: {
     minHeight: 110,
-    padding: theme.spacing.md,
+    padding: `${theme.spacing.md}px ${theme.spacing.xl}px`,
     backgroundColor: theme.white,
     display: 'flex',
     justifyContent: 'space-between',
@@ -22,7 +22,7 @@ const useStyles = createStyles((theme, _, getRef) => ({
     [theme.fn.smallerThan('sm')]: {
       minHeight: 250,
       flexDirection: 'column-reverse',
-      padding: theme.spacing.xs,
+      padding: theme.spacing.md,
       [`& .${getRef('section')}:first-of-type, & .${getRef(
         'section'
       )}:last-of-type`]: {

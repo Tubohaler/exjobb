@@ -98,6 +98,7 @@ const mainTheme: MantineTheme = {
     body: {
       minHeight: '100%',
       width: '100%',
+      textRendering: 'optimizeLegibility',
     },
     p: {
       margin: 0,
