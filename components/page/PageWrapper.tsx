@@ -93,7 +93,7 @@ const PageWrapper = ({
   useEffect(() => {
     if (!data.page || currentSection === prevSection.current) return;
     document
-      .querySelector(`section-${currentSection}`)
+      .querySelector(`#section-${currentSection}`)
       ?.scrollIntoView({ behavior: 'smooth' });
     prevSection.current = currentSection;
   }, [data, currentSection]);
