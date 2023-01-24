@@ -1,4 +1,5 @@
 import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
+import { forwardRef } from 'react';
 
 export type SectionStylesNames = Selectors<typeof useStyles>;
 
@@ -14,26 +15,23 @@ const useStyles = createStyles((theme) => ({
 /**
  * Wraps content with a html section element
  */
-const Section = ({
-  className,
-  classNames,
-  styles,
-  unstyled,
-  ...props
-}: SectionProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'Section',
-    classNames,
-    styles,
-    unstyled,
-  });
-  return (
-    <Box
-      component="section"
-      className={cx(classes.root, className)}
-      {...props}
-    />
-  );
-};
+const Section = forwardRef<HTMLDivElement, SectionProps>(
+  ({ className, classNames, styles, unstyled, ...props }, ref) => {
+    const { classes, cx } = useStyles(undefined, {
+      name: 'Section',
+      classNames,
+      styles,
+      unstyled,
+    });
+    return (
+      <Box
+        ref={ref}
+        component="section"
+        className={cx(classes.root, className)}
+        {...props}
+      />
+    );
+  }
+);
 
 export default Section;

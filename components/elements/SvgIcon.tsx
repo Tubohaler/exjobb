@@ -45,7 +45,18 @@ const SvgIcon = ({ src, svgClassName, className, fallback }: SvgIconProps) => {
         .filter((v) => !!v)
     );
     svg.setAttribute('fill', 'currentColor');
-    console.log(svg.getAttribute('class'));
+    const children = svg.querySelectorAll('*');
+    if (children.length <= 1) {
+      children[0].removeAttribute('fill');
+      return;
+    }
+    const colors = new Set<string>();
+    children.forEach((element) => {
+      const fill = element.getAttribute('fill');
+      if (fill) colors.add(fill);
+    });
+    if (colors.size >= 2 || !colors.size) return;
+    children.forEach((element) => element.removeAttribute('fill'));
   };
   return (
     <ReactSVG

@@ -1,5 +1,6 @@
 import { Anchor, createStyles, Selectors, DefaultProps } from '@mantine/core';
 import { createTransition } from '@lib/theme/utils';
+import { forwardRef } from 'react';
 
 export type LinkStylesNames = Selectors<typeof useStyles>;
 
@@ -18,22 +19,23 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const Link = ({
-  styles,
-  className,
-  classNames,
-  unstyled,
-  ...props
-}: LinkProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'Link',
-    classNames,
-    unstyled,
-    styles,
-  });
-  return (
-    <Anchor component="a" className={cx(classes.root, className)} {...props} />
-  );
-};
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ styles, className, classNames, unstyled, ...props }, ref) => {
+    const { classes, cx } = useStyles(undefined, {
+      name: 'Link',
+      classNames,
+      unstyled,
+      styles,
+    });
+    return (
+      <Anchor
+        ref={ref}
+        component="a"
+        className={cx(classes.root, className)}
+        {...props}
+      />
+    );
+  }
+);
 
 export default Link;

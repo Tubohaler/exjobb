@@ -5,13 +5,14 @@ import {
   Selectors,
   useMantineTheme,
 } from '@mantine/core';
-import { PageQuery, PageSectionFragment } from '@lib/dato-cms';
+import { PageQuery } from '@lib/dato-cms';
 import Header from './Header';
 import Footer from './Footer';
 import Head from '@components/page/Head';
 import PageSection, { PageSectionProps } from '@components/page/PageSection';
-import { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from '@mantine/hooks';
+import SectionDivider from '@components/elements/buttons/SectionDivider';
 
 export type PageWrapperStylesNames = Selectors<typeof useStyles>;
 export type PageWrapperStylesParams = { headerHeight: number };
@@ -21,7 +22,7 @@ export type PageWrapperProps = DefaultProps<
   PageWrapperStylesParams
 > & {
   data: PageQuery;
-  sectionProps?: Partial<Omit<PageSectionProps, 'section'>>;
+  sectionProps?: Partial<Omit<PageSectionProps, 'section' | 'divider'>>;
 };
 
 const useStyles = createStyles(
@@ -71,12 +72,10 @@ const PageWrapper = ({
   ...props
 }: PageWrapperProps) => {
   const [headerHeight, setHeaderHeight] = useState(80);
-  const [currentSection, setCurrentSection] = useState(
-    data.page?.sections[0]?.id
-  );
-  const prevSection = useRef(currentSection);
+
   const theme = useMantineTheme();
   const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
+  const mainRef = useRef<HTMLDivElement>(null);
 
   const { classes, cx } = useStyles(
     { headerHeight },
@@ -86,22 +85,10 @@ const PageWrapper = ({
       classNames,
     }
   );
+
   useEffect(() => {
     setHeaderHeight(smallScreen ? 140 : 80);
   }, [smallScreen]);
-
-  useEffect(() => {
-    if (!data.page || currentSection === prevSection.current) return;
-    document
-      .querySelector(`#section-${currentSection}`)
-      ?.scrollIntoView({ behavior: 'smooth' });
-    prevSection.current = currentSection;
-  }, [data, currentSection]);
-
-  const handleDividerClick = (id: string) => {
-    if (!data.page) return;
-    setCurrentSection(id);
-  };
 
   return (
     <>
@@ -115,19 +102,30 @@ const PageWrapper = ({
               className={classes.header}
               height={headerHeight}
             />
-            <Box className={classes.main} component="main">
-              {data.page.sections.map((section) => {
+            <Box className={classes.main} component="main" ref={mainRef}>
+              {data.page.sections.map((section, i, sections) => {
                 if (section.__typename === 'PageSectionHtmlRecord') return null;
-                const props: Partial<Omit<PageSectionProps, 'section'>> = {
-                  divider: data.page?.sectionDivider,
-                  onDividerClick: handleDividerClick,
-                  ...(sectionProps || {}),
-                };
+                const props: Partial<Omit<PageSectionProps, 'section'>> =
+                  sectionProps || {};
                 return (
                   <PageSection
                     id={`section-${section.id}`}
                     key={section.id}
                     section={section}
+                    divider={
+                      data.page?.sectionDivider && i < sections.length - 1 ? (
+                        <SectionDivider
+                          icon={data.page.sectionDivider}
+                          getTargetId={(direction) => {
+                            return `#section-${
+                              direction === 'up'
+                                ? section.id
+                                : sections[i + 1]?.id
+                            }`;
+                          }}
+                        />
+                      ) : undefined
+                    }
                     {...props}
                   />
                 );

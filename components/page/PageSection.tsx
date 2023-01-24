@@ -1,24 +1,18 @@
 import StructuredText, {
   StructuredTextProps,
 } from '@components/structured-text/StructuredText';
-import type { PageFragment, PageSectionFragment } from '@lib/dato-cms';
-import { Article, ArticleProps } from '@components/elements/layout';
+import type { PageSectionFragment } from '@lib/dato-cms';
+import { Article } from '@components/elements/layout';
 import PageSectionHeader from './PageSectionHeader';
 import { createStyles } from '@mantine/styles';
 import { Box, DefaultProps, MantineNumberSize, Selectors } from '@mantine/core';
 
-import SvgIconLink from '@components/elements/links/SvgIconLink';
-
-import { createTransition } from '@lib/theme/utils';
-import { MouseEventHandler } from 'react';
-
 export type PageSectionProps = DefaultProps<PageSectionStylesNames> &
-  Omit<ArticleProps, 'children'> & {
+  Omit<Parameters<typeof Article>[0], 'children'> & {
     section: PageSectionFragment;
     fullscreen?: boolean;
     contentWidth?: MantineNumberSize;
-    divider?: PageFragment['sectionDivider'];
-    onDividerClick?: (id: string) => unknown;
+    divider?: React.ReactNode;
     structuredTextProps?: Omit<StructuredTextProps, 'data'>;
   };
 
@@ -116,16 +110,6 @@ const useStyles = createStyles(
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        [`& .${getRef('dividerLink')}`]: {
-          color: theme.colors.blue[2],
-          transition: createTransition(['color']),
-          '&:hover': {
-            color: theme.colors.red[2],
-          },
-        },
-      },
-      dividerLink: {
-        ref: getRef('dividerLink'),
       },
     };
   }
@@ -140,7 +124,6 @@ const PageSection = ({
   structuredTextProps = {},
   fullscreen,
   contentWidth,
-  onDividerClick,
   ...props
 }: PageSectionProps) => {
   const { classes, cx } = useStyles(
@@ -160,10 +143,6 @@ const PageSection = ({
       styles,
     }
   );
-  const handleDividerClick: MouseEventHandler<HTMLAnchorElement> = (ev) => {
-    ev.preventDefault();
-    onDividerClick && onDividerClick(section.id);
-  };
 
   return (
     <Article
@@ -184,16 +163,7 @@ const PageSection = ({
       <Box className={classes.body}>
         <StructuredText data={section.content} {...structuredTextProps} />
       </Box>
-      {divider && (
-        <Box className={classes.divider}>
-          <SvgIconLink
-            href="#"
-            onClick={handleDividerClick}
-            src={divider.url}
-            className={classes.dividerLink}
-          />
-        </Box>
-      )}
+      {divider && <Box className={classes.divider}>{divider}</Box>}
     </Article>
   );
 };
