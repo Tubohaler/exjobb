@@ -18,6 +18,9 @@ fragment Page on PageRecord {
       ...HtmlSection
     }
   }
+  sectionDivider {
+    ...Icon
+  }
   metaTags {
     ...PageMetaTags
   }
@@ -309,6 +312,9 @@ fragment FooterSection on FooterSectionRecord {
 fragment Header on HeaderRecord {
   __typename
   id
+  logo {
+    ...Icon
+  }
   navigationLinks {
     ...PageLink
   }

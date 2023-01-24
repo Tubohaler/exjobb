@@ -1,7 +1,7 @@
 import { PageWrapper, Section } from '@components/elements/layout';
 import { createGetStaticPageProps, StaticPageProps } from '@lib/dato-cms';
 import createStructuredTextProps from '@components/structured-text/createStructuredTextProps';
-import { Title, createStyles, Text } from '@mantine/core';
+import { Title, createStyles, Text, List } from '@mantine/core';
 
 export const getStaticProps = createGetStaticPageProps('contact');
 
@@ -48,6 +48,15 @@ const structuredTextProps = createStructuredTextProps({
           )}
           {children}
         </Section>
+      );
+    },
+  },
+  nodeRules: {
+    List: ({ key, children }) => {
+      return (
+        <List key={key} listStyleType="none">
+          {children}
+        </List>
       );
     },
   },

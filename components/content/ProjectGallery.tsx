@@ -8,7 +8,10 @@ const useStyles = createStyles((theme) => ({
     gridTemplateColumns: 'repeat(2, 1fr)',
     alignContent: 'center',
     justifyItems: 'center',
-    [theme.fn.largerThan('md')]: { gridTemplateColumns: 'repeat(4, 1fr)' },
+    maxWidth: theme.breakpoints.xl,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    [theme.fn.largerThan('md')]: { gridTemplateColumns: 'repeat(3, 1fr)' },
   },
 }));
 

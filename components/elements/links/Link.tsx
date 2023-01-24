@@ -1,12 +1,4 @@
-import {
-  Anchor,
-  packSx,
-  Sx,
-  createStyles,
-  Selectors,
-  DefaultProps,
-} from '@mantine/core';
-import NextLink from 'next/link';
+import { Anchor, createStyles, Selectors, DefaultProps } from '@mantine/core';
 import { createTransition } from '@lib/theme/utils';
 
 export type LinkStylesNames = Selectors<typeof useStyles>;

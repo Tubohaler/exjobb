@@ -19,7 +19,6 @@ export type SvgIconLinkStylesParams = {
   baseShade?: number;
   hoverColor?: string;
   hoverShade?: number;
-  size?: MantineNumberSize;
 };
 
 export type SvgIconLinkProps = DefaultProps<
@@ -34,7 +33,6 @@ const useStyles = createStyles(
   (
     theme,
     {
-      size,
       color = 'black',
       hoverColor = 'red',
       baseShade = 9,
@@ -51,17 +49,10 @@ const useStyles = createStyles(
 
     const styles: Record<'root' | 'wrapper', CSSObject> = {
       root: {
-        fontSize:
-          typeof size === 'number'
-            ? size
-            : typeof size === 'string' && size in theme.fontSizes
-            ? theme.fontSizes[size]
-            : 'inherit',
         color: !color ? 'inherit' : getColor(color, baseShade),
         outline: 'none',
         transition: createTransition(['color', 'opacity']),
         lineHeight: 1,
-        opacity: 0.75,
         '&:hover': {
           color: !hoverColor ? 'inherit' : getColor(hoverColor, hoverShade),
           opacity: 1,
@@ -75,7 +66,6 @@ const useStyles = createStyles(
         alignItems: 'center',
         padding: 0,
         color: 'inherit',
-        fontSize: 'inherit',
       },
     };
     return styles;
@@ -89,7 +79,6 @@ const SvgIconLink = ({
   className,
   classNames,
   fallback,
-  size,
   color,
   hoverColor,
   baseShade,
@@ -98,7 +87,6 @@ const SvgIconLink = ({
   ...props
 }: SvgIconLinkProps) => {
   const stylesParams = useRef<SvgIconLinkStylesParams>({
-    size,
     color,
     baseShade,
     hoverColor,
@@ -112,19 +100,13 @@ const SvgIconLink = ({
   });
 
   return (
-    <Box
-      component={Link}
-      className={cx(classes.root, className)}
-      size="xs"
-      {...props}
-    >
+    <Box component={Link} className={cx(classes.root, className)} {...props}>
       <SvgIcon src={src} className={classes.wrapper} fallback={fallback} />
     </Box>
   );
 };
 
 const defaultProps: Partial<Omit<SvgIconLinkProps, 'icon' | 'href'>> = {
-  size: 'md',
   color: 'black',
   hoverColor: 'blue',
   baseShade: 9,
