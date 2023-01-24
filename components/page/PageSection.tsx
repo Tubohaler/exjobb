@@ -38,7 +38,7 @@ const useStyles = createStyles(
         [`&.${getRef('fullscreen')}`]: {
           padding: 0,
           height: '100%',
-          maxHeight: 'calc(100vh - 70px)',
+          maxHeight: 'calc(95vh - 70px)',
           maxWidth: '100vw',
           overflow: 'hidden',
           position: 'relative',
@@ -48,7 +48,7 @@ const useStyles = createStyles(
             overflowX: 'hidden',
           },
           [theme.fn.smallerThan('md')]: {
-            maxHeight: 'calc(100vh - 110px)',
+            maxHeight: 'calc(95vh - 110px)',
           },
         },
       },
@@ -60,10 +60,10 @@ const useStyles = createStyles(
         height: 'auto',
         maxWidth: theme.breakpoints.md,
         minWidth: 0,
-        '& > section + :not(section)': {
+        '& > section + *': {
           marginTop: theme.spacing.xl,
         },
-        '& > :not(section, h1, h2, h3, h4, h5, h6):has(+ section)': {
+        '& > :not(h1, h2, h3, h4, h5, h6):has(+ section)': {
           marginBottom: theme.spacing.xl * 2,
         },
       },

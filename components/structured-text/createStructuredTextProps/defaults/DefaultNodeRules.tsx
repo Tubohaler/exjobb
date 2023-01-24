@@ -49,7 +49,8 @@ const DefaultNodeRules: NodeRules = {
         key={key}
         order={node.level}
         sx={{
-          margin: '1em 0',
+          marginBottom: '1em',
+          marginTop: '0.5em',
         }}
       >
         {children}
