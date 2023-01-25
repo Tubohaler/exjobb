@@ -19,7 +19,7 @@ fragment Page on PageRecord {
     }
   }
   sectionDivider {
-    ...Icon
+    ...PageSectionDivider
   }
   metaTags {
     ...PageMetaTags
@@ -119,6 +119,16 @@ fragment Subsection on SubsectionRecord {
         ...CurrentVacancies
       }
     }
+  }
+}
+
+fragment PageSectionDivider on PageSectionDividerRecord {
+  __typename
+  id
+  rotate
+  size
+  icon {
+    ...Icon
   }
 }
 

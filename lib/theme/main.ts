@@ -4,6 +4,9 @@ import {
   DefaultMantineColor,
   DEFAULT_THEME,
   AnchorProps,
+  MantineThemeOverride,
+  MantineThemeBase,
+  CSSObject,
 } from '@mantine/core';
 import Link from 'next/link';
 import { EB_Garamond } from '@next/font/google';
@@ -81,11 +84,10 @@ const breakpoints: MantineTheme['breakpoints'] = {
 
 const mainTheme: MantineTheme = {
   ...DEFAULT_THEME,
-
   colors,
   colorScheme: 'light',
-  primaryShade: { dark: 6, light: 2 },
-  primaryColor: 'red',
+  primaryShade: { dark: 2, light: 2 },
+  primaryColor: 'beige',
   defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
   breakpoints,
@@ -97,6 +99,8 @@ const mainTheme: MantineTheme = {
   globalStyles: () => ({
     html: {
       height: '100%',
+      scrollBehavior: 'smooth',
+      scrollSnapType: 'y proximity',
     },
     body: {
       minHeight: '100%',

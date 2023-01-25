@@ -2119,6 +2119,24 @@ export interface InUseFilter {
   eq: InputMaybe<Scalars['BooleanType']>;
 }
 
+/** Specifies how to filter Integer fields */
+export interface IntegerFilter {
+  /** Search for records with an exact match */
+  eq: InputMaybe<Scalars['IntType']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's less than the one specified */
+  lt: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's less or equal than the one specified */
+  lte: InputMaybe<Scalars['IntType']>;
+  /** Exclude records with an exact match */
+  neq: InputMaybe<Scalars['IntType']>;
+}
+
 /** Specifies how to filter by linking fields */
 export interface InverseRelationshipFieldFilterBetweenFooterAndPage {
   /** Filter linking records that reference current record in at least one of the specified fields */
@@ -2339,7 +2357,7 @@ export interface PageModelFilter {
   pageTitle: InputMaybe<StringFilter>;
   parent: InputMaybe<ParentFilter>;
   position: InputMaybe<PositionFilter>;
-  sectionDivider: InputMaybe<FileFilter>;
+  sectionDivider: InputMaybe<LinkFilter>;
   urlSlug: InputMaybe<SlugFilter>;
 }
 
@@ -2404,7 +2422,7 @@ export interface PageRecord extends RecordInterface {
   pageTitle: Scalars['String'];
   parent: Maybe<PageRecord>;
   position: Maybe<Scalars['IntType']>;
-  sectionDivider: Maybe<FileField>;
+  sectionDivider: Maybe<PageSectionDividerRecord>;
   sections: Array<PageModelSectionsField>;
   urlSlug: Maybe<Scalars['String']>;
 }
@@ -2456,6 +2474,80 @@ export interface PageRecord_AllReferencingPagesMetaArgs {
 
 /** Record of type Page (page) */
 export interface PageRecord_SeoMetaTagsArgs {
+  locale: InputMaybe<SiteLocale>;
+}
+
+export interface PageSectionDividerModelFilter {
+  OR: InputMaybe<Array<InputMaybe<PageSectionDividerModelFilter>>>;
+  _createdAt: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt: InputMaybe<PublishedAtFilter>;
+  _isValid: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt: InputMaybe<PublishedAtFilter>;
+  _publishedAt: InputMaybe<PublishedAtFilter>;
+  _status: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
+  _updatedAt: InputMaybe<UpdatedAtFilter>;
+  icon: InputMaybe<FileFilter>;
+  id: InputMaybe<ItemIdFilter>;
+  presentationTitle: InputMaybe<StringFilter>;
+  rotate: InputMaybe<BooleanFilter>;
+  size: InputMaybe<IntegerFilter>;
+  title: InputMaybe<StringFilter>;
+}
+
+export enum PageSectionDividerModelOrderBy {
+  CreatedAtAsc = '_createdAt_ASC',
+  CreatedAtDesc = '_createdAt_DESC',
+  FirstPublishedAtAsc = '_firstPublishedAt_ASC',
+  FirstPublishedAtDesc = '_firstPublishedAt_DESC',
+  IsValidAsc = '_isValid_ASC',
+  IsValidDesc = '_isValid_DESC',
+  PublicationScheduledAtAsc = '_publicationScheduledAt_ASC',
+  PublicationScheduledAtDesc = '_publicationScheduledAt_DESC',
+  PublishedAtAsc = '_publishedAt_ASC',
+  PublishedAtDesc = '_publishedAt_DESC',
+  StatusAsc = '_status_ASC',
+  StatusDesc = '_status_DESC',
+  UnpublishingScheduledAtAsc = '_unpublishingScheduledAt_ASC',
+  UnpublishingScheduledAtDesc = '_unpublishingScheduledAt_DESC',
+  UpdatedAtAsc = '_updatedAt_ASC',
+  UpdatedAtDesc = '_updatedAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  PresentationTitleAsc = 'presentationTitle_ASC',
+  PresentationTitleDesc = 'presentationTitle_DESC',
+  RotateAsc = 'rotate_ASC',
+  RotateDesc = 'rotate_DESC',
+  SizeAsc = 'size_ASC',
+  SizeDesc = 'size_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+}
+
+/** Record of type Page Section Divider (page_section_divider) */
+export interface PageSectionDividerRecord extends RecordInterface {
+  __typename: 'PageSectionDividerRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  icon: FileField;
+  id: Scalars['ItemId'];
+  presentationTitle: Maybe<Scalars['String']>;
+  rotate: Maybe<Scalars['BooleanType']>;
+  size: Maybe<Scalars['IntType']>;
+  title: Scalars['String'];
+}
+
+/** Record of type Page Section Divider (page_section_divider) */
+export interface PageSectionDividerRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -2724,6 +2816,8 @@ export interface Query {
   /** Returns meta information regarding a record collection */
   _allJobsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allPageSectionDividersMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allPagesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allProjectsMeta: CollectionMetadata;
@@ -2754,6 +2848,8 @@ export interface Query {
   /** Returns a collection of records */
   allJobs: Array<JobRecord>;
   /** Returns a collection of records */
+  allPageSectionDividers: Array<PageSectionDividerRecord>;
+  /** Returns a collection of records */
   allPages: Array<PageRecord>;
   /** Returns a collection of records */
   allProjects: Array<ProjectRecord>;
@@ -2781,6 +2877,8 @@ export interface Query {
   job: Maybe<JobRecord>;
   /** Returns a specific record */
   page: Maybe<PageRecord>;
+  /** Returns a specific record */
+  pageSectionDivider: Maybe<PageSectionDividerRecord>;
   /** Returns the single instance record */
   peopleGallery: Maybe<PeopleGalleryRecord>;
   /** Returns a specific record */
@@ -2838,6 +2936,13 @@ export interface Query_AllImageGalleriesMetaArgs {
 export interface Query_AllJobsMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<JobModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+}
+
+/** The query root for this schema */
+export interface Query_AllPageSectionDividersMetaArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<PageSectionDividerModelFilter>;
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -2964,6 +3069,16 @@ export interface QueryAllJobsArgs {
 }
 
 /** The query root for this schema */
+export interface QueryAllPageSectionDividersArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<PageSectionDividerModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<PageSectionDividerModelOrderBy>>>;
+  skip: InputMaybe<Scalars['IntType']>;
+}
+
+/** The query root for this schema */
 export interface QueryAllPagesArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
   filter: InputMaybe<PageModelFilter>;
@@ -3085,6 +3200,14 @@ export interface QueryPageArgs {
   filter: InputMaybe<PageModelFilter>;
   locale: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<PageModelOrderBy>>>;
+}
+
+/** The query root for this schema */
+export interface QueryPageSectionDividerArgs {
+  fallbackLocales: InputMaybe<Array<SiteLocale>>;
+  filter: InputMaybe<PageSectionDividerModelFilter>;
+  locale: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<PageSectionDividerModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -4335,11 +4458,16 @@ export type PageFragment = {
   >;
   sectionDivider:
     | ({
-        mimeType: string;
-        url: string;
-        width: number | null;
-        height: number | null;
-      } & { __typename: 'FileField' })
+        id: string;
+        rotate: boolean | null;
+        size: number | null;
+        icon: {
+          mimeType: string;
+          url: string;
+          width: number | null;
+          height: number | null;
+        } & { __typename: 'FileField' };
+      } & { __typename: 'PageSectionDividerRecord' })
     | null;
   metaTags:
     | ({
@@ -4614,6 +4742,18 @@ export type SubsectionFragment = {
     >;
   } & { __typename: 'SubsectionModelContentField' };
 } & { __typename: 'SubsectionRecord' };
+
+export type PageSectionDividerFragment = {
+  id: string;
+  rotate: boolean | null;
+  size: number | null;
+  icon: {
+    mimeType: string;
+    url: string;
+    width: number | null;
+    height: number | null;
+  } & { __typename: 'FileField' };
+} & { __typename: 'PageSectionDividerRecord' };
 
 export type CurrentVacanciesFragment = {
   id: string;
@@ -5366,11 +5506,16 @@ export type PageQuery = {
         >;
         sectionDivider:
           | ({
-              mimeType: string;
-              url: string;
-              width: number | null;
-              height: number | null;
-            } & { __typename: 'FileField' })
+              id: string;
+              rotate: boolean | null;
+              size: number | null;
+              icon: {
+                mimeType: string;
+                url: string;
+                width: number | null;
+                height: number | null;
+              } & { __typename: 'FileField' };
+            } & { __typename: 'PageSectionDividerRecord' })
           | null;
         metaTags:
           | ({
@@ -6701,6 +6846,41 @@ export const HtmlSectionFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<HtmlSectionFragment, unknown>;
+export const PageSectionDividerFragmentDoc = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'FragmentDefinition',
+      name: { kind: 'Name', value: 'PageSectionDivider' },
+      typeCondition: {
+        kind: 'NamedType',
+        name: { kind: 'Name', value: 'PageSectionDividerRecord' },
+      },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'rotate' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'size' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'icon' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                {
+                  kind: 'FragmentSpread',
+                  name: { kind: 'Name', value: 'Icon' },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<PageSectionDividerFragment, unknown>;
 export const PageFragmentDoc = {
   kind: 'Document',
   definitions: [
@@ -6794,7 +6974,7 @@ export const PageFragmentDoc = {
               selections: [
                 {
                   kind: 'FragmentSpread',
-                  name: { kind: 'Name', value: 'Icon' },
+                  name: { kind: 'Name', value: 'PageSectionDivider' },
                 },
               ],
             },
@@ -7005,6 +7185,7 @@ export const PageDocument = {
     ...CoverVideoFragmentDoc.definitions,
     ...VideoFragmentDoc.definitions,
     ...HtmlSectionFragmentDoc.definitions,
+    ...PageSectionDividerFragmentDoc.definitions,
     ...SiteMetaFragmentDoc.definitions,
   ],
 } as unknown as DocumentNode<PageQuery, PageQueryVariables>;

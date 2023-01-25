@@ -8,45 +8,49 @@ export type FooterProps = Omit<
   'children'
 > & {
   data: FooterFragment;
+  height: number;
 };
 
-const useStyles = createStyles((theme, _, getRef) => ({
-  root: {
-    minHeight: 110,
-    padding: `${theme.spacing.md}px ${theme.spacing.xl}px`,
-    backgroundColor: theme.white,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: theme.spacing.md,
-    [theme.fn.smallerThan('sm')]: {
-      minHeight: 250,
-      flexDirection: 'column-reverse',
-      padding: theme.spacing.md,
-      [`& .${getRef('section')}:first-of-type, & .${getRef(
-        'section'
-      )}:last-of-type`]: {
-        alignItems: 'center',
+export type FooterStylesParams = { height: number };
+
+const useStyles = createStyles(
+  (theme, { height }: FooterStylesParams, getRef) => ({
+    root: {
+      height,
+      padding: `${theme.spacing.md}px ${theme.spacing.xl}px`,
+      backgroundColor: theme.white,
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      gap: theme.spacing.md,
+      [theme.fn.smallerThan('sm')]: {
+        flexDirection: 'column-reverse',
+        padding: theme.spacing.md,
+        [`& .${getRef('section')}:first-of-type, & .${getRef(
+          'section'
+        )}:last-of-type`]: {
+          alignItems: 'center',
+        },
       },
     },
-  },
-  section: {
-    ref: getRef('section'),
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: theme.fontSizes.sm,
-    '&:first-of-type': {
-      alignItems: 'flex-start',
+    section: {
+      ref: getRef('section'),
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      fontSize: theme.fontSizes.md,
+      '&:first-of-type': {
+        alignItems: 'flex-start',
+      },
+      '&:last-of-type': {
+        alignItems: 'flex-end',
+      },
     },
-    '&:last-of-type': {
-      alignItems: 'flex-end',
-    },
-  },
-}));
+  })
+);
 
 const structuredTextProps = createStructuredTextProps({
   nodeRules: {
@@ -80,13 +84,17 @@ const Footer = ({
   className,
   classNames,
   styles,
+  height,
   ...props
 }: FooterProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'Footer',
-    classNames,
-    styles,
-  });
+  const { classes, cx } = useStyles(
+    { height },
+    {
+      name: 'Footer',
+      classNames,
+      styles,
+    }
+  );
   return (
     <Box component="footer" className={cx(classes.root, className)} {...props}>
       {data.sections.map((section) => {

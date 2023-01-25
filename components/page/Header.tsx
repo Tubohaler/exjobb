@@ -18,23 +18,51 @@ const useStyles = createStyles(
   (theme, { height }: HeaderStylesParams, getRef) => ({
     root: {
       height,
-      padding: theme.spacing.md,
+      padding: theme.spacing.xl,
       background: theme.white,
       display: 'flex',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       alignItems: 'center',
       position: 'fixed',
       zIndex: 999,
-      [theme.fn.smallerThan('md')]: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-      },
       [theme.fn.smallerThan('xs')]: {
         padding: theme.spacing.xs,
       },
     },
+    inner: {
+      flexGrow: 1,
+      lineHeight: 1,
+      display: 'flex',
+      justifyContent: 'space-between',
+      fontSize: theme.fontSizes.xl,
+      flexWrap: 'wrap',
+      gap: theme.spacing.md,
+      [`& .${getRef('socialLinks')}, & .${getRef('logo')}`]: {
+        fontSize: theme.fontSizes.lg,
+      },
+      [theme.fn.smallerThan('md')]: {
+        [`& .${getRef('left')}, & .${getRef('right')}`]: {
+          justifyContent: 'flex-start',
+          flexDirection: 'column',
+        },
+        [`& .${getRef('left')}`]: {},
+        [`& .${getRef('right')}`]: {
+          alignItems: 'center',
+          gap: theme.spacing.sm,
+        },
+      },
+      [theme.fn.smallerThan('xs')]: {
+        columnGap: 0,
+        fontSize: theme.fontSizes.xl,
+        [`& .${getRef('right')}`]: {
+          [`& .${getRef('socialLink')}`]: {
+            fontSize: theme.fontSizes.md,
+          },
+        },
+      },
+    },
     logo: {
-      fontSize: theme.fontSizes.xl * 3,
+      ref: getRef('logo'),
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -44,39 +72,27 @@ const useStyles = createStyles(
       },
       '&:hover': {
         '& svg': {
-          transform: 'scale(1.05)',
+          transform: 'scale(1.1)',
         },
       },
     },
+    leftSection: {
+      ref: getRef('left'),
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-start',
+    },
     rightSection: {
+      ref: getRef('right'),
+      height: '100%',
       display: 'flex',
       flexGrow: 1,
       justifyContent: 'flex-end',
-      height: '100%',
       gap: theme.spacing.xl,
-      fontSize: theme.fontSizes.xl,
-      [`& .${getRef('socialLink')}`]: {
-        fontSize: theme.fontSizes.lg,
-      },
-      [theme.fn.smallerThan('md')]: {
-        justifyContent: 'center',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: theme.spacing.md,
-        [`& .${getRef('socialLink')}`]: {
-          fontSize: theme.fontSizes.lg,
-        },
-      },
-      [theme.fn.smallerThan('xs')]: {
-        fontSize: theme.fontSizes.lg,
-        gap: theme.spacing.sm,
-        [`& .${getRef('socialLink')}`]: {
-          fontSize: theme.fontSizes.md,
-        },
-      },
     },
     socialLinks: {
-      ref: getRef('socialLink'),
+      ref: getRef('socialLinks'),
     },
   })
 );
@@ -106,15 +122,22 @@ const Header = ({
   );
   return (
     <Box className={cx(classes.root, className)} component="header" {...props}>
-      <Link href="/" title="Home" className={classes.logo}>
-        <SvgIcon src={data.logo.url} />
-      </Link>
-      <Box className={classes.rightSection}>
-        <NavLinkGroup links={data.navigationLinks} currentPage={currentPage} />
-        <SocialLinkGroup
-          links={data.socialLinks.links}
-          linkProps={{ className: classes.socialLinks }}
-        />
+      <Box className={classes.inner}>
+        <Box className={classes.leftSection}>
+          <Link href="/" title="Home" className={classes.logo}>
+            <SvgIcon src={data.logo.url} />
+          </Link>
+        </Box>
+        <Box className={classes.rightSection}>
+          <NavLinkGroup
+            links={data.navigationLinks}
+            currentPage={currentPage}
+          />
+          <SocialLinkGroup
+            links={data.socialLinks.links}
+            linkProps={{ className: classes.socialLinks }}
+          />
+        </Box>
       </Box>
     </Box>
   );
