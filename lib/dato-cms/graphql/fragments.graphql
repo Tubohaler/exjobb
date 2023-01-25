@@ -151,6 +151,7 @@ fragment ResponsiveImage on ResponsiveImage {
   sizes
   bgColor
   aspectRatio
+  base64
 }
 
 fragment Video on VideoFileField {
@@ -206,7 +207,7 @@ fragment Project on ProjectRecord {
     __typename
     id
     responsiveImage(
-      imgixParams: { fm: webp, fit: crop, ar: "1", dpi: "72", w: "800" }
+      imgixParams: { fm: webp, fit: crop, ar: "1", dpi: "72", w: "600" }
     ) {
       ...ResponsiveImage
     }
@@ -230,7 +231,7 @@ fragment Staff on StaffRecord {
     __typename
     id
     responsiveImage(
-      imgixParams: { fm: webp, fit: crop, w: "800", ar: "3:4", dpi: "72" }
+      imgixParams: { fm: webp, fit: crop, w: "600", ar: "3:4", dpi: "72" }
     ) {
       ...ResponsiveImage
     }
@@ -252,9 +253,12 @@ fragment ImageGallery on ImageGalleryRecord {
   images {
     __typename
     id
-    responsiveImage(
-      imgixParams: { fm: webp, fit: crop, ar: "3:2", dpi: "72" }
+    thumbnail: responsiveImage(
+      imgixParams: { fm: webp, fit: crop, ar: "3:2", dpi: "72", w: "600" }
     ) {
+      ...ResponsiveImage
+    }
+    highres: responsiveImage(imgixParams: { fm: webp, fit: crop, dpi: "72" }) {
       ...ResponsiveImage
     }
   }

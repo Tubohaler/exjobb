@@ -1,5 +1,4 @@
-import React from 'react';
-import { Image } from 'react-datocms';
+import ResponsiveImage from '@components/elements/ResponsiveImage';
 
 import { ImageGalleryFragment } from '@lib/dato-cms';
 import { createStyles, Box, Title, useMantineTheme } from '@mantine/core';
@@ -50,19 +49,16 @@ function ImageGalleryThumbnail({ image, onClick }: ImageGalleryThumbnailProps) {
 
   return (
     <Box className={classes.root} onClick={() => onClick && onClick(image.id)}>
-      {image.responsiveImage.title && (
+      {image.thumbnail.title && (
         <Box className={classes.overlay}>
           <Title className={classes.title} italic order={3}>
-            {image.responsiveImage.title}
+            {image.thumbnail.title}
           </Title>
         </Box>
       )}
-      <Image
+      <ResponsiveImage
         className={classes.image}
-        data={image.responsiveImage}
-        layout="responsive"
-        objectFit="cover"
-        objectPosition="center"
+        data={image.thumbnail}
         sizes={`(max-width: ${theme.breakpoints.md}px) ${
           theme.breakpoints.md
         }px, ${Math.floor(theme.breakpoints.md / 3)}px`}

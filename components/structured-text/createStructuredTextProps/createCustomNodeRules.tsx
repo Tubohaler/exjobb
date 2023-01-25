@@ -54,7 +54,7 @@ export default function createCustomNodeRules<
             return ctx.node.children.every(
               (child) => isSpan(child) && !child.value.trim()
             ) ? (
-              <Space h="xl" />
+              <Space key={ctx.key} h="xl" />
             ) : ctx.node.children.every((child) => isInlineItem(child)) ? (
               <React.Fragment key={ctx.key}>{ctx.children}</React.Fragment>
             ) : (
