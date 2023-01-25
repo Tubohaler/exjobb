@@ -1,11 +1,14 @@
 import {
-  MantineProvider,
   MantineTheme,
   Tuple,
   DefaultMantineColor,
   DEFAULT_THEME,
+  AnchorProps,
+  MantineThemeOverride,
+  MantineThemeBase,
+  CSSObject,
 } from '@mantine/core';
-
+import Link from 'next/link';
 import { EB_Garamond } from '@next/font/google';
 
 declare module '@mantine/core' {
@@ -25,6 +28,7 @@ const ebGaramond = EB_Garamond({
  *
  * color swatches for beige, blue and red generated with
  * https://smart-swatch.netlify.app/
+ * based on:
  * (beige: #e8e5df, blue: #9dc3df, red: #ff8a8a)
  *
  * body background: beige[1],
@@ -71,35 +75,51 @@ export const colors: MantineTheme['colors'] = {
   ],
 };
 
-export const theme: MantineTheme = {
+export const defaultTransition = 'all 0.33s ease-in-out 0.1s';
+
+const breakpoints: MantineTheme['breakpoints'] = {
+  ...DEFAULT_THEME.breakpoints,
+  xs: 480,
+};
+
+const mainTheme: MantineTheme = {
   ...DEFAULT_THEME,
+  colors,
   colorScheme: 'light',
+  primaryShade: { dark: 2, light: 2 },
+  primaryColor: 'beige',
+  defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
+  breakpoints,
   headings: {
     ...DEFAULT_THEME.headings,
     fontFamily: ebGaramond.style.fontFamily,
+    fontWeight: 400,
   },
-  colors,
-  globalStyles: (theme) => ({
-    body: {
-      background: theme.colors.beige[1],
+  globalStyles: () => ({
+    html: {
+      height: '100%',
+      scrollBehavior: 'smooth',
+      scrollSnapType: 'y proximity',
     },
-    a: {
-      color: theme.colors.blue[2],
-      transition: 'all 0.33s ease-in-out 0.1s;',
-      '&:hover': {
-        color: theme.colors.red[2],
+    body: {
+      minHeight: '100%',
+      width: '100%',
+      textRendering: 'optimizeLegibility',
+    },
+    p: {
+      margin: 0,
+    },
+    'html, body': {
+      margin: 0,
+      padding: 0,
+    },
+    'main > article': {
+      '&:nth-of-type(even)': {
+        backgroundColor: 'rgba(0,0,0,0.02)',
       },
     },
   }),
 };
 
-const ThemeProvider = ({ children }: React.PropsWithChildren) => {
-  return (
-    <MantineProvider withGlobalStyles withNormalizeCSS theme={theme}>
-      {children}
-    </MantineProvider>
-  );
-};
-
-export default ThemeProvider;
+export default mainTheme;
