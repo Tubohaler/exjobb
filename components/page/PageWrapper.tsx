@@ -1,21 +1,18 @@
-import {
-  Box,
-  createStyles,
-  DefaultProps,
-  Selectors,
-  useMantineTheme,
-} from '@mantine/core';
+import { Box, createStyles, DefaultProps, Selectors } from '@mantine/core';
 import { PageQuery } from '@lib/dato-cms';
 import Header from './Header';
 import Footer from './Footer';
 import Head from '@components/page/Head';
 import PageSection, { PageSectionProps } from '@components/page/PageSection';
-import { useEffect, useRef, useState } from 'react';
-import { useMediaQuery } from '@mantine/hooks';
+import { useMemo, useRef } from 'react';
 import SectionDivider from '@components/elements/buttons/SectionDivider';
+import useSmallerThan from '@hooks/useSmallerThan';
 
 export type PageWrapperStylesNames = Selectors<typeof useStyles>;
-export type PageWrapperStylesParams = { headerHeight: number };
+export type PageWrapperStylesParams = {
+  headerHeight: number;
+  footerHeight: number;
+};
 
 export type PageWrapperProps = DefaultProps<
   PageWrapperStylesNames,
@@ -26,11 +23,11 @@ export type PageWrapperProps = DefaultProps<
 };
 
 const useStyles = createStyles(
-  (theme, { headerHeight }: PageWrapperStylesParams, getRef) => ({
+  (theme, { headerHeight, footerHeight }: PageWrapperStylesParams, getRef) => ({
     root: {
       width: '100vw',
+      height: '100%',
       maxWidth: '100%',
-      minHeight: '100vh',
       display: 'grid',
       gridTemplateRows: 'auto 1fr auto',
       gridTemplateColumns: '1fr',
@@ -45,23 +42,21 @@ const useStyles = createStyles(
       ref: getRef('main'),
       position: 'relative',
       height: 'auto',
-      minHeight: '100%',
+      minHeight: `calc(100vh - ${footerHeight + headerHeight}px)`,
       backgroundColor: theme.colors.beige[1],
-      paddingTop: headerHeight,
+      marginTop: headerHeight,
     },
     header: {
       ref: getRef('header'),
-      [theme.fn.smallerThan('md')]: {
-        flexDirection: 'column',
-        justifyContent: 'center',
-      },
-      [theme.fn.smallerThan('xs')]: {
-        padding: theme.spacing.xs,
-      },
     },
     footer: { ref: getRef('footer') },
   })
 );
+
+const fixedHeights = {
+  header: { base: 80, md: 110 },
+  footer: { base: 160, sm: 280 },
+};
 
 const PageWrapper = ({
   data,
@@ -71,24 +66,27 @@ const PageWrapper = ({
   sectionProps,
   ...props
 }: PageWrapperProps) => {
-  const [headerHeight, setHeaderHeight] = useState(80);
+  const smallerThanMd = useSmallerThan('md');
+  const smallerThanSm = useSmallerThan('sm');
+  const headerHeight = useMemo(
+    () => fixedHeights.header[smallerThanMd ? 'md' : 'base'],
+    [smallerThanMd]
+  );
+  const footerHeight = useMemo(
+    () => fixedHeights.footer[smallerThanSm ? 'sm' : 'base'],
+    [smallerThanSm]
+  );
 
-  const theme = useMantineTheme();
-  const smallScreen = useMediaQuery(`(max-width: ${theme.breakpoints.md}px)`);
   const mainRef = useRef<HTMLDivElement>(null);
 
   const { classes, cx } = useStyles(
-    { headerHeight },
+    { headerHeight, footerHeight },
     {
       name: 'PageWrapper',
       styles,
       classNames,
     }
   );
-
-  useEffect(() => {
-    setHeaderHeight(smallScreen ? 140 : 80);
-  }, [smallScreen]);
 
   return (
     <>
@@ -117,10 +115,11 @@ const PageWrapper = ({
                     id={`section-${section.id}`}
                     key={section.id}
                     section={section}
+                    dividerSize={data.page?.sectionDivider?.size || 0}
                     divider={
                       data.page?.sectionDivider && i < sections.length - 1 ? (
                         <SectionDivider
-                          icon={data.page.sectionDivider}
+                          divider={data.page.sectionDivider}
                           getTargetId={getTargetId}
                           onClick={(direction) => {
                             const rect = document
@@ -140,7 +139,11 @@ const PageWrapper = ({
                 );
               })}
             </Box>
-            <Footer data={data.page.footer} className={classes.footer} />
+            <Footer
+              height={footerHeight}
+              data={data.page.footer}
+              className={classes.footer}
+            />
           </>
         )}
       </Box>

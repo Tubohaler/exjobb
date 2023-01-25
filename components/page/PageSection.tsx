@@ -13,28 +13,30 @@ export type PageSectionProps = DefaultProps<PageSectionStylesNames> &
     fullscreen?: boolean;
     contentWidth?: MantineNumberSize;
     divider?: React.ReactNode;
+    dividerSize?: number;
     structuredTextProps?: Omit<StructuredTextProps, 'data'>;
   };
 
 export type PageSectionStylesNames = Selectors<typeof useStyles>;
 export type PageSectionStylesParams = {
   withHeader?: boolean;
-  withDivider?: boolean;
+  dividerSize?: number;
   contentWidth?: MantineNumberSize;
 };
 
 const useStyles = createStyles(
   (
     theme,
-    { withHeader, withDivider, contentWidth }: PageSectionStylesParams,
+    { withHeader, contentWidth, dividerSize }: PageSectionStylesParams,
     getRef
   ) => {
+    const pY = theme.spacing.xl * 4;
     return {
       root: {
         width: '100%',
         maxWidth: '100vw',
         minHeight: '50vh',
-        padding: `${theme.spacing.xl * 4}px ${theme.spacing.xl}px`,
+        padding: `${pY}px ${theme.spacing.xl}px`,
         display: 'grid',
         gridTemplateRows: withHeader ? 'auto 1fr' : '1fr',
         gridTemplateColumns: '1fr',
@@ -43,6 +45,16 @@ const useStyles = createStyles(
         alignItems: 'center',
         justifyItems: 'center',
         position: 'relative',
+        ['&:not(:first-of-type)']: !dividerSize
+          ? {}
+          : {
+              paddingTop: `${pY + dividerSize * 0.5}px`,
+            },
+        ['&:not(:last-of-type)']: !dividerSize
+          ? {}
+          : {
+              paddingBottom: `${pY + dividerSize * 0.5}px`,
+            },
         [theme.fn.smallerThan('sm')]: {
           paddingLeft: theme.spacing.sm,
           paddingRight: theme.spacing.sm,
@@ -50,11 +62,6 @@ const useStyles = createStyles(
         [`&:last-of-type .${getRef('divider')}`]: {
           display: 'none',
         },
-        [`&:not(:first-of-type)`]: !withDivider
-          ? {
-              paddingTop: theme.spacing.xl * 10,
-            }
-          : {},
         [`&.${getRef('fullscreen')}`]: {
           padding: 0,
           height: '100%',
@@ -100,7 +107,6 @@ const useStyles = createStyles(
       },
       divider: {
         ref: getRef('divider'),
-        fontSize: theme.fontSizes.xl * 8,
         position: 'absolute',
         zIndex: 100,
         bottom: 0,
@@ -118,6 +124,7 @@ const useStyles = createStyles(
 const PageSection = ({
   section,
   divider,
+  dividerSize,
   className,
   classNames,
   styles,
@@ -129,7 +136,7 @@ const PageSection = ({
   const { classes, cx } = useStyles(
     {
       withHeader: !!section.title,
-      withDivider: !!divider,
+      dividerSize,
       contentWidth:
         contentWidth !== undefined
           ? contentWidth

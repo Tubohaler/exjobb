@@ -11,7 +11,11 @@ const useStyles = createStyles((theme) => ({
   root: {
     color: theme.black,
     textDecoration: 'none',
-    transition: createTransition(['color']),
+    transition: createTransition([
+      'color',
+      'border-color',
+      'text-decoration-color',
+    ]),
     '&:hover': {
       color: theme.colors.red[2],
       textDecoration: 'none',

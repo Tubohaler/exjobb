@@ -6,30 +6,21 @@ export type NavLinkProps = LinkProps & {
 };
 
 export type NavLinkStylesNames = Selectors<typeof useStyles>;
+export type NavLinkStylesParams = { active?: boolean };
 
-const useStyles = createStyles((theme) => {
-  const margin = 0.5;
+const useStyles = createStyles((theme, { active }: NavLinkStylesParams) => {
   return {
     root: {
-      color: theme.black,
+      display: 'inline',
+      lineHeight: 1,
+      padding: 0,
+      margin: 0,
+      color: !active ? theme.black : theme.colors.blue[2],
+      borderBottomWidth: '2px',
+      borderBottomStyle: 'solid',
+      borderBottomColor: !active ? 'transparent' : 'inherit',
+      position: 'relative',
       textTransform: 'capitalize',
-      margin: `0 ${margin}em`,
-      '&:not(:last-of-type):after': {
-        pointerEvents: 'none',
-        content: '"/"',
-        position: 'relative',
-        color: theme.black,
-        right: `-${margin}em`,
-      },
-      '&:first-of-type': {
-        marginLeft: 0,
-      },
-      '&:last-of-type': {
-        marginRight: 0,
-      },
-    },
-    active: {
-      color: theme.colors.blue[2],
     },
   };
 });
@@ -41,17 +32,15 @@ const NavLink = ({
   active,
   ...props
 }: NavLinkProps) => {
-  const { classes, cx } = useStyles(undefined, {
-    name: 'NavLink',
-    classNames,
-    styles,
-  });
-  return (
-    <Link
-      className={cx(classes.root, active && classes.active, className)}
-      {...props}
-    />
+  const { classes, cx } = useStyles(
+    { active },
+    {
+      name: 'NavLink',
+      classNames,
+      styles,
+    }
   );
+  return <Link className={cx(classes.root, className)} {...props} />;
 };
 
 export default NavLink;

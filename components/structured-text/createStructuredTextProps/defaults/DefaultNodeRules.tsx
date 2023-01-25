@@ -11,7 +11,7 @@ import {
 } from '@mantine/core';
 import { Prism } from '@mantine/prism';
 import { isPrismLanguage } from '@lib/prism-utils';
-import React from 'react';
+import { Fragment } from 'react';
 
 const getLinkPropsFromMeta = (meta: LinkNode['meta']): Partial<LinkProps> => {
   if (!meta) return {};
@@ -27,9 +27,7 @@ const getLinkPropsFromMeta = (meta: LinkNode['meta']): Partial<LinkProps> => {
 };
 
 const DefaultNodeRules: NodeRules = {
-  Root: ({ key, children }) => (
-    <React.Fragment key={key}>{children}</React.Fragment>
-  ),
+  Root: ({ key, children }) => <Fragment key={key}>{children}</Fragment>,
   Paragraph: ({ key, children, ancestors }) => {
     return (
       <Text
@@ -100,7 +98,7 @@ const DefaultNodeRules: NodeRules = {
     );
   },
   Span: ({ key, node: { value } }) => {
-    return <React.Fragment key={key}>{value}</React.Fragment>;
+    return <Fragment key={key}>{value}</Fragment>;
   },
 };
 
