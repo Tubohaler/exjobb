@@ -20,7 +20,8 @@ const useStyles = createStyles(
       fontSize: size || theme.fontSizes.xl * 6,
       color: theme.colors.blue[2],
       transition: createTransition(
-        !rotate ? ['color'] : ['color', 'transform']
+        !rotate ? ['color'] : ['color', 'transform'],
+        0.2
       ),
       transform: !rotate || direction !== 'up' ? 'none' : 'rotate(180deg)',
       '&:hover': {
@@ -68,7 +69,7 @@ const SectionDivider = ({
     if (!observerSupport || !linkRef.current) return;
 
     const marginTop = 0.3;
-    const marginBottom = 0.25;
+    const marginBottom = 0.3;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -86,7 +87,7 @@ const SectionDivider = ({
       {
         root: window.document,
         rootMargin: `-${marginTop * 100}% 0% -${marginBottom * 100}% 0%`,
-        threshold: [0.25, 0.5, 0.75],
+        threshold: [0, 1],
       }
     );
 
