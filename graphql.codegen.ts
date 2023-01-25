@@ -7,6 +7,7 @@ import headers from './lib/dato-cms/request-headers';
 
 const tsPluginConfig: TypeScriptDocumentsPluginConfig &
   Omit<TypeScriptPluginConfig, keyof TypeScriptDocumentsPluginConfig> = {
+  // https://www.datocms.com/docs/content-delivery-api/custom-scalar-types
   scalars: {
     BooleanType: 'boolean',
     CustomData: 'Record<string, unknown>',
@@ -25,6 +26,7 @@ const tsPluginConfig: TypeScriptDocumentsPluginConfig &
   nonOptionalTypename: true,
   dedupeFragments: true,
   mergeFragmentTypes: true,
+  preResolveTypes: false,
   declarationKind: 'interface',
 };
 

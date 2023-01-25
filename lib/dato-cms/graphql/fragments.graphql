@@ -1,34 +1,3 @@
-fragment Page on PageRecord {
-  __typename
-  name
-  pageTitle
-  urlSlug
-  id
-  header {
-    ...Header
-  }
-  footer {
-    ...Footer
-  }
-  sections {
-    ... on PageSectionRecord {
-      ...PageSection
-    }
-    ... on PageSectionHtmlRecord {
-      ...HtmlSection
-    }
-  }
-  sectionDivider {
-    ...PageSectionDivider
-  }
-  metaTags {
-    ...PageMetaTags
-  }
-  _seoMetaTags {
-    ...PageSeo
-  }
-}
-
 fragment PageLink on PageRecord {
   __typename
   id
