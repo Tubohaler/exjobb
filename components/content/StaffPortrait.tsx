@@ -1,5 +1,4 @@
-import React from 'react';
-import { Image } from 'react-datocms';
+import ResponsiveImage from '@components/elements/ResponsiveImage';
 
 import { Box, createStyles, Title, useMantineTheme } from '@mantine/core';
 import { createTransition } from '@lib/theme/utils';
@@ -55,12 +54,9 @@ function StaffPortrait({ featuredImage, name, jobPosition }: StaffFragment) {
           {jobPosition}
         </Title>
       </Box>
-      <Image
+      <ResponsiveImage
         className={classes.image}
         data={featuredImage.responsiveImage}
-        layout="responsive"
-        objectFit="cover"
-        objectPosition="center"
         sizes={`(max-width: ${theme.breakpoints.md}px) ${Math.floor(
           theme.breakpoints.md / 2
         )}px, ${Math.floor(theme.breakpoints.md / 3)}px`}

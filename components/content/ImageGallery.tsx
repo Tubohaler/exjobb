@@ -1,18 +1,9 @@
-import {
-  ActionIcon,
-  Box,
-  Button,
-  createStyles,
-  CSSObject,
-  Modal,
-  ModalStylesNames,
-  Title,
-} from '@mantine/core';
+import { ActionIcon, Box, createStyles, Modal } from '@mantine/core';
 import { ImageGalleryFragment } from '@lib/dato-cms';
 import ImageGalleryThumbnail from './ImageGalleryThumbnail';
-import { useEffect, useState } from 'react';
-import { Image } from 'react-datocms';
+import { useState } from 'react';
 import { createTransition } from '@lib/theme/utils';
+import ResponsiveImage from '@components/elements/ResponsiveImage';
 
 const useGalleryStyles = createStyles((theme) => ({
   root: {
@@ -119,12 +110,10 @@ function ImageGallery({ images }: ImageGalleryFragment) {
           className={classes.modalImageWrapper}
           onClick={() => setShowOverlay(false)}
         >
-          <Image
+          <ResponsiveImage
             className={classes.modalImage}
-            data={currentImage.responsiveImage}
-            layout="responsive"
+            data={currentImage.highres}
             objectFit="contain"
-            objectPosition="center"
             usePlaceholder={false}
           />
         </Box>

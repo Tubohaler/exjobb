@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-datocms';
+import ResponsiveImage from '@components/elements/ResponsiveImage';
 import HumbleButton from '@components/elements/buttons/HumbleButton';
 import SteamButton from '@components/elements/buttons/SteamButton';
 
@@ -120,12 +120,9 @@ const Project = ({
           </Group>
         )}
       </Box>
-      <Image
+      <ResponsiveImage
         className={classes.image}
         data={featuredImage.responsiveImage}
-        layout="responsive"
-        objectFit="cover"
-        objectPosition="center"
         sizes={`(max-width: ${theme.breakpoints.md}px) ${Math.floor(
           theme.breakpoints.md / 2
         )}px, ${Math.floor(theme.breakpoints.md / 4)}px`}

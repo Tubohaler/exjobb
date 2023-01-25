@@ -4312,7 +4312,7 @@ export type PageSectionFragment = { __typename: 'PageSectionRecord' } & Pick<
                     ImageFileField,
                     'id'
                   > & {
-                      responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+                      thumbnail: { __typename: 'ResponsiveImage' } & Pick<
                         ResponsiveImage,
                         | 'src'
                         | 'alt'
@@ -4323,6 +4323,20 @@ export type PageSectionFragment = { __typename: 'PageSectionRecord' } & Pick<
                         | 'sizes'
                         | 'bgColor'
                         | 'aspectRatio'
+                        | 'base64'
+                      >;
+                      highres: { __typename: 'ResponsiveImage' } & Pick<
+                        ResponsiveImage,
+                        | 'src'
+                        | 'alt'
+                        | 'title'
+                        | 'width'
+                        | 'height'
+                        | 'srcSet'
+                        | 'sizes'
+                        | 'bgColor'
+                        | 'aspectRatio'
+                        | 'base64'
                       >;
                     }
                 >;
@@ -4354,6 +4368,7 @@ export type PageSectionFragment = { __typename: 'PageSectionRecord' } & Pick<
                             | 'sizes'
                             | 'bgColor'
                             | 'aspectRatio'
+                            | 'base64'
                           >;
                         };
                     }
@@ -4391,6 +4406,7 @@ export type PageSectionFragment = { __typename: 'PageSectionRecord' } & Pick<
                             | 'sizes'
                             | 'bgColor'
                             | 'aspectRatio'
+                            | 'base64'
                           >;
                         };
                     }
@@ -4496,6 +4512,7 @@ export type ResponsiveImageFragment = { __typename: 'ResponsiveImage' } & Pick<
   | 'sizes'
   | 'bgColor'
   | 'aspectRatio'
+  | 'base64'
 >;
 
 export type VideoFragment = { __typename: 'VideoFileField' } & Pick<
@@ -4580,6 +4597,7 @@ export type ProjectFragment = { __typename: 'ProjectRecord' } & Pick<
           | 'sizes'
           | 'bgColor'
           | 'aspectRatio'
+          | 'base64'
         >;
       };
   };
@@ -4613,6 +4631,7 @@ export type ProjectGalleryFragment = {
                 | 'sizes'
                 | 'bgColor'
                 | 'aspectRatio'
+                | 'base64'
               >;
             };
         }
@@ -4638,6 +4657,7 @@ export type StaffFragment = { __typename: 'StaffRecord' } & Pick<
           | 'sizes'
           | 'bgColor'
           | 'aspectRatio'
+          | 'base64'
         >;
       };
   };
@@ -4665,6 +4685,7 @@ export type PeopleGalleryFragment = {
                 | 'sizes'
                 | 'bgColor'
                 | 'aspectRatio'
+                | 'base64'
               >;
             };
         }
@@ -4677,7 +4698,7 @@ export type ImageGalleryFragment = { __typename: 'ImageGalleryRecord' } & Pick<
 > & {
     images: Array<
       { __typename: 'ImageFileField' } & Pick<ImageFileField, 'id'> & {
-          responsiveImage: { __typename: 'ResponsiveImage' } & Pick<
+          thumbnail: { __typename: 'ResponsiveImage' } & Pick<
             ResponsiveImage,
             | 'src'
             | 'alt'
@@ -4688,6 +4709,20 @@ export type ImageGalleryFragment = { __typename: 'ImageGalleryRecord' } & Pick<
             | 'sizes'
             | 'bgColor'
             | 'aspectRatio'
+            | 'base64'
+          >;
+          highres: { __typename: 'ResponsiveImage' } & Pick<
+            ResponsiveImage,
+            | 'src'
+            | 'alt'
+            | 'title'
+            | 'width'
+            | 'height'
+            | 'srcSet'
+            | 'sizes'
+            | 'bgColor'
+            | 'aspectRatio'
+            | 'base64'
           >;
         }
     >;
@@ -5141,7 +5176,7 @@ export type PageQuery = { __typename: 'Query' } & {
                                 ImageFileField,
                                 'id'
                               > & {
-                                  responsiveImage: {
+                                  thumbnail: {
                                     __typename: 'ResponsiveImage';
                                   } & Pick<
                                     ResponsiveImage,
@@ -5154,6 +5189,22 @@ export type PageQuery = { __typename: 'Query' } & {
                                     | 'sizes'
                                     | 'bgColor'
                                     | 'aspectRatio'
+                                    | 'base64'
+                                  >;
+                                  highres: {
+                                    __typename: 'ResponsiveImage';
+                                  } & Pick<
+                                    ResponsiveImage,
+                                    | 'src'
+                                    | 'alt'
+                                    | 'title'
+                                    | 'width'
+                                    | 'height'
+                                    | 'srcSet'
+                                    | 'sizes'
+                                    | 'bgColor'
+                                    | 'aspectRatio'
+                                    | 'base64'
                                   >;
                                 }
                             >;
@@ -5184,6 +5235,7 @@ export type PageQuery = { __typename: 'Query' } & {
                                         | 'sizes'
                                         | 'bgColor'
                                         | 'aspectRatio'
+                                        | 'base64'
                                       >;
                                     };
                                 }
@@ -5220,6 +5272,7 @@ export type PageQuery = { __typename: 'Query' } & {
                                         | 'sizes'
                                         | 'bgColor'
                                         | 'aspectRatio'
+                                        | 'base64'
                                       >;
                                     };
                                 }
@@ -5513,6 +5566,7 @@ export const ResponsiveImageFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: 'sizes' } },
           { kind: 'Field', name: { kind: 'Name', value: 'bgColor' } },
           { kind: 'Field', name: { kind: 'Name', value: 'aspectRatio' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'base64' } },
         ],
       },
     },
@@ -5590,7 +5644,7 @@ export const ProjectFragmentDoc = {
                             name: { kind: 'Name', value: 'w' },
                             value: {
                               kind: 'StringValue',
-                              value: '800',
+                              value: '600',
                               block: false,
                             },
                           },
@@ -5675,6 +5729,7 @@ export const ImageGalleryFragmentDoc = {
                 { kind: 'Field', name: { kind: 'Name', value: 'id' } },
                 {
                   kind: 'Field',
+                  alias: { kind: 'Name', value: 'thumbnail' },
                   name: { kind: 'Name', value: 'responsiveImage' },
                   arguments: [
                     {
@@ -5701,6 +5756,59 @@ export const ImageGalleryFragmentDoc = {
                               value: '3:2',
                               block: false,
                             },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'dpi' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '72',
+                              block: false,
+                            },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'w' },
+                            value: {
+                              kind: 'StringValue',
+                              value: '600',
+                              block: false,
+                            },
+                          },
+                        ],
+                      },
+                    },
+                  ],
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [
+                      {
+                        kind: 'FragmentSpread',
+                        name: { kind: 'Name', value: 'ResponsiveImage' },
+                      },
+                    ],
+                  },
+                },
+                {
+                  kind: 'Field',
+                  alias: { kind: 'Name', value: 'highres' },
+                  name: { kind: 'Name', value: 'responsiveImage' },
+                  arguments: [
+                    {
+                      kind: 'Argument',
+                      name: { kind: 'Name', value: 'imgixParams' },
+                      value: {
+                        kind: 'ObjectValue',
+                        fields: [
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fm' },
+                            value: { kind: 'EnumValue', value: 'webp' },
+                          },
+                          {
+                            kind: 'ObjectField',
+                            name: { kind: 'Name', value: 'fit' },
+                            value: { kind: 'EnumValue', value: 'crop' },
                           },
                           {
                             kind: 'ObjectField',
@@ -5783,7 +5891,7 @@ export const StaffFragmentDoc = {
                             name: { kind: 'Name', value: 'w' },
                             value: {
                               kind: 'StringValue',
-                              value: '800',
+                              value: '600',
                               block: false,
                             },
                           },
