@@ -75,8 +75,8 @@ function ImageGallery({ images }: ImageGalleryFragment) {
         closeOnClickOutside
         closeOnEscape
         centered
-        fullScreen
         exitTransitionDuration={0.3}
+        overlayBlur={2}
         styles={{
           inner: {
             width: '100%',
@@ -87,7 +87,9 @@ function ImageGallery({ images }: ImageGalleryFragment) {
             },
           },
           modal: {
-            background: 'rgba(0,0,0,0.75)',
+            background: 'transparent',
+            width: '100%',
+            height: '100%',
             display: 'flex',
           },
           body: {
