@@ -1,4 +1,4 @@
-import { Button, createStyles, Box } from '@mantine/core';
+import { Button, createStyles } from '@mantine/core';
 import Link from 'next/link';
 
 import { createTransition } from '@lib/theme/utils';

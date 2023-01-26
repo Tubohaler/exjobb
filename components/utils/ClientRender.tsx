@@ -1,4 +1,4 @@
-import React, { LazyExoticComponent } from 'react';
+import React from 'react';
 import useDidMount from '@hooks/useDidMount';
 // const Test = React.lazy(() => import('@components/Test'));
 

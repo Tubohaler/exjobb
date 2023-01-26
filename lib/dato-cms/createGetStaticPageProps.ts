@@ -5,7 +5,7 @@ import { ParsedUrlQuery } from 'querystring';
 import replaceHtmlSections from './replaceHtmlSections';
 
 export async function getStaticPageProps(
-  urlSlug: string = ''
+  urlSlug = ''
 ): Promise<StaticPageProps> {
   const data = await request(PageDocument, { urlSlug });
   return {

@@ -1,5 +1,5 @@
 import { SocialLinkFragment } from '@lib/dato-cms';
-import { Box, createStyles, Group, GroupProps } from '@mantine/core';
+import { Box, createStyles } from '@mantine/core';
 import SvgIconLink, {
   SvgIconLinkProps,
 } from '@components/elements/links/SvgIconLink';

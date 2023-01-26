@@ -2,8 +2,6 @@ import {
   Box,
   createStyles,
   HeaderProps as MantineHeaderProps,
-  MantineSizes,
-  Title,
 } from '@mantine/core';
 import SocialLinkGroup from '@components/content/SocialLinkGroup';
 import NavLinkGroup from '@components/content/NavLinkGroup';

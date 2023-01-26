@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { Box, Title, createStyles } from '@mantine/core';
+import { Box, createStyles } from '@mantine/core';
 
 import StaffPortrait from './StaffPortrait';
 import { PeopleGalleryFragment } from '@lib/dato-cms';
