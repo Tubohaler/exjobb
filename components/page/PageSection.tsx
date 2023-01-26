@@ -7,6 +7,8 @@ import PageSectionHeader from './PageSectionHeader';
 import { createStyles } from '@mantine/styles';
 import { Box, DefaultProps, MantineNumberSize, Selectors } from '@mantine/core';
 
+export type PageSectionStylesNames = Selectors<typeof useStyles>;
+
 export type PageSectionProps = DefaultProps<PageSectionStylesNames> &
   Omit<Parameters<typeof Article>[0], 'children'> & {
     section: PageSectionFragment;
@@ -17,7 +19,6 @@ export type PageSectionProps = DefaultProps<PageSectionStylesNames> &
     structuredTextProps?: Omit<StructuredTextProps, 'data'>;
   };
 
-export type PageSectionStylesNames = Selectors<typeof useStyles>;
 export type PageSectionStylesParams = {
   withHeader?: boolean;
   dividerSize?: number;

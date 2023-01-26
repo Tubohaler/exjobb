@@ -1,59 +1,18 @@
-import { isShade, isThemeShade } from '@lib/theme/utils';
-import {
-  useMantineTheme,
-  MantineTheme,
-  DEFAULT_THEME,
-  MantineThemeOverride,
-} from '@mantine/core';
-import { useMemo } from 'react';
+import { useMantineTheme, MantineTheme, DEFAULT_THEME } from '@mantine/core';
+import { useCallback, useMemo } from 'react';
 import ExtendedThemeContext, {
   type ExtendedTheme,
 } from './ExtendedTheme.context';
 
-export type ExtendedThemeOverride = Partial<Omit<ExtendedTheme, 'fn'>>;
+export type ExtendedThemeOverride = Partial<
+  Omit<ExtendedTheme, 'fn' | 'theme'>
+>;
 
-const createExtendedTheme = (
-  theme?: MantineTheme,
-  extendedThemeOverride?: ExtendedThemeOverride
-) => {
-  const extended: Omit<ExtendedTheme, 'fn'> = {
-    theme: theme || DEFAULT_THEME,
-    backgroundColor: 'beige',
-    activeColor: 'red',
-    backgroundShade: { light: 1, dark: 9 },
-    activeShade: DEFAULT_THEME.primaryShade,
-    ...(extendedThemeOverride || {}),
-  };
-  if (
-    theme?.primaryShade !== undefined &&
-    extended.activeShade === DEFAULT_THEME.primaryShade
-  ) {
-    extended.activeShade = theme.primaryShade;
-  }
-  const fn: ExtendedTheme['fn'] = {
-    backgroundColor: (colorScheme) => {
-      const { theme, backgroundColor, backgroundShade } = extended;
-      return theme.colors[backgroundColor][
-        typeof backgroundShade === 'number'
-          ? backgroundShade
-          : backgroundShade[colorScheme || theme.colorScheme]
-      ];
-    },
-    activeColor: (colorScheme) => {
-      const { theme, activeColor, activeShade } = extended;
-      return theme.colors[activeColor][
-        typeof activeShade === 'number'
-          ? activeShade
-          : activeShade[colorScheme || theme.colorScheme]
-      ];
-    },
-  };
-  return {
-    ...extended,
-    fn,
-  } as ExtendedTheme;
+const DEFAULT_EXTENDED_THEME: Required<ExtendedThemeOverride> = {
+  activeColor: 'red',
+  backgroundShade: { light: 1, dark: 9 },
+  activeShade: 2,
 };
-
 export default function ExtendedThemeProvider({
   children,
   extendedThemeOverride,
@@ -62,9 +21,40 @@ export default function ExtendedThemeProvider({
   extendedThemeOverride?: ExtendedThemeOverride;
 }) {
   const theme = useMantineTheme();
+  const extended = useMemo(
+    () => ({ ...DEFAULT_EXTENDED_THEME, ...(extendedThemeOverride || {}) }),
+    [extendedThemeOverride]
+  );
+  const backgroundColor: ExtendedTheme['fn']['backgroundColor'] = useCallback(
+    (colorScheme) => {
+      return theme.colors.background[
+        typeof extended.backgroundShade === 'number'
+          ? extended.backgroundShade
+          : extended.backgroundShade[colorScheme || theme.colorScheme]
+      ];
+    },
+    [theme, extended]
+  );
+  const activeColor: ExtendedTheme['fn']['activeColor'] = useCallback(
+    (colorScheme) => {
+      return theme.colors[extended.activeColor][
+        typeof extended.activeShade === 'number'
+          ? extended.activeShade
+          : extended.activeShade[colorScheme || theme.colorScheme]
+      ];
+    },
+    [theme, extended]
+  );
   const value = useMemo<ExtendedTheme>(
-    () => createExtendedTheme(theme, extendedThemeOverride),
-    [theme, extendedThemeOverride]
+    () => ({
+      theme,
+      ...extended,
+      fn: {
+        backgroundColor,
+        activeColor,
+      },
+    }),
+    [theme, extended, activeColor, backgroundColor]
   );
   return (
     <ExtendedThemeContext.Provider value={value}>

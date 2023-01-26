@@ -4,61 +4,66 @@ import ImageGalleryThumbnail from './ImageGalleryThumbnail';
 import { useState } from 'react';
 import { createTransition } from '@lib/theme/utils';
 import ResponsiveImage from '@components/elements/ResponsiveImage';
+import { ExtendedTheme } from 'context/ExtendedTheme.context';
+import useExtendedTheme from '@hooks/useExtendedTheme';
 
-const useGalleryStyles = createStyles((theme) => ({
-  root: {
-    display: 'grid',
-    gridTemplateRows: 'auto',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    alignContent: 'center',
-    justifyContent: 'center',
+const useGalleryStyles = createStyles(
+  (theme, { extended }: { extended: ExtendedTheme }) => ({
+    root: {
+      display: 'grid',
+      gridTemplateRows: 'auto',
+      gridTemplateColumns: 'repeat(3, 1fr)',
+      alignContent: 'center',
+      justifyContent: 'center',
 
-    [theme.fn.smallerThan('md')]: { gridTemplateColumns: '1fr' },
-  },
-  overlay: {
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    background: 'green',
-    padding: theme.spacing.xl * 2,
-  },
-  modalImageWrapper: {
-    width: '100%',
-    height: '100%',
-    position: 'relative',
-  },
-  modalCloseButton: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    zIndex: 48,
-    color: theme.white,
-    fontWeight: 700,
-    fontFamily: 'Verdana',
-    fontSize: theme.fontSizes.xl * 1.5,
-    transform: 'rotate(45deg)',
-    transformOrigin: 'center',
-    transition: createTransition(['color', 'transform']),
-    border: 'none',
-    outline: 'none',
-    '&:hover': {
-      color: theme.colors.red[2],
+      [theme.fn.smallerThan('md')]: { gridTemplateColumns: '1fr' },
     },
-    '&:focus': {
+    overlay: {
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      background: 'green',
+      padding: theme.spacing.xl * 2,
+    },
+    modalImageWrapper: {
+      width: '100%',
+      height: '100%',
+      position: 'relative',
+    },
+    modalCloseButton: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      zIndex: 48,
+      color: theme.white,
+      fontWeight: 700,
+      fontFamily: 'Verdana',
+      fontSize: theme.fontSizes.xl * 1.5,
+      transform: 'rotate(45deg)',
+      transformOrigin: 'center',
+      transition: createTransition(['color', 'transform']),
       border: 'none',
       outline: 'none',
+      '&:hover': {
+        color: extended.fn.activeColor(),
+      },
+      '&:focus': {
+        border: 'none',
+        outline: 'none',
+      },
     },
-  },
-  modalImage: {
-    width: 'auto',
-    height: '100%',
-  },
-}));
+    modalImage: {
+      width: 'auto',
+      height: '100%',
+    },
+  })
+);
 
 function ImageGallery({ images }: ImageGalleryFragment) {
-  const { classes } = useGalleryStyles(undefined, { name: 'ImageGallery' });
+  const extended = useExtendedTheme();
+  const { classes } = useGalleryStyles({ extended }, { name: 'ImageGallery' });
   const [showOverlay, setShowOverlay] = useState(false);
   const [currentImage, setCurrentImage] = useState(images[0]);
   const handleClick = (id: string) => {

@@ -15,7 +15,7 @@ const useStyles = createStyles((theme, { active }: NavLinkStylesParams) => {
       lineHeight: 1,
       padding: 0,
       margin: 0,
-      color: !active ? theme.black : theme.colors.blue[2],
+      color: !active ? 'inherit' : theme.fn.primaryColor(),
       borderBottomWidth: '2px',
       borderBottomStyle: 'solid',
       borderBottomColor: !active ? 'transparent' : 'inherit',

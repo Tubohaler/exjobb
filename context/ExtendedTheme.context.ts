@@ -3,7 +3,6 @@ import { createContext } from 'react';
 
 export interface ExtendedTheme {
   theme: MantineTheme;
-  backgroundColor: MantineColor;
   activeColor: MantineColor;
   backgroundShade: MantineTheme['primaryShade'];
   activeShade: MantineTheme['primaryShade'];

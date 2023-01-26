@@ -7,11 +7,14 @@ import PageSection, { PageSectionProps } from '@components/page/PageSection';
 import { useMemo, useRef } from 'react';
 import SectionDivider from '@components/elements/buttons/SectionDivider';
 import useSmallerThan from '@hooks/useSmallerThan';
+import { ExtendedTheme } from 'context/ExtendedTheme.context';
+import useExtendedTheme from '@hooks/useExtendedTheme';
 
 export type PageWrapperStylesNames = Selectors<typeof useStyles>;
 export type PageWrapperStylesParams = {
   headerHeight: number;
   footerHeight: number;
+  extended: ExtendedTheme;
 };
 
 export type PageWrapperProps = DefaultProps<
@@ -23,7 +26,11 @@ export type PageWrapperProps = DefaultProps<
 };
 
 const useStyles = createStyles(
-  (theme, { headerHeight, footerHeight }: PageWrapperStylesParams, getRef) => ({
+  (
+    theme,
+    { headerHeight, footerHeight, extended }: PageWrapperStylesParams,
+    getRef
+  ) => ({
     root: {
       width: '100vw',
       height: '100%',
@@ -43,7 +50,7 @@ const useStyles = createStyles(
       position: 'relative',
       height: 'auto',
       minHeight: `calc(100vh - ${footerHeight + headerHeight}px)`,
-      backgroundColor: theme.colors.background[1],
+      backgroundColor: extended.fn.backgroundColor(),
       marginTop: headerHeight,
     },
     header: {
@@ -76,11 +83,12 @@ const PageWrapper = ({
     () => fixedHeights.footer[smallerThanSm ? 'sm' : 'base'],
     [smallerThanSm]
   );
+  const extended = useExtendedTheme();
 
   const mainRef = useRef<HTMLDivElement>(null);
 
   const { classes, cx } = useStyles(
-    { headerHeight, footerHeight },
+    { headerHeight, footerHeight, extended },
     {
       name: 'PageWrapper',
       styles,

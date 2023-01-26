@@ -1,40 +1,45 @@
 import { Button, createStyles } from '@mantine/core';
 import Link from 'next/link';
 import { createTransition } from '@lib/theme/utils';
+import { ExtendedTheme } from 'context/ExtendedTheme.context';
+import useExtendedTheme from '@hooks/useExtendedTheme';
 
 type Props = Omit<Parameters<typeof Button<typeof Link>>[0], 'children'>;
 
-const useStyles = createStyles((theme, _, getRef) => ({
-  icon: {
-    display: 'block',
-    fill: theme.white,
-    height: '75%',
-    width: 'auto',
-    objectFit: 'contain',
-    objectPosition: 'center',
-    maxWidth: '100%',
-    ref: getRef('icon'),
-    transition: createTransition(['transform']),
-    overflow: 'visible',
-  },
-  button: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: theme.black,
-    opacity: 0.75,
-    padding: 0,
-    transition: createTransition(['opacity', 'background']),
-    '&:hover': {
-      opacity: 1,
-      background: theme.colors.red[2],
-      [`& .${getRef('icon')}`]: { transform: 'scale(1.1)' },
+const useStyles = createStyles(
+  (theme, { extended }: { extended: ExtendedTheme }, getRef) => ({
+    icon: {
+      display: 'block',
+      fill: theme.white,
+      height: '75%',
+      width: 'auto',
+      objectFit: 'contain',
+      objectPosition: 'center',
+      maxWidth: '100%',
+      ref: getRef('icon'),
+      transition: createTransition(['transform']),
+      overflow: 'visible',
     },
-  },
-}));
+    button: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      background: theme.black,
+      opacity: 0.75,
+      padding: 0,
+      transition: createTransition(['opacity', 'background']),
+      '&:hover': {
+        opacity: 1,
+        background: extended.fn.activeColor(),
+        [`& .${getRef('icon')}`]: { transform: 'scale(1.1)' },
+      },
+    },
+  })
+);
 
 function SteamButton(props: Props) {
-  const { classes } = useStyles(undefined, { name: 'SteamButton' });
+  const extended = useExtendedTheme();
+  const { classes } = useStyles({ extended }, { name: 'SteamButton' });
 
   return (
     <Button component={Link} className={classes.button} {...props}>

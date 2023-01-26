@@ -4,6 +4,7 @@ import mainTheme from '@lib/theme/main';
 import { MantineProvider } from '@mantine/core';
 import '@styles/globals.css';
 import emotionCache from '@lib/theme/emotionCache';
+import ExtendedThemeProvider from 'context/ExtendedTheme.provider';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +14,9 @@ export default function App({ Component, pageProps }: AppProps) {
       theme={mainTheme}
       emotionCache={emotionCache}
     >
-      <Component {...pageProps} />
+      <ExtendedThemeProvider>
+        <Component {...pageProps} />
+      </ExtendedThemeProvider>
     </MantineProvider>
   );
 }

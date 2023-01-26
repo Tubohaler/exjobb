@@ -1,6 +1,8 @@
+import useExtendedTheme from '@hooks/useExtendedTheme';
 import { PageSectionDividerFragment } from '@lib/dato-cms';
 import { createTransition } from '@lib/theme/utils';
 import { createStyles, DefaultProps, Selectors } from '@mantine/core';
+import { ExtendedTheme } from 'context/ExtendedTheme.context';
 import { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import SvgIconLink, { SvgIconLinkProps } from '../links/SvgIconLink';
 
@@ -9,23 +11,24 @@ export type SectionDividerStylesParams = {
   direction?: 'up' | 'down';
   size?: PageSectionDividerFragment['size'];
   rotate?: PageSectionDividerFragment['rotate'];
+  extended: ExtendedTheme;
 };
 
 const useStyles = createStyles(
   (
     theme,
-    { direction = 'down', size, rotate }: SectionDividerStylesParams
+    { direction = 'down', size, rotate, extended }: SectionDividerStylesParams
   ) => ({
     root: {
       fontSize: size || theme.fontSizes.xl * 6,
-      color: theme.colors.blue[2],
+      color: theme.fn.primaryColor(),
       transition: createTransition(
         !rotate ? ['color'] : ['color', 'transform'],
         0.2
       ),
       transform: !rotate || direction !== 'up' ? 'none' : 'rotate(180deg)',
       '&:hover': {
-        color: theme.colors.red[2],
+        color: extended.fn.activeColor(),
       },
     },
   })
@@ -54,8 +57,9 @@ const SectionDivider = ({
   const [observerSupport, setObserverSupport] = useState(false);
   const [direction, setDirection] = useState<'up' | 'down'>('down');
   const linkRef = useRef<HTMLAnchorElement>(null);
+  const extended = useExtendedTheme();
   const { classes, cx } = useStyles(
-    { direction, size, rotate },
+    { direction, size, rotate, extended },
     { name: 'SectionDivider', classNames, styles, unstyled }
   );
 
@@ -108,10 +112,6 @@ const SectionDivider = ({
       className={cx(classes.root, className)}
       href={!getTargetId ? '#' : getTargetId(direction)}
       onClick={handleClick}
-      hoverColor="red"
-      color="blue"
-      hoverShade={2}
-      baseShade={2}
       {...props}
     />
   );
