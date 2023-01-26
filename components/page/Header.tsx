@@ -24,7 +24,7 @@ const useStyles = createStyles(
       justifyContent: 'center',
       alignItems: 'center',
       position: 'fixed',
-      zIndex: 999,
+      zIndex: 100,
       [theme.fn.smallerThan('xs')]: {
         padding: theme.spacing.xs,
       },
