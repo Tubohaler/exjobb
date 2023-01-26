@@ -1,4 +1,12 @@
 {
-  "extends": ["next/core-web-vitals", "prettier"],
-  "rules": { "react/display-name": "off", "jsx-a11y/alt-text": "off" }
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  "rules": { "react/display-name": "off", "jsx-a11y/alt-text": "off" },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "root": true
 }

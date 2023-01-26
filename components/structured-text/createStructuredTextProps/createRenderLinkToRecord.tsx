@@ -7,7 +7,6 @@ import {
   StructuredTextGraphQlResponseRecord,
   StructuredTextPropTypes,
 } from 'react-datocms';
-import DefaultComponents from './defaults/DefaultComponents';
 import DefaultRecordLinks from './defaults/DefaultRecordLinks';
 import { RecordLinkComponents } from './types';
 import inferType from './inferType';

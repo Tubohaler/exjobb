@@ -1,21 +1,9 @@
 import {
   MantineTheme,
-  Tuple,
-  DefaultMantineColor,
   DEFAULT_THEME,
-  AnchorProps,
   MantineThemeOverride,
-  MantineThemeBase,
-  CSSObject,
 } from '@mantine/core';
-import Link from 'next/link';
 import { EB_Garamond } from '@next/font/google';
-
-declare module '@mantine/core' {
-  export interface MantineThemeColorsOverride {
-    colors: Record<DefaultMantineColor | 'beige', Tuple<string, 10>>;
-  }
-}
 
 const ebGaramond = EB_Garamond({
   subsets: ['latin', 'latin-ext'],
@@ -31,13 +19,13 @@ const ebGaramond = EB_Garamond({
  * based on:
  * (beige: #e8e5df, blue: #9dc3df, red: #ff8a8a)
  *
- * body background: beige[1],
+ * body background: background[1],
  * link color: blue[2]
  * link:hover color: red[2]
  */
 export const colors: MantineTheme['colors'] = {
   ...DEFAULT_THEME.colors,
-  beige: [
+  background: [
     '#f6f3eb',
     '#e8e5df', // background color
     '#c9c3b8',
@@ -82,12 +70,11 @@ const breakpoints: MantineTheme['breakpoints'] = {
   xs: 480,
 };
 
-const mainTheme: MantineTheme = {
-  ...DEFAULT_THEME,
+const mainTheme: MantineThemeOverride = {
   colors,
   colorScheme: 'light',
-  primaryShade: { dark: 2, light: 2 },
-  primaryColor: 'beige',
+  primaryShade: 2,
+  primaryColor: 'blue',
   defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
   breakpoints,

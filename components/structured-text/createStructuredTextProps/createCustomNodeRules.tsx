@@ -84,6 +84,7 @@ export default function createCustomNodeRules<
         output.push(
           renderNodeRule(isBlockquote, callback as NodeRuleFn<Blockquote>)
         );
+        break;
       case 'ThematicBreak':
         output.push(
           renderNodeRule(isThematicBreak, callback as NodeRuleFn<ThematicBreak>)

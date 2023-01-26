@@ -1,7 +1,6 @@
 import NavLink, { NavLinkProps } from '@components/elements/links/NavLink';
 import { PageLinkFragment } from '@lib/dato-cms';
-import { Box, createStyles, Text } from '@mantine/core';
-import { Fragment } from 'react';
+import { Box, createStyles } from '@mantine/core';
 
 export type NavLinkGroupProps = Omit<
   Parameters<typeof Box<'ul'>>[0],
@@ -12,7 +11,7 @@ export type NavLinkGroupProps = Omit<
   linkProps?: Omit<NavLinkProps, 'children' | 'href' | 'title' | 'active'>;
 };
 
-const useStyles = createStyles((theme) => {
+const useStyles = createStyles(() => {
   const margin = '1.5ch';
   return {
     root: {
@@ -75,7 +74,7 @@ const NavLinkGroup = ({
   });
   return (
     <Box component="ul" className={cx(classes.root, className)} {...props}>
-      {links.map(({ id, urlSlug, name }, i) => {
+      {links.map(({ id, urlSlug, name }) => {
         return (
           <Box component="li" key={id} className={classes.listItem}>
             <NavLink
@@ -83,6 +82,7 @@ const NavLinkGroup = ({
               href={`/${urlSlug}`}
               active={currentPage === name}
               className={cx(classes.link)}
+              {...(linkProps || {})}
             >
               {name}
             </NavLink>

@@ -1,5 +1,5 @@
 import { StaticPageProps } from '@lib/dato-cms';
-import { renderMetaTags, renderMetaTagsToString } from 'react-datocms';
+import { renderMetaTags } from 'react-datocms';
 import NextHead from 'next/head';
 
 import React from 'react';
