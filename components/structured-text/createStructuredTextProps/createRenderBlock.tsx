@@ -37,13 +37,12 @@ export default function createRenderBlock<
     const typename = record.__typename as BlockTypeNames | 'unknown';
     switch (typename) {
       case 'SubsectionRecord':
-        const content = record.content as SubsectionFragment;
         return (
           <Components.Subsection
             section={inferType<SubsectionFragment>(record)}
           >
-            {!isStructuredText<R1, R2>(content) ? null : (
-              <StructuredText data={content} {...structuredTextProps} />
+            {!isStructuredText<R1, R2>(record.content) ? null : (
+              <StructuredText data={record.content} {...structuredTextProps} />
             )}
           </Components.Subsection>
         );

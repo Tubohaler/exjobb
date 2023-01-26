@@ -43,7 +43,7 @@ const useStyles = createStyles(
       position: 'relative',
       height: 'auto',
       minHeight: `calc(100vh - ${footerHeight + headerHeight}px)`,
-      backgroundColor: theme.colors.beige[1],
+      backgroundColor: theme.colors.background[1],
       marginTop: headerHeight,
     },
     header: {

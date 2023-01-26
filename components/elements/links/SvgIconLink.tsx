@@ -1,8 +1,6 @@
 import { forwardRef } from 'react';
 import Link from './Link';
 import {
-  ActionIcon,
-  Box,
   createStyles,
   CSSObject,
   DefaultProps,
@@ -86,7 +84,6 @@ const SvgIconLink = forwardRef<HTMLAnchorElement, SvgIconLinkProps>(
       hoverColor,
       baseShade,
       hoverShade,
-      variant,
       ...props
     },
     ref

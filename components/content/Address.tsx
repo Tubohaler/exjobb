@@ -1,7 +1,6 @@
 import { AddressFragment } from '@lib/dato-cms';
 import {
   Box,
-  Title,
   Text,
   createStyles,
   Selectors,
