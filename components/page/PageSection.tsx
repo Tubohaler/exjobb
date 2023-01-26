@@ -108,7 +108,7 @@ const useStyles = createStyles(
       divider: {
         ref: getRef('divider'),
         position: 'absolute',
-        zIndex: 100,
+        zIndex: 10,
         bottom: 0,
         right: 'auto',
         left: 'auto',
