@@ -22,6 +22,9 @@ query Page($urlSlug: String) {
     sectionDivider {
       ...PageSectionDivider
     }
+    themeColors {
+      ...ThemeColors
+    }
     metaTags {
       ...PageMetaTags
     }

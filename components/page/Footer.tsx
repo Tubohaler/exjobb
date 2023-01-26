@@ -18,7 +18,8 @@ const useStyles = createStyles(
     root: {
       height,
       padding: `${theme.spacing.md}px ${theme.spacing.xl}px`,
-      backgroundColor: theme.white,
+      backgroundColor:
+        theme.colorScheme === 'light' ? theme.white : theme.black,
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',

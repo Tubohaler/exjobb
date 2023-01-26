@@ -20,8 +20,8 @@ const ebGaramond = EB_Garamond({
  * (beige: #e8e5df, blue: #9dc3df, red: #ff8a8a)
  *
  * body background: background[1],
- * link color: blue[2]
- * link:hover color: red[2]
+ * link color: primary[2]
+ * link:hover color: active[2]
  */
 export const colors: MantineTheme['colors'] = {
   ...DEFAULT_THEME.colors,
@@ -37,7 +37,7 @@ export const colors: MantineTheme['colors'] = {
     '#2d2820',
     '#130c04',
   ],
-  blue: [
+  primary: [
     '#e5f4ff',
     '#c2dcee',
     '#9dc3df', // link color
@@ -49,7 +49,7 @@ export const colors: MantineTheme['colors'] = {
     '#0f293c',
     '#000f19',
   ],
-  red: [
+  active: [
     '#ffe2e2',
     '#ffb2b2',
     '#ff8a8a', // link hover
@@ -74,7 +74,7 @@ const mainTheme: MantineThemeOverride = {
   colors,
   colorScheme: 'light',
   primaryShade: 2,
-  primaryColor: 'blue',
+  primaryColor: 'active',
   defaultRadius: 0,
   fontFamily: ebGaramond.style.fontFamily,
   breakpoints,
@@ -83,7 +83,7 @@ const mainTheme: MantineThemeOverride = {
     fontFamily: ebGaramond.style.fontFamily,
     fontWeight: 400,
   },
-  globalStyles: () => ({
+  globalStyles: (theme) => ({
     html: {
       height: '100%',
       scrollBehavior: 'smooth',
@@ -93,6 +93,7 @@ const mainTheme: MantineThemeOverride = {
       minHeight: '100%',
       width: '100%',
       textRendering: 'optimizeLegibility',
+      background: theme.colorScheme === 'light' ? theme.white : theme.black,
     },
     p: {
       margin: 0,

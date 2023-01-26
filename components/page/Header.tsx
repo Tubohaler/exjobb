@@ -17,7 +17,7 @@ const useStyles = createStyles(
     root: {
       height,
       padding: theme.spacing.xl,
-      background: theme.white,
+      background: theme.colorScheme === 'light' ? theme.white : theme.black,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

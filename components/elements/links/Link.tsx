@@ -12,7 +12,7 @@ export type LinkProps = DefaultProps<LinkStylesNames, LinkStylesParams> &
 
 const useStyles = createStyles((theme, { extended }: LinkStylesParams) => ({
   root: {
-    color: 'inherit',
+    color: theme.colorScheme === 'light' ? theme.black : theme.white,
     textDecoration: 'none',
     transition: createTransition([
       'color',

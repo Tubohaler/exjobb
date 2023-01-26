@@ -2,7 +2,6 @@ import { MantineColor, MantineTheme, ColorScheme } from '@mantine/core';
 import { createContext } from 'react';
 
 export interface ExtendedTheme {
-  theme: MantineTheme;
   activeColor: MantineColor;
   backgroundShade: MantineTheme['primaryShade'];
   activeShade: MantineTheme['primaryShade'];

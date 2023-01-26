@@ -328,3 +328,21 @@ fragment SiteMeta on Site {
   }
   locales
 }
+
+fragment ThemeColors on ThemeColorModelRecord {
+  primary {
+    hex
+  }
+  background {
+    hex
+  }
+  active {
+    hex
+  }
+  black {
+    hex
+  }
+  white {
+    hex
+  }
+}

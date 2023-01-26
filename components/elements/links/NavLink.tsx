@@ -1,4 +1,6 @@
+import useExtendedTheme from '@hooks/useExtendedTheme';
 import { Selectors, createStyles } from '@mantine/core';
+import { ExtendedTheme } from 'context/ExtendedTheme.context';
 import Link, { LinkProps } from './Link';
 
 export type NavLinkProps = LinkProps & {
@@ -6,7 +8,7 @@ export type NavLinkProps = LinkProps & {
 };
 
 export type NavLinkStylesNames = Selectors<typeof useStyles>;
-export type NavLinkStylesParams = { active?: boolean };
+export type NavLinkStylesParams = { active?: boolean; extended: ExtendedTheme };
 
 const useStyles = createStyles((theme, { active }: NavLinkStylesParams) => {
   return {
@@ -32,8 +34,9 @@ const NavLink = ({
   active,
   ...props
 }: NavLinkProps) => {
+  const extended = useExtendedTheme();
   const { classes, cx } = useStyles(
-    { active },
+    { active, extended },
     {
       name: 'NavLink',
       classNames,

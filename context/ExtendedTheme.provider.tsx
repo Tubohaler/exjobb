@@ -10,7 +10,7 @@ export type ExtendedThemeOverride = Partial<
 
 const DEFAULT_EXTENDED_THEME: Required<ExtendedThemeOverride> = {
   activeColor: 'red',
-  backgroundShade: { light: 1, dark: 9 },
+  backgroundShade: 1,
   activeShade: 2,
 };
 export default function ExtendedThemeProvider({
@@ -45,9 +45,9 @@ export default function ExtendedThemeProvider({
     },
     [theme, extended]
   );
+
   const value = useMemo<ExtendedTheme>(
     () => ({
-      theme,
       ...extended,
       fn: {
         backgroundColor,
