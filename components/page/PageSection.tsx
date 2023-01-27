@@ -74,6 +74,16 @@ const useStyles = createStyles(
           paddingLeft: theme.spacing.sm,
           paddingRight: theme.spacing.sm,
         },
+        [`& .${getRef('body')}, & .${getRef('sectionHeader')}`]: {
+          width: '100%',
+          maxWidth:
+            typeof contentWidth === 'number'
+              ? contentWidth
+              : typeof contentWidth === 'string'
+              ? theme.breakpoints[contentWidth]
+              : theme.breakpoints.md,
+          minWidth: 0,
+        },
         [`&:last-of-type .${getRef('divider')}`]: {
           display: 'none',
         },
@@ -85,9 +95,10 @@ const useStyles = createStyles(
           maxWidth: '100vw',
           position: 'relative',
           maxHeight: `calc(100vh - ${(dividerSize ?? 0) * 1.1}px)`,
-          [`& .${getRef('body')}`]: {
-            width: '100%',
+          [`& .${getRef('body')}, & .${getRef('sectionHeader')}`]: {
             maxWidth: '100%',
+          },
+          [`& .${getRef('body')}`]: {
             height: '100%',
             overflow: 'hidden',
           },
@@ -114,24 +125,16 @@ const useStyles = createStyles(
         },
       },
       sectionHeader: {
-        width: '100%',
+        ref: getRef('sectionHeader'),
       },
       body: {
         ref: getRef('body'),
         position: 'relative',
-        width: '100%',
         height: 'auto',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: alignCenter ? 'center' : 'normal',
         textAlign: alignCenter ? 'center' : 'initial',
-        maxWidth:
-          typeof contentWidth === 'number'
-            ? contentWidth
-            : typeof contentWidth === 'string'
-            ? theme.breakpoints[contentWidth]
-            : theme.breakpoints.md,
-        minWidth: 0,
         '& > section + :not(section)': {
           marginTop: theme.spacing.xl,
         },
@@ -141,9 +144,6 @@ const useStyles = createStyles(
       },
       fullscreen: {
         ref: getRef('fullscreen'),
-      },
-      wider: {
-        ref: getRef('wider'),
       },
       divider: {
         ref: getRef('divider'),
