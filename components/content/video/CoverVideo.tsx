@@ -54,7 +54,13 @@ const useStyles = createStyles((theme) => {
       [theme.fn.smallerThan('xs')]: {
         fontSize: theme.fontSizes.xl * 4,
       },
-      zIndex: 10,
+      [`@media (max-height: ${theme.breakpoints.xs}px)`]: {
+        fontSize: theme.fontSizes.xl * 2,
+      },
+      [`@media (max-height: ${theme.breakpoints.xs * 1.5}px)`]: {
+        fontSize: theme.fontSizes.xl * 4,
+      },
+      zIndex: 8,
     },
     landscape: {
       ...videoStyles,

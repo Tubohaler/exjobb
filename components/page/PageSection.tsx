@@ -7,27 +7,42 @@ import PageSectionHeader from './PageSectionHeader';
 import { createStyles } from '@mantine/styles';
 import { Box, DefaultProps, MantineNumberSize, Selectors } from '@mantine/core';
 
-export type PageSectionProps = DefaultProps<PageSectionStylesNames> &
+export type PageSectionProps = DefaultProps<
+  PageSectionStylesNames,
+  PageSectionStylesParams
+> &
   Omit<Parameters<typeof Article>[0], 'children'> & {
     section: PageSectionFragment;
     fullscreen?: boolean;
     contentWidth?: MantineNumberSize;
     divider?: React.ReactNode;
     dividerSize?: number;
+    headerHeight?: number;
+    footerHeight?: number;
     structuredTextProps?: Omit<StructuredTextProps, 'data'>;
   };
 
 export type PageSectionStylesNames = Selectors<typeof useStyles>;
 export type PageSectionStylesParams = {
-  withHeader?: boolean;
+  withTitle?: boolean;
   dividerSize?: number;
+  headerHeight?: number;
+  footerHeight?: number;
   contentWidth?: MantineNumberSize;
+  alignCenter?: PageSectionFragment['alignContentCenter'];
 };
 
 const useStyles = createStyles(
   (
     theme,
-    { withHeader, contentWidth, dividerSize }: PageSectionStylesParams,
+    {
+      withTitle,
+      contentWidth,
+      alignCenter,
+      dividerSize = 0,
+      headerHeight = 0,
+      footerHeight = 0,
+    }: PageSectionStylesParams,
     getRef
   ) => {
     const pY = theme.spacing.xl * 4;
@@ -38,7 +53,7 @@ const useStyles = createStyles(
         minHeight: '50vh',
         padding: `${pY}px ${theme.spacing.xl}px`,
         display: 'grid',
-        gridTemplateRows: withHeader ? 'auto 1fr' : '1fr',
+        gridTemplateRows: withTitle ? 'auto 1fr' : '1fr',
         gridTemplateColumns: '1fr',
         gap: theme.spacing.xl * 2,
         alignContent: 'center',
@@ -62,29 +77,54 @@ const useStyles = createStyles(
         [`&:last-of-type .${getRef('divider')}`]: {
           display: 'none',
         },
+
         [`&.${getRef('fullscreen')}`]: {
           padding: 0,
           height: '100%',
-          maxHeight: 'calc(90vh - 70px)',
+          minHeight: 240,
           maxWidth: '100vw',
           position: 'relative',
+          maxHeight: `calc(100vh - ${(dividerSize ?? 0) * 1.1}px)`,
           [`& .${getRef('body')}`]: {
             width: '100%',
             maxWidth: '100%',
             height: '100%',
             overflow: 'hidden',
           },
+        },
+        [`&:first-of-type.${getRef('fullscreen')}`]: {
+          maxHeight: `calc(100vh - calc(${headerHeight || 70}px + ${
+            (dividerSize || 0) * 0.55
+          }px))`,
           [theme.fn.smallerThan('md')]: {
-            maxHeight: 'calc(95vh - 110px)',
+            maxHeight: `calc(100vh - calc(${headerHeight || 110}px + ${
+              (dividerSize || 0) * 0.55
+            }px))`,
+          },
+        },
+        [`&:last-of-type.${getRef('fullscreen')}`]: {
+          maxHeight: `calc(100vh - calc(${footerHeight || 110}px + ${
+            (dividerSize || 0) * 0.55
+          }px))`,
+          [theme.fn.smallerThan('md')]: {
+            maxHeight: `calc(90vh - calc(${footerHeight || 250}px + ${
+              (dividerSize || 0) * 0.55
+            }px))`,
           },
         },
       },
-      header: {},
+      sectionHeader: {
+        width: '100%',
+      },
       body: {
         ref: getRef('body'),
         position: 'relative',
         width: '100%',
         height: 'auto',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: alignCenter ? 'center' : 'normal',
+        textAlign: alignCenter ? 'center' : 'initial',
         maxWidth:
           typeof contentWidth === 'number'
             ? contentWidth
@@ -131,18 +171,23 @@ const PageSection = ({
   structuredTextProps = {},
   fullscreen,
   contentWidth,
+  footerHeight,
+  headerHeight,
   ...props
 }: PageSectionProps) => {
   const { classes, cx } = useStyles(
     {
-      withHeader: !!section.title,
       dividerSize,
+      withTitle: !!section.title,
       contentWidth:
         contentWidth !== undefined
           ? contentWidth
           : section.content.links[0]?.__typename === 'ProjectGalleryRecord'
           ? 'xl'
           : 'md',
+      alignCenter: section.alignContentCenter,
+      footerHeight,
+      headerHeight,
     },
     {
       name: 'PageSection',
@@ -165,7 +210,11 @@ const PageSection = ({
       {...props}
     >
       {section.title && (
-        <PageSectionHeader title={section.title} className={classes.header} />
+        <PageSectionHeader
+          title={section.title}
+          alignCenter={section.alignTitleCenter}
+          className={classes.sectionHeader}
+        />
       )}
       <Box className={classes.body}>
         <StructuredText data={section.content} {...structuredTextProps} />
