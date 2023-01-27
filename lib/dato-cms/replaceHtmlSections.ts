@@ -31,6 +31,8 @@ export default async function replaceHtmlSections(page: PageQuery['page']) {
         __typename: 'PageSectionRecord',
         id: section.id,
         title: section.title,
+        alignContentCenter: section.alignContentCenter,
+        alignTitleCenter: section.alignTitleCenter,
         content: {
           __typename: 'PageSectionModelContentField',
           value,
