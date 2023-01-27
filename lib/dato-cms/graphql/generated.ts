@@ -143,6 +143,12 @@ export interface ColorField {
   red: Scalars['IntType'];
 }
 
+/** Specifies how to filter Color fields */
+export interface ColorFilter {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists: InputMaybe<Scalars['BooleanType']>;
+}
+
 export interface CoverVideoModelFilter {
   OR: InputMaybe<Array<InputMaybe<CoverVideoModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
@@ -2271,12 +2277,6 @@ export interface JobRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
-/** Specifies how to filter JSON fields */
-export interface JsonFilter {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists: InputMaybe<Scalars['BooleanType']>;
-}
-
 /** Specifies how to filter Single-link fields */
 export interface LinkFilter {
   /** Search for records with an exact match. The specified value must be a Record ID */
@@ -2319,6 +2319,33 @@ export interface LinksFilter {
   notIn: InputMaybe<Array<InputMaybe<Scalars['ItemId']>>>;
 }
 
+/** Block of type Mantine Sizes (mantine_sizes_block) */
+export interface MantineSizesBlockRecord extends RecordInterface {
+  __typename: 'MantineSizesBlockRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt: Maybe<Scalars['DateTime']>;
+  _publishedAt: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  lg: Scalars['IntType'];
+  md: Scalars['IntType'];
+  sm: Scalars['IntType'];
+  xl: Scalars['IntType'];
+  xs: Scalars['IntType'];
+}
+
+/** Block of type Mantine Sizes (mantine_sizes_block) */
+export interface MantineSizesBlockRecord_SeoMetaTagsArgs {
+  locale: InputMaybe<SiteLocale>;
+}
+
 export enum MuxThumbnailFormatType {
   Gif = 'gif',
   Jpg = 'jpg',
@@ -2358,6 +2385,7 @@ export interface PageModelFilter {
   parent: InputMaybe<ParentFilter>;
   position: InputMaybe<PositionFilter>;
   sectionDivider: InputMaybe<LinkFilter>;
+  themeColors: InputMaybe<LinkFilter>;
   urlSlug: InputMaybe<SlugFilter>;
 }
 
@@ -2424,6 +2452,7 @@ export interface PageRecord extends RecordInterface {
   position: Maybe<Scalars['IntType']>;
   sectionDivider: Maybe<PageSectionDividerRecord>;
   sections: Array<PageModelSectionsField>;
+  themeColors: Maybe<ThemeColorModelRecord>;
   urlSlug: Maybe<Scalars['String']>;
 }
 
@@ -2565,6 +2594,8 @@ export interface PageSectionHtmlRecord extends RecordInterface {
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  alignContentCenter: Maybe<Scalars['BooleanType']>;
+  alignTitleCenter: Maybe<Scalars['BooleanType']>;
   htmlContent: Scalars['String'];
   id: Scalars['ItemId'];
   title: Maybe<Scalars['String']>;
@@ -2596,7 +2627,7 @@ export type PageSectionModelContentLinksField =
   | PeopleGalleryRecord
   | ProjectGalleryRecord;
 
-/** Block of type Page Section - Structured Text (page_section) */
+/** Block of type Page Section (page_section) */
 export interface PageSectionRecord extends RecordInterface {
   __typename: 'PageSectionRecord';
   _createdAt: Scalars['DateTime'];
@@ -2610,12 +2641,14 @@ export interface PageSectionRecord extends RecordInterface {
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  alignContentCenter: Maybe<Scalars['BooleanType']>;
+  alignTitleCenter: Maybe<Scalars['BooleanType']>;
   content: PageSectionModelContentField;
   id: Scalars['ItemId'];
   title: Maybe<Scalars['String']>;
 }
 
-/** Block of type Page Section - Structured Text (page_section) */
+/** Block of type Page Section (page_section) */
 export interface PageSectionRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
@@ -2828,7 +2861,7 @@ export interface Query {
   /** Returns meta information regarding a record collection */
   _allStaffsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
-  _allThemesMeta: CollectionMetadata;
+  _allThemeColorModelsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
@@ -2860,7 +2893,7 @@ export interface Query {
   /** Returns a collection of records */
   allStaffs: Array<StaffRecord>;
   /** Returns a collection of records */
-  allThemes: Array<ThemeRecord>;
+  allThemeColorModels: Array<ThemeColorModelRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns a specific record */
@@ -2892,7 +2925,7 @@ export interface Query {
   /** Returns a specific record */
   staff: Maybe<StaffRecord>;
   /** Returns a specific record */
-  theme: Maybe<ThemeRecord>;
+  themeColorModel: Maybe<ThemeColorModelRecord>;
   /** Returns a specific asset */
   upload: Maybe<FileField>;
 }
@@ -2982,9 +3015,9 @@ export interface Query_AllStaffsMetaArgs {
 }
 
 /** The query root for this schema */
-export interface Query_AllThemesMetaArgs {
+export interface Query_AllThemeColorModelsMetaArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  filter: InputMaybe<ThemeModelFilter>;
+  filter: InputMaybe<ThemeColorModelModelFilter>;
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -3129,12 +3162,12 @@ export interface QueryAllStaffsArgs {
 }
 
 /** The query root for this schema */
-export interface QueryAllThemesArgs {
+export interface QueryAllThemeColorModelsArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  filter: InputMaybe<ThemeModelFilter>;
+  filter: InputMaybe<ThemeColorModelModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ThemeModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<ThemeColorModelModelOrderBy>>>;
   skip: InputMaybe<Scalars['IntType']>;
 }
 
@@ -3255,11 +3288,11 @@ export interface QueryStaffArgs {
 }
 
 /** The query root for this schema */
-export interface QueryThemeArgs {
+export interface QueryThemeColorModelArgs {
   fallbackLocales: InputMaybe<Array<SiteLocale>>;
-  filter: InputMaybe<ThemeModelFilter>;
+  filter: InputMaybe<ThemeColorModelModelFilter>;
   locale: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ThemeModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<ThemeColorModelModelOrderBy>>>;
 }
 
 /** The query root for this schema */
@@ -3660,8 +3693,8 @@ export interface Tag {
   tag: Scalars['String'];
 }
 
-export interface ThemeModelFilter {
-  OR: InputMaybe<Array<InputMaybe<ThemeModelFilter>>>;
+export interface ThemeColorModelModelFilter {
+  OR: InputMaybe<Array<InputMaybe<ThemeColorModelModelFilter>>>;
   _createdAt: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt: InputMaybe<PublishedAtFilter>;
   _isValid: InputMaybe<BooleanFilter>;
@@ -3670,12 +3703,17 @@ export interface ThemeModelFilter {
   _status: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt: InputMaybe<PublishedAtFilter>;
   _updatedAt: InputMaybe<UpdatedAtFilter>;
-  content: InputMaybe<JsonFilter>;
+  active: InputMaybe<ColorFilter>;
+  background: InputMaybe<ColorFilter>;
+  black: InputMaybe<ColorFilter>;
   id: InputMaybe<ItemIdFilter>;
-  name: InputMaybe<StringFilter>;
+  presentationTitle: InputMaybe<StringFilter>;
+  primary: InputMaybe<ColorFilter>;
+  title: InputMaybe<StringFilter>;
+  white: InputMaybe<ColorFilter>;
 }
 
-export enum ThemeModelOrderBy {
+export enum ThemeColorModelModelOrderBy {
   CreatedAtAsc = '_createdAt_ASC',
   CreatedAtDesc = '_createdAt_DESC',
   FirstPublishedAtAsc = '_firstPublishedAt_ASC',
@@ -3694,13 +3732,15 @@ export enum ThemeModelOrderBy {
   UpdatedAtDesc = '_updatedAt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
+  PresentationTitleAsc = 'presentationTitle_ASC',
+  PresentationTitleDesc = 'presentationTitle_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
 }
 
-/** Record of type Theme (theme) */
-export interface ThemeRecord extends RecordInterface {
-  __typename: 'ThemeRecord';
+/** Record of type Theme Colors (theme_color_model) */
+export interface ThemeColorModelRecord extends RecordInterface {
+  __typename: 'ThemeColorModelRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -3712,13 +3752,18 @@ export interface ThemeRecord extends RecordInterface {
   _status: ItemStatus;
   _unpublishingScheduledAt: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  content: Scalars['JsonField'];
+  active: ColorField;
+  background: ColorField;
+  black: Maybe<ColorField>;
   id: Scalars['ItemId'];
-  name: Scalars['String'];
+  presentationTitle: Maybe<Scalars['String']>;
+  primary: ColorField;
+  title: Scalars['String'];
+  white: Maybe<ColorField>;
 }
 
-/** Record of type Theme (theme) */
-export interface ThemeRecord_SeoMetaTagsArgs {
+/** Record of type Theme Colors (theme_color_model) */
+export interface ThemeColorModelRecord_SeoMetaTagsArgs {
   locale: InputMaybe<SiteLocale>;
 }
 
@@ -4201,11 +4246,14 @@ export type PageSeoFragment = { __typename: 'Tag' } & Pick<
 
 export type HtmlSectionFragment = {
   __typename: 'PageSectionHtmlRecord';
-} & Pick<PageSectionHtmlRecord, 'id' | 'title' | 'htmlContent'>;
+} & Pick<
+  PageSectionHtmlRecord,
+  'id' | 'title' | 'alignTitleCenter' | 'alignContentCenter' | 'htmlContent'
+>;
 
 export type PageSectionFragment = { __typename: 'PageSectionRecord' } & Pick<
   PageSectionRecord,
-  'id' | 'title'
+  'id' | 'title' | 'alignTitleCenter' | 'alignContentCenter'
 > & {
     content: { __typename: 'PageSectionModelContentField' } & Pick<
       PageSectionModelContentField,
@@ -5057,11 +5105,15 @@ export type PageQuery = { __typename: 'Query' } & {
         sections: Array<
           | ({ __typename: 'PageSectionHtmlRecord' } & Pick<
               PageSectionHtmlRecord,
-              'id' | 'title' | 'htmlContent'
+              | 'id'
+              | 'title'
+              | 'alignTitleCenter'
+              | 'alignContentCenter'
+              | 'htmlContent'
             >)
           | ({ __typename: 'PageSectionRecord' } & Pick<
               PageSectionRecord,
-              'id' | 'title'
+              'id' | 'title' | 'alignTitleCenter' | 'alignContentCenter'
             > & {
                 content: { __typename: 'PageSectionModelContentField' } & Pick<
                   PageSectionModelContentField,
@@ -5398,6 +5450,11 @@ export const HtmlSectionFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'alignTitleCenter' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'alignContentCenter' },
+          },
           { kind: 'Field', name: { kind: 'Name', value: 'htmlContent' } },
         ],
       },
@@ -6125,6 +6182,11 @@ export const PageSectionFragmentDoc = {
           { kind: 'Field', name: { kind: 'Name', value: '__typename' } },
           { kind: 'Field', name: { kind: 'Name', value: 'id' } },
           { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+          { kind: 'Field', name: { kind: 'Name', value: 'alignTitleCenter' } },
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'alignContentCenter' },
+          },
           {
             kind: 'Field',
             name: { kind: 'Name', value: 'content' },

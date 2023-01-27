@@ -68,7 +68,11 @@ const DefaultNodeRules: NodeRules = {
     );
   },
   ListItem: ({ key, children }) => {
-    return <List.Item key={key}>{children}</List.Item>;
+    return (
+      <List.Item key={key} sx={{ textAlign: 'inherit' }}>
+        {children}
+      </List.Item>
+    );
   },
   Blockquote: ({ key, children, node }) => {
     return (

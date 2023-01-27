@@ -67,7 +67,10 @@ const Career = ({ data }: StaticPageProps) => {
   return (
     <PageWrapper
       data={data}
-      sectionProps={{ classNames: classes, structuredTextProps }}
+      sectionProps={{
+        classNames: classes,
+        structuredTextProps,
+      }}
     />
   );
 };

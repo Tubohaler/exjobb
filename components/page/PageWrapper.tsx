@@ -116,21 +116,14 @@ const PageWrapper = ({
                     key={section.id}
                     section={section}
                     dividerSize={data.page?.sectionDivider?.size || 0}
+                    footerHeight={footerHeight}
+                    headerHeight={headerHeight}
                     divider={
                       data.page?.sectionDivider && i < sections.length - 1 ? (
                         <SectionDivider
                           divider={data.page.sectionDivider}
                           getTargetId={getTargetId}
-                          onClick={(direction) => {
-                            const rect = document
-                              .querySelector(getTargetId(direction))
-                              ?.getBoundingClientRect();
-                            if (!rect) return;
-                            window.scrollTo({
-                              top: rect.top - headerHeight,
-                              behavior: 'smooth',
-                            });
-                          }}
+                          headerHeight={headerHeight}
                         />
                       ) : undefined
                     }

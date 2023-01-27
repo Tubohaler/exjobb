@@ -35,6 +35,8 @@ fragment HtmlSection on PageSectionHtmlRecord {
   __typename
   id
   title
+  alignTitleCenter
+  alignContentCenter
   htmlContent
 }
 
@@ -42,6 +44,8 @@ fragment PageSection on PageSectionRecord {
   __typename
   id
   title
+  alignTitleCenter
+  alignContentCenter
   content {
     __typename
     value
