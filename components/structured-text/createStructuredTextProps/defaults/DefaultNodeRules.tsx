@@ -26,12 +26,11 @@ const getLinkPropsFromMeta = (meta: LinkNode['meta']): Partial<LinkProps> => {
   return props;
 };
 
-const DefaultNodeRules: NodeRules = {
+const DefaultNodeRules: Partial<NodeRules> = {
   Root: ({ key, children }) => <Fragment key={key}>{children}</Fragment>,
   Paragraph: ({ key, children, ancestors }) => {
     return (
       <Text
-        component="p"
         key={key}
         sx={(theme) => ({
           marginBottom: isListItem(ancestors[0]) ? 0 : theme.spacing.xs * 0.5,
@@ -100,9 +99,6 @@ const DefaultNodeRules: NodeRules = {
         {children}
       </Link>
     );
-  },
-  Span: ({ key, node: { value } }) => {
-    return <Fragment key={key}>{value}</Fragment>;
   },
 };
 
