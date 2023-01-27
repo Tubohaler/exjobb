@@ -5,7 +5,13 @@ import type { PageSectionFragment } from '@lib/dato-cms';
 import { Article } from '@components/elements/layout';
 import PageSectionHeader from './PageSectionHeader';
 import { createStyles } from '@mantine/styles';
-import { Box, DefaultProps, MantineNumberSize, Selectors } from '@mantine/core';
+import {
+  Box,
+  DefaultProps,
+  MantineNumberSize,
+  Selectors,
+  CSSObject,
+} from '@mantine/core';
 
 export type PageSectionProps = DefaultProps<
   PageSectionStylesNames,
@@ -46,6 +52,16 @@ const useStyles = createStyles(
     getRef
   ) => {
     const pY = theme.spacing.xl * 4;
+    const contentStyles: CSSObject = {
+      width: '100%',
+      minWidth: 0,
+      maxWidth:
+        typeof contentWidth === 'number'
+          ? contentWidth
+          : typeof contentWidth === 'string'
+          ? theme.breakpoints[contentWidth]
+          : theme.breakpoints.md,
+    };
     return {
       root: {
         width: '100%',
@@ -73,16 +89,6 @@ const useStyles = createStyles(
         [theme.fn.smallerThan('sm')]: {
           paddingLeft: theme.spacing.sm,
           paddingRight: theme.spacing.sm,
-        },
-        [`& .${getRef('body')}, & .${getRef('sectionHeader')}`]: {
-          width: '100%',
-          maxWidth:
-            typeof contentWidth === 'number'
-              ? contentWidth
-              : typeof contentWidth === 'string'
-              ? theme.breakpoints[contentWidth]
-              : theme.breakpoints.md,
-          minWidth: 0,
         },
         [`&:last-of-type .${getRef('divider')}`]: {
           display: 'none',
@@ -126,9 +132,11 @@ const useStyles = createStyles(
       },
       sectionHeader: {
         ref: getRef('sectionHeader'),
+        ...contentStyles,
       },
       body: {
         ref: getRef('body'),
+        ...contentStyles,
         position: 'relative',
         height: 'auto',
         display: 'flex',

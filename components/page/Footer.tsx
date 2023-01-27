@@ -56,7 +56,7 @@ const structuredTextProps = createStructuredTextProps({
   nodeRules: {
     Paragraph: ({ key, children }) => {
       return (
-        <Text key={key} m={0}>
+        <Text key={key} component="p" m={0}>
           {children}
         </Text>
       );
